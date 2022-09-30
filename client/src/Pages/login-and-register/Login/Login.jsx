@@ -1,4 +1,5 @@
 import React from "react";
+import GoogleButton from "../../../Components/login-and-register/GoogleButton";
 
 import "./Login.css";
 
@@ -60,6 +61,8 @@ const Login = () => {
             Submit
           </button>
         </form>
+        <br />
+        <GoogleButton type={2} />
       </div>
       <div className="hidden lg:block second-grid">LOGO</div>
     </div>

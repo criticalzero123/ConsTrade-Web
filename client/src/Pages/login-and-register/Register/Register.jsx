@@ -1,10 +1,10 @@
 import React from "react";
-import GoogleButtonSignup from "../../../Components/login-and-register/Signup/GoogleButtonSignup";
+import GoogleButton from "../../../Components/login-and-register/GoogleButton";
 
 const Register = () => {
   return (
     <div>
-      <GoogleButtonSignup />
+      <GoogleButton type={1} />
     </div>
   );
 };

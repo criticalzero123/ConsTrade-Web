@@ -2,6 +2,8 @@ import {
   getAllProductsReducer,
   getProductByIdReducer,
 } from "./reducers/productReducer";
+
+import { googleAuthReducer } from "./reducers/userReducer";
 import { combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 
@@ -11,6 +13,7 @@ import thunk from "redux-thunk";
 const finalReducer = combineReducers({
   getAllProductsReducer,
   getProductByIdReducer,
+  googleAuthReducer,
 });
 
 const composeEnhancers = composeWithDevTools({

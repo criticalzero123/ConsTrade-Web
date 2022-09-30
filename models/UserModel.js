@@ -28,6 +28,14 @@ const userSchema = mongoose.Schema(
       type: String,
       require,
     },
+    email: {
+      type: String,
+      require,
+    },
+    uid: {
+      type: String,
+      require,
+    },
     lastActiveAt: {
       type: Date,
       require,
