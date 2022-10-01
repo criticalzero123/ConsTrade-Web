@@ -1,15 +1,15 @@
 import axios from "axios";
 
-export const googleAuth = (data) => (dispatch) => {
-  dispatch({ type: "USER_GOOGLE_AUTH_REQUEST" });
+export const socialMediaMethod = (data) => (dispatch) => {
+  dispatch({ type: "USER_SOCIAL_MEDIA_AUTH_REQUEST" });
 
   axios
-    .post("/api/users/googleauth", data)
+    .post("/api/users/socialmediaauth", data)
     .then((res) => {
-      dispatch({ type: "USER_GOOGLE_AUTH_SUCCESS" });
+      dispatch({ type: "USER_SOCIAL_MEDIA_AUTH_SUCCESS" });
     })
     .catch((err) => {
-      dispatch({ type: "USER_GOOGLE_AUTH_FAILED" });
+      dispatch({ type: "USER_SOCIAL_MEDIA_AUTH_FAILED" });
       console.log(err);
     });
 };

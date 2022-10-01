@@ -40,6 +40,10 @@ const userSchema = mongoose.Schema(
       type: Date,
       require,
     },
+    emailVerified: {
+      type: Boolean,
+      require,
+    },
     reviews: [reviewSchema],
   },
   {

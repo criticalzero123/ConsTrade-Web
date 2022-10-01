@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const router = express.Router();
 const User = require("../models/UserModel");
 
-router.post("/googleauth", async (req, res) => {
+router.post("/socialmediaauth", async (req, res) => {
   // authType = register || login
   const authType = req.body.authType;
 
@@ -20,6 +20,7 @@ router.post("/googleauth", async (req, res) => {
         else {
           // Login
           // TODO: update the lastActive in a use when login
+          console.log(docs);
         }
       } else {
         if (authType === 2)
@@ -28,10 +29,12 @@ router.post("/googleauth", async (req, res) => {
           });
         else {
           // Register
+          console.log(req.body);
           const newUser = new User({
             name: req.body.name,
             email: req.body.email,
             uid: req.body.uid,
+            emailVerified: req.body.emailVerified,
             lastActiveAt: new Date().getTime(),
           });
 

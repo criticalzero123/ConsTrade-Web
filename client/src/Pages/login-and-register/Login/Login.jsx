@@ -1,4 +1,5 @@
 import React from "react";
+import FacebookButton from "../../../Components/login-and-register/FacebookButton";
 import GoogleButton from "../../../Components/login-and-register/GoogleButton";
 
 import "./Login.css";
@@ -63,6 +64,7 @@ const Login = () => {
         </form>
         <br />
         <GoogleButton type={2} />
+        <FacebookButton type={2} />
       </div>
       <div className="hidden lg:block second-grid">LOGO</div>
     </div>

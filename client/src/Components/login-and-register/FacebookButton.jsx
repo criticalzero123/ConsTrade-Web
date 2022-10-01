@@ -1,18 +1,17 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import socialMediaAuth from "../../firebase/auth";
+import { facebookProvider } from "../../firebase/authMethod";
 
 import { socialMediaMethod } from "../../actions/userActions";
-import socialMediaAuth from "../../firebase/auth";
+import { useDispatch } from "react-redux";
 
-import { googleProvider } from "../../firebase/authMethod";
-
-const GoogleButton = ({ type }) => {
+const FacebookButton = ({ type }) => {
   const _authType = type === 1 ? "Register" : "Login";
 
   const dispatch = useDispatch();
 
-  const GoogleAuth = async () => {
-    const res = await socialMediaAuth(googleProvider);
+  const FacebookAuth = async () => {
+    const res = await socialMediaAuth(facebookProvider);
 
     const data = {
       authType: type,
@@ -28,13 +27,13 @@ const GoogleButton = ({ type }) => {
   return (
     <div>
       <button
-        onClick={GoogleAuth}
+        onClick={FacebookAuth}
         className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
       >
-        {_authType} With Google
+        {_authType} With Facebook
       </button>
     </div>
   );
 };
 
-export default GoogleButton;
+export default FacebookButton;
