@@ -3,7 +3,11 @@ import {
   getProductByIdReducer,
 } from "./reducers/productReducer";
 
-import { socalMediaAuthReducer } from "./reducers/userReducer";
+import {
+  socalMediaAuthReducer,
+  emailPasswordRegisterReducer,
+  emailPasswordLoginReducer,
+} from "./reducers/userReducer";
 import { combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 
@@ -14,6 +18,8 @@ const finalReducer = combineReducers({
   getAllProductsReducer,
   getProductByIdReducer,
   socalMediaAuthReducer,
+  emailPasswordRegisterReducer,
+  emailPasswordLoginReducer,
 });
 
 const composeEnhancers = composeWithDevTools({

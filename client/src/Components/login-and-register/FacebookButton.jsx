@@ -1,5 +1,5 @@
 import React from "react";
-import socialMediaAuth from "../../firebase/auth";
+import socialMediaAuth from "../../firebase/authSocialMedia";
 import { facebookProvider } from "../../firebase/authMethod";
 
 import { socialMediaMethod } from "../../actions/userActions";

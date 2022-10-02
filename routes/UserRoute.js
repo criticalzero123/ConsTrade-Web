@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const router = express.Router();
 const User = require("../models/UserModel");
 
-router.post("/socialmediaauth", async (req, res) => {
+router.post("/socialMediaAuth", (req, res) => {
   // authType = register || login
   const authType = req.body.authType;
 
@@ -29,7 +29,6 @@ router.post("/socialmediaauth", async (req, res) => {
           });
         else {
           // Register
-          console.log(req.body);
           const newUser = new User({
             name: req.body.name,
             email: req.body.email,
@@ -49,8 +48,63 @@ router.post("/socialmediaauth", async (req, res) => {
       }
 
       if (err) {
-        return res.status(400).json({ message: "Something went Wrong" });
+        return res
+          .status(400)
+          .json({ message: "Something went Wrong in social media auth" });
       }
+    }
+  );
+});
+
+router.post("/emailPasswordRegister", (req, res) => {
+  User.findOne(
+    { $or: [{ email: req.body.email }, { uid: req.body.uid }] },
+    (err, docs) => {
+      // no need to check if there are user
+      // firebase will do this for us
+
+      const newUser = new User({
+        name: req.body.name,
+        email: req.body.email,
+        uid: req.body.uid,
+        emailVerified: req.body.emailVerified,
+        lastActiveAt: new Date().getTime(),
+      });
+
+      newUser.save((err) => {
+        if (!err) {
+          res.send(`User Registration Successful`);
+        } else {
+          res.send(`User Registration went wrong`);
+        }
+      });
+
+      if (err) {
+        return res.status(400).json({
+          message: "Something went Wrong in email and password register",
+        });
+      }
+    }
+  );
+});
+
+router.post("/emailPasswordLogin", (req, res) => {
+  User.findOneAndUpdate(
+    { $or: [{ email: req.body.email }, { uid: req.body.uid }] },
+    { $set: { lastActiveAt: new Date().getTime() } },
+    { new: true },
+    (err, docs) => {
+      if (docs) {
+        // console.log(docs);
+      } else {
+        return res.status(400).json({
+          message: "User Not Found",
+        });
+      }
+      if (err)
+        return res.status(400).json({
+          message: "Something went wrong in email and password login",
+        });
     }
   );
 });

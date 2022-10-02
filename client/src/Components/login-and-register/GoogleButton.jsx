@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 
 import { socialMediaMethod } from "../../actions/userActions";
-import socialMediaAuth from "../../firebase/auth";
+import socialMediaAuth from "../../firebase/authSocialMedia";
 
 import { googleProvider } from "../../firebase/authMethod";
 
