@@ -1,16 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import FacebookButton from "../../../Components/login-and-register/FacebookButton";
 import GoogleButton from "../../../Components/login-and-register/GoogleButton";
 
+import { useDispatch } from "react-redux";
+
 import "./Login.css";
+import { signInUserEmailPassword } from "../../../firebase/authEmailAndPassword";
+import { emailAndPasswordLogin } from "../../../actions/userActions";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const dispatch = useDispatch();
+
+  const loginAuth = async (e) => {
+    e.preventDefault();
+    // TODO: make a checker the error code is auth/user-not-found or auth/wrong-password
+    const res = await signInUserEmailPassword(email, password);
+    if (res) {
+      const user = {
+        email: res.email,
+        uid: res.uid,
+      };
+      dispatch(emailAndPasswordLogin(user));
+    }
+  };
+
   return (
     <div className="h-screen grid md:grid-cols-1 lg:grid-cols-2">
       <div className="self-center justify-self-center">
         <h1>Welcome Back</h1>
         <h6 className="mt-3">Welcome back! Please enter your details.</h6>
-        <form className="mt-10">
+        <form className="mt-10" onSubmit={loginAuth}>
           <div className="mb-6">
             <label htmlFor="email" className="block mb-2 text-xs font-medium">
               Email
@@ -20,6 +42,7 @@ const Login = () => {
               id="email"
               className=" border border-gray-300 text-gray-900 text-sm rounded-lg  w-full p-2.5"
               placeholder="Enter your email"
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
@@ -35,6 +58,7 @@ const Login = () => {
               id="password"
               placeholder="Enter your password"
               className=" border border-gray-300 text-gray-900 text-sm rounded-lg  w-full p-2.5"
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
@@ -45,7 +69,6 @@ const Login = () => {
                 type="checkbox"
                 value=""
                 className="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
-                required
               />
             </div>
             <label

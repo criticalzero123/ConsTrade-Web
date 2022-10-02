@@ -4,14 +4,42 @@ import GoogleButton from "../../../Components/login-and-register/GoogleButton";
 import InputEmail from "../../../Components/login-and-register/InputEmail";
 import InputPassword from "../../../Components/login-and-register/InputPassword";
 
+import { useDispatch } from "react-redux";
+import { createUserEmailPassword } from "../../../firebase/authEmailAndPassword";
+import { emailAndPasswordRegister } from "../../../actions/userActions";
+
 const Register = () => {
   const [email, setEmail] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [password, setPassword] = useState("");
 
+  const dispatch = useDispatch();
+
+  const loginCredential = async (e) => {
+    e.preventDefault();
+
+    if (password === confirmPassword) {
+      // TODO: CHECK FOR THE LOG FOR THE ERROR OF PASSWORD WEAK AND USER EXIST TO PROMPT ERROR
+      // TIPS:  ERROR.CODE FOR THE MESSAGE NAME
+      const res = await createUserEmailPassword(email, password);
+      if (res) {
+        const data = {
+          name: res.displayName !== null ? res.displayName : "",
+          email: res.email,
+          uid: res.uid,
+          emailVerified: res.emailVerified,
+        };
+
+        dispatch(emailAndPasswordRegister(data));
+      }
+    } else {
+      alert("Password is not the same!");
+    }
+  };
+
   return (
     <div>
-      <form>
+      <form onSubmit={loginCredential}>
         <InputEmail onChange={(e) => setEmail(e.target.value)} />
         <InputPassword
           text={"Password"}
@@ -21,6 +49,7 @@ const Register = () => {
           text={"Confirm Password"}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
+        <button>Submit</button>
       </form>
       <br />
       <hr />

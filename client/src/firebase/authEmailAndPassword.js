@@ -1,5 +1,7 @@
 import firebase from "./firebase-config";
 
+import "firebase/compat/auth";
+
 export const createUserEmailPassword = (email, password) => {
   return firebase
     .auth()
