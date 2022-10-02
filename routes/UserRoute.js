@@ -96,6 +96,7 @@ router.post("/emailPasswordLogin", (req, res) => {
     (err, docs) => {
       if (docs) {
         // console.log(docs);
+        res.send(docs);
       } else {
         return res.status(400).json({
           message: "User Not Found",

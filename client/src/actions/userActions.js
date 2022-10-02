@@ -35,6 +35,10 @@ export const emailAndPasswordLogin = (data) => (dispatch) => {
     .post("/api/users/emailPasswordLogin", data)
     .then((res) => {
       dispatch({ type: "USER_EMAIL_PASSWORD_LOGIN_AUTH_SUCCESS" });
+
+      localStorage.setItem("currentUser", JSON.stringify(res.data));
+
+      window.location.href = "/home";
     })
     .catch((err) => {
       dispatch({ type: "USER_EMAIL_PASSWORD_LOGIN_AUTH_FAILED" });

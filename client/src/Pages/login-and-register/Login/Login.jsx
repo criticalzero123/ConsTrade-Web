@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FacebookButton from "../../../Components/login-and-register/FacebookButton";
 import GoogleButton from "../../../Components/login-and-register/GoogleButton";
 
@@ -26,6 +26,12 @@ const Login = () => {
       dispatch(emailAndPasswordLogin(user));
     }
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("currentUser")) {
+      window.location.href = "/home";
+    }
+  }, []);
 
   return (
     <div className="h-screen grid md:grid-cols-1 lg:grid-cols-2">

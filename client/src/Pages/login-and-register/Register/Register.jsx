@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FacebookButton from "../../../Components/login-and-register/FacebookButton";
 import GoogleButton from "../../../Components/login-and-register/GoogleButton";
 import InputEmail from "../../../Components/login-and-register/InputEmail";
@@ -36,6 +36,12 @@ const Register = () => {
       alert("Password is not the same!");
     }
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("currentUser")) {
+      window.location.href = "/home";
+    }
+  }, []);
 
   return (
     <div>
