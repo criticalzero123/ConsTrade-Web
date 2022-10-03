@@ -1,6 +1,9 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { deleteProduct } from "../../actions/productActions";
 
 const ProductListCard = ({ product }) => {
+  const dispatch = useDispatch();
   return (
     <div className="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
       <div className="h-96">
@@ -11,11 +14,9 @@ const ProductListCard = ({ product }) => {
         />
       </div>
       <div className="p-5">
-        <p>
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            {product.title}
-          </h5>
-        </p>
+        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+          {product.title}
+        </h5>
         <p className="mb-3 font-normal text-gray-700 dark:text-gray-400  text-ellipsis overflow-hidden whitespace-nowrap">
           {product.description}
         </p>
@@ -37,7 +38,12 @@ const ProductListCard = ({ product }) => {
             </svg>
           </p>
           <div className="flex text-white">
-            <p className="mr-5 cursor-pointer">Delete</p>
+            <p
+              className="mr-5 cursor-pointer"
+              onClick={() => dispatch(deleteProduct(product._id))}
+            >
+              Delete
+            </p>
             <p className="cursor-pointer">Edit</p>
           </div>
         </div>

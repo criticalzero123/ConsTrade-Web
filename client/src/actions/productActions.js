@@ -55,3 +55,18 @@ export const addProduct = (data) => (dispatch) => {
       dispatch({ type: "ADD_PRODUCT_FAILED", payload: err });
     });
 };
+
+export const deleteProduct = (productid) => (dispatch) => {
+  dispatch({ type: "DELETE_PRODUCT_REQUEST" });
+
+  axios
+    .post("/api/products/deleteProduct", { productid })
+    .then((res) => {
+      dispatch({ type: "DELETE_PRODUCT_SUCCESS", payload: res.data });
+      window.location.reload();
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({ type: "DELETE_PRODUCT_FAILED", payload: err });
+    });
+};

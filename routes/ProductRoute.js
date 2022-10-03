@@ -67,4 +67,14 @@ router.post("/addProduct", (req, res) => {
   });
 });
 
+router.post("/deleteProduct", (req, res) => {
+  Product.findByIdAndDelete(req.body.productid, (err) => {
+    if (err) {
+      return res.status(400).json({ message: "Something went wrong" + err });
+    } else {
+      res.send("Product deleted successfully");
+    }
+  });
+});
+
 module.exports = router;

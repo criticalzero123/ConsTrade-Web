@@ -3,6 +3,7 @@ import {
   getProductByIdReducer,
   addProductReducer,
   getProductByUserIdReducer,
+  deleteProductReducer,
 } from "./reducers/productReducer";
 
 import {
@@ -24,6 +25,7 @@ const finalReducer = combineReducers({
   emailPasswordLoginReducer,
   addProductReducer,
   getProductByUserIdReducer,
+  deleteProductReducer,
 });
 
 const composeEnhancers = composeWithDevTools({

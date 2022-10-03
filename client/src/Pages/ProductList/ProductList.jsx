@@ -23,7 +23,7 @@ const ProductList = () => {
   return (
     <div className="mt-5">
       {products && (
-        <div className="grid lg:grid-cols-3">
+        <div className="grid lg:grid-cols-3 justify-center">
           {products.map((product) => (
             <ProductListCard product={product} key={product.title} />
           ))}
