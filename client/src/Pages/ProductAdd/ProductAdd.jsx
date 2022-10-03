@@ -141,7 +141,6 @@ const ProductAdd = () => {
               fortext="cash"
               placeholdertext="0"
               onChange={(e) => setCash(e.target.value)}
-              value={0}
               required
             />
             <ProductAddInput
