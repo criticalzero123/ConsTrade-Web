@@ -7,6 +7,7 @@ import InputPassword from "../../../Components/login-and-register/InputPassword"
 import { useDispatch } from "react-redux";
 import { createUserEmailPassword } from "../../../firebase/authEmailAndPassword";
 import { emailAndPasswordRegister } from "../../../actions/userActions";
+import { isUserLoggedIn } from "../../../service/userService";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -20,7 +21,7 @@ const Register = () => {
 
     if (password === confirmPassword) {
       // TODO: CHECK FOR THE LOG FOR THE ERROR OF PASSWORD WEAK AND USER EXIST TO PROMPT ERROR
-      // TIPS:  ERROR.CODE FOR THE MESSAGE NAME
+      // TIPS: ERROR.CODE FOR THE MESSAGE NAME
       const res = await createUserEmailPassword(email, password);
       if (res) {
         const data = {
@@ -38,7 +39,7 @@ const Register = () => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("currentUser")) {
+    if (isUserLoggedIn()) {
       window.location.href = "/home";
     }
   }, []);

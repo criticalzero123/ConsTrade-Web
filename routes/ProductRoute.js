@@ -28,4 +28,31 @@ router.post("/getproductbyid", (req, res) => {
   });
 });
 
+router.post("/addProduct", (req, res) => {
+  const { data } = req.body;
+
+  const newProduct = new Product({
+    userId: data.userId,
+    title: data.title,
+    description: data.description,
+    location: data.location,
+    gameGenre: data.category,
+    platform: data.platform,
+    condition: data.condition,
+    imageURL: data.imageURL,
+    preferTrade: data.preferTrade,
+    cash: data.cash,
+    item: data.item,
+    deliveryType: data.deliveryType,
+    dateCreated: new Date().getTime(),
+  });
+  newProduct.save((err) => {
+    if (!err) {
+      res.send(`Product add Successful`);
+    } else {
+      res.send(`Product add went wrong`);
+    }
+  });
+});
+
 module.exports = router;

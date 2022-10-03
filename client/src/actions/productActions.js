@@ -27,3 +27,17 @@ export const getProductById = (id) => (dispatch) => {
       dispatch({ type: "GET_PRODUCT_BY_ID_FAILED", payload: err });
     });
 };
+
+export const addProduct = (data) => (dispatch) => {
+  dispatch({ type: "ADD_PRODUCT_REQUEST" });
+
+  axios
+    .post("/api/products/addProduct", { data })
+    .then((res) => {
+      dispatch({ type: "ADD_PRODUCT_SUCCESS", payload: res.data });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({ type: "ADD_PRODUCT_FAILED", payload: err });
+    });
+};

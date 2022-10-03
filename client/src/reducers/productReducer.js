@@ -39,3 +39,27 @@ export const getProductByIdReducer = (state = { product: {} }, action) => {
       return state;
   }
 };
+
+export const addProductReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "ADD_PRODUCT_REQUEST":
+      return {
+        loading: true,
+      };
+    case "ADD_PRODUCT_SUCCESS":
+      return {
+        ...state,
+        loading: false,
+        success: true,
+      };
+    case "ADD_PRODUCT_FAILED":
+      return {
+        ...state,
+        loading: false,
+        error: true,
+      };
+
+    default:
+      return state;
+  }
+};

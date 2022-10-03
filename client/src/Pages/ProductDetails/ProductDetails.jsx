@@ -14,7 +14,11 @@ const ProductDetails = () => {
     dispatch(getProductById(id));
   }, [dispatch, id]);
 
-  const { loading, error, product } = getproductbyid;
+  const {
+    // loading,
+    //  error,
+    product,
+  } = getproductbyid;
 
   return <div>{product && product._id}</div>;
 };

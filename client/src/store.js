@@ -1,6 +1,7 @@
 import {
   getAllProductsReducer,
   getProductByIdReducer,
+  addProductReducer,
 } from "./reducers/productReducer";
 
 import {
@@ -20,6 +21,7 @@ const finalReducer = combineReducers({
   socalMediaAuthReducer,
   emailPasswordRegisterReducer,
   emailPasswordLoginReducer,
+  addProductReducer,
 });
 
 const composeEnhancers = composeWithDevTools({

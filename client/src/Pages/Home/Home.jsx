@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllProducts } from "../../actions/productActions";
 import ProductCard from "../../Components/ProductCard/ProductCard";
 
+import { Link } from "react-router-dom";
+
 const Index = () => {
   const dispatch = useDispatch();
   const getallproducts = useSelector((state) => state.getAllProductsReducer);
@@ -26,6 +28,8 @@ const Index = () => {
           <ProductCard product={product} key={product._id} />
         ))
       )}
+
+      <Link to="/product/add">Add a item</Link>
     </div>
   );
 };
