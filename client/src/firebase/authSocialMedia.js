@@ -6,7 +6,6 @@ const socialMediaAuth = (provider) => {
     .signInWithPopup(provider)
     .then((res) => {
       // TODO: incase for additional field in users in mongodb
-      console.log(res);
       return res.user;
     })
     .catch((err) => {

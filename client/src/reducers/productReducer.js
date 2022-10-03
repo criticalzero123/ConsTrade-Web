@@ -40,6 +40,27 @@ export const getProductByIdReducer = (state = { product: {} }, action) => {
   }
 };
 
+export const getProductByUserIdReducer = (state = { product: [] }, action) => {
+  switch (action.type) {
+    case "GET_PRODUCT_BY_USER_ID_REQUEST":
+      return {
+        loading: true,
+      };
+    case "GET_PRODUCT_BY_USER_ID_SUCCESS":
+      return {
+        products: action.payload,
+        loading: false,
+      };
+    case "GET_PRODUCT_BY_USER_ID_FAILED":
+      return {
+        error: action.payload,
+        loading: false,
+      };
+    default:
+      return state;
+  }
+};
+
 export const addProductReducer = (state = {}, action) => {
   switch (action.type) {
     case "ADD_PRODUCT_REQUEST":

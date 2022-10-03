@@ -73,7 +73,7 @@ const ProductAdd = () => {
   };
 
   return (
-    <div className="grid grid-cols-3 pt-7">
+    <div className="grid grid-cols-1 lg:grid-cols-3 pt-7">
       <div className="">
         <form onSubmit={productAddRequest}>
           <aside className="overflow-y-auto h-[52rem] ">
@@ -141,6 +141,7 @@ const ProductAdd = () => {
               fortext="cash"
               placeholdertext="0"
               onChange={(e) => setCash(e.target.value)}
+              value={0}
               required
             />
             <ProductAddInput
@@ -162,10 +163,11 @@ const ProductAdd = () => {
           <button className="z-10">Add</button>
         </form>
       </div>
-      <div className="col-span-2 ">
+      <div className="lg:col-span-2 ">
         <ProductCardDetails
           title={title}
           image={imageUpload && window.URL.createObjectURL(imageUpload)}
+          userPhoto={user.imagePhotoURL}
         />
       </div>
     </div>

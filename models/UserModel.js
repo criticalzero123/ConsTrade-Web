@@ -24,6 +24,10 @@ const reviewSchema = mongoose.Schema(
 
 const userSchema = mongoose.Schema(
   {
+    uid: {
+      type: String,
+      require,
+    },
     name: {
       type: String,
       require,
@@ -32,7 +36,7 @@ const userSchema = mongoose.Schema(
       type: String,
       require,
     },
-    uid: {
+    imagePhotoURL: {
       type: String,
       require,
     },

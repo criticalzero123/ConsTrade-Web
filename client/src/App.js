@@ -8,6 +8,7 @@ import Navbar from "./Components/Navbar/Navbar";
 import Home from "./Pages/Home/Home";
 import ProductDetails from "./Pages/ProductDetails/ProductDetails";
 import ProductAdd from "./Pages/ProductAdd/ProductAdd";
+import ProductList from "./Pages/ProductList/ProductList";
 function App() {
   return (
     <div className="container mx-auto px-0 lg:px-4">
@@ -22,6 +23,7 @@ function App() {
         <Route path="/home" element={<Home />} />
 
         <Route path="/product/item/:id" element={<ProductDetails />} />
+        <Route path="/product/item/list/:id" element={<ProductList />} />
         <Route path="/product/add" element={<ProductAdd />} />
         <Route
           path="*"

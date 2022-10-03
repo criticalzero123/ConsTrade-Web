@@ -16,6 +16,18 @@ router.get("/getallproducts", (req, res) => {
   });
 });
 
+router.post("/getProductByUserId", (req, res) => {
+  Product.find({ uid: req.body.id }, (err, docs) => {
+    if (!err) {
+      return res.send(docs);
+    } else {
+      return res.status(400).json({
+        message: "Something went wrong fetching all products by user id.",
+      });
+    }
+  });
+});
+
 router.post("/getproductbyid", (req, res) => {
   Product.find({ _id: req.body.id }, (err, docs) => {
     if (!err) {

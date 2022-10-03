@@ -68,6 +68,10 @@ export const emailPasswordLoginReducer = (state = {}, action) => {
         loading: false,
         error: true,
       };
+    case "USER_LOGOUT":
+      return {
+        ...state,
+      };
     default:
       return { ...state };
   }

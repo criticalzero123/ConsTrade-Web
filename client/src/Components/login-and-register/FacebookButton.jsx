@@ -19,8 +19,9 @@ const FacebookButton = ({ type }) => {
       email: res.email,
       uid: res.uid,
       emailVerified: res.emailVerified,
+      imagePhotoURL: res.photoURL,
     };
-
+    console.log(res);
     dispatch(socialMediaMethod(data));
   };
 

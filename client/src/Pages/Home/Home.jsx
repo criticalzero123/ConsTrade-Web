@@ -5,8 +5,10 @@ import { getAllProducts } from "../../actions/productActions";
 import ProductCard from "../../Components/ProductCard/ProductCard";
 
 import { Link } from "react-router-dom";
+import { userInfo } from "../../service/userService";
 
 const Index = () => {
+  const user = userInfo();
   const dispatch = useDispatch();
   const getallproducts = useSelector((state) => state.getAllProductsReducer);
 
@@ -30,6 +32,9 @@ const Index = () => {
       )}
 
       <Link to="/product/add">Add a item</Link>
+      <Link to={`/product/item/list/${user.uid}`} className="ml-5">
+        Item List
+      </Link>
     </div>
   );
 };

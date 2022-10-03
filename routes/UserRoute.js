@@ -19,8 +19,12 @@ router.post("/socialMediaAuth", (req, res) => {
             .json({ message: "Account Already Registered" });
         else {
           // Login
-          // TODO: update the lastActive in a use when login
-          console.log(docs);
+          // console.log(docs);
+
+          docs.lastActiveAt = new Date().getTime();
+          docs.save().then((savedDoc) => {
+            res.send(savedDoc);
+          });
         }
       } else {
         if (authType === 2)
@@ -33,15 +37,20 @@ router.post("/socialMediaAuth", (req, res) => {
             name: req.body.name,
             email: req.body.email,
             uid: req.body.uid,
+            imagePhotoURL: req.body.imagePhotoURL,
             emailVerified: req.body.emailVerified,
             lastActiveAt: new Date().getTime(),
           });
 
           newUser.save((err) => {
             if (!err) {
-              res.send(`${message} Successful`);
+              return res.status(201).json({
+                message: "Account Registered!",
+              });
             } else {
-              res.send(`${message} went wrong`);
+              return res.status(400).json({
+                message: "You don't have any account yet, Please Register",
+              });
             }
           });
         }
@@ -67,6 +76,7 @@ router.post("/emailPasswordRegister", (req, res) => {
         name: req.body.name,
         email: req.body.email,
         uid: req.body.uid,
+        imagePhotoURL: "",
         emailVerified: req.body.emailVerified,
         lastActiveAt: new Date().getTime(),
       });

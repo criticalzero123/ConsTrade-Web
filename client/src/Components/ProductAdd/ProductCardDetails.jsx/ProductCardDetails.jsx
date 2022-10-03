@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProductCardDetails = ({ image, title }) => {
+const ProductCardDetails = ({ image, title, userPhoto }) => {
   return (
     <div className="ml-16 grid grid-cols-2 place-items-center h-4/6 rounded">
       <div className=" h-full bg-blue-900 flex align-center rounded lg:rounded-r-none">
@@ -33,7 +33,7 @@ const ProductCardDetails = ({ image, title }) => {
           <div className="flex">
             <img
               className="w-10 h-10 rounded-full mr-4"
-              src={image}
+              src={userPhoto}
               alt="name"
             />
             <div className="text-sm">

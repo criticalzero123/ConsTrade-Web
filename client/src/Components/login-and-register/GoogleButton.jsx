@@ -19,6 +19,7 @@ const GoogleButton = ({ type }) => {
       name: res.displayName,
       email: res.email,
       uid: res.uid,
+      imagePhotoURL: res.photoURL,
       emailVerified: res.emailVerified,
     };
 

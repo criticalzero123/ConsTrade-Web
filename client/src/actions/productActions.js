@@ -28,6 +28,20 @@ export const getProductById = (id) => (dispatch) => {
     });
 };
 
+export const getProductByUserId = (id) => (dispatch) => {
+  dispatch({ type: "GET_PRODUCT_BY_USER_ID_REQUEST" });
+
+  axios
+    .post("/api/products/getProductByUserId", { id })
+    .then((res) => {
+      dispatch({ type: "GET_PRODUCT_BY_USER_ID_SUCCESS", payload: res.data });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({ type: "GET_PRODUCT_BY_USER_ID_FAILED", payload: err });
+    });
+};
+
 export const addProduct = (data) => (dispatch) => {
   dispatch({ type: "ADD_PRODUCT_REQUEST" });
 
