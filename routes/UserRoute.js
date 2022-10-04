@@ -76,7 +76,8 @@ router.post("/emailPasswordRegister", (req, res) => {
         name: req.body.name,
         email: req.body.email,
         uid: req.body.uid,
-        imagePhotoURL: "",
+        imagePhotoURL:
+          "https://lh3.googleusercontent.com/u47bMeQILiIr-MZSU3O6DqlwKyje0DXNvnSTxwlK2BwrUi5IfVjefPF9oCq98qDMVyHspIoPJWY248iVJ4dHk57AJxio_bb0-6e0Gjmq_w_iRqDNmVpk7oNCmFvwP1JH-HDhj_lZKQ=w2400",
         emailVerified: req.body.emailVerified,
         lastActiveAt: new Date().getTime(),
       });

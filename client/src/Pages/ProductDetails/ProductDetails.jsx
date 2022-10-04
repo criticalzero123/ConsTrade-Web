@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getProductById } from "../../actions/productActions";
+import ProductAddComment from "./ProductAddComment/ProductAddComment";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -14,13 +15,26 @@ const ProductDetails = () => {
     dispatch(getProductById(id));
   }, [dispatch, id]);
 
-  const {
-    // loading,
-    //  error,
-    product,
-  } = getproductbyid;
+  const { loading, error, product } = getproductbyid;
 
-  return <div>{product && product._id}</div>;
+  return (
+    <div>
+      {error && <div>Something Went Wrong...</div>}
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        product && (
+          <div>
+            <p>{product.title}</p>
+            <p>comments</p>
+            <p>{product.comments !== undefined && product.comments.length}</p>
+            {/* input */}
+            <ProductAddComment id={id} />
+          </div>
+        )
+      )}
+    </div>
+  );
 };
 
 export default ProductDetails;

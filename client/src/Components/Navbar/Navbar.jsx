@@ -18,8 +18,8 @@ const Navbar = () => {
 
   return (
     <div>
-      <div className="flex place-items-center justify-between">
-        <Link to={user ? "/home" : "/"} className="mr-5">
+      <div className="flex justify-between place-items-center">
+        <Link to={user ? "/home" : "/"} className="mr-5 ">
           <span className="text-2xl font-mono">
             <span className="text-gray-500">Cons</span>
             <span className="text-orange-900">Trade</span>

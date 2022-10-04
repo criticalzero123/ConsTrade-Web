@@ -51,6 +51,7 @@ const ProductAdd = () => {
     if (image) {
       const product = {
         userId: user.uid,
+        name: user.name,
         title: title,
         description: description,
         location: location,

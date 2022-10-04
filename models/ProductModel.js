@@ -9,15 +9,21 @@ const commentSchema = mongoose.Schema(
       type: String,
       require,
     },
+    imagePhoto: {
+      type: String,
+      require,
+    },
     comment: {
       type: String,
       require,
     },
     edited: {
       type: Boolean,
+      require,
     },
-    timeEdit: {
+    timePosted: {
       type: Date,
+      require,
     },
   },
   { timeStamps: true }
@@ -26,6 +32,10 @@ const commentSchema = mongoose.Schema(
 const productSchema = mongoose.Schema(
   {
     userId: {
+      type: String,
+      require,
+    },
+    userName: {
       type: String,
       require,
     },

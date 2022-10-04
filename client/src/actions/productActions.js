@@ -70,3 +70,24 @@ export const deleteProduct = (productid) => (dispatch) => {
       dispatch({ type: "DELETE_PRODUCT_FAILED", payload: err });
     });
 };
+
+export const addCommentProduct =
+  (productId, comment) => (dispatch, getState) => {
+    dispatch({ type: "ADD_COMMENT_PRODUCT_REQUEST" });
+
+    const currentUser = getState().userInfoReducer.currentUser;
+
+    axios
+      .post("/api/products/addCommentProduct", {
+        productId,
+        comment,
+        currentUser,
+      })
+      .then((res) => {
+        dispatch({ type: "ADD_COMMENT_PRODUCT_SUCCESS", payload: res.data });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({ type: "ADD_COMMENT_PRODUCT_FAILED", payload: err });
+      });
+  };

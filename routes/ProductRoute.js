@@ -17,7 +17,7 @@ router.get("/getallproducts", (req, res) => {
 });
 
 router.post("/getProductByUserId", (req, res) => {
-  Product.find({ uid: req.body.id }, (err, docs) => {
+  Product.find({ userId: req.body.id }, (err, docs) => {
     if (!err) {
       return res.send(docs);
     } else {
@@ -45,6 +45,7 @@ router.post("/addProduct", (req, res) => {
 
   const newProduct = new Product({
     userId: data.userId,
+    userName: data.name,
     title: data.title,
     description: data.description,
     location: data.location,
@@ -73,6 +74,33 @@ router.post("/deleteProduct", (req, res) => {
       return res.status(400).json({ message: "Something went wrong" + err });
     } else {
       res.send("Product deleted successfully");
+    }
+  });
+});
+
+router.post("/addCommentProduct", async (req, res) => {
+  const { comment, productId, currentUser } = req.body;
+
+  const product = await Product.findById({ _id: productId });
+
+  const commentModel = {
+    userId: currentUser.uid,
+    name: currentUser.name,
+    imagePhoto: currentUser.imagePhotoURL,
+    comment: comment,
+    edited: false,
+    timePosted: new Date().getTime(),
+  };
+
+  product.comments.push(commentModel);
+
+  product.save((err) => {
+    if (err) {
+      return res
+        .status(400)
+        .json({ message: "Something went wrong in adding comment" });
+    } else {
+      res.send("Commented product successfully");
     }
   });
 });

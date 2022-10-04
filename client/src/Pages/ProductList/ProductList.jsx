@@ -20,14 +20,24 @@ const ProductList = () => {
     dispatch(getProductByUserId(params.id));
   }, [dispatch, params.id]);
 
+  console.log(products);
   return (
     <div className="mt-5">
-      {products && (
-        <div className="grid lg:grid-cols-3 justify-center">
-          {products.map((product) => (
-            <ProductListCard product={product} key={product.title} />
-          ))}
-        </div>
+      {error && <p>Something Went Wrong</p>}
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        products && (
+          <div className="grid lg:grid-cols-3 justify-center">
+            {products.map((product) => (
+              <ProductListCard product={product} key={product.title} />
+            ))}
+          </div>
+        )
+      )}
+
+      {products !== undefined && products.length === 0 && (
+        <div>There is no product listing</div>
       )}
     </div>
   );

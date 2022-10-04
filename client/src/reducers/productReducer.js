@@ -108,3 +108,25 @@ export const deleteProductReducer = (state = {}, action) => {
       return state;
   }
 };
+
+export const addCommentProductReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "ADD_COMMENT_PRODUCT_REQUEST":
+      return {
+        loading: true,
+      };
+    case "ADD_COMMENT_PRODUCT_SUCCESS":
+      return {
+        loading: false,
+        success: true,
+      };
+    case "ADD_COMMENT_PRODUCT_FAILED":
+      return {
+        loading: false,
+        error: true,
+      };
+
+    default:
+      return state;
+  }
+};
