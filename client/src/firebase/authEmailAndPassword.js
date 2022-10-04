@@ -26,12 +26,12 @@ export const signInUserEmailPassword = (email, password) => {
     });
 };
 
-export const signOutEmailPassword = () => {
+export const signOutEmailPassword = (callback) => {
   return firebase
     .auth()
     .signOut()
     .then(() => {
-      console.log("SignOut Successfully");
+      callback();
     })
     .catch((err) => {
       console.log(err);

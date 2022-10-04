@@ -1,11 +1,15 @@
 import {
   getAllProductsReducer,
   getProductByIdReducer,
+  addProductReducer,
+  getProductByUserIdReducer,
+  deleteProductReducer,
 } from "./reducers/productReducer";
 
 import {
   socalMediaAuthReducer,
   emailPasswordRegisterReducer,
+  userInfoReducer,
   emailPasswordLoginReducer,
 } from "./reducers/userReducer";
 import { combineReducers } from "redux";
@@ -20,7 +24,19 @@ const finalReducer = combineReducers({
   socalMediaAuthReducer,
   emailPasswordRegisterReducer,
   emailPasswordLoginReducer,
+  addProductReducer,
+  getProductByUserIdReducer,
+  deleteProductReducer,
+  userInfoReducer,
 });
+
+const currentUser = localStorage.getItem("currentUser")
+  ? JSON.parse(localStorage.getItem("currentUser"))
+  : null;
+
+const initialState = {
+  userInfoReducer: { currentUser: currentUser },
+};
 
 const composeEnhancers = composeWithDevTools({
   // Specify here name, actionsBlacklist, actionsCreators and other options
@@ -28,6 +44,7 @@ const composeEnhancers = composeWithDevTools({
 
 const store = createStore(
   finalReducer,
+  initialState,
   composeEnhancers(
     applyMiddleware(thunk)
     // other store enhancers if any

@@ -16,6 +16,18 @@ router.get("/getallproducts", (req, res) => {
   });
 });
 
+router.post("/getProductByUserId", (req, res) => {
+  Product.find({ userId: req.body.id }, (err, docs) => {
+    if (!err) {
+      return res.send(docs);
+    } else {
+      return res.status(400).json({
+        message: "Something went wrong fetching all products by user id.",
+      });
+    }
+  });
+});
+
 router.post("/getproductbyid", (req, res) => {
   Product.find({ _id: req.body.id }, (err, docs) => {
     if (!err) {
@@ -24,6 +36,71 @@ router.post("/getproductbyid", (req, res) => {
       return res
         .status(400)
         .json({ message: "Something Went wrong fetching item details" });
+    }
+  });
+});
+
+router.post("/addProduct", (req, res) => {
+  const { data } = req.body;
+
+  const newProduct = new Product({
+    userId: data.userId,
+    userName: data.name,
+    title: data.title,
+    description: data.description,
+    location: data.location,
+    gameGenre: data.category,
+    platform: data.platform,
+    condition: data.condition,
+    imageURL: data.imageURL,
+    preferTrade: data.preferTrade,
+    cash: data.cash,
+    item: data.item,
+    deliveryType: data.deliveryType,
+    dateCreated: new Date().getTime(),
+  });
+  newProduct.save((err) => {
+    if (!err) {
+      res.send(`Product add Successful`);
+    } else {
+      res.send(`Product add went wrong`);
+    }
+  });
+});
+
+router.post("/deleteProduct", (req, res) => {
+  Product.findByIdAndDelete(req.body.productid, (err) => {
+    if (err) {
+      return res.status(400).json({ message: "Something went wrong" + err });
+    } else {
+      res.send("Product deleted successfully");
+    }
+  });
+});
+
+router.post("/addCommentProduct", async (req, res) => {
+  const { comment, productId, currentUser } = req.body;
+
+  const product = await Product.findById({ _id: productId });
+
+  const commentModel = {
+    userId: currentUser.uid,
+    name: currentUser.name,
+    imagePhoto: currentUser.imagePhotoURL,
+    comment: comment,
+    edited: false,
+    timePosted: new Date().getTime(),
+  };
+
+  product.comments.push(commentModel);
+
+  product.save((err) => {
+    if (err) {
+      return res
+        .status(400)
+        .json({ message: "Something went wrong in adding comment" });
+    } else {
+      res.send("Commented product successfully");
     }
   });
 });

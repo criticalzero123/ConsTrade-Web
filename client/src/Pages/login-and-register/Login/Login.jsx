@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import "./Login.css";
 import { signInUserEmailPassword } from "../../../firebase/authEmailAndPassword";
 import { emailAndPasswordLogin } from "../../../actions/userActions";
+import { isUserLoggedIn } from "../../../service/userService";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -28,7 +29,7 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("currentUser")) {
+    if (isUserLoggedIn()) {
       window.location.href = "/home";
     }
   }, []);

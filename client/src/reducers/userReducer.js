@@ -48,6 +48,18 @@ export const emailPasswordRegisterReducer = (state = {}, action) => {
   }
 };
 
+export const userInfoReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "USER_INFO_SUCCESS":
+      return {
+        ...state,
+      };
+
+    default:
+      return { ...state };
+  }
+};
+
 export const emailPasswordLoginReducer = (state = {}, action) => {
   switch (action.type) {
     case "USER_EMAIL_PASSWORD_LOGIN_AUTH_REQUEST":
@@ -67,6 +79,10 @@ export const emailPasswordLoginReducer = (state = {}, action) => {
         ...state,
         loading: false,
         error: true,
+      };
+    case "USER_LOGOUT":
+      return {
+        ...state,
       };
     default:
       return { ...state };

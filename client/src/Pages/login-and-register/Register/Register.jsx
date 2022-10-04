@@ -7,9 +7,12 @@ import InputPassword from "../../../Components/login-and-register/InputPassword"
 import { useDispatch } from "react-redux";
 import { createUserEmailPassword } from "../../../firebase/authEmailAndPassword";
 import { emailAndPasswordRegister } from "../../../actions/userActions";
+import { isUserLoggedIn } from "../../../service/userService";
+import InputName from "../../../Components/login-and-register/InputName";
 
 const Register = () => {
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [password, setPassword] = useState("");
 
@@ -20,11 +23,11 @@ const Register = () => {
 
     if (password === confirmPassword) {
       // TODO: CHECK FOR THE LOG FOR THE ERROR OF PASSWORD WEAK AND USER EXIST TO PROMPT ERROR
-      // TIPS:  ERROR.CODE FOR THE MESSAGE NAME
+      // TIPS: ERROR.CODE FOR THE MESSAGE NAME
       const res = await createUserEmailPassword(email, password);
       if (res) {
         const data = {
-          name: res.displayName !== null ? res.displayName : "",
+          name: name,
           email: res.email,
           uid: res.uid,
           emailVerified: res.emailVerified,
@@ -38,7 +41,7 @@ const Register = () => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("currentUser")) {
+    if (isUserLoggedIn()) {
       window.location.href = "/home";
     }
   }, []);
@@ -46,6 +49,7 @@ const Register = () => {
   return (
     <div>
       <form onSubmit={loginCredential}>
+        <InputName onChange={(e) => setName(e.target.value)} textname="Name" />
         <InputEmail onChange={(e) => setEmail(e.target.value)} />
         <InputPassword
           text={"Password"}

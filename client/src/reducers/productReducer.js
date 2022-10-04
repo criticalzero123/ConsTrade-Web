@@ -39,3 +39,94 @@ export const getProductByIdReducer = (state = { product: {} }, action) => {
       return state;
   }
 };
+
+export const getProductByUserIdReducer = (state = { product: [] }, action) => {
+  switch (action.type) {
+    case "GET_PRODUCT_BY_USER_ID_REQUEST":
+      return {
+        loading: true,
+      };
+    case "GET_PRODUCT_BY_USER_ID_SUCCESS":
+      return {
+        products: action.payload,
+        loading: false,
+      };
+    case "GET_PRODUCT_BY_USER_ID_FAILED":
+      return {
+        error: action.payload,
+        loading: false,
+      };
+    default:
+      return state;
+  }
+};
+
+export const addProductReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "ADD_PRODUCT_REQUEST":
+      return {
+        loading: true,
+      };
+    case "ADD_PRODUCT_SUCCESS":
+      return {
+        ...state,
+        loading: false,
+        success: true,
+      };
+    case "ADD_PRODUCT_FAILED":
+      return {
+        ...state,
+        loading: false,
+        error: true,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const deleteProductReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "DELETE_PRODUCT_REQUEST":
+      return {
+        loading: true,
+      };
+    case "DELETE_PRODUCT_SUCCESS":
+      return {
+        ...state,
+        loading: false,
+        success: true,
+      };
+    case "DELETE_PRODUCT_FAILED":
+      return {
+        ...state,
+        loading: false,
+        error: true,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const addCommentProductReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "ADD_COMMENT_PRODUCT_REQUEST":
+      return {
+        loading: true,
+      };
+    case "ADD_COMMENT_PRODUCT_SUCCESS":
+      return {
+        loading: false,
+        success: true,
+      };
+    case "ADD_COMMENT_PRODUCT_FAILED":
+      return {
+        loading: false,
+        error: true,
+      };
+
+    default:
+      return state;
+  }
+};

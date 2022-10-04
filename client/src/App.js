@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 import "./App.css";
 
 import { Route, Routes } from "react-router-dom";
@@ -9,33 +7,24 @@ import Register from "./Pages/login-and-register/Register/Register";
 import Navbar from "./Components/Navbar/Navbar";
 import Home from "./Pages/Home/Home";
 import ProductDetails from "./Pages/ProductDetails/ProductDetails";
+import ProductAdd from "./Pages/ProductAdd/ProductAdd";
+import ProductList from "./Pages/ProductList/ProductList";
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    if (localStorage.getItem("currentUser")) {
-      setIsLoggedIn(true);
-    } else {
-      setIsLoggedIn(false);
-    }
-  }, []);
-
   return (
-    <div className="container mx-auto px-4">
+    <div className="container mx-auto px-0 lg:px-4">
       <Navbar />
+
       <Routes>
         <Route path="/" element={<Index />} />
-        {!isLoggedIn ? (
-          <>
-            <Route path="/signin" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-          </>
-        ) : (
-          <>
-            <Route path="/home" element={<Home />} />
-            <Route path="/product/:id" element={<ProductDetails />} />
-          </>
-        )}
+
+        <Route path="/signin" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+
+        <Route path="/home" element={<Home />} />
+
+        <Route path="/product/item/:id" element={<ProductDetails />} />
+        <Route path="/product/item/list/:id" element={<ProductList />} />
+        <Route path="/product/add" element={<ProductAdd />} />
         <Route
           path="*"
           element={
