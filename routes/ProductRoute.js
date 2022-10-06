@@ -94,15 +94,37 @@ router.post("/addCommentProduct", async (req, res) => {
 
   product.comments.push(commentModel);
 
-  product.save((err) => {
+  product.save(async (err) => {
     if (err) {
       return res
         .status(400)
         .json({ message: "Something went wrong in adding comment" });
     } else {
-      res.send("Commented product successfully");
+      const product = await Product.findById({ _id: productId });
+
+      res.send(product.comments);
     }
   });
+});
+
+router.post("/deleteCommentProduct", (req, res) => {
+  Product.updateOne(
+    { _id: req.body.productId },
+    {
+      $pull: { comments: { userId: req.body.userId, _id: req.body.commentId } },
+    },
+    async (err) => {
+      if (err) {
+        return res
+          .status(400)
+          .json({ message: "Something went wrong in deleting comment" });
+      } else {
+        const product = await Product.findById({ _id: req.body.productId });
+
+        res.send(product.comments);
+      }
+    }
+  );
 });
 
 module.exports = router;

@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getProductByUserId } from "../../actions/productActions";
 import ProductListCard from "../../Components/ProductListCard/ProductListCard";
 
@@ -37,7 +37,12 @@ const ProductList = () => {
       )}
 
       {products !== undefined && products.length === 0 && (
-        <div>There is no product listing</div>
+        <div>
+          <div>There is no product listing.</div>
+          <Link to="/product/add" className="text-blue-700">
+            Add here
+          </Link>
+        </div>
       )}
     </div>
   );

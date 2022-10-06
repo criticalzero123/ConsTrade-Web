@@ -130,3 +130,37 @@ export const addCommentProductReducer = (state = {}, action) => {
       return state;
   }
 };
+
+export const commentListProductReducer = (state = { comments: [] }, action) => {
+  switch (action.type) {
+    case "COMMENT_LIST":
+      return {
+        comments: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const deleteCommentProductReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "DELETE_COMMENT_PRODUCT_REQUEST":
+      return {
+        loading: true,
+      };
+    case "DELETE_COMMENT_PRODUCT_SUCCESS":
+      return {
+        loading: false,
+        success: true,
+      };
+    case "DELETE_COMMENT_PRODUCT_FAILED":
+      return {
+        loading: false,
+        error: true,
+      };
+
+    default:
+      return state;
+  }
+};

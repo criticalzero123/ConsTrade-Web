@@ -21,6 +21,8 @@ export const getProductById = (id) => (dispatch) => {
     .post("/api/products/getproductbyid", { id })
     .then((res) => {
       dispatch({ type: "GET_PRODUCT_BY_ID_SUCCESS", payload: res.data });
+
+      dispatch({ type: "COMMENT_LIST", payload: res.data.comments });
     })
     .catch((err) => {
       console.log(err);
@@ -84,10 +86,32 @@ export const addCommentProduct =
         currentUser,
       })
       .then((res) => {
-        dispatch({ type: "ADD_COMMENT_PRODUCT_SUCCESS", payload: res.data });
+        dispatch({ type: "ADD_COMMENT_PRODUCT_SUCCESS" });
+        dispatch({ type: "COMMENT_LIST", payload: res.data });
       })
       .catch((err) => {
         console.log(err);
         dispatch({ type: "ADD_COMMENT_PRODUCT_FAILED", payload: err });
+      });
+  };
+
+export const deleteCommentProduct =
+  (productId, userId, commentId) => (dispatch) => {
+    dispatch({ type: "DELETE_COMMENT_PRODUCT_REQUEST" });
+
+    axios
+      .post("/api/products/deleteCommentProduct", {
+        productId,
+        userId,
+        commentId,
+      })
+      .then((res) => {
+        dispatch({ type: "DELETE_COMMENT_PRODUCT_SUCCESS" });
+
+        dispatch({ type: "COMMENT_LIST", payload: res.data });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({ type: "DELETE_COMMENT_PRODUCT_FAILED", payload: err });
       });
   };

@@ -4,6 +4,7 @@ import {
   addProductReducer,
   getProductByUserIdReducer,
   deleteProductReducer,
+  commentListProductReducer,
 } from "./reducers/productReducer";
 
 import {
@@ -28,6 +29,7 @@ const finalReducer = combineReducers({
   getProductByUserIdReducer,
   deleteProductReducer,
   userInfoReducer,
+  commentListProductReducer,
 });
 
 const currentUser = localStorage.getItem("currentUser")

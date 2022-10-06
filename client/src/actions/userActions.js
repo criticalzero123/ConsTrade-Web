@@ -16,8 +16,7 @@ export const socialMediaMethod = (data) => (dispatch) => {
         localStorage.setItem("currentUser", JSON.stringify(res.data));
 
         dispatch({ type: "USER_INFO_SUCCESS" });
-        // window.location.href = "/home";
-        console.log(res);
+        window.location.href = "/home";
       }
     })
     .catch((err) => {
@@ -62,8 +61,6 @@ export const emailAndPasswordRegister = (data) => (dispatch) => {
 
 // TODO:Make a update for the lastActive in the mongodb of the specific user
 export const logoutUser = () => (dispatch) => {
-  //localStorage.removeItem("cartItems")
-
   dispatch({ type: "USER_LOGOUT" });
   signOutEmailPassword(removeAndRedirect);
 };

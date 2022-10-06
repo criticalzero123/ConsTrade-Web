@@ -1,9 +1,24 @@
 const mongoose = require("mongoose");
 
+const favoriteSchema = mongoose.Schema(
+  {
+    productId: {
+      type: mongoose.Schema.Types.ObjectId,
+      require,
+    },
+    dateAdded: {
+      type: Date,
+      require,
+    },
+  },
+  { timeStamps: true }
+);
+
 const reviewSchema = mongoose.Schema(
   {
     userid: {
       type: mongoose.Schema.Types.ObjectId,
+      require,
     },
     name: {
       type: String,
@@ -49,6 +64,7 @@ const userSchema = mongoose.Schema(
       require,
     },
     reviews: [reviewSchema],
+    favorites: [favoriteSchema],
   },
   {
     timeStamps: true,

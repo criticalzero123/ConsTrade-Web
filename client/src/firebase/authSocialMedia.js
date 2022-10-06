@@ -15,7 +15,6 @@ const socialMediaAuth = (provider) => {
 
 export default socialMediaAuth;
 
-// const auth = getAuth();
 // signInWithPopup(auth, googleProvider)
 //   .then((result) => {
 //     // This gives you a Google Access Token. You can use it to access the Google API.

@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProductCardDetails = ({ image, title, userPhoto }) => {
+const ProductCardDetails = ({ image, title, userPhoto, userName }) => {
   return (
     <div className="ml-16 grid grid-cols-2 place-items-center h-4/6 rounded">
       <div className=" h-full bg-blue-900 flex align-center rounded lg:rounded-r-none">
@@ -37,9 +37,7 @@ const ProductCardDetails = ({ image, title, userPhoto }) => {
               alt="name"
             />
             <div className="text-sm">
-              <p className="text-gray-900 leading-none">
-                James Dylan Caramonte
-              </p>
+              <p className="text-gray-900 leading-none">{userName}</p>
               <p className="text-gray-600">Aug 18</p>
             </div>
           </div>

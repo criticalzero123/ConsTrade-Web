@@ -75,9 +75,9 @@ const ProductAdd = () => {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 pt-7">
-      <div className="">
+      <div className=" ">
         <form onSubmit={productAddRequest}>
-          <aside className="overflow-y-auto h-[52rem] ">
+          <aside className="overflow-y-hidden hover:overflow-y-auto h-[45rem] ">
             <ProductAddInput
               labeltext="Title"
               placeholdertext="title..."
@@ -168,6 +168,7 @@ const ProductAdd = () => {
           title={title}
           image={imageUpload && window.URL.createObjectURL(imageUpload)}
           userPhoto={user.imagePhotoURL}
+          userName={user.name}
         />
       </div>
     </div>
