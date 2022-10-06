@@ -88,3 +88,29 @@ export const emailPasswordLoginReducer = (state = {}, action) => {
       return { ...state };
   }
 };
+
+export const favoriteReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "USER_FAVORITE_REQUEST":
+      return {
+        loading: true,
+      };
+
+    case "USER_FAVORITE_SUCCESS":
+      return {
+        loading: false,
+        success: true,
+        favorite: action.payload.favorites,
+        message: action.payload.message,
+      };
+
+    case "USER_FAVORITE_FAILED":
+      return {
+        loading: false,
+        error: true,
+      };
+
+    default:
+      return state;
+  }
+};

@@ -6,6 +6,8 @@ import { getProductById } from "../../actions/productActions";
 import ProductComment from "./ProductComment/ProductComment";
 import ProductAddComment from "./ProductAddComment/ProductAddComment";
 
+import ProductDetailsFavoriteCounter from "../../Components/ProductDetails/ProductDetailsFavoritesCounter/ProductDetailsFavoriteCounter";
+
 const ProductDetails = () => {
   const { id } = useParams();
   const [showComments, setShowComments] = useState(true);
@@ -15,9 +17,9 @@ const ProductDetails = () => {
   const getproductbyid = useSelector((state) => state.getProductByIdReducer);
   const getuser = useSelector((state) => state.userInfoReducer);
   const getcomments = useSelector((state) => state.commentListProductReducer);
+  // const getfavorites = useSelector((state) => state.favoriteReducer);
 
   const { comments } = getcomments;
-
   const { currentUser } = getuser;
   const { loading, error, product } = getproductbyid;
 
@@ -71,7 +73,13 @@ const ProductDetails = () => {
               <p>Delivery Method: {product.deliveryType}</p>
               <p>Condition: {product.condition}</p>
               <div className="flex justify-between mt-5">
-                <p>0 Favorites</p>
+                <div>
+                  <ProductDetailsFavoriteCounter
+                    id={id}
+                    product={product}
+                    currentUser={currentUser}
+                  />
+                </div>
                 <p
                   className="cursor-pointer"
                   onClick={() => setShowComments(!showComments)}

@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
 const User = require("../models/UserModel");
+const Product = require("../models/ProductModel");
 
 router.post("/socialMediaAuth", (req, res) => {
   // authType = register || login
@@ -71,7 +72,7 @@ router.post("/emailPasswordRegister", (req, res) => {
     (err, docs) => {
       // no need to check if there are user
       // firebase will do this for us
-
+      // TODO: usahay ang uid way i hatag i check ni
       const newUser = new User({
         name: req.body.name,
         email: req.body.email,
@@ -119,6 +120,97 @@ router.post("/emailPasswordLogin", (req, res) => {
         });
     }
   );
+});
+
+router.post("/addFavorite", async (req, res) => {
+  const { userInfo, productId } = req.body;
+
+  const user = await User.findById({ _id: userInfo._id });
+  const product = await Product.findOne({ _id: productId });
+
+  const exist = await user.favorites.some(
+    (favorite) => favorite.productId == productId
+  );
+
+  if (!exist) {
+    const favoriteModel = {
+      productId: productId,
+      dateAdded: new Date().getTime(),
+    };
+
+    user.favorites.push(favoriteModel);
+
+    user.save(async (err) => {
+      if (!err) {
+        product.favoritesCount = product.favoritesCount + 1;
+
+        product.save(async (err) => {
+          if (!err) {
+            // const user = await User.findById({ _id: userInfo._id });
+            res.send(user);
+          } else {
+            return res
+              .status(400)
+              .json({ message: "Something went wrong in adding favorite" });
+          }
+        });
+      } else {
+        return res
+          .status(400)
+          .json({ message: "Something went wrong in adding favorite " });
+      }
+    });
+  } else {
+    const newFavorite = user.favorites.filter(
+      (favorite) => favorite.productId != productId
+    );
+
+    user.favorites = newFavorite;
+
+    user.save(async (err) => {
+      if (err) {
+        return res.status(400).json({
+          message: "Something went wrong in removing favorite in users",
+        });
+      } else {
+        product.favoritesCount = product.favoritesCount - 1;
+
+        product.save((err) => {
+          if (!err) {
+            res.send(user);
+          } else {
+            return res.status(400).json({
+              message:
+                "Something went wrong in updating favorite count in product",
+            });
+          }
+        });
+      }
+    });
+    // user.updateOne(
+    //   { $pull: { favorites: { productId: productId } } },
+    //   async (err) => {
+    //     if (err) {
+    //       return res.status(400).json({
+    //         message: "Something went wrong in removing favorite in users",
+    //       });
+    //     } else {
+    //       product.favoritesCount = product.favoritesCount - 1;
+
+    //       product.save((err) => {
+    //         if (!err) {
+    //           res.send(user);
+    //         } else {
+    //           return res.status(400).json({
+    //             message:
+    //               "Something went wrong in updating favorite count in product",
+    //           });
+    //         }
+    //       });
+    //     }
+    //   }
+    // );
+  }
 });
 
 module.exports = router;

@@ -58,12 +58,13 @@ router.post("/addProduct", (req, res) => {
     item: data.item,
     deliveryType: data.deliveryType,
     dateCreated: new Date().getTime(),
+    favoritesCount: 0,
   });
   newProduct.save((err) => {
     if (!err) {
       res.send(`Product add Successful`);
     } else {
-      res.send(`Product add went wrong`);
+      res.status(400).json({ message: `Product add went wrong` });
     }
   });
 });

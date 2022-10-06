@@ -59,6 +59,24 @@ export const emailAndPasswordRegister = (data) => (dispatch) => {
     });
 };
 
+export const addToFavorite = (productId) => (dispatch, getState) => {
+  dispatch({ type: "USER_FAVORITE_REQUEST" });
+
+  const userInfo = getState().userInfoReducer.currentUser;
+
+  axios
+    .post("/api/users/addFavorite", { productId, userInfo })
+    .then((res) => {
+      dispatch({ type: "USER_FAVORITE_SUCCESS", payload: res.data });
+
+      // Updating the favorite product
+      localStorage.setItem("currentUser", JSON.stringify(res.data));
+    })
+    .catch((err) => {
+      dispatch({ type: "USER_FAVORITE_FAILED" });
+    });
+};
+
 // TODO:Make a update for the lastActive in the mongodb of the specific user
 export const logoutUser = () => (dispatch) => {
   dispatch({ type: "USER_LOGOUT" });

@@ -12,6 +12,7 @@ import {
   emailPasswordRegisterReducer,
   userInfoReducer,
   emailPasswordLoginReducer,
+  favoriteReducer,
 } from "./reducers/userReducer";
 import { combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
@@ -30,6 +31,7 @@ const finalReducer = combineReducers({
   deleteProductReducer,
   userInfoReducer,
   commentListProductReducer,
+  favoriteReducer,
 });
 
 const currentUser = localStorage.getItem("currentUser")

@@ -84,6 +84,10 @@ const productSchema = mongoose.Schema(
       type: Date,
       require,
     },
+    favoritesCount: {
+      type: Number,
+      require,
+    },
     comments: [commentSchema],
   },
   {
