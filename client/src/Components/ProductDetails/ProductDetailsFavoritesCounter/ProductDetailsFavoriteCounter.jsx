@@ -34,7 +34,7 @@ const ProductDetailsFavoriteCounter = ({ id, product }) => {
         size={20}
         className={`${
           select && "text-red-500 hover:text-black"
-        } mr-1 hover:cursor-pointer hover:text-red-500`}
+        } mr-1 hover:cursor-pointer `}
         onClick={favoriteOnClick}
       />{" "}
       {favoriteCount} Favorites
