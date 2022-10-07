@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 
 const app = express();
 var dbconnection = require("./db");
+const path = require("path");
 
 var productsRoute = require("./routes/ProductRoute");
 var userRoute = require("./routes/UserRoute");
