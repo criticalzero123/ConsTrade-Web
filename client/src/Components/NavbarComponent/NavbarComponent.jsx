@@ -66,7 +66,7 @@ const NavbarComponent = () => {
             ConsTrade
           </span>
         </Navbar.Brand>
-        {useLoggedIn && (
+        {useLoggedIn ? (
           <>
             <div className="flex md:order-2">
               <Dropdown
@@ -81,23 +81,24 @@ const NavbarComponent = () => {
                       status="online"
                       statusPosition="bottom-right"
                       size="sm"
-                    >
-                      <div className="space-y-1 ">
-                        <div>{firstLetterUpper(user.name)}</div>
-                      </div>
-                    </Avatar>
+                    ></Avatar>
                   </>
                 }
               >
                 <Dropdown.Header>
-                  <span className="block text-sm">{user.name}</span>
+                  <span className="block text-sm">
+                    {firstLetterUpper(user.name)}
+                  </span>
                   <span className="block truncate text-sm font-medium">
                     {user.email}
                   </span>
                 </Dropdown.Header>
                 <Dropdown.Item>Dashboard</Dropdown.Item>
+
+                <Link to="/favorites">
+                  <Dropdown.Item>Favorites</Dropdown.Item>
+                </Link>
                 <Dropdown.Item>Settings</Dropdown.Item>
-                <Dropdown.Item>Favorites</Dropdown.Item>
                 <Dropdown.Divider />
                 <Dropdown.Item onClick={logoutUserButton}>
                   Sign out
@@ -113,6 +114,14 @@ const NavbarComponent = () => {
               <Navbar.Link href="/navbars">Services</Navbar.Link>
               <Navbar.Link href="/navbars">Pricing</Navbar.Link>
               <Navbar.Link href="/navbars">Contact</Navbar.Link>
+            </Navbar.Collapse>
+          </>
+        ) : (
+          <>
+            <Navbar.Toggle />
+            <Navbar.Collapse>
+              <Navbar.Link href="/register"> Sign Up</Navbar.Link>
+              <Navbar.Link href="/signin">Sign in</Navbar.Link>
             </Navbar.Collapse>
           </>
         )}

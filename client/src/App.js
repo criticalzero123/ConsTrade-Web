@@ -9,6 +9,7 @@ import Home from "./Pages/Home/Home";
 import ProductDetails from "./Pages/ProductDetails/ProductDetails";
 import ProductAdd from "./Pages/ProductAdd/ProductAdd";
 import ProductList from "./Pages/ProductList/ProductList";
+import Favorites from "./Pages/Favorites/Favorites";
 function App() {
   return (
     <div>
@@ -25,6 +26,7 @@ function App() {
           <Route path="/product/item/:id" element={<ProductDetails />} />
           <Route path="/product/item/list/:id" element={<ProductList />} />
           <Route path="/product/add" element={<ProductAdd />} />
+          <Route path="/favorites" element={<Favorites />} />
           <Route
             path="*"
             element={

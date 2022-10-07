@@ -20,7 +20,6 @@ const ProductList = () => {
     dispatch(getProductByUserId(params.id));
   }, [dispatch, params.id]);
 
-  console.log(products);
   return (
     <div className="mt-5">
       {error && <p>Something Went Wrong</p>}

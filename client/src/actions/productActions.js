@@ -44,13 +44,16 @@ export const getProductByUserId = (id) => (dispatch) => {
     });
 };
 
-export const addProduct = (data) => (dispatch) => {
+export const addProduct = (data) => (dispatch, getState) => {
   dispatch({ type: "ADD_PRODUCT_REQUEST" });
+
+  const currentUser = getState().userInfoReducer.currentUser;
 
   axios
     .post("/api/products/addProduct", { data })
     .then((res) => {
       dispatch({ type: "ADD_PRODUCT_SUCCESS", payload: res.data });
+      window.location.href = `/product/item/list/${currentUser.uid}`;
     })
     .catch((err) => {
       console.log(err);

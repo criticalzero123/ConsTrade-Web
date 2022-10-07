@@ -39,9 +39,9 @@ const ProductListCard = ({ product }) => {
                 ></path>
               </svg>
             </p>
-            <div className="flex text-white">
+            <div className="flex text-black">
               <p
-                className="mr-5 cursor-pointer"
+                className="mr-5 cursor-pointer "
                 onClick={() => dispatch(deleteProduct(product._id))}
               >
                 Delete

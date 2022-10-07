@@ -11,10 +11,13 @@ app.use(bodyParser.json());
 app.use("/api/products/", productsRoute);
 app.use("/api/users/", userRoute);
 
-app.get("/", (req, res) => {
-  res.send("Initial");
-});
+if (process.env.NODE_ENV === "production") {
+  app.use("/", express.static("client/build"));
 
-const port = 8000;
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client/build/index.html"));
+  });
+}
+const port = process.env.PORT || 8000;
 
 app.listen(port, () => console.log("Server is running!"));

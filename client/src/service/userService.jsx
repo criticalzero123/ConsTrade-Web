@@ -11,8 +11,6 @@ export const firstLetterUpper = (name) => {
 
   let finalWord = "";
 
-  console.log(letterSplit);
-
   for (var i = 0; i < letterSplit.length; i++) {
     finalWord +=
       letterSplit[i].charAt(0).toUpperCase() + letterSplit[i].slice(1) + " ";
