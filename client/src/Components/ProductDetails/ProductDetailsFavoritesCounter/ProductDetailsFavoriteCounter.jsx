@@ -33,8 +33,8 @@ const ProductDetailsFavoriteCounter = ({ id, product }) => {
       <AiFillHeart
         size={20}
         className={`${
-          select && "text-red-500 hover:text-black"
-        } mr-1 hover:cursor-pointer `}
+          select && "text-red-500"
+        } text-black mr-1 hover:cursor-pointer `}
         onClick={favoriteOnClick}
       />{" "}
       {favoriteCount} Favorites
