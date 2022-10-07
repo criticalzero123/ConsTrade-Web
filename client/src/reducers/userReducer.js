@@ -52,7 +52,7 @@ export const userInfoReducer = (state = {}, action) => {
   switch (action.type) {
     case "USER_INFO_SUCCESS":
       return {
-        ...state,
+        currentUser: action.payload,
       };
 
     default:

@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { AiFillHeart } from "react-icons/ai";
 import { addToFavorite } from "../../../actions/userActions";
 
-const ProductDetailsFavoriteCounter = ({ currentUser, id, product }) => {
+const ProductDetailsFavoriteCounter = ({ id, product }) => {
   const dispatch = useDispatch();
+
+  const getuser = useSelector((state) => state.userInfoReducer);
+
+  const { currentUser } = getuser;
 
   const userFavoriteProduct = currentUser.favorites.some(
     (favorite) => favorite.productId === id

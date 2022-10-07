@@ -1,12 +1,18 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteCommentProduct } from "../../../actions/productActions";
 import { calculateDateRelative } from "../../../service/commentService";
 
 import CommentSettings from "./CommentSettings/CommentSettings";
 
-const ProductComment = ({ comment, userId, productId, ownerId }) => {
+const ProductComment = ({ comment, productId, ownerId }) => {
   const dispatch = useDispatch();
+
+  const getuser = useSelector((state) => state.userInfoReducer);
+
+  const { currentUser } = getuser;
+
+  const { uid } = currentUser;
 
   const time = calculateDateRelative(comment.timePosted);
 
@@ -26,7 +32,7 @@ const ProductComment = ({ comment, userId, productId, ownerId }) => {
               {comment.name} ● {time}
             </div>
             <div>
-              {(comment.userId === userId || ownerId === userId) && (
+              {(comment.userId === uid || ownerId === uid) && (
                 <CommentSettings
                   deleteComment={() =>
                     dispatch(

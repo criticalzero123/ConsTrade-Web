@@ -15,7 +15,7 @@ export const socialMediaMethod = (data) => (dispatch) => {
       if (res.status === 200) {
         localStorage.setItem("currentUser", JSON.stringify(res.data));
 
-        dispatch({ type: "USER_INFO_SUCCESS" });
+        dispatch({ type: "USER_INFO_SUCCESS", currentUser: res.data });
         window.location.href = "/home";
       }
     })
@@ -69,6 +69,7 @@ export const addToFavorite = (productId) => (dispatch, getState) => {
     .then((res) => {
       dispatch({ type: "USER_FAVORITE_SUCCESS", payload: res.data });
 
+      dispatch({ type: "USER_INFO_SUCCESS", payload: res.data });
       // Updating the favorite product
       localStorage.setItem("currentUser", JSON.stringify(res.data));
     })

@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getProductById } from "../../actions/productActions";
-import ProductComment from "./ProductComment/ProductComment";
-import ProductAddComment from "./ProductAddComment/ProductAddComment";
+import ProductComment from "../../Components/ProductDetails/ProductComment/ProductComment";
+import ProductAddComment from "../../Components/ProductDetails/ProductAddComment/ProductAddComment";
 
 import ProductDetailsFavoriteCounter from "../../Components/ProductDetails/ProductDetailsFavoritesCounter/ProductDetailsFavoriteCounter";
 
@@ -15,12 +15,9 @@ const ProductDetails = () => {
   const dispatch = useDispatch();
 
   const getproductbyid = useSelector((state) => state.getProductByIdReducer);
-  const getuser = useSelector((state) => state.userInfoReducer);
   const getcomments = useSelector((state) => state.commentListProductReducer);
-  // const getfavorites = useSelector((state) => state.favoriteReducer);
 
   const { comments } = getcomments;
-  const { currentUser } = getuser;
   const { loading, error, product } = getproductbyid;
 
   useEffect(() => {
@@ -74,11 +71,7 @@ const ProductDetails = () => {
               <p>Condition: {product.condition}</p>
               <div className="flex justify-between mt-5">
                 <div>
-                  <ProductDetailsFavoriteCounter
-                    id={id}
-                    product={product}
-                    currentUser={currentUser}
-                  />
+                  <ProductDetailsFavoriteCounter id={id} product={product} />
                 </div>
                 <p
                   className="cursor-pointer"
@@ -96,7 +89,6 @@ const ProductDetails = () => {
                       comment={comment}
                       productId={product._id}
                       ownerId={product.userId}
-                      userId={currentUser.uid}
                     />
                   ))}
               </div>
