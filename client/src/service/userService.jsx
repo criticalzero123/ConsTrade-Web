@@ -7,14 +7,16 @@ export const userInfo = () => {
 };
 
 export const firstLetterUpper = (name) => {
-  const letterSplit = name.split(" ");
+  if (name !== undefined) {
+    const letterSplit = name.split(" ");
 
-  let finalWord = "";
+    let finalWord = "";
 
-  for (var i = 0; i < letterSplit.length; i++) {
-    finalWord +=
-      letterSplit[i].charAt(0).toUpperCase() + letterSplit[i].slice(1) + " ";
+    for (var i = 0; i < letterSplit.length; i++) {
+      finalWord +=
+        letterSplit[i].charAt(0).toUpperCase() + letterSplit[i].slice(1) + " ";
+    }
+
+    return finalWord;
   }
-
-  return finalWord;
 };
