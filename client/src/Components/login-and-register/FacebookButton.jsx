@@ -24,6 +24,8 @@ const FacebookButton = ({ type }) => {
       };
 
       dispatch(socialMediaMethod(data));
+    } else {
+      alert("Something went wrong facebook auth");
     }
   };
 

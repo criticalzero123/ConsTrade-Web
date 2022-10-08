@@ -25,7 +25,7 @@ const Register = () => {
       // TODO: CHECK FOR THE LOG FOR THE ERROR OF PASSWORD WEAK AND USER EXIST TO PROMPT ERROR
       // TIPS: ERROR.CODE FOR THE MESSAGE NAME
       const res = await createUserEmailPassword(email, password);
-      if (res) {
+      if (res.uid !== undefined) {
         const data = {
           name: name,
           email: res.email,
@@ -34,6 +34,8 @@ const Register = () => {
         };
 
         dispatch(emailAndPasswordRegister(data));
+      } else {
+        alert("Something went wrong registering with email and password");
       }
     } else {
       alert("Password is not the same!");

@@ -19,12 +19,14 @@ const Login = () => {
     e.preventDefault();
     // TODO: make a checker the error code is auth/user-not-found or auth/wrong-password
     const res = await signInUserEmailPassword(email, password);
-    if (res) {
+    if (res.uid !== undefined) {
       const user = {
         email: res.email,
         uid: res.uid,
       };
       dispatch(emailAndPasswordLogin(user));
+    } else {
+      alert("Something went wrong loging in with email and password");
     }
   };
 
