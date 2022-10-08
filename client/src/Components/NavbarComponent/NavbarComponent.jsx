@@ -101,7 +101,7 @@ const NavbarComponent = () => {
                     {user.email}
                   </span>
                 </Dropdown.Header>
-                <Link to={`/product/item/list/${user.uid}`}>
+                <Link to={`/product/item/list/${user._id}`}>
                   <Dropdown.Item>Item List</Dropdown.Item>
                 </Link>
                 <Link to="/favorites">
