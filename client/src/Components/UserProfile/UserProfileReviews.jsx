@@ -16,9 +16,6 @@ const UserProfileReviews = ({ user }) => {
           <p className="ml-2 text-sm font-medium text-gray-500 dark:text-gray-400">
             4.95 out of 5 (10 ratings)
           </p>
-          <p className="text-sm font-medium text-gray-500 ml-10 hover:underline hover:text-blue-500 hover:cursor-pointer">
-            View All
-          </p>
         </Rating>
         <div className="mt-5">
           <Rating.Advanced percentFilled={70}>5 star</Rating.Advanced>
