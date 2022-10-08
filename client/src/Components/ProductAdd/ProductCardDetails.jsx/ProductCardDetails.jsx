@@ -14,7 +14,10 @@ const ProductCardDetails = (props) => {
     preferTrade,
     cash,
     item,
+    platform,
     meetup,
+    modelNumber,
+    serialNumber,
   } = props;
 
   const imageDefault =
@@ -49,24 +52,34 @@ const ProductCardDetails = (props) => {
             <p className="text-gray-700 text-base text-ellipsis overflow-hidden whitespace-nowrap w-72">
               Description: {description}
             </p>
+
+            <p className="text-gray-700 text-base mt-2">Category: {category}</p>
+            <p className="text-gray-700 text-base mt-2">
+              Platform Supported: {platform}
+            </p>
+            <p className="text-gray-700 text-base mt-2">
+              Model Number: {modelNumber}
+            </p>
+            <p className="text-gray-700 text-base mt-2">
+              Serial Number: {serialNumber}
+            </p>
             <p className="text-gray-700 text-base mt-2 ">
               Condition: {condition}
             </p>
-            <p className="text-gray-700 text-base mt-2">Category: {category}</p>
             <p className="text-gray-700 text-base mt-2 text-ellipsis overflow-hidden whitespace-nowrap w-72">
               Location: {location}
             </p>
             <p className="text-gray-700 text-base mt-2">
               Prefer Trade:{" "}
-              {preferTrade === "Both" ? "Cash and Item" : preferTrade}
+              {preferTrade === "Trade-in" ? "Cash and Item" : preferTrade}
             </p>
-            {(preferTrade === "Both" || preferTrade === "Cash") && (
+            {(preferTrade === "Trade-in" || preferTrade === "Selling") && (
               <p className="text-gray-700 text-base mt-2 text-ellipsis overflow-hidden whitespace-nowrap w-72">
                 Cash: {`₱${cash}`}
               </p>
             )}
 
-            {(preferTrade === "Both" || preferTrade === "Item/s") && (
+            {(preferTrade === "Trade-in" || preferTrade === "Swapping") && (
               <p className="text-gray-700 text-base mt-2 text-ellipsis overflow-hidden whitespace-nowrap w-72">
                 Item: {item}
               </p>

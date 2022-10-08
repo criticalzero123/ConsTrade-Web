@@ -122,6 +122,25 @@ router.post("/emailPasswordLogin", (req, res) => {
   );
 });
 
+router.post("/getUserById", (req, res) => {
+  const { id } = req.body;
+
+  User.findOne({ _id: id }, (err, docs) => {
+    if (docs) {
+      res.send(docs);
+    } else {
+      return res.status(400).json({
+        message: "User Not Found",
+      });
+    }
+
+    if (err)
+      return res.status(400).json({
+        message: "Something went wrong in email and password login",
+      });
+  });
+});
+
 router.post("/addFavorite", async (req, res) => {
   const { userInfo, productId } = req.body;
 

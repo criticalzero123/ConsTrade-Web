@@ -32,6 +32,8 @@ const ProductAdd = () => {
   const [location, setLocation] = useState("");
   const [cash, setCash] = useState(0);
   const [item, setItem] = useState("");
+  const [modelNumber, setModelNumber] = useState("");
+  const [serialNumber, setSerialNumber] = useState("");
   //   Textarea
   const [description, setDescription] = useState("");
   //   dropzone
@@ -56,12 +58,14 @@ const ProductAdd = () => {
   const productUploadCallBack = (image) => {
     if (image) {
       const product = {
-        userId: user.uid,
+        userId: user._id,
         name: user.name,
         title: title,
         description: description,
         location: location,
         category: category,
+        modelNumber: modelNumber,
+        serialNumber: serialNumber,
         platform: platform,
         condition: condition,
         imageURL: image,
@@ -107,6 +111,24 @@ const ProductAdd = () => {
               onChange={(e) => setPlatform(e.target.value)}
             />
             <br />
+            <ProductAddInput
+              labeltext="Model Number"
+              placeholdertext="xxx-xxx"
+              value={modelNumber}
+              fortext="modelnumber"
+              onChange={(e) => setModelNumber(e.target.value)}
+              required
+            />
+            <br />
+            <ProductAddInput
+              labeltext="Serial Number"
+              placeholdertext="xxx-xxxx"
+              value={serialNumber}
+              fortext="serialnumber"
+              onChange={(e) => setSerialNumber(e.target.value)}
+              required
+            />
+            <br />
             <ProductAddSelect
               items={conditionOptions}
               labeltext="Condition"
@@ -117,7 +139,7 @@ const ProductAdd = () => {
             <ProductAddTextArea
               labeltext="Description"
               fortext="description"
-              placeholdertext="Description..."
+              placeholdertext="Describe the item (Dents or Defects)"
               onChange={(e) => setDescription(e.target.value)}
               required
             />
@@ -137,6 +159,7 @@ const ProductAdd = () => {
               }}
               required
             />
+            <br />
             {/* <img src={imageUpload && window.URL.createObjectURL(imageUpload)} /> */}
             <ProductAddSelect
               labeltext="Prefer Trade"
@@ -145,13 +168,14 @@ const ProductAdd = () => {
               width="w-40"
               onChange={(e) => setPrefer(e.target.value)}
             />
+            <br />
             <ProductAddInput
               labeltext="Cash Prefer"
               fortext="cash"
               placeholdertext="0"
               onChange={cashPreferInput}
               value={cash}
-              hidden={prefer === "Item/s" ? true : false}
+              hidden={prefer === "Swapping" ? true : false}
               number={true}
               required
             />
@@ -161,11 +185,12 @@ const ProductAdd = () => {
               placeholdertext="something..."
               value={item}
               onChange={(e) => setItem(e.target.value)}
-              hidden={prefer === "Cash" ? true : false}
+              hidden={prefer === "Selling" ? true : false}
               required
             />
+            <br />
             <ProductAddSelect
-              labeltext="Meetup Preference"
+              labeltext="Mode of Transaction"
               items={meetupPreferenceOptions}
               width="w-42"
               onChange={(e) => setMeetup(e.target.value)}
@@ -183,8 +208,11 @@ const ProductAdd = () => {
           condition={condition}
           category={category}
           location={location}
+          platform={platform}
           preferTrade={prefer}
           cash={cash}
+          modelNumber={modelNumber}
+          serialNumber={serialNumber}
           item={item}
           meetup={meetup}
           image={imageUpload && window.URL.createObjectURL(imageUpload)}

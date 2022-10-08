@@ -89,6 +89,28 @@ export const emailPasswordLoginReducer = (state = {}, action) => {
   }
 };
 
+export const getUserByIdReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "GET_USER_BY_ID_REQUEST":
+      return {
+        loading: true,
+      };
+    case "GET_USER_BY_ID_SUCCESS":
+      return {
+        loading: false,
+        user: action.payload,
+      };
+
+    case "GET_USER_BY_ID_FAILED":
+      return {
+        loading: false,
+        error: true,
+      };
+    default:
+      return { ...state };
+  }
+};
+
 export const favoriteReducer = (state = {}, action) => {
   switch (action.type) {
     case "USER_FAVORITE_REQUEST":

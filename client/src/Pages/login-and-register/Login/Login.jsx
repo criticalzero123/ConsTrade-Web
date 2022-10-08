@@ -4,7 +4,6 @@ import GoogleButton from "../../../Components/login-and-register/GoogleButton";
 
 import { useDispatch } from "react-redux";
 
-import "./Login.css";
 import { signInUserEmailPassword } from "../../../firebase/authEmailAndPassword";
 import { emailAndPasswordLogin } from "../../../actions/userActions";
 import { isUserLoggedIn } from "../../../service/userService";

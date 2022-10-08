@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 
 import { Link } from "react-router-dom";
 import { logoutUser } from "../../actions/userActions";
+import { IoIosArrowDown } from "react-icons/io";
 import {
   isUserLoggedIn,
   userInfo,
@@ -78,23 +79,31 @@ const NavbarComponent = () => {
                       alt="User settings"
                       img={user.imagePhotoURL}
                       rounded={true}
-                      status="online"
+                      // status="online"
                       statusPosition="bottom-right"
                       size="sm"
-                    ></Avatar>
+                    >
+                      <div className="flex place-items-center">
+                        {firstLetterUpper(user.name.split(" ")[0])}
+                        <IoIosArrowDown size={10} className="ml-2 mt-1" />
+                      </div>
+                    </Avatar>
                   </>
                 }
               >
                 <Dropdown.Header>
-                  <span className="block text-sm">
-                    {firstLetterUpper(user.name)}
-                  </span>
+                  <Link to={`user/${user._id}`}>
+                    <span className="block text-sm hover:text-red-500">
+                      {firstLetterUpper(user.name)}
+                    </span>
+                  </Link>
                   <span className="block truncate text-sm font-medium">
                     {user.email}
                   </span>
                 </Dropdown.Header>
-                <Dropdown.Item>Dashboard</Dropdown.Item>
-
+                <Link to={`/product/item/list/${user.uid}`}>
+                  <Dropdown.Item>Item List</Dropdown.Item>
+                </Link>
                 <Link to="/favorites">
                   <Dropdown.Item>Favorites</Dropdown.Item>
                 </Link>

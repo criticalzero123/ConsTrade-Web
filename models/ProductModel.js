@@ -51,6 +51,14 @@ const productSchema = mongoose.Schema(
       type: String,
       require,
     },
+    modelNumber: {
+      type: String,
+      require,
+    },
+    serialNumber: {
+      type: String,
+      require,
+    },
     gameGenre: {
       type: String,
       require,

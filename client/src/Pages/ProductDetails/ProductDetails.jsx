@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getProductById } from "../../actions/productActions";
@@ -60,7 +60,10 @@ const ProductDetails = () => {
               </div>
             </div>
             <div className="w-full shadow-lg bg-white rounded p-5">
-              <p>Owner: {product.userName}</p>
+              <p>
+                Owner:{" "}
+                <Link to={`/user/${product.userId}`}>{product.userName}</Link>
+              </p>
               <p>Description: {product.description}</p>
               <p>Location: {product.location}</p>
               <p>Item Posted: {date}</p>

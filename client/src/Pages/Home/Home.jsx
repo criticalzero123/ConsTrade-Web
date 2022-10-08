@@ -21,9 +21,6 @@ const Index = () => {
   return (
     <div>
       <Link to="/product/add">Add a item</Link>
-      <Link to={`/product/item/list/${user.uid}`} className="ml-5">
-        Item List
-      </Link>
       {loading ? (
         <h1>Loading...</h1>
       ) : error ? (

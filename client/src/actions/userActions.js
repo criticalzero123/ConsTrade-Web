@@ -59,6 +59,20 @@ export const emailAndPasswordRegister = (data) => (dispatch) => {
     });
 };
 
+export const getUserById = (id) => (dispatch) => {
+  dispatch({ type: "GET_USER_BY_ID_REQUEST" });
+
+  axios
+    .post("/api/users/getUserById", { id })
+    .then((res) => {
+      dispatch({ type: "GET_USER_BY_ID_SUCCESS", payload: res.data });
+    })
+    .catch((err) => {
+      dispatch({ type: "GET_USER_BY_ID_FAILED" });
+      alert(err.response.data);
+    });
+};
+
 export const addToFavorite = (productId) => (dispatch, getState) => {
   dispatch({ type: "USER_FAVORITE_REQUEST" });
 
