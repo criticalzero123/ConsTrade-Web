@@ -1,7 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { deleteCommentProduct } from "../../../actions/productActions";
 import { calculateDateRelative } from "../../../service/commentService";
+import { firstLetterUpper } from "../../../service/userService";
 
 import CommentSettings from "./CommentSettings/CommentSettings";
 
@@ -12,7 +14,7 @@ const ProductComment = ({ comment, productId, ownerId }) => {
 
   const { currentUser } = getuser;
 
-  const { uid } = currentUser;
+  const { _id } = currentUser;
 
   const time = calculateDateRelative(comment.timePosted);
 
@@ -29,10 +31,13 @@ const ProductComment = ({ comment, productId, ownerId }) => {
         <div className="w-11/12 bg-slate-400 rounded p-2  shadow-lg">
           <div className="flex justify-between">
             <div>
-              {comment.name} ● {time}
+              <Link to={`/user/${comment.userId}`}>
+                {firstLetterUpper(comment.name)}{" "}
+              </Link>
+              ● {time}
             </div>
             <div>
-              {(comment.userId === uid || ownerId === uid) && (
+              {(comment.userId === _id || ownerId === _id) && (
                 <CommentSettings
                   deleteComment={() =>
                     dispatch(

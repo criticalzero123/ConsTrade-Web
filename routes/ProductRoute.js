@@ -87,7 +87,7 @@ router.post("/addCommentProduct", async (req, res) => {
   const product = await Product.findById({ _id: productId });
 
   const commentModel = {
-    userId: currentUser.uid,
+    userId: currentUser._id,
     name: currentUser.name,
     imagePhoto: currentUser.imagePhotoURL,
     comment: comment,

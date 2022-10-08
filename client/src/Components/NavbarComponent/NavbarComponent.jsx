@@ -83,10 +83,7 @@ const NavbarComponent = () => {
                       statusPosition="bottom-right"
                       size="sm"
                     >
-                      <div className="flex place-items-center">
-                        {firstLetterUpper(user.name.split(" ")[0])}
-                        <IoIosArrowDown size={10} className="ml-2 mt-1" />
-                      </div>
+                      <IoIosArrowDown size={10} />
                     </Avatar>
                   </>
                 }
