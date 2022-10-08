@@ -7,6 +7,7 @@ import ProductComment from "../../Components/ProductDetails/ProductComment/Produ
 import ProductAddComment from "../../Components/ProductDetails/ProductAddComment/ProductAddComment";
 
 import ProductDetailsFavoriteCounter from "../../Components/ProductDetails/ProductDetailsFavoritesCounter/ProductDetailsFavoriteCounter";
+import { firstLetterUpper } from "../../service/userService";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -62,7 +63,12 @@ const ProductDetails = () => {
             <div className="w-full shadow-lg bg-white rounded p-5">
               <p>
                 Owner:{" "}
-                <Link to={`/user/${product.userId}`}>{product.userName}</Link>
+                <Link
+                  to={`/user/${product.userId}`}
+                  className="hover:text-red-500"
+                >
+                  {firstLetterUpper(product.userName)}
+                </Link>
               </p>
               <p>Description: {product.description}</p>
               <p>Location: {product.location}</p>
