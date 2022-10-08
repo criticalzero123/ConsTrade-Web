@@ -154,6 +154,9 @@ router.post("/addFavorite", async (req, res) => {
   if (!exist) {
     const favoriteModel = {
       productId: productId,
+      productImage: product.imageURL,
+      productTitle: product.title,
+      ownerName: product.userName,
       dateAdded: new Date().getTime(),
     };
 

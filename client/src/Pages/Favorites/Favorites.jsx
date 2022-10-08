@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import FavoriteCard from "../../Components/Favorite/FavoriteCard";
 
 const Favorites = () => {
   const getFavorites = useSelector((state) => state.userInfoReducer);
@@ -7,10 +8,10 @@ const Favorites = () => {
   const { favorites } = getFavorites.currentUser && getFavorites.currentUser;
 
   return (
-    <div>
+    <div className="flex">
       {favorites &&
         favorites.map((favorite) => (
-          <div key={favorite.productId}>{favorite.productId}</div>
+          <FavoriteCard favorite={favorite} key={favorite.productId} />
         ))}
     </div>
   );

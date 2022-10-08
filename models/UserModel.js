@@ -6,6 +6,18 @@ const favoriteSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       require,
     },
+    productImage: {
+      type: String,
+      require,
+    },
+    productTitle: {
+      type: String,
+      require,
+    },
+    ownerName: {
+      type: String,
+      require,
+    },
     dateAdded: {
       type: Date,
       require,
