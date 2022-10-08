@@ -8,4 +8,4 @@ export const conditionOptions = [
   "Other...",
 ];
 export const preferTradeOptions = ["Cash", "Item/s", "Both"];
-export const meetupPreferenceOptions = ["PUBLIC MEETUP", "Deliver", "Other"];
+export const meetupPreferenceOptions = ["Public Meetup", "Deliver", "Other"];

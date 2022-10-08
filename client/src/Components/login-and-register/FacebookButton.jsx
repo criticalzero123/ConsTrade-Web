@@ -11,22 +11,24 @@ const FacebookButton = ({ type }) => {
   const dispatch = useDispatch();
 
   const FacebookAuth = async () => {
-    const res = await socialMediaAuth(facebookProvider);
+    alert("Temporarily Disable the Facebook Auth");
+    // const res = await socialMediaAuth(facebookProvider);
 
-    if (res.uid !== undefined) {
-      const data = {
-        authType: type,
-        name: res.displayName,
-        email: res.email,
-        uid: res.uid,
-        emailVerified: res.emailVerified,
-        imagePhotoURL: res.photoURL,
-      };
+    // if (res.uid !== undefined) {
+    //   const data = {
+    //     authType: type,
+    //     name: res.displayName,
+    //     email: res.email,
+    //     uid: res.uid,
+    //     emailVerified: res.emailVerified,
+    //     imagePhotoURL: res.photoURL,
+    //   };
 
-      dispatch(socialMediaMethod(data));
-    } else {
-      alert("Something went wrong facebook auth");
-    }
+    //   dispatch(socialMediaMethod(data));
+    // } else {
+    //   // alert("Something went wrong facebook auth");
+    //   // error
+    // }
   };
 
   return (

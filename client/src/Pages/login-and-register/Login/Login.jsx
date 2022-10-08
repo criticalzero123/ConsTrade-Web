@@ -27,6 +27,7 @@ const Login = () => {
       dispatch(emailAndPasswordLogin(user));
     } else {
       alert("Something went wrong loging in with email and password");
+      // error
     }
   };
 

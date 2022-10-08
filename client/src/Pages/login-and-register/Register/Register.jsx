@@ -36,6 +36,7 @@ const Register = () => {
         dispatch(emailAndPasswordRegister(data));
       } else {
         alert("Something went wrong registering with email and password");
+        // error
       }
     } else {
       alert("Password is not the same!");

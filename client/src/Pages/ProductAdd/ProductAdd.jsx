@@ -39,6 +39,12 @@ const ProductAdd = () => {
 
   const dispatch = useDispatch();
 
+  const cashPreferInput = (e) => {
+    if (e.target.value >= 0) {
+      setCash(e.target.value);
+    }
+  };
+
   const productAddRequest = async (e) => {
     e.preventDefault();
 
@@ -81,6 +87,7 @@ const ProductAdd = () => {
             <ProductAddInput
               labeltext="Title"
               placeholdertext="title..."
+              value={title}
               fortext="title"
               onChange={(e) => setTitle(e.target.value)}
               required
@@ -118,6 +125,7 @@ const ProductAdd = () => {
             <ProductAddInput
               labeltext="Location"
               placeholdertext="Cebu City..."
+              value={location}
               onChange={(e) => setLocation(e.target.value)}
               fortext="location"
             />
@@ -141,14 +149,19 @@ const ProductAdd = () => {
               labeltext="Cash Prefer"
               fortext="cash"
               placeholdertext="0"
-              onChange={(e) => setCash(e.target.value)}
+              onChange={cashPreferInput}
+              value={cash}
+              hidden={prefer === "Item/s" ? true : false}
+              number={true}
               required
             />
             <ProductAddInput
               labeltext="Item Prefer"
               fortext="Item"
               placeholdertext="something..."
+              value={item}
               onChange={(e) => setItem(e.target.value)}
+              hidden={prefer === "Cash" ? true : false}
               required
             />
             <ProductAddSelect
@@ -166,6 +179,14 @@ const ProductAdd = () => {
       <div className="lg:col-span-2 ">
         <ProductCardDetails
           title={title}
+          description={description}
+          condition={condition}
+          category={category}
+          location={location}
+          preferTrade={prefer}
+          cash={cash}
+          item={item}
+          meetup={meetup}
           image={imageUpload && window.URL.createObjectURL(imageUpload)}
           userPhoto={user.imagePhotoURL}
           userName={user.name}

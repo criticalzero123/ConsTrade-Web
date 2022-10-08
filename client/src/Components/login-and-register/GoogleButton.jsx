@@ -26,7 +26,8 @@ const GoogleButton = ({ type }) => {
 
       dispatch(socialMediaMethod(data));
     } else {
-      alert("Something went wrong in google auth");
+      // alert("Something went wrong in google auth");
+      // error
     }
   };
 

@@ -1,10 +1,18 @@
 import React from "react";
 
 const ProductAddInput = (props) => {
-  const { labeltext, placeholdertext, fortext, onChange } = props;
+  const {
+    labeltext,
+    placeholdertext,
+    fortext,
+    onChange,
+    hidden,
+    number,
+    value,
+  } = props;
 
   return (
-    <div>
+    <div className={hidden ? "hidden" : "block"}>
       <div>
         <label
           htmlFor={fortext}
@@ -13,12 +21,12 @@ const ProductAddInput = (props) => {
           {labeltext}
         </label>
         <input
-          type="text"
+          type={number ? "number" : "text"}
+          value={value}
           id={fortext}
           className=" text-sm rounded-lg  block w-full p-2.5 bg-gray-800 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
           placeholder={placeholdertext}
           onChange={onChange}
-          {...props}
         />
       </div>
     </div>
