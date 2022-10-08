@@ -14,16 +14,18 @@ const GoogleButton = ({ type }) => {
   const GoogleAuth = async () => {
     const res = await socialMediaAuth(googleProvider);
 
-    const data = {
-      authType: type,
-      name: res.displayName,
-      email: res.email,
-      uid: res.uid,
-      imagePhotoURL: res.photoURL,
-      emailVerified: res.emailVerified,
-    };
+    if (res.uid) {
+      const data = {
+        authType: type,
+        name: res.displayName,
+        email: res.email,
+        uid: res.uid,
+        imagePhotoURL: res.photoURL,
+        emailVerified: res.emailVerified,
+      };
 
-    dispatch(socialMediaMethod(data));
+      dispatch(socialMediaMethod(data));
+    }
   };
 
   return (

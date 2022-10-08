@@ -13,16 +13,18 @@ const FacebookButton = ({ type }) => {
   const FacebookAuth = async () => {
     const res = await socialMediaAuth(facebookProvider);
 
-    const data = {
-      authType: type,
-      name: res.displayName,
-      email: res.email,
-      uid: res.uid,
-      emailVerified: res.emailVerified,
-      imagePhotoURL: res.photoURL,
-    };
-    console.log(res);
-    dispatch(socialMediaMethod(data));
+    if (res.uid !== undefined) {
+      const data = {
+        authType: type,
+        name: res.displayName,
+        email: res.email,
+        uid: res.uid,
+        emailVerified: res.emailVerified,
+        imagePhotoURL: res.photoURL,
+      };
+
+      dispatch(socialMediaMethod(data));
+    }
   };
 
   return (
