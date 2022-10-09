@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { Link } from "react-router-dom";
@@ -12,8 +12,13 @@ import {
 
 import { Avatar, Dropdown, Navbar } from "flowbite-react/lib/cjs/components";
 
+import { BiSearch } from "react-icons/bi";
+import SearchHeader from "./SearchHeader/SearchHeader";
+
 const NavbarComponent = () => {
   const useLoggedIn = isUserLoggedIn();
+
+  const [showSearch, setShowSearch] = useState(false);
 
   const user = useLoggedIn && userInfo();
 
@@ -25,37 +30,6 @@ const NavbarComponent = () => {
 
   return (
     <div>
-      {/* <div className="flex justify-between place-items-center">
-        <Link to={user ? "/home" : "/"} className="mr-5 ">
-          <span className="text-2xl font-mono">
-            <span className="text-gray-500">Cons</span>
-            <span className="text-orange-900">Trade</span>
-          </span>
-        </Link>
-        {useLoggedIn ? (
-          <>
-            <div>Search</div>
-            <div>add item</div>
-            <div>notification</div>
-            <div>
-              <Link>{user.email}</Link>
-              <button className="ml-5" onClick={logoutUserButton}>
-                LOG OUT
-              </button>
-            </div>
-          </>
-        ) : (
-          <>
-            <Link to="/register" className="mr-5">
-              Sign Up
-            </Link>
-            <Link to="/signin" className="mr-5">
-              Sign in
-            </Link>
-          </>
-        )}
-      </div> */}
-
       <Navbar fluid={true} rounded={true} className="bg-black">
         <Navbar.Brand href="/">
           <img
@@ -69,7 +43,12 @@ const NavbarComponent = () => {
         </Navbar.Brand>
         {useLoggedIn ? (
           <>
-            <div className="flex md:order-2">
+            <div className="flex md:order-2 place-items-center">
+              <BiSearch
+                size={20}
+                className="mr-4 cursor-pointer"
+                onClick={() => setShowSearch(!showSearch)}
+              />
               <Dropdown
                 arrowIcon={false}
                 inline={true}
@@ -112,15 +91,19 @@ const NavbarComponent = () => {
               </Dropdown>
               <Navbar.Toggle />
             </div>
-            <Navbar.Collapse>
-              <Navbar.Link href="/home" active={true}>
-                Home
-              </Navbar.Link>
-              <Navbar.Link href="/navbars">About</Navbar.Link>
-              <Navbar.Link href="/navbars">Services</Navbar.Link>
-              <Navbar.Link href="/navbars">Pricing</Navbar.Link>
-              <Navbar.Link href="/navbars">Contact</Navbar.Link>
-            </Navbar.Collapse>
+            {showSearch ? (
+              <SearchHeader />
+            ) : (
+              <Navbar.Collapse>
+                <Navbar.Link href="/home" active={true}>
+                  Home
+                </Navbar.Link>
+                <Navbar.Link href="/home">About</Navbar.Link>
+                <Navbar.Link href="/home">Services</Navbar.Link>
+                <Navbar.Link href="/home">Pricing</Navbar.Link>
+                <Navbar.Link href="/home">Contact</Navbar.Link>
+              </Navbar.Collapse>
+            )}
           </>
         ) : (
           <>

@@ -1,49 +1,60 @@
-import React from "react";
+import React, { useState } from "react";
+
+import { AiOutlineSearch } from "react-icons/ai";
 
 const SearchHeader = () => {
+  const searchTypeSelect = ["Platform", "Genre"];
+
+  const [searchType, setSearchType] = useState(searchTypeSelect[0]);
+  const [searchInput, setSearchInput] = useState("");
+
+  const search = (e) => {
+    e.preventDefault();
+    if (
+      (searchType.toLowerCase() === "platform" ||
+        searchType.toLowerCase() === "genre") &&
+      searchInput.trim() !== ""
+    ) {
+      window.location.href = `/search/category/${searchInput}`;
+    } else {
+      //other
+    }
+  };
+
   return (
-    <div>
-      <form>
-        <label
-          for="default-search"
-          class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300"
-        >
-          Search
-        </label>
-        <div class="relative">
-          <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-            <svg
-              aria-hidden="true"
-              class="w-5 h-5 text-gray-500 dark:text-gray-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              ></path>
-            </svg>
-          </div>
+    <form onSubmit={search}>
+      <div className="flex place-items-center ">
+        <div className="w-25 ">
+          <select
+            required={true}
+            onChange={(e) => setSearchType(e.target.value)}
+            value={searchType}
+            className="rounded-l-md border-gray-300"
+          >
+            {searchTypeSelect.map((searchTypeValue) => (
+              <option value={searchTypeValue} key={searchTypeValue}>
+                {searchTypeValue}
+              </option>
+            ))}
+          </select>
+        </div>
+        <label className="relative block w-96">
+          <button
+            className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer"
+            onClick={search}
+          >
+            <AiOutlineSearch size={18} color={"gray"} />
+          </button>
           <input
-            type="search"
-            id="default-search"
-            class="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Search Mockups, Logos..."
+            className="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-r-md  py-2 pl-3 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-md"
+            placeholder="Search..."
+            type="text"
+            onChange={(e) => setSearchInput(e.target.value)}
             required
           />
-          <button
-            type="submit"
-            class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Search
-          </button>
-        </div>
-      </form>
-    </div>
+        </label>
+      </div>
+    </form>
   );
 };
 
