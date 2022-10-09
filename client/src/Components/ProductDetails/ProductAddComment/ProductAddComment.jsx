@@ -25,6 +25,7 @@ const ProductAddComment = ({ id }) => {
           placeholder="Enter your comment"
           onChange={(e) => setComment(e.target.value)}
           value={comment}
+          required
         />
         <button className="ml-5">Submit</button>
       </form>
