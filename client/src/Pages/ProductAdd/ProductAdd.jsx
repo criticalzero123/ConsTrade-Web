@@ -8,6 +8,7 @@ import ProductCardDetails from "../../Components/ProductAdd/ProductCardDetails.j
 
 // For the Options
 import {
+  addHookSelect,
   categoryOptions,
   conditionOptions,
   meetupPreferenceOptions,
@@ -18,12 +19,13 @@ import { useDispatch } from "react-redux";
 import { addProduct } from "../../actions/productActions";
 import { userInfo } from "../../service/userService";
 import { saveImageStorage } from "../../firebase/storageImages";
+import { Button, Spinner } from "flowbite-react";
 
 const ProductAdd = () => {
   const user = userInfo();
   //   Select
-  const [category, setCategory] = useState(categoryOptions[0]);
-  const [platform, setPlatform] = useState(platformOptions[0]);
+  const [category, setCategory] = useState([]);
+  const [platform, setPlatform] = useState([]);
   const [condition, setCondition] = useState(conditionOptions[0]);
   const [prefer, setPrefer] = useState(preferTradeOptions[0]);
   const [meetup, setMeetup] = useState(meetupPreferenceOptions[0]);
@@ -39,6 +41,8 @@ const ProductAdd = () => {
   //   dropzone
   const [imageUpload, setImageUpload] = useState(null);
 
+  const [loading, setLoading] = useState(false);
+
   const dispatch = useDispatch();
 
   const cashPreferInput = (e) => {
@@ -49,10 +53,13 @@ const ProductAdd = () => {
 
   const productAddRequest = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
-    if (imageUpload == null) return;
-
-    await saveImageStorage(imageUpload, title, user, productUploadCallBack);
+    if (imageUpload != null) {
+      await saveImageStorage(imageUpload, title, user, productUploadCallBack);
+    } else {
+      alert("Please Provide Picture");
+    }
   };
 
   const productUploadCallBack = (image) => {
@@ -63,10 +70,10 @@ const ProductAdd = () => {
         title: title,
         description: description,
         location: location,
-        category: category,
+        category: category.toString(),
+        platform: platform.toString(),
         modelNumber: modelNumber,
         serialNumber: serialNumber,
-        platform: platform,
         condition: condition,
         imageURL: image,
         preferTrade: prefer,
@@ -76,13 +83,10 @@ const ProductAdd = () => {
       };
 
       dispatch(addProduct(product));
-
-      alert("Item Added");
     } else {
       alert("Something Went wrong");
     }
   };
-
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 pt-7">
       <div className=" ">
@@ -100,15 +104,19 @@ const ProductAdd = () => {
             <ProductAddSelect
               items={categoryOptions}
               labeltext="Category"
-              width="w-40"
-              onChange={(e) => setCategory(e.target.value)}
+              width="w-32"
+              onChange={(e) =>
+                addHookSelect(e.target.value, category, setCategory)
+              }
             />
             <br />
             <ProductAddSelect
               items={platformOptions}
               labeltext="Platform Supported"
-              width="w-40"
-              onChange={(e) => setPlatform(e.target.value)}
+              width="w-32"
+              onChange={(e) =>
+                addHookSelect(e.target.value, platform, setPlatform)
+              }
             />
             <br />
             <ProductAddInput
@@ -198,7 +206,23 @@ const ProductAdd = () => {
             <br />
             <br />
           </aside>
-          <button className="z-10">Add</button>
+
+          <div className="mt-5 flex justify-center">
+            <Button
+              gradientDuoTone="cyanToBlue"
+              type="submit"
+              disabled={loading ? true : false}
+            >
+              <div className="w-96 flex justify-center text-lg">
+                {loading && (
+                  <div className="mr-3">
+                    <Spinner size="md" light={true} />
+                  </div>
+                )}
+                Add
+              </div>
+            </Button>
+          </div>
         </form>
       </div>
       <div className="lg:col-span-2 ">
@@ -206,9 +230,9 @@ const ProductAdd = () => {
           title={title}
           description={description}
           condition={condition}
-          category={category}
+          category={category.toString()}
+          platform={platform.toString()}
           location={location}
-          platform={platform}
           preferTrade={prefer}
           cash={cash}
           modelNumber={modelNumber}

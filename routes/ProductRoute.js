@@ -16,6 +16,37 @@ router.get("/getallproducts", (req, res) => {
   });
 });
 
+router.post("/getProductByPlatform", async (req, res) => {
+  const platformCategory = req.body.platform;
+  const productAllPlatform = await Product.find({
+    $text: { $search: platformCategory, $caseSensitive: false },
+  });
+
+  if (productAllPlatform.length > 0) {
+    return res.send(productAllPlatform);
+  } else {
+    return res.status(400).json({
+      message: "No platform found",
+    });
+  }
+});
+
+router.post("/getProductByCategory", async (req, res) => {
+  const category = req.body.category;
+
+  const productAllCategory = await Product.find({
+    $text: { $search: category, $caseSensitive: false },
+  });
+
+  if (productAllCategory.length > 0) {
+    return res.send(productAllCategory);
+  } else {
+    return res.status(400).json({
+      message: "No category found",
+    });
+  }
+});
+
 router.post("/getProductByUserId", (req, res) => {
   Product.find({ userId: req.body.id }, (err, docs) => {
     if (!err) {

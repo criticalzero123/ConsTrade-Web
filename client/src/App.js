@@ -11,6 +11,7 @@ import ProductAdd from "./Pages/ProductAdd/ProductAdd";
 import ProductList from "./Pages/ProductList/ProductList";
 import Favorites from "./Pages/Favorites/Favorites";
 import UserProfile from "./Pages/UserProfile/UserProfile";
+import Category from "./Pages/Search/Category/Category";
 function App() {
   return (
     <div>
@@ -28,6 +29,7 @@ function App() {
           <Route path="/product/item/list/:id" element={<ProductList />} />
           <Route path="/product/add" element={<ProductAdd />} />
           <Route path="/user/:id" element={<UserProfile />} />
+          <Route path="/search/category/:category" element={<Category />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route
             path="*"

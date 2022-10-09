@@ -14,6 +14,19 @@ export const getAllProducts = () => (dispatch) => {
     });
 };
 
+export const getAllProductByCategory = (category) => (dispatch) => {
+  dispatch({ type: "GET_PRODUCTS_BY_CATEGORY_REQUEST" });
+
+  axios
+    .post("/api/products/getProductByCategory", { category })
+    .then((res) => {
+      dispatch({ type: "GET_PRODUCTS_BY_CATEGORY_SUCCESS", payload: res.data });
+    })
+    .catch((err) => {
+      dispatch({ type: "GET_PRODUCTS_BY_CATEGORY_FAILED", error: err });
+    });
+};
+
 export const getProductById = (id) => (dispatch) => {
   dispatch({ type: "GET_PRODUCT_BY_ID_REQUEST" });
 

@@ -19,6 +19,33 @@ export const getAllProductsReducer = (state = { products: [] }, action) => {
   }
 };
 
+export const getAllProductByCategoryReducer = (
+  state = { products: [] },
+  action
+) => {
+  switch (action.type) {
+    case "GET_PRODUCTS_BY_CATEGORY_REQUEST":
+      return {
+        loading: true,
+      };
+
+    case "GET_PRODUCTS_BY_CATEGORY_SUCCESS":
+      return {
+        loading: false,
+        products: action.payload,
+      };
+
+    case "GET_PRODUCTS_BY_CATEGORY_FAILED":
+      return {
+        loading: false,
+        error: true,
+      };
+
+    default:
+      return state;
+  }
+};
+
 export const getProductByIdReducer = (state = { product: {} }, action) => {
   switch (action.type) {
     case "GET_PRODUCT_BY_ID_REQUEST":

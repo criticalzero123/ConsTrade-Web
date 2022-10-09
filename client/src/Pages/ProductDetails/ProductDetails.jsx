@@ -8,6 +8,7 @@ import ProductAddComment from "../../Components/ProductDetails/ProductAddComment
 
 import ProductDetailsFavoriteCounter from "../../Components/ProductDetails/ProductDetailsFavoritesCounter/ProductDetailsFavoriteCounter";
 import { firstLetterUpper } from "../../service/userService";
+import { toArrayString } from "../../service/productService";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -26,6 +27,9 @@ const ProductDetails = () => {
   }, [dispatch, id]);
 
   const date = product && new Date(product.dateCreated).toDateString();
+
+  const gameGenreArray = product && toArrayString(product.gameGenre);
+  const platformArray = product && toArrayString(product.platform);
 
   return (
     <div>
@@ -48,15 +52,25 @@ const ProductDetails = () => {
 
                 <div>
                   <p>Platform Supported: </p>
-                  <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                    {product.platform}
-                  </span>
+                  {platformArray !== undefined &&
+                    platformArray.map((platform, index) => (
+                      <Link to={`/search/category/${platform}`} key={index}>
+                        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                          {platform}
+                        </span>
+                      </Link>
+                    ))}
                 </div>
                 <div className="pt-4 pb-2">
                   <p>Game Genre:</p>
-                  <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                    {product.gameGenre}
-                  </span>
+                  {gameGenreArray !== undefined &&
+                    gameGenreArray.map((category, index) => (
+                      <Link to={`/search/category/${category}`} key={index}>
+                        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                          {category}
+                        </span>
+                      </Link>
+                    ))}
                 </div>
               </div>
             </div>
