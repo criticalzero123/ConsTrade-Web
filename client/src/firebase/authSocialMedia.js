@@ -1,11 +1,14 @@
 import firebase from "./firebase-config";
 
+import { existInUserChatsSocialMediaAuth } from "./chatService";
+
 const socialMediaAuth = (provider) => {
   return firebase
     .auth()
     .signInWithPopup(provider)
-    .then((res) => {
+    .then(async (res) => {
       // TODO: incase for additional field in users in mongodb
+      existInUserChatsSocialMediaAuth(res.user.uid);
       return res.user;
     })
     .catch((err) => {

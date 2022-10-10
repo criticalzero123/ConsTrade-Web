@@ -2,7 +2,12 @@ import { doc, onSnapshot } from "firebase/firestore";
 import React, { useState, useEffect } from "react";
 import { db } from "../../firebase/firebase-config";
 
-const MessagesComponent = ({ chatId, currentUserId, otherUserProfile }) => {
+const MessagesComponent = ({
+  chatId,
+  currentUserId,
+  otherUserProfile,
+  currentUserProfile,
+}) => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -24,7 +29,7 @@ const MessagesComponent = ({ chatId, currentUserId, otherUserProfile }) => {
               <div className="flex h-12 mt-3">
                 <div className="place-self-center mr-3">{message.text}</div>
                 <img
-                  src={otherUserProfile}
+                  src={currentUserProfile}
                   alt={message.senderId}
                   className="rounded-full"
                 />

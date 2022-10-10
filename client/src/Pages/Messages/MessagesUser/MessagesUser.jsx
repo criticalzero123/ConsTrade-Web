@@ -109,8 +109,9 @@ const MessagesUser = () => {
                     chatId={chatId}
                     currentUserId={currentUser.uid}
                     otherUserProfile={otherUserProfile}
+                    currentUserProfile={currentUser.imagePhotoURL}
                   />
-                  <br/>
+                  <br />
                   <hr />
                   <MessageInput chatId={chatId} otherUserId={user.uid} />
                 </div>
