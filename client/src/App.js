@@ -12,6 +12,8 @@ import ProductList from "./Pages/ProductList/ProductList";
 import Favorites from "./Pages/Favorites/Favorites";
 import UserProfile from "./Pages/UserProfile/UserProfile";
 import Category from "./Pages/Search/Category/Category";
+import Messages from "./Pages/Messages/Messages";
+import MessagesUser from "./Pages/Messages/MessagesUser/MessagesUser";
 function App() {
   return (
     <div>
@@ -31,6 +33,9 @@ function App() {
           <Route path="/user/:id" element={<UserProfile />} />
           <Route path="/search/category/:category" element={<Category />} />
           <Route path="/favorites" element={<Favorites />} />
+          <Route path="/messages" element={<Messages />}>
+            <Route path="user/:uid" element={<MessagesUser />} />
+          </Route>
           <Route
             path="*"
             element={

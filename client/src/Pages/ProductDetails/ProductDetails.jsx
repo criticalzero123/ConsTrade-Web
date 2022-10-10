@@ -10,6 +10,8 @@ import ProductDetailsFavoriteCounter from "../../Components/ProductDetails/Produ
 import { firstLetterUpper } from "../../service/userService";
 import { toArrayString } from "../../service/productService";
 
+import { BsFillChatDotsFill } from "react-icons/bs";
+
 const ProductDetails = () => {
   const { id } = useParams();
   const [showComments, setShowComments] = useState(true);
@@ -75,15 +77,20 @@ const ProductDetails = () => {
               </div>
             </div>
             <div className="w-full shadow-lg bg-white rounded p-5">
-              <p>
-                Owner:{" "}
-                <Link
-                  to={`/user/${product.userId}`}
-                  className="hover:text-red-500"
-                >
-                  {firstLetterUpper(product.userName)}
+              <div className="flex justify-between">
+                <p>
+                  Owner:{" "}
+                  <Link
+                    to={`/user/${product.userId}`}
+                    className="hover:text-red-500"
+                  >
+                    {firstLetterUpper(product.userName)}
+                  </Link>
+                </p>{" "}
+                <Link to={`/messages/user/${product.userId}`} state={product}>
+                  <BsFillChatDotsFill size={20} className="cursor-pointer" />
                 </Link>
-              </p>
+              </div>
               <p>Description: {product.description}</p>
               <p>Location: {product.location}</p>
               <p>Item Posted: {date}</p>
