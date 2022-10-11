@@ -12,10 +12,9 @@ export const existInUserChatsSocialMediaAuth = async (uid) => {
   const docSnap = await getDoc(docRef);
 
   if (docSnap.exists()) {
-    console.log("ni exist na ");
+    // if nag exists
   } else {
-    console.log("wa pa ");
+    // if wala pa
     creationOfUserChats(uid);
-    console.log("na creatan na");
   }
 };

@@ -20,10 +20,14 @@ const MessageInput = ({ chatId, otherUserId }) => {
   const handleSend = async (e) => {
     e.preventDefault();
 
+    const _text = text;
+
+    setText("");
+
     await updateDoc(doc(db, "chats", chatId), {
       messages: arrayUnion({
         id: v4(),
-        text,
+        _text,
         senderId: currentUser.uid,
         date: Timestamp.now(),
       }),
@@ -31,19 +35,17 @@ const MessageInput = ({ chatId, otherUserId }) => {
 
     await updateDoc(doc(db, "userChats", currentUser.uid), {
       [chatId + ".lastMessage"]: {
-        text,
+        _text,
       },
       [chatId + ".date"]: serverTimestamp(),
     });
 
     await updateDoc(doc(db, "userChats", otherUserId), {
       [chatId + ".lastMessage"]: {
-        text,
+        _text,
       },
       [chatId + ".date"]: serverTimestamp(),
     });
-
-    setText("");
   };
 
   return (

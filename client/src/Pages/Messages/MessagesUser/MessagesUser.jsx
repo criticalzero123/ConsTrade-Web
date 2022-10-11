@@ -70,6 +70,11 @@ const MessagesUser = () => {
             displayName: user.name,
             photoURL: user.imagePhotoURL,
           },
+          [combinedId + ".productInfo"]: {
+            title: location.state.title,
+            imageURL: location.state.imageURL,
+          },
+
           [combinedId + ".lastMessage"]: {
             text: defaultMessage,
           },
@@ -83,6 +88,11 @@ const MessagesUser = () => {
             displayName: currentUser.name,
             photoURL: currentUser.imagePhotoURL,
           },
+          [combinedId + ".productInfo"]: {
+            title: location.state.title,
+            imageURL: location.state.imageURL,
+          },
+
           [combinedId + ".lastMessage"]: {
             text: defaultMessage,
           },

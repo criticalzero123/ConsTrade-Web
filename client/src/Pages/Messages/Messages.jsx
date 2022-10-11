@@ -46,9 +46,9 @@ const Messages = () => {
                 }}
               >
                 <SideUserDisplay
-                  lastMessage={chat[1].lastMessage?.text}
+                  displayTitle={chat[1].productInfo.title}
                   displayName={chat[1].userInfo.displayName}
-                  photoURL={chat[1].userInfo.photoURL}
+                  photoURL={chat[1].productInfo.imageURL}
                 />
               </Link>
             ))}
