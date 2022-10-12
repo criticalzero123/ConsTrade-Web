@@ -31,8 +31,8 @@ const Messages = () => {
   }, [currentUser.uid]);
 
   return (
-    <div className="grid grid-cols-6 gap-4">
-      <aside className="col-span-2 lg:col-span-1 overflow-y-hidden hover:overflow-y-auto h-[50rem] bg-gray-400 p-5 rounded">
+    <div className="grid grid-cols-6 gap-4 ">
+      <aside className="col-span-2 xl:col-span-1 overflow-hidden hover:overflow-y-auto h-[30rem] bg-gray-400 p-5 rounded">
         {chats !== undefined &&
           Object.entries(chats)
             ?.sort((a, b) => b[1].date - a[1].date)
@@ -53,10 +53,12 @@ const Messages = () => {
               </Link>
             ))}
       </aside>
-      <div className="col-span-4">
+      <div className="col-span-4 ">
         <div className="">
           {splitName.length < 3 && (
-            <div className="text-black">Select Someone to chat</div>
+            <div className="text-black h-[30rem] bg-gray-400 flex place-items-center justify-center text-4xl">
+              Select Someone to chat
+            </div>
           )}
           <Outlet context={[chatId, otherUserProfile]} />
         </div>

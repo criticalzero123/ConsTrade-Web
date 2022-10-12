@@ -23,9 +23,6 @@ const MessagesUser = () => {
   const [chatId, otherUserProfile] = useOutletContext();
   const location = useLocation();
 
-  // mo null ni siya if dili gkan sa item na chat
-  // console.log(location.state);
-
   const dispatch = useDispatch();
   const { user, error, loading } = useSelector(
     (state) => state.getUserByIdReducer
@@ -41,6 +38,7 @@ const MessagesUser = () => {
 
     const defaultMessage =
       "Hello i'm trying to negotiate for the item name " + location.state.title;
+
     const combinedId =
       currentUser.uid > user.uid
         ? currentUser.uid + user.uid

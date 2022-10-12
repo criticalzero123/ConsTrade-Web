@@ -15,24 +15,25 @@ const MessagesComponent = ({
 
   const scrollDown = useRef();
 
+  const onClickScrollDown = () => {
+    console.log(scrollDown);
+    if (scrollDown.current !== undefined && scrollDown.current !== null) {
+      scrollDown.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   useEffect(() => {
     const unSub = onSnapshot(doc(db, "chats", chatId), (doc) => {
       doc.exists() && setMessages(doc.data().messages);
     });
-
     return () => {
       unSub();
     };
   }, [chatId]);
 
-  const onClickScrollDown = () => {
-    scrollDown.current.scrollIntoView({ behavior: "smooth" });
-    console.log("");
-  };
-
   return (
     <div className="">
-      <div className="h-[47rem] p-5 overflow-y-auto  bg-gray-400 rounded">
+      <div className="h-[30rem] p-5 overflow-y-auto  bg-gray-400 rounded">
         {messages.map((message) => (
           <div key={message.id}>
             {message.senderId === currentUserId ? (
