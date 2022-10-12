@@ -9,7 +9,8 @@ router.post("/soldProduct", (req, res) => {
 
   const newTransaction = new Transaction({
     productId: productId,
-    userId: userId,
+    buyerId: userId,
+    inAppTransac: true,
     dateTransac: new Date().getTime(),
   });
 
@@ -30,7 +31,7 @@ router.post("/soldProduct", (req, res) => {
         }
       );
     } else {
-      res.status(400).json({ message: `Transaction went wrong` });
+      res.status(400).json({ message: err });
     }
   });
 });

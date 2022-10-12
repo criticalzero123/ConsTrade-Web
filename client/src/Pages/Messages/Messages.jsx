@@ -15,6 +15,7 @@ const Messages = () => {
   const [chats, setChats] = useState();
   const [chatId, setChatId] = useState("");
   const [otherUserProfile, setOtherUserProfile] = useState("");
+  const [productId, setProductId] = useState("");
   const { currentUser } = useSelector((state) => state.userInfoReducer);
 
   useEffect(() => {
@@ -43,6 +44,7 @@ const Messages = () => {
                 onClick={() => {
                   setChatId(chat[0]);
                   setOtherUserProfile(chat[1].userInfo.photoURL);
+                  setProductId(chat[1].productInfo.productId);
                 }}
               >
                 <SideUserDisplay
@@ -60,7 +62,7 @@ const Messages = () => {
               Select Someone to chat
             </div>
           )}
-          <Outlet context={[chatId, otherUserProfile]} />
+          <Outlet context={[chatId, otherUserProfile, productId]} />
         </div>
       </div>
     </div>

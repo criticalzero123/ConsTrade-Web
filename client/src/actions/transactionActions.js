@@ -11,6 +11,6 @@ export const soldItemTransaction = (productId, userId) => (dispatch) => {
     })
     .catch((err) => {
       dispatch({ type: "SOLD_TRANSACTION_FAILED" });
-      //
+      console.log(err);
     });
 };

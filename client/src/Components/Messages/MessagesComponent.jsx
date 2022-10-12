@@ -4,15 +4,19 @@ import { useRef } from "react";
 import { db } from "../../firebase/firebase-config";
 import MessageInput from "./MessageInput";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { soldItemTransaction } from "../../actions/transactionActions";
+import { getProductById } from "../../actions/productActions";
 
 const MessagesComponent = ({
   chatId,
   currentUserId,
+  currentUser_Id,
   otherUserProfile,
   currentUserProfile,
   otherUserId,
+  productId,
+  otherUser_Id,
 }) => {
   const [messages, setMessages] = useState([]);
 
@@ -25,11 +29,13 @@ const MessagesComponent = ({
     }
   };
 
+  const { product } = useSelector((state) => state.getProductByIdReducer);
+
   useEffect(() => {
     const unSub = onSnapshot(doc(db, "chats", chatId), (doc) => {
       doc.exists() && setMessages(doc.data().messages);
     });
-
+    dispatch(getProductById(productId));
     // This is for the ref scroll
     messages.length !== 0 &&
       scrollDown.current !== undefined &&
@@ -38,12 +44,17 @@ const MessagesComponent = ({
     return () => {
       unSub();
     };
-  }, [chatId, messages.length]);
+  }, [chatId, messages.length, dispatch, productId]);
 
   return (
     <div className="">
-      {/* onClick={() => dispatch(soldItemTransaction(,otherUserId))} */}
-      <div>Mark As Sold</div>
+      {product && product.userId === currentUser_Id && (
+        <button
+          onClick={() => dispatch(soldItemTransaction(productId, otherUser_Id))}
+        >
+          Mark As Sold
+        </button>
+      )}
       <div className="h-[30rem] p-5 overflow-y-auto  bg-gray-400 rounded">
         {messages.map((message) => (
           <div key={message.id}>

@@ -3,11 +3,15 @@ const mongoose = require("mongoose");
 const transactionSchema = mongoose.Schema(
   {
     productId: {
-      type: mongoose.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       require,
     },
-    userId: {
-      type: mongoose.Schema.ObjectId,
+    buyerId: {
+      type: String,
+      require,
+    },
+    inAppTransac: {
+      type: Boolean,
       require,
     },
     dateTransac: {

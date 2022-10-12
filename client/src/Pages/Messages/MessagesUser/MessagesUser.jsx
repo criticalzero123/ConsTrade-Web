@@ -20,7 +20,7 @@ import { v4 } from "uuid";
 const MessagesUser = () => {
   const { uid } = useParams();
 
-  const [chatId, otherUserProfile] = useOutletContext();
+  const [chatId, otherUserProfile, productId] = useOutletContext();
   const location = useLocation();
 
   const dispatch = useDispatch();
@@ -34,8 +34,6 @@ const MessagesUser = () => {
     dispatch(getUserById(uid));
   }, [dispatch, uid]);
   const handleClick = async () => {
-    // e.preventDefault();
-
     const defaultMessage =
       "Hello i'm trying to negotiate for the item name " + location.state.title;
 
@@ -116,9 +114,12 @@ const MessagesUser = () => {
                 <MessagesComponent
                   chatId={chatId}
                   currentUserId={currentUser.uid}
+                  currentUser_Id={currentUser._id}
                   otherUserProfile={otherUserProfile}
                   currentUserProfile={currentUser.imagePhotoURL}
                   otherUserId={user.uid}
+                  otherUser_Id={user._id}
+                  productId={productId}
                 />
                 <br />
               </div>

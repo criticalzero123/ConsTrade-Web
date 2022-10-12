@@ -18,6 +18,9 @@ const ProductInfo = ({
     product.preferTrade !== undefined &&
     product.preferTrade.toString().toUpperCase();
 
+  const soldChecker =
+    product.status !== undefined && product.status === "sold" && true;
+
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.getUserByIdReducer);
 
@@ -34,7 +37,7 @@ const ProductInfo = ({
   return (
     <div className=" bg-[#031533]  px-10 py-5 rounded h-full text-white">
       <p className="font-bold text-base font-mono text-orange-400 tracking-widest">
-        {stringPrefer}
+        {soldChecker ? "SOLD" : stringPrefer}
       </p>
       <div className="flex place-items-center">
         <p className="font-bold text-4xl font-mono mr-3">{product.title}</p>
@@ -124,6 +127,7 @@ const ProductInfo = ({
           <div className="w-full">
             <Link to={`/messages/user/${product.userId}`} state={product}>
               <button
+                disabled={soldChecker}
                 type="button"
                 className="mt-5 text-white self-end
                     bg-gradient-to-r from-green-500 to-blue-500 hover:from-pink-500 hover:to-yellow-500
