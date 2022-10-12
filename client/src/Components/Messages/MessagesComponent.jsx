@@ -16,7 +16,6 @@ const MessagesComponent = ({
   const scrollDown = useRef();
 
   const onClickScrollDown = () => {
-    console.log(scrollDown);
     if (scrollDown.current !== undefined && scrollDown.current !== null) {
       scrollDown.current.scrollIntoView({ behavior: "smooth" });
     }
@@ -26,10 +25,16 @@ const MessagesComponent = ({
     const unSub = onSnapshot(doc(db, "chats", chatId), (doc) => {
       doc.exists() && setMessages(doc.data().messages);
     });
+
+    // This is for the ref scroll
+    messages.length !== 0 &&
+      scrollDown.current !== undefined &&
+      onClickScrollDown();
+
     return () => {
       unSub();
     };
-  }, [chatId]);
+  }, [chatId, messages.length]);
 
   return (
     <div className="">
@@ -61,6 +66,7 @@ const MessagesComponent = ({
             )}
           </div>
         ))}
+
         <div ref={scrollDown}></div>
       </div>
       <hr />
