@@ -12,7 +12,7 @@ import { v4 } from "uuid";
 
 import { MdSend } from "react-icons/md";
 
-const MessageInput = ({ chatId, otherUserId }) => {
+const MessageInput = ({ chatId, otherUserId, onClickScrollDown }) => {
   const [text, setText] = useState("");
 
   const { currentUser } = useSelector((state) => state.userInfoReducer);
@@ -44,6 +44,8 @@ const MessageInput = ({ chatId, otherUserId }) => {
       },
       [chatId + ".date"]: serverTimestamp(),
     });
+
+    onClickScrollDown();
   };
 
   return (

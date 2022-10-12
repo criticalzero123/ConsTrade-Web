@@ -14,7 +14,6 @@ import {
 
 import { db } from "../../../firebase/firebase-config";
 import MessagesComponent from "../../../Components/Messages/MessagesComponent";
-import MessageInput from "../../../Components/Messages/MessageInput";
 import MessageModal from "../../../Components/Messages/MessageModal";
 import { v4 } from "uuid";
 
@@ -113,18 +112,15 @@ const MessagesUser = () => {
         user && (
           <>
             {chatId !== "" && (
-              <div className="h-full grid items-end">
-                <div>
-                  <MessagesComponent
-                    chatId={chatId}
-                    currentUserId={currentUser.uid}
-                    otherUserProfile={otherUserProfile}
-                    currentUserProfile={currentUser.imagePhotoURL}
-                  />
-                  <br />
-                  <hr />
-                  <MessageInput chatId={chatId} otherUserId={user.uid} />
-                </div>
+              <div>
+                <MessagesComponent
+                  chatId={chatId}
+                  currentUserId={currentUser.uid}
+                  otherUserProfile={otherUserProfile}
+                  currentUserProfile={currentUser.imagePhotoURL}
+                  otherUserId={user.uid}
+                />
+                <br />
               </div>
             )}
           </>

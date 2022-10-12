@@ -54,8 +54,10 @@ const Messages = () => {
             ))}
       </aside>
       <div className="col-span-4">
-        <div className="bg-gray-400 rounded p-5 overflow-y-hidden hover:overflow-y-auto h-[50rem]">
-          {splitName.length < 3 && <div>Select Someone to chat</div>}
+        <div className="">
+          {splitName.length < 3 && (
+            <div className="text-black">Select Someone to chat</div>
+          )}
           <Outlet context={[chatId, otherUserProfile]} />
         </div>
       </div>
