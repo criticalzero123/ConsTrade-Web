@@ -69,7 +69,7 @@ export const getUserById = (id) => (dispatch) => {
     })
     .catch((err) => {
       dispatch({ type: "GET_USER_BY_ID_FAILED" });
-      alert(err.response.data);
+      console.log(err);
     });
 };
 

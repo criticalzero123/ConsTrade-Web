@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useRef } from "react";
 import { db } from "../../firebase/firebase-config";
 import MessageInput from "./MessageInput";
+import { Link } from "react-router-dom";
 
 const MessagesComponent = ({
   chatId,
@@ -55,11 +56,13 @@ const MessagesComponent = ({
             ) : (
               <div className="grid justify-start">
                 <div className="flex h-12 mt-3">
-                  <img
-                    src={otherUserProfile}
-                    alt={message.senderId}
-                    className="rounded-full"
-                  />
+                  <Link to={`/user/${message.sender_Id}`}>
+                    <img
+                      src={otherUserProfile}
+                      alt={message.senderId}
+                      className="rounded-full h-full"
+                    />
+                  </Link>
                   <div className="place-self-center ml-3">{message.text}</div>
                 </div>
               </div>

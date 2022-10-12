@@ -27,6 +27,7 @@ const MessageInput = ({ chatId, otherUserId, onClickScrollDown }) => {
         id: v4(),
         text,
         senderId: currentUser.uid,
+        sender_Id: currentUser._id,
         date: Timestamp.now(),
       }),
     });
