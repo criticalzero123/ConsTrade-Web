@@ -10,7 +10,9 @@ import ProductDetailsFavoriteCounter from "../../Components/ProductDetails/Produ
 import { firstLetterUpper } from "../../service/userService";
 import { toArrayString } from "../../service/productService";
 
-import { BsFillChatDotsFill } from "react-icons/bs";
+import { BsFillChatDotsFill, BsBookmarkHeartFill } from "react-icons/bs";
+
+import { Badge } from "flowbite-react";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -43,11 +45,21 @@ const ProductDetails = () => {
         product && (
           <div className="flex shadow-lg bg-gray-700  p-5 ">
             <div className="max-w-sm rounded overflow-hidden mr-5 text-black bg-white">
-              <img
-                className="w-full object-contain"
-                src={product.imageURL}
-                alt={product.title}
-              />
+              <Badge color="warning" size="sm">
+                {product.preferTrade}
+              </Badge>
+              <div className="relative w-full">
+                <img
+                  className="w-full object-contain"
+                  src={product.imageURL}
+                  alt={product.title}
+                />
+                <div className="absolute top-0 w-full">
+                  <div className="flex justify-end ">
+                    <BsBookmarkHeartFill size={40} className="text-red-600" />
+                  </div>
+                </div>
+              </div>
               <div className="px-6">
                 <div className=" py-4">
                   <div className="font-bold text-xl mb-2">{product.title}</div>
