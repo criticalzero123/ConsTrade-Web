@@ -124,8 +124,8 @@ router.post("/emailPasswordLogin", (req, res) => {
 
 router.post("/getUserById", (req, res) => {
   const { id } = req.body;
-  console.log(id);
-  User.findOne({ $or: [{ _id: id }, { uid: id }] }, (err, docs) => {
+
+  User.findOne({ _id: id }, (err, docs) => {
     if (docs) {
       res.send(docs);
     } else {

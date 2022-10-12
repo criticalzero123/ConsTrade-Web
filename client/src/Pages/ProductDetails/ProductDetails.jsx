@@ -6,13 +6,13 @@ import { getProductById } from "../../actions/productActions";
 import ProductComment from "../../Components/ProductDetails/ProductComment/ProductComment";
 import ProductAddComment from "../../Components/ProductDetails/ProductAddComment/ProductAddComment";
 
-import ProductDetailsFavoriteCounter from "../../Components/ProductDetails/ProductDetailsFavoritesCounter/ProductDetailsFavoriteCounter";
 import { firstLetterUpper } from "../../service/userService";
 import { toArrayString } from "../../service/productService";
 
 import { BsFillChatDotsFill, BsBookmarkHeartFill } from "react-icons/bs";
 
 import { Badge } from "flowbite-react";
+import { addToFavorite } from "../../actions/userActions";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -36,6 +36,17 @@ const ProductDetails = () => {
   const gameGenreArray = product && toArrayString(product.gameGenre);
   const platformArray = product && toArrayString(product.platform);
 
+  //For Favorites
+  const userFavoriteProduct = currentUser.favorites.some(
+    (favorite) => favorite.productId === id
+  );
+  const [select, setSelected] = useState(userFavoriteProduct);
+
+  const favoriteOnClick = () => {
+    dispatch(addToFavorite(product._id));
+    setSelected(!select);
+  };
+
   return (
     <div>
       {error && <div>Something Went Wrong...</div>}
@@ -54,11 +65,19 @@ const ProductDetails = () => {
                   src={product.imageURL}
                   alt={product.title}
                 />
-                <div className="absolute top-0 w-full">
-                  <div className="flex justify-end ">
-                    <BsBookmarkHeartFill size={40} className="text-red-600" />
+                {product && currentUser._id !== product.userId && (
+                  <div className="absolute top-0 w-full">
+                    <div className="flex justify-end ">
+                      <BsBookmarkHeartFill
+                        size={40}
+                        className={`${
+                          select && "text-red-500"
+                        } text-black mr-1 hover:cursor-pointer `}
+                        onClick={favoriteOnClick}
+                      />
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
               <div className="px-6">
                 <div className=" py-4">
@@ -114,10 +133,7 @@ const ProductDetails = () => {
               <p>Item: {product.item}</p>
               <p>Delivery Method: {product.deliveryType}</p>
               <p>Condition: {product.condition}</p>
-              <div className="flex justify-between mt-5">
-                <div>
-                  <ProductDetailsFavoriteCounter id={id} product={product} />
-                </div>
+              <div className="flex justify-end mt-5">
                 <p
                   className="cursor-pointer"
                   onClick={() => setShowComments(!showComments)}
