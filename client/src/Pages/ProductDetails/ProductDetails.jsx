@@ -71,7 +71,7 @@ const ProductDetails = () => {
                       <BsBookmarkHeartFill
                         size={40}
                         className={`${
-                          select && "text-red-500"
+                          select && "text-red-600"
                         } text-black mr-1 hover:cursor-pointer `}
                         onClick={favoriteOnClick}
                       />
