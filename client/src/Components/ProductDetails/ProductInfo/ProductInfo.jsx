@@ -80,7 +80,9 @@ const ProductInfo = ({
 
           <p className="mt-2 font-semibold text-lg">
             Location:{" "}
-            <span className="text-base text-gray-500">{product.location}</span>
+            <span className="text-base text-gray-500">
+              {firstLetterUpper(product.location)}
+            </span>
           </p>
           <p className="mt-2 font-semibold text-lg">
             Item Posted: <span className="text-base text-gray-500">{date}</span>

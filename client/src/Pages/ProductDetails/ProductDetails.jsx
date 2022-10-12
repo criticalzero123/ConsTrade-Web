@@ -46,8 +46,8 @@ const ProductDetails = () => {
       ) : (
         product && (
           <div>
-            <div className="md:grid md:grid-cols-3  h-[42rem] p-5 ">
-              <div className="md:col-span-1  relative rounded w-full shadow-lg mr-5 text-black flex justify-center place-items-center bg-[#031533]">
+            <div className="lg:grid lg:grid-cols-3  h-[42rem] p-5 ">
+              <div className="lg:col-span-1  relative rounded w-full shadow-lg mr-5 text-black flex justify-center place-items-center bg-[#031533]">
                 <img
                   className="object-contain rounded h-5/6"
                   src={product.imageURL}
@@ -68,7 +68,7 @@ const ProductDetails = () => {
                 )}
               </div>
 
-              <div className="md:col-span-2 ml-5 ">
+              <div className="lg:col-span-2 lg:ml-5 ">
                 <ProductInfo
                   product={product}
                   currentUser={currentUser}
