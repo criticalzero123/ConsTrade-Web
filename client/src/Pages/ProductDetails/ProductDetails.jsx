@@ -20,6 +20,7 @@ const ProductDetails = () => {
 
   const getproductbyid = useSelector((state) => state.getProductByIdReducer);
   const getcomments = useSelector((state) => state.commentListProductReducer);
+  const { currentUser } = useSelector((state) => state.userInfoReducer);
 
   const { comments } = getcomments;
   const { loading, error, product } = getproductbyid;
@@ -86,10 +87,12 @@ const ProductDetails = () => {
                   >
                     {firstLetterUpper(product.userName)}
                   </Link>
-                </p>{" "}
-                <Link to={`/messages/user/${product.userId}`} state={product}>
-                  <BsFillChatDotsFill size={20} className="cursor-pointer" />
-                </Link>
+                </p>
+                {currentUser._id !== product.userId && (
+                  <Link to={`/messages/user/${product.userId}`} state={product}>
+                    <BsFillChatDotsFill size={20} className="cursor-pointer" />
+                  </Link>
+                )}
               </div>
               <p>Description: {product.description}</p>
               <p>Location: {product.location}</p>
