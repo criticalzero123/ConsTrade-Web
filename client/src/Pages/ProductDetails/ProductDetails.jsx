@@ -78,19 +78,30 @@ const ProductDetails = () => {
                 />
               </div>
             </div>
-            <div className={showComments ? "block" : "hidden"}>
-              {product.comments !== undefined && (
-                <div className="h-[20rem]  overflow-auto mt-1">
-                  {comments.map((comment) => (
-                    <ProductComment
-                      key={comment._id}
-                      comment={comment}
-                      productId={product._id}
-                      ownerId={product.userId}
-                    />
-                  ))}
-                </div>
-              )}
+            <div
+              className={`${
+                showComments ? "block" : "hidden"
+              } bg-gray-200 rounded mx-5`}
+            >
+              {product.comments !== undefined &&
+                (comments.length === 0 ? (
+                  <div className="flex p-5 bg-gray-400 rounded">
+                    No Comment Yet.
+                    <br />
+                    be the first to comment
+                  </div>
+                ) : (
+                  <div className="h-[20rem]  overflow-auto mt-1">
+                    {comments.map((comment) => (
+                      <ProductComment
+                        key={comment._id}
+                        comment={comment}
+                        productId={product._id}
+                        ownerId={product.userId}
+                      />
+                    ))}
+                  </div>
+                ))}
               <ProductAddComment id={id} />
             </div>
           </div>

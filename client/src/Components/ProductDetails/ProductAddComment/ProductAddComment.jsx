@@ -16,7 +16,7 @@ const ProductAddComment = ({ id }) => {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full px-5 mt-5 pb-5">
       <form onSubmit={formSubmit} className="flex">
         <input
           type="text"
