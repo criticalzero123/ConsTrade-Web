@@ -37,7 +37,7 @@ const ProductCardDetails = (props) => {
         <div className=" h-full bg-blue-900 flex align-center rounded lg:rounded-r-none">
           <img
             src={image ? image : imageDefault}
-            alt=""
+            alt={title}
             className="object-contain place-content-center "
           />
         </div>
