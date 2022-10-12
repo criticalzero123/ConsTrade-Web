@@ -12,7 +12,8 @@ import {
 
 import { Avatar, Dropdown, Navbar } from "flowbite-react/lib/cjs/components";
 
-import { BiSearch, BiMessageAltDots } from "react-icons/bi";
+import { BiSearch } from "react-icons/bi";
+import { BsChatDots } from "react-icons/bs";
 import SearchHeader from "./SearchHeader/SearchHeader";
 
 const NavbarComponent = () => {
@@ -45,7 +46,7 @@ const NavbarComponent = () => {
           <>
             <div className="flex md:order-2 place-items-center">
               <Link to="/messages">
-                <BiMessageAltDots size={20} className="mr-4 cursor-pointer" />
+                <BsChatDots size={20} className="mr-4 cursor-pointer" />
               </Link>
               <BiSearch
                 size={20}

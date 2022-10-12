@@ -48,12 +48,19 @@ const MessagesComponent = ({
 
   return (
     <div className="">
-      {product && product.userId === currentUser_Id && (
-        <button
-          onClick={() => dispatch(soldItemTransaction(productId, otherUser_Id))}
-        >
-          Mark As Sold
-        </button>
+      {product && product.status === "sold" ? (
+        <div>sold</div>
+      ) : (
+        product &&
+        product.userId === currentUser_Id && (
+          <button
+            onClick={() =>
+              dispatch(soldItemTransaction(productId, otherUser_Id))
+            }
+          >
+            Mark As Sold
+          </button>
+        )
       )}
       <div className="h-[30rem] p-5 overflow-y-auto  bg-gray-400 rounded">
         {messages.map((message) => (
@@ -88,11 +95,13 @@ const MessagesComponent = ({
         <div ref={scrollDown}></div>
       </div>
       <hr />
-      <MessageInput
-        chatId={chatId}
-        otherUserId={otherUserId}
-        onClickScrollDown={onClickScrollDown}
-      />
+      {product && product.status !== "sold" && (
+        <MessageInput
+          chatId={chatId}
+          otherUserId={otherUserId}
+          onClickScrollDown={onClickScrollDown}
+        />
+      )}
     </div>
   );
 };

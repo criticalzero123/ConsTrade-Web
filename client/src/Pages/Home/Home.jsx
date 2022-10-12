@@ -25,9 +25,12 @@ const Index = () => {
       ) : (
         <div className="grid lg:grid-cols-4">
           {products &&
-            products.map((product) => (
-              <ProductCard product={product} key={product._id} />
-            ))}
+            products.map(
+              (product) =>
+                product.status !== "sold" && (
+                  <ProductCard product={product} key={product._id} />
+                )
+            )}
         </div>
       )}
     </div>

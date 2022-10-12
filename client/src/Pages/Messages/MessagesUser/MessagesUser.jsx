@@ -50,6 +50,7 @@ const MessagesUser = () => {
           messages: [
             {
               id: v4(),
+              sender_Id: currentUser._id,
               text: defaultMessage,
               senderId: currentUser.uid,
               date: Timestamp.now(),

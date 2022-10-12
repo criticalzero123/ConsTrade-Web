@@ -37,7 +37,7 @@ const ProductInfo = ({
   return (
     <div className=" bg-[#031533]  px-10 py-5 rounded h-full text-white">
       <p className="font-bold text-base font-mono text-orange-400 tracking-widest">
-        {soldChecker ? "SOLD" : stringPrefer}
+        {soldChecker ? "TRANSACTION SUCCESSFUL" : stringPrefer}
       </p>
       <div className="flex place-items-center">
         <p className="font-bold text-4xl font-mono mr-3">{product.title}</p>
