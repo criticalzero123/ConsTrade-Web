@@ -96,6 +96,10 @@ const productSchema = mongoose.Schema(
       type: Number,
       require,
     },
+    status: {
+      type: String,
+      require,
+    },
     comments: [commentSchema],
   },
   {

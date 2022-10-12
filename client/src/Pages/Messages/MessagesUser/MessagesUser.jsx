@@ -69,6 +69,7 @@ const MessagesUser = () => {
           },
           [combinedId + ".productInfo"]: {
             title: location.state.title,
+            productId: location.state._id,
             imageURL: location.state.imageURL,
           },
 
@@ -87,6 +88,7 @@ const MessagesUser = () => {
           },
           [combinedId + ".productInfo"]: {
             title: location.state.title,
+            productId: location.state._id,
             imageURL: location.state.imageURL,
           },
 

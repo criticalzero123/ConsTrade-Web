@@ -4,6 +4,8 @@ import { useRef } from "react";
 import { db } from "../../firebase/firebase-config";
 import MessageInput from "./MessageInput";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { soldItemTransaction } from "../../actions/transactionActions";
 
 const MessagesComponent = ({
   chatId,
@@ -15,6 +17,7 @@ const MessagesComponent = ({
   const [messages, setMessages] = useState([]);
 
   const scrollDown = useRef();
+  const dispatch = useDispatch();
 
   const onClickScrollDown = () => {
     if (scrollDown.current !== undefined && scrollDown.current !== null) {
@@ -39,6 +42,8 @@ const MessagesComponent = ({
 
   return (
     <div className="">
+      {/* onClick={() => dispatch(soldItemTransaction(,otherUserId))} */}
+      <div>Mark As Sold</div>
       <div className="h-[30rem] p-5 overflow-y-auto  bg-gray-400 rounded">
         {messages.map((message) => (
           <div key={message.id}>
@@ -69,7 +74,6 @@ const MessagesComponent = ({
             )}
           </div>
         ))}
-
         <div ref={scrollDown}></div>
       </div>
       <hr />

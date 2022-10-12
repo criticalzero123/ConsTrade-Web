@@ -92,6 +92,7 @@ router.post("/addProduct", (req, res) => {
     deliveryType: data.deliveryType,
     dateCreated: new Date().getTime(),
     favoritesCount: 0,
+    status: "unsold",
   });
   newProduct.save((err) => {
     if (!err) {

@@ -8,6 +8,8 @@ import {
   getAllProductByCategoryReducer,
 } from "./reducers/productReducer";
 
+// import { soldItemTransactionReducer } from "./reducers/transactionReducer";
+
 import {
   socalMediaAuthReducer,
   emailPasswordRegisterReducer,

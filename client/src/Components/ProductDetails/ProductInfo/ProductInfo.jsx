@@ -125,7 +125,7 @@ const ProductInfo = ({
             <Link to={`/messages/user/${product.userId}`} state={product}>
               <button
                 type="button"
-                class="mt-5 text-white self-end
+                className="mt-5 text-white self-end
                     bg-gradient-to-r from-green-500 to-blue-500 hover:from-pink-500 hover:to-yellow-500
                     w-full rounded-md p-3 font-semibold text-lg"
               >
@@ -136,7 +136,7 @@ const ProductInfo = ({
         ) : (
           <button
             type="button"
-            class="mt-5 text-white self-end
+            className="mt-5 text-white self-end
             bg-gradient-to-r from-green-500 to-blue-500 hover:from-pink-500 hover:to-yellow-500
             w-full rounded-md p-3 font-semibold text-lg"
           >
@@ -147,7 +147,7 @@ const ProductInfo = ({
           <button
             type="button"
             onClick={setOnClickShowComments}
-            class="mt-5 text-white 
+            className="mt-5 text-white 
                   bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-cyan-500 hover:to-blue-500
                     w-full rounded-md p-3 font-semibold text-lg"
           >
