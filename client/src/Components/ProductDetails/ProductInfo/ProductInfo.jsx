@@ -65,7 +65,7 @@ const ProductInfo = ({
             <Link to={`/user/${product.userId}`}>
               <img
                 src={user && user.imagePhotoURL}
-                alt={product.title}
+                alt={product.userName}
                 className="rounded-full w-12 "
               />
             </Link>
