@@ -2,9 +2,27 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { deleteProduct } from "../../actions/productActions";
+import Swal from "sweetalert2";
 
 const ProductListCard = ({ product }) => {
   const dispatch = useDispatch();
+
+  const deleteClick = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteProduct(product._id));
+        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+      }
+    });
+  };
   return (
     <div className="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
       <div className="h-96">
@@ -42,10 +60,7 @@ const ProductListCard = ({ product }) => {
             </p>
           </Link>
           <div className="flex text-black">
-            <p
-              className="mr-5 cursor-pointer "
-              onClick={() => dispatch(deleteProduct(product._id))}
-            >
+            <p className="mr-5 cursor-pointer " onClick={deleteClick}>
               Delete
             </p>
             <p className="cursor-pointer">Edit</p>

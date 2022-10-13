@@ -70,9 +70,6 @@ router.post("/emailPasswordRegister", (req, res) => {
   User.findOne(
     { $or: [{ email: req.body.email }, { uid: req.body.uid }] },
     (err, docs) => {
-      // no need to check if there are user
-      // firebase will do this for us
-      // TODO: usahay ang uid way i hatag i check ni
       const newUser = new User({
         name: req.body.name,
         email: req.body.email,

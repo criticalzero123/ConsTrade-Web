@@ -61,7 +61,7 @@ const Messages = () => {
         <div className="">
           {splitName.length < 3 && (
             <div className="text-black h-[30rem] bg-[#F5F7FB] flex place-items-center justify-center text-4xl">
-              Select Someone to chat
+              Select Conversation
             </div>
           )}
           <Outlet

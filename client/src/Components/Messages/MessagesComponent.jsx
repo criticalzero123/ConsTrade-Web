@@ -10,6 +10,8 @@ import { BsCheckSquareFill } from "react-icons/bs";
 
 import { useDispatch } from "react-redux";
 
+import Swal from "sweetalert2";
+
 const MessagesComponent = ({
   chatId,
   currentUserId,
@@ -56,7 +58,30 @@ const MessagesComponent = ({
   };
 
   const completeItemOnClick = () => {
-    dispatch(soldItemTransaction(product._id, currentUser_Id));
+    Swal.fire({
+      title: "Transaction Completed?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          "Hoooray!",
+          "Transaction of this item is completed.",
+          "success"
+        );
+
+        dispatch(soldItemTransaction(product._id, currentUser_Id));
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        Swal.fire("Cancelled", "Transaction Cancelled.", "error");
+      }
+    });
   };
 
   return (
