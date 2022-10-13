@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { db } from "../../firebase/firebase-config";
 import { v4 } from "uuid";
 
-import { MdSend } from "react-icons/md";
+import { RiSendPlaneFill } from "react-icons/ri";
 
 const MessageInput = ({ chatId, otherUserId, onClickScrollDown }) => {
   const [text, setText] = useState("");
@@ -50,8 +50,11 @@ const MessageInput = ({ chatId, otherUserId, onClickScrollDown }) => {
   };
 
   return (
-    <div className="w-full mt-2">
-      <form onSubmit={handleSend}>
+    <div className="w-full p-3 ">
+      <form
+        onSubmit={handleSend}
+        className="bg-white p-2 rounded-lg shadow-xl mb-2"
+      >
         <div className="flex">
           <input
             type="text"
@@ -60,10 +63,10 @@ const MessageInput = ({ chatId, otherUserId, onClickScrollDown }) => {
             value={text}
             required
             autoFocus
-            className="w-full rounded"
+            className="w-full rounded border-0 focus:ring-0  mr-5"
           />
-          <button>
-            <MdSend size={30} className="ml-5" />
+          <button className=" bg-[#2C61F6] px-2 rounded-md mr-2 hover:text-red-500">
+            <RiSendPlaneFill size={25} color={"white"} />
           </button>
         </div>
       </form>

@@ -16,6 +16,7 @@ const Messages = () => {
   const [chatId, setChatId] = useState("");
   const [otherUserProfile, setOtherUserProfile] = useState("");
   const [productId, setProductId] = useState("");
+  const [displayName, setDisplayName] = useState("");
   const { currentUser } = useSelector((state) => state.userInfoReducer);
 
   useEffect(() => {
@@ -33,7 +34,7 @@ const Messages = () => {
 
   return (
     <div className="grid grid-cols-6 gap-4 ">
-      <aside className="col-span-2 xl:col-span-1 overflow-hidden hover:overflow-y-auto h-[30rem] bg-gray-400 p-5 rounded">
+      <aside className="col-span-2 xl:col-span-1 overflow-y-auto h-[35rem] bg-[#F5F7FB] p-5 rounded">
         {chats !== undefined &&
           Object.entries(chats)
             ?.sort((a, b) => b[1].date - a[1].date)
@@ -45,6 +46,7 @@ const Messages = () => {
                   setChatId(chat[0]);
                   setOtherUserProfile(chat[1].userInfo.photoURL);
                   setProductId(chat[1].productInfo.productId);
+                  setDisplayName(chat[1].userInfo.displayName);
                 }}
               >
                 <SideUserDisplay
@@ -58,11 +60,13 @@ const Messages = () => {
       <div className="col-span-4 ">
         <div className="">
           {splitName.length < 3 && (
-            <div className="text-black h-[30rem] bg-gray-400 flex place-items-center justify-center text-4xl">
+            <div className="text-black h-[30rem] bg-[#F5F7FB] flex place-items-center justify-center text-4xl">
               Select Someone to chat
             </div>
           )}
-          <Outlet context={[chatId, otherUserProfile, productId]} />
+          <Outlet
+            context={[chatId, otherUserProfile, productId, displayName]}
+          />
         </div>
       </div>
     </div>

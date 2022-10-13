@@ -4,18 +4,26 @@ import { useRef } from "react";
 import { db } from "../../firebase/firebase-config";
 import MessageInput from "./MessageInput";
 import { Link } from "react-router-dom";
+import { Button } from "flowbite-react";
+import { soldItemTransaction } from "../../actions/transactionActions";
+import { BsCheckSquareFill } from "react-icons/bs";
+
+import { useDispatch } from "react-redux";
 
 const MessagesComponent = ({
   chatId,
   currentUserId,
   otherUserProfile,
-  currentUserProfile,
   otherUserId,
   completed,
+  displayName,
+  product,
+  currentUser_Id,
 }) => {
   const [messages, setMessages] = useState([]);
 
   const scrollDown = useRef();
+  const dispatch = useDispatch();
 
   const onClickScrollDown = () => {
     if (scrollDown.current !== undefined && scrollDown.current !== null) {
@@ -37,33 +45,63 @@ const MessagesComponent = ({
     };
   }, [chatId, messages.length]);
 
+  const dateToTime = (date) => {
+    return new Date(date).toLocaleTimeString([], {
+      hour: "numeric",
+      minute: "numeric",
+      day: "2-digit",
+      month: "short",
+      hour12: true,
+    });
+  };
+
+  const completeItemOnClick = () => {
+    dispatch(soldItemTransaction(product._id, currentUser_Id));
+  };
+
   return (
-    <div className="">
-      <div className="h-[30rem] p-5 overflow-y-auto  bg-gray-400 rounded">
+    <div className="bg-[#EFF3F8] rounded-md relative">
+      <div className="h-[30rem] p-5 overflow-y-auto  rounded">
         {messages.map((message) => (
           <div key={message.id}>
             {message.senderId === currentUserId ? (
-              <div className="grid justify-end">
-                <div className="flex h-12 mt-3">
-                  <div className="place-self-center mr-3">{message.text}</div>
-                  <img
-                    src={currentUserProfile}
-                    alt={message.senderId}
-                    className="rounded-full"
-                  />
+              <div>
+                <div className="flex justify-end mt-5 mb-2 text-sm text-gray-400">
+                  {dateToTime(message.date.toDate())}
+                </div>
+                <div className=" flex justify-end">
+                  <div className=" flex justify-end w-3/5">
+                    <div className="text-end bg-[#CCE6FB]  p-3 rounded-l-2xl rounded-b-2xl max-w-fit">
+                      {message.text}
+                    </div>
+                  </div>
                 </div>
               </div>
             ) : (
-              <div className="grid justify-start">
-                <div className="flex h-12 mt-3">
+              <div>
+                <div className="flex items-center mt-7 text-sm ">
                   <Link to={`/user/${message.sender_Id}`}>
                     <img
                       src={otherUserProfile}
                       alt={message.senderId}
-                      className="rounded-full h-full"
+                      className="rounded-full h-8 md:h-10 mr-2"
                     />
                   </Link>
-                  <div className="place-self-center ml-3">{message.text}</div>
+                  <Link
+                    to={`/user/${message.sender_Id}`}
+                    className="hover:text-red-500"
+                  >
+                    {displayName}
+                  </Link>
+                  <span className="ml-2 text-gray-500">
+                    {dateToTime(message.date.toDate())}
+                  </span>
+                </div>
+
+                <div className="flex justify-start w-3/5">
+                  <div className="text-end mr-3 bg-white mt-2 p-3 rounded-r-2xl rounded-b-2xl max-w-fit">
+                    {message.text}
+                  </div>
                 </div>
               </div>
             )}
@@ -71,13 +109,26 @@ const MessagesComponent = ({
         ))}
         <div ref={scrollDown}></div>
       </div>
-      <hr />
       {completed !== true && (
         <MessageInput
           chatId={chatId}
           otherUserId={otherUserId}
           onClickScrollDown={onClickScrollDown}
         />
+      )}
+      {!completed && product && product.userId === currentUser_Id && (
+        <div className="absolute top-0 p-4 bg-[rgba(100%,100%,100%,60%)] backdrop-blur-md w-full flex place-items-center justify-between">
+          <Link
+            to={`/product/item/${product._id}`}
+            className="hover:text-red-400 font-semibold text-gray-500"
+          >
+            {product.title}
+          </Link>
+          <Button gradientDuoTone="greenToBlue" onClick={completeItemOnClick}>
+            <BsCheckSquareFill size={20} className="mr-2" />
+            Transaction Completed
+          </Button>
+        </div>
       )}
     </div>
   );

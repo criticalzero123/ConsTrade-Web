@@ -17,14 +17,12 @@ import { db } from "../../../firebase/firebase-config";
 import MessagesComponent from "../../../Components/Messages/MessagesComponent";
 import MessageModal from "../../../Components/Messages/MessageModal";
 import { v4 } from "uuid";
-import { Button } from "flowbite-react";
-import { soldItemTransaction } from "../../../actions/transactionActions";
 import MessageModalSoldInfo from "../../../Components/Messages/MessageModalSoldInfo";
 
 const MessagesUser = () => {
   const { uid } = useParams();
 
-  const [chatId, otherUserProfile, productId] = useOutletContext();
+  const [chatId, otherUserProfile, productId, displayName] = useOutletContext();
   const location = useLocation();
 
   const dispatch = useDispatch();
@@ -108,10 +106,6 @@ const MessagesUser = () => {
     }
   };
 
-  const completeItemOnClick = () => {
-    dispatch(soldItemTransaction(productId, user._id));
-  };
-
   const completed = product && product.status === "sold";
 
   return (
@@ -128,19 +122,13 @@ const MessagesUser = () => {
                 <MessagesComponent
                   chatId={chatId}
                   currentUserId={currentUser.uid}
+                  currentUser_Id={currentUser._id}
                   otherUserProfile={otherUserProfile}
-                  currentUserProfile={currentUser.imagePhotoURL}
                   completed={completed}
+                  displayName={displayName}
+                  product={product}
                 />
                 <br />
-                {!completed && product && product.userId === currentUser._id && (
-                  <Button
-                    gradientDuoTone="greenToBlue"
-                    onClick={completeItemOnClick}
-                  >
-                    Transaction Completed
-                  </Button>
-                )}
               </div>
             )}
           </>
