@@ -83,7 +83,15 @@ const ProductInfo = ({
 
           <p className="mt-2 font-semibold text-lg">
             Location:{" "}
-            <span className="text-base text-gray-500">
+            <span
+              className="text-base text-gray-500 hover:text-red-500 cursor-pointer"
+              onClick={() =>
+                window.open(
+                  "http://maps.google.com/?q=" + product.location,
+                  "_blank"
+                )
+              }
+            >
               {firstLetterUpper(product.location)}
             </span>
           </p>

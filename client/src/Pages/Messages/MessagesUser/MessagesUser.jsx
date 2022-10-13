@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { useOutletContext } from "react-router-dom";
 import { getUserById } from "../../../actions/userActions";
+import { getProductById } from "../../../actions/productActions";
 import { useDispatch, useSelector } from "react-redux";
 import {
   doc,
@@ -16,6 +17,8 @@ import { db } from "../../../firebase/firebase-config";
 import MessagesComponent from "../../../Components/Messages/MessagesComponent";
 import MessageModal from "../../../Components/Messages/MessageModal";
 import { v4 } from "uuid";
+import { Button } from "flowbite-react";
+import { soldItemTransaction } from "../../../actions/transactionActions";
 
 const MessagesUser = () => {
   const { uid } = useParams();
@@ -29,10 +32,12 @@ const MessagesUser = () => {
   );
 
   const { currentUser } = useSelector((state) => state.userInfoReducer);
+  const { product } = useSelector((state) => state.getProductByIdReducer);
 
   useEffect(() => {
     dispatch(getUserById(uid));
-  }, [dispatch, uid]);
+    productId && dispatch(getProductById(productId));
+  }, [dispatch, uid, productId]);
   const handleClick = async () => {
     const defaultMessage =
       "Hello i'm trying to negotiate for the item name " + location.state.title;
@@ -102,6 +107,11 @@ const MessagesUser = () => {
     }
   };
 
+  const completeItemOnClick = () => {
+    dispatch(soldItemTransaction(productId, user._id));
+    window.location.href = `/product/item/${productId}`;
+  };
+
   return (
     <>
       {error && <div>error</div>}
@@ -115,14 +125,18 @@ const MessagesUser = () => {
                 <MessagesComponent
                   chatId={chatId}
                   currentUserId={currentUser.uid}
-                  currentUser_Id={currentUser._id}
                   otherUserProfile={otherUserProfile}
                   currentUserProfile={currentUser.imagePhotoURL}
-                  otherUserId={user.uid}
-                  otherUser_Id={user._id}
-                  productId={productId}
                 />
                 <br />
+                {product && product.userId === currentUser._id && (
+                  <Button
+                    gradientDuoTone="greenToBlue"
+                    onClick={completeItemOnClick}
+                  >
+                    Transaction Completed
+                  </Button>
+                )}
               </div>
             )}
           </>
