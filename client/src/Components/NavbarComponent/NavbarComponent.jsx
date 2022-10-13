@@ -31,7 +31,7 @@ const NavbarComponent = () => {
 
   return (
     <div>
-      <Navbar fluid={true} rounded={true} className="bg-black">
+      <Navbar fluid={true}>
         <Navbar.Brand href="/">
           <img
             src="https://flowbite.com/docs/images/logo.svg"
@@ -66,7 +66,7 @@ const NavbarComponent = () => {
                       statusPosition="bottom-right"
                       size="sm"
                     >
-                      <IoIosArrowDown size={10} />
+                      <IoIosArrowDown size={10} className="-ml-3" />
                     </Avatar>
                   </>
                 }

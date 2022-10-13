@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 import { getAllProducts } from "../../actions/productActions";
-import ProductCard from "../../Components/ProductCard/ProductCard";
+import { IoMdAddCircle } from "react-icons/io";
+import SlickCarousel from "../../Components/Home/SlickCarousel";
 
 import { Link } from "react-router-dom";
 const Index = () => {
@@ -17,20 +18,30 @@ const Index = () => {
 
   return (
     <div>
-      <Link to="/product/add">Add a item</Link>
+      <Link to="/product/add">
+        <div className="fixed z-30 bottom-5 right-5 p-3 shadow-lg  md:p-5 bg-[#051632] rounded-full flex place-items-center text-white hover:text-orange-500">
+          <IoMdAddCircle size={25} className="md:mr-1" />
+          <p className="font-semibold text-lg md:block hidden">Add item</p>
+        </div>
+      </Link>
+
       {loading ? (
         <h1>Loading...</h1>
       ) : error ? (
         <h1>Something Went Wrong Check for the logs</h1>
       ) : (
-        <div className="grid lg:grid-cols-4">
-          {products &&
-            products.map(
-              (product) =>
-                product.status !== "sold" && (
-                  <ProductCard product={product} key={product._id} />
-                )
-            )}
+        <div>
+          <SlickCarousel
+            products={products.filter((product) => product.status !== "sold")}
+            title={"Recommended for you"}
+          />
+          <br />
+          <br />
+          <br />
+          <SlickCarousel
+            products={products.filter((product) => product.status === "sold")}
+            title={"Successful Transactions"}
+          />
         </div>
       )}
     </div>
