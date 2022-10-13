@@ -59,6 +59,7 @@ const MessageInput = ({ chatId, otherUserId, onClickScrollDown }) => {
             onChange={(e) => setText(e.target.value)}
             value={text}
             required
+            autoFocus
             className="w-full rounded"
           />
           <button>

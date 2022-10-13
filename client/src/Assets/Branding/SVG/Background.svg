@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Background_Layer" data-name="Background Layer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        stroke: #000;
+        stroke-miterlimit: 10;
+        stroke-width: .3px;
+      }
+
+      .cls-2 {
+        fill: #e64a19;
+      }
+    </style>
+  </defs>
+  <rect id="Background_Colour" data-name="Background Colour" class="cls-1" width="108" height="108"/>
+  <rect class="cls-2" width="108" height="108"/>
+</svg>

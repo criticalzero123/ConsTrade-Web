@@ -11,6 +11,7 @@ const MessagesComponent = ({
   otherUserProfile,
   currentUserProfile,
   otherUserId,
+  completed,
 }) => {
   const [messages, setMessages] = useState([]);
 
@@ -71,11 +72,13 @@ const MessagesComponent = ({
         <div ref={scrollDown}></div>
       </div>
       <hr />
-      <MessageInput
-        chatId={chatId}
-        otherUserId={otherUserId}
-        onClickScrollDown={onClickScrollDown}
-      />
+      {completed !== true && (
+        <MessageInput
+          chatId={chatId}
+          otherUserId={otherUserId}
+          onClickScrollDown={onClickScrollDown}
+        />
+      )}
     </div>
   );
 };

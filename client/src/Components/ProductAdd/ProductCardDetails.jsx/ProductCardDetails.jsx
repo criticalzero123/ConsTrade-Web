@@ -30,9 +30,13 @@ const ProductCardDetails = (props) => {
     day: "2-digit",
   });
 
+  const titlePreview = (text) => {
+    return <span className="font-semibold">{text}</span>;
+  };
+
   return (
     <>
-      <span className="lg:ml-16 text-gray-500">Product Review:</span>
+      <span className="lg:ml-16 text-gray-500">Product Preview:</span>
       <div className="lg:ml-16 grid grid-cols-2 place-items-center h-4/6 rounded">
         <div className=" h-full bg-blue-900 flex align-center rounded lg:rounded-r-none">
           <img
@@ -43,49 +47,50 @@ const ProductCardDetails = (props) => {
         </div>
         <div className="h-full w-full  bg-white rounded-b lg:rounded-b-none rounded p-4 flex flex-col justify-between leading-normal">
           <div className="mb-8 ">
-            <div className="flex justify-between items-center">
-              <div className="text-gray-900 font-bold text-xl mb-2 text-ellipsis overflow-hidden whitespace-nowrap w-52">
-                {title === "" ? "TITLE" : title}
-              </div>
-              <div className=" block">chat</div>
+            <div className="text-gray-900 font-bold text-xl mb-2 text-ellipsis overflow-hidden whitespace-nowrap w-52">
+              {title === "" ? "TITLE" : title}
             </div>
+
             <p className="text-gray-700 text-base text-ellipsis overflow-hidden whitespace-nowrap w-72">
-              Description: {description}
+              {titlePreview("Description: ")}
+              {description}
             </p>
 
-            <p className="text-gray-700 text-base mt-2">Category: {category}</p>
             <p className="text-gray-700 text-base mt-2">
-              Platform Supported: {platform}
+              {titlePreview("Category: ")} {category}
             </p>
             <p className="text-gray-700 text-base mt-2">
-              Model Number: {modelNumber}
+              {titlePreview("Platform Supported: ")} {platform}
             </p>
             <p className="text-gray-700 text-base mt-2">
-              Serial Number: {serialNumber}
+              {titlePreview("Model Number: ")} {modelNumber}
+            </p>
+            <p className="text-gray-700 text-base mt-2">
+              {titlePreview("Serial Number: ")} {serialNumber}
             </p>
             <p className="text-gray-700 text-base mt-2 ">
-              Condition: {condition}
+              {titlePreview("Condition: ")} {condition}
             </p>
             <p className="text-gray-700 text-base mt-2 text-ellipsis overflow-hidden whitespace-nowrap w-72">
-              Location: {location}
+              {titlePreview("Location: ")} {location}
             </p>
             <p className="text-gray-700 text-base mt-2">
-              Prefer Trade:{" "}
+              {titlePreview("Prefer Trade: ")}{" "}
               {preferTrade === "Trade-in" ? "Cash and Item" : preferTrade}
             </p>
             {(preferTrade === "Trade-in" || preferTrade === "Selling") && (
               <p className="text-gray-700 text-base mt-2 text-ellipsis overflow-hidden whitespace-nowrap w-72">
-                Cash: {`₱${cash}`}
+                {titlePreview("Cash: ")} {`₱${cash}`}
               </p>
             )}
 
             {(preferTrade === "Trade-in" || preferTrade === "Swapping") && (
               <p className="text-gray-700 text-base mt-2 text-ellipsis overflow-hidden whitespace-nowrap w-72">
-                Item: {item}
+                {titlePreview("Item: ")} {item}
               </p>
             )}
             <p className="text-gray-700 text-base mt-2">
-              Meetup Preference: {meetup}
+              {titlePreview("Meetup Preference: ")} {meetup}
             </p>
           </div>
 
@@ -103,8 +108,6 @@ const ProductCardDetails = (props) => {
                 <p className="text-gray-600">{currentDateString}</p>
               </div>
             </div>
-
-            <div className="place-items-center">share</div>
           </div>
         </div>
       </div>

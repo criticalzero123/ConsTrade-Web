@@ -132,19 +132,44 @@ const ProductInfo = ({
       </div>
       <div className="flex h-2/5 items-end">
         {currentUser._id !== product.userId ? (
-          <div className="w-full">
-            <Link to={`/messages/user/${product.userId}`} state={product}>
-              <button
-                disabled={soldChecker}
-                type="button"
-                className="mt-5 text-white self-end
+          product && product.status === "sold" ? (
+            <div className="w-full">
+              <Link to={`/search/category/${gameGenreArray[0]}`}>
+                <button
+                  type="button"
+                  className="mt-5 text-white self-end
                     bg-gradient-to-r from-green-500 to-blue-500 hover:from-pink-500 hover:to-yellow-500
                     w-full rounded-md p-3 font-semibold text-lg"
-              >
-                Contact Seller
-              </button>
-            </Link>
-          </div>
+                >
+                  Look for similar Items
+                </button>
+              </Link>
+            </div>
+          ) : (
+            <div className="w-full">
+              <Link to={`/messages/user/${product.userId}`} state={product}>
+                <button
+                  disabled={soldChecker}
+                  type="button"
+                  className="mt-5 text-white self-end
+                    bg-gradient-to-r from-green-500 to-blue-500 hover:from-pink-500 hover:to-yellow-500
+                    w-full rounded-md p-3 font-semibold text-lg"
+                >
+                  Contact Seller
+                </button>
+              </Link>
+            </div>
+          )
+        ) : product && product.status === "sold" ? (
+          <button
+            type="button"
+            onClick={() => (window.location.href = "/product/add")}
+            className="mt-5 text-white self-end
+          bg-gradient-to-r from-green-500 to-blue-500 hover:from-pink-500 hover:to-yellow-500
+          w-full rounded-md p-3 font-semibold text-lg"
+          >
+            Add another Item
+          </button>
         ) : (
           <button
             type="button"

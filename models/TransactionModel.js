@@ -7,7 +7,7 @@ const transactionSchema = mongoose.Schema(
       require,
     },
     buyerId: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       require,
     },
     inAppTransac: {

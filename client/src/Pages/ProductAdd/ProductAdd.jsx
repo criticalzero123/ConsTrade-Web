@@ -53,9 +53,11 @@ const ProductAdd = () => {
 
   const productAddRequest = async (e) => {
     e.preventDefault();
-    setLoading(true);
 
-    if (imageUpload != null) {
+    if (category.length === 0) alert("Please choose category of the item");
+    else if (platform.length === 0) alert("Please choose platform of the item");
+    else if (imageUpload != null) {
+      setLoading(true);
       await saveImageStorage(imageUpload, title, user, productUploadCallBack);
     } else {
       alert("Please Provide Picture");
@@ -91,17 +93,18 @@ const ProductAdd = () => {
     <div className="grid grid-cols-1 lg:grid-cols-3 pt-7">
       <div className=" ">
         <form onSubmit={productAddRequest}>
-          <aside className="overflow-y-hidden hover:overflow-y-auto h-[45rem] ">
+          <aside className=" overflow-y-hidden hover:overflow-y-auto h-[45rem] ">
             <ProductAddInput
               labeltext="Title"
               placeholdertext="title..."
               value={title}
               fortext="title"
               onChange={(e) => setTitle(e.target.value)}
-              required
+              required={true}
             />
             <br />
             <ProductAddSelect
+              required={true}
               items={categoryOptions}
               labeltext="Category"
               width="w-32"
@@ -111,6 +114,7 @@ const ProductAdd = () => {
             />
             <br />
             <ProductAddSelect
+              required={true}
               items={platformOptions}
               labeltext="Platform Supported"
               width="w-32"
@@ -125,7 +129,7 @@ const ProductAdd = () => {
               value={modelNumber}
               fortext="modelnumber"
               onChange={(e) => setModelNumber(e.target.value)}
-              required
+              required={true}
             />
             <br />
             <ProductAddInput
@@ -134,7 +138,7 @@ const ProductAdd = () => {
               value={serialNumber}
               fortext="serialnumber"
               onChange={(e) => setSerialNumber(e.target.value)}
-              required
+              required={true}
             />
             <br />
             <ProductAddSelect
@@ -149,7 +153,7 @@ const ProductAdd = () => {
               fortext="description"
               placeholdertext="Describe the item (Dents or Defects)"
               onChange={(e) => setDescription(e.target.value)}
-              required
+              required={true}
             />
             <br />
             <ProductAddInput
@@ -158,6 +162,7 @@ const ProductAdd = () => {
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               fortext="location"
+              required={true}
             />
             <br />
             <ProductAddDropZone
@@ -165,7 +170,7 @@ const ProductAdd = () => {
               onChange={(e) => {
                 setImageUpload(e.target.files[0]);
               }}
-              required
+              required={true}
             />
             <br />
             {/* <img src={imageUpload && window.URL.createObjectURL(imageUpload)} /> */}
@@ -185,7 +190,6 @@ const ProductAdd = () => {
               value={cash}
               hidden={prefer === "Swapping" ? true : false}
               number={true}
-              required
             />
             <ProductAddInput
               labeltext="Item Prefer"
@@ -194,7 +198,6 @@ const ProductAdd = () => {
               value={item}
               onChange={(e) => setItem(e.target.value)}
               hidden={prefer === "Selling" ? true : false}
-              required
             />
             <br />
             <ProductAddSelect

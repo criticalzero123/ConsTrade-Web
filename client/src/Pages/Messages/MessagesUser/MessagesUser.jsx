@@ -19,6 +19,7 @@ import MessageModal from "../../../Components/Messages/MessageModal";
 import { v4 } from "uuid";
 import { Button } from "flowbite-react";
 import { soldItemTransaction } from "../../../actions/transactionActions";
+import MessageModalSoldInfo from "../../../Components/Messages/MessageModalSoldInfo";
 
 const MessagesUser = () => {
   const { uid } = useParams();
@@ -109,8 +110,9 @@ const MessagesUser = () => {
 
   const completeItemOnClick = () => {
     dispatch(soldItemTransaction(productId, user._id));
-    window.location.href = `/product/item/${productId}`;
   };
+
+  const completed = product && product.status === "sold";
 
   return (
     <>
@@ -122,14 +124,16 @@ const MessagesUser = () => {
           <>
             {chatId !== "" && (
               <div>
+                <MessageModalSoldInfo product={product} completed={completed} />
                 <MessagesComponent
                   chatId={chatId}
                   currentUserId={currentUser.uid}
                   otherUserProfile={otherUserProfile}
                   currentUserProfile={currentUser.imagePhotoURL}
+                  completed={completed}
                 />
                 <br />
-                {product && product.userId === currentUser._id && (
+                {!completed && product && product.userId === currentUser._id && (
                   <Button
                     gradientDuoTone="greenToBlue"
                     onClick={completeItemOnClick}
