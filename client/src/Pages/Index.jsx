@@ -7,7 +7,9 @@ import pic2 from "../Assets/LandingPage/pic2.png";
 import pic3 from "../Assets/LandingPage/pic3.png";
 import pic4 from "../Assets/LandingPage/pic4.png";
 import flash from "../Assets/LandingPage/flash.png";
-import ellipse from "../Assets/LandingPage/ellipse.png";
+import ellipse3 from "../Assets/LandingPage/ellipse3.png";
+import ellipse6 from "../Assets/LandingPage/ellipse6.png";
+import ellipse2 from "../Assets/LandingPage/Ellipse2.gif";
 
 const Index = () => {
   useEffect(() => {
@@ -16,33 +18,30 @@ const Index = () => {
   return (
     <div className="container -px-4 bg-white">
       <section className="item-cards ">
-        <div className="grid grid-cols-2">
-          <img
-            src={ellipse}
-            alt="ellipse"
-            className=" z-20 w-12 absolute animate-ping left-5 top-64"
-          />
-          <img
-            src={ellipse}
-            alt="ellipse"
-            className=" z-20 w-10 absolute animate-ping right-24 top-30"
-          />
-          <img
-            src={ellipse}
-            alt="ellipse"
-            className=" z-20 w-12 absolute animate-ping right-1/2 top-3/4"
-          />
-          {/* <!-- <img src="xbox.png" className=" z-20 w-12 absolute right-1/2 top-3/4"> --> */}
-          <img
-            src={ellipse}
-            alt="ellipse"
-            className=" z-20 w-6 absolute animate-ping left-48 top-30"
-          />
-          {/* <!-- <img src="ps4.png" className=" z-20 w-12 absolute left-5 top-64"> --> */}
-          {/* <!-- <img src="play-station.png" className=" z-20 w-10 absolute right-24 top-30"> --> */}
-          <div className="text-header p-32">
-            <p className="text-4xl flex text-[#202937] font-bold">
-              ENJOY EVERY{" "}
+        <img
+          src={ellipse2}
+          alt="ellipse2"
+          className="z-20 w-52 absolute  -right-32 sm:-right-20 lg:-left-20 top-1/3 sm:top-1/2 rounded-full"
+        />
+        <img
+          src={ellipse6}
+          alt="ellipse"
+          className=" z-20 w-12 absolute animate-ping right-24 top-30"
+        />
+        <img
+          src={ellipse3}
+          alt="ellipse"
+          className=" z-20 w-12 absolute animate-ping right-1/2 top-3/4"
+        />
+        <img
+          src={ellipse6}
+          alt="ellipse"
+          className=" z-20 w-12 absolute animate-ping left-48 top-40"
+        />
+        <div className="grid grid-cols-1 lg:grid-cols-2">
+          <div className="mt-10 p-8 lg:mt-0 lg:p-18 xl:p-32">
+            <p className="text-4xl  text-[#202937] font-bold">
+              ENJOY EVERY
               <span className="text-4xl ml-4 font-bold text-orange-400">
                 GAME.
               </span>{" "}
@@ -58,32 +57,28 @@ const Index = () => {
               </p>
             </div>
             <div>
-              <p className="text-2xl font-semibold text-orange-500 tracking-widest flex">
+              <p className="text-2xl mt-10 font-semibold text-orange-500 tracking-widest flex">
                 HOT{" "}
                 <img src={flash} className="w-6 animate-pulse" alt="flash" />
                 ITEM{" "}
               </p>
               <img
-                className="rounded-t-lg  w-16 md:w-32 lg:w-full"
+                className="rounded-t-lg  w-1/2 lg:w-full"
                 src={pic1}
                 alt="pic1"
               />
             </div>
           </div>
-          <div className="grid grid-rows-2 grid-flow-col">
-            <div className="max-w-sm  dark:border-gray-700">
+          <div className="md:grid md:grid-rows-2 md:grid-flow-col">
+            <div className="">
               <p className="mt-4 ml-7 text-2xl font-semibold  tracking-widest text-orange-500">
                 TOP TRADED GAMES
               </p>
 
-              <img
-                className="rounded-t-lg w-16 md:w-32 lg:w-full"
-                src={pic1}
-                alt="pic2"
-              />
+              <img className="rounded-t-lg w-full" src={pic1} alt="pic2" />
 
               <div className="w-72 ml-11 text-justify">
-                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 hover:underline hover:decoration-pink-500/70 transition delay-200 cursor-pointer">
                   HALO
                 </h5>
 
@@ -95,15 +90,11 @@ const Index = () => {
                 </div>
               </div>
             </div>
-            <div className="max-w-sm dark:border-gray-700">
-              <img
-                className="rounded-t-lg  w-16 md:w-32 lg:w-full"
-                src={pic2}
-                alt="pic3"
-              />
+            <div className="">
+              <img className="rounded-t-lg  w-full" src={pic2} alt="pic3" />
 
               <div className="w-72 ml-11 text-justify">
-                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 hover:underline hover:decoration-pink-500/70 transition delay-200 cursor-pointer">
                   NBA2K20
                 </h5>
 
@@ -116,14 +107,10 @@ const Index = () => {
               </div>
             </div>
             <div className="max-w-sm  dark:border-gray-700">
-              <img
-                className="rounded-t-lg  w-16 md:w-32 lg:w-full"
-                src={pic3}
-                alt="pic3"
-              />
+              <img className="rounded-t-lg  w-full" src={pic3} alt="pic3" />
 
               <div className="w-72 ml-11 text-justify">
-                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 hover:underline hover:decoration-pink-500/70 transition delay-200 cursor-pointer">
                   GTA 5
                 </h5>
 
@@ -135,15 +122,11 @@ const Index = () => {
                 </div>
               </div>
             </div>
-            <div className="max-w-sm dark:border-gray-700">
-              <img
-                className="rounded-t-lg  w-16 md:w-32 lg:w-full"
-                src={pic4}
-                alt="pic4"
-              />
+            <div className="">
+              <img className="rounded-t-lg  w-full" src={pic4} alt="pic4" />
 
               <div className="w-72 ml-11 text-justify">
-                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 hover:underline hover:decoration-pink-500/70 transition delay-200 cursor-pointer">
                   FIFA20
                 </h5>
 
