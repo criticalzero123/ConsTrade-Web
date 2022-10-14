@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { firstLetterUpper } from "../../../service/userService";
+import { IoCloseCircleOutline } from "react-icons/io5";
 
 const ProductCardDetails = (props) => {
   const {
@@ -18,11 +19,13 @@ const ProductCardDetails = (props) => {
     meetup,
     modelNumber,
     serialNumber,
+    onDeletePicture,
   } = props;
 
   const imageDefault =
     "https://lh3.googleusercontent.com/PxtxcMEM7csm-ismj3MWtG-g8xsFDt9cyNHTbVEyxllXJQEKCLdqxT9MjgH3epPgpXhaOSGwKd_Ba7CJ4vWzW7TnkuPnMbLuILP2OmO-ZV2pt9A-6KBkmRXir0cJkhAdT02OUnokiw=w2400";
 
+  const [displayImage, setDisplayImage] = useState(null);
   const currentDate = new Date();
 
   const currentDateString = currentDate.toLocaleString("default", {
@@ -40,9 +43,13 @@ const ProductCardDetails = (props) => {
       <div className="lg:ml-16 grid grid-cols-2 place-items-center h-4/6 rounded">
         <div className=" h-full bg-blue-900 flex align-center rounded lg:rounded-r-none">
           <img
-            src={image ? image : imageDefault}
+            src={
+              displayImage !== null
+                ? window.URL.createObjectURL(displayImage)
+                : imageDefault
+            }
             alt={title}
-            className="object-contain place-content-center "
+            className="object-contain place-content-center h-full"
           />
         </div>
         <div className="h-full w-full  bg-white rounded-b lg:rounded-b-none rounded p-4 flex flex-col justify-between leading-normal">
@@ -111,6 +118,30 @@ const ProductCardDetails = (props) => {
           </div>
         </div>
       </div>
+      {image.length !== 0 && (
+        <div className="lg:ml-16 flex mt-5">
+          {image.map((img, index) => (
+            <div
+              key={index}
+              className="relative mr-3 flex place-items-center h-28 w-20 bg-gray-100 cursor-pointer"
+              onClick={() => setDisplayImage(img)}
+            >
+              <img
+                src={window.URL.createObjectURL(img)}
+                alt={img.name}
+                className="h-full w-full object-contain "
+              />
+              <div className="absolute top-0 right-0">
+                <IoCloseCircleOutline
+                  size={25}
+                  className="text-[#b8b8b8] cursor-pointer"
+                  onClick={() => onDeletePicture(img)}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </>
   );
 };
