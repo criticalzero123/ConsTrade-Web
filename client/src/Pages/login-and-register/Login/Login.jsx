@@ -42,7 +42,7 @@ const Login = () => {
   return (
     <div className=" h-screen ">
       <div className=" grid md:grid-cols-1 lg:grid-cols-2 h-5/6 ">
-        <div className="self-center justify-self-center  w-1/2">
+        <div className="self-center justify-self-center w-3/4 sm:w-1/2">
           <img
             src={logo}
             alt="logo"
