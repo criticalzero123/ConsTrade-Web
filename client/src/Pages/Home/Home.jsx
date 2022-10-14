@@ -31,17 +31,27 @@ const Index = () => {
         <h1>Something Went Wrong Check for the logs</h1>
       ) : (
         <div>
-          <SlickCarousel
-            products={products.filter((product) => product.status !== "sold")}
-            title={"Recommended for you"}
-          />
-          <br />
-          <br />
-          <br />
-          <SlickCarousel
-            products={products.filter((product) => product.status === "sold")}
-            title={"Successful Transactions"}
-          />
+          {products && products.length === 0 ? (
+            <div>There are no product posted yet.</div>
+          ) : (
+            <div>
+              <SlickCarousel
+                products={products.filter(
+                  (product) => product.status !== "sold"
+                )}
+                title={"Recommended for you"}
+              />
+              <br />
+              <br />
+              <br />
+              <SlickCarousel
+                products={products.filter(
+                  (product) => product.status === "sold"
+                )}
+                title={"Successful Transactions"}
+              />
+            </div>
+          )}
         </div>
       )}
     </div>

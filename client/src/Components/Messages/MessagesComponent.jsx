@@ -8,6 +8,8 @@ import { Button } from "flowbite-react";
 import { soldItemTransaction } from "../../actions/transactionActions";
 import { BsCheckSquareFill } from "react-icons/bs";
 
+import { RiArrowDownSLine, RiArrowUpSLine } from "react-icons/ri";
+
 import { useDispatch } from "react-redux";
 
 import Swal from "sweetalert2";
@@ -23,6 +25,7 @@ const MessagesComponent = ({
   currentUser_Id,
 }) => {
   const [messages, setMessages] = useState([]);
+  const [showHeader, setShowHeader] = useState(true);
 
   const scrollDown = useRef();
   const dispatch = useDispatch();
@@ -124,7 +127,7 @@ const MessagesComponent = ({
                 </div>
 
                 <div className="flex justify-start w-3/5">
-                  <div className="text-end mr-3 bg-white mt-2 p-3 rounded-r-2xl rounded-b-2xl max-w-fit">
+                  <div className="text-start mr-3 bg-white mt-2 p-3 rounded-r-2xl rounded-b-2xl max-w-fit">
                     {message.text}
                   </div>
                 </div>
@@ -141,20 +144,42 @@ const MessagesComponent = ({
           onClickScrollDown={onClickScrollDown}
         />
       )}
-      {!completed && product && product.userId === currentUser_Id && (
-        <div className="absolute top-0 p-4 bg-[rgba(100%,100%,100%,60%)] backdrop-blur-md w-full flex place-items-center justify-between">
-          <Link
-            to={`/product/item/${product._id}`}
-            className="hover:text-red-400 font-semibold text-gray-500"
+      {!completed &&
+        product &&
+        product.userId === currentUser_Id &&
+        (showHeader ? (
+          <div
+            className={`absolute top-0 p-4 bg-[rgba(100%,100%,100%,60%)] backdrop-blur-md w-full flex place-items-center justify-between`}
           >
-            {product.title}
-          </Link>
-          <Button gradientDuoTone="greenToBlue" onClick={completeItemOnClick}>
-            <BsCheckSquareFill size={20} className="mr-2" />
-            Transaction Completed
-          </Button>
-        </div>
-      )}
+            <Link
+              to={`/product/item/${product._id}`}
+              className="hover:text-red-400 font-semibold text-gray-500"
+            >
+              {product.title}
+            </Link>
+            <div className="relative top-5">
+              <div className="absolute top">
+                <RiArrowUpSLine
+                  size={30}
+                  className="text-gray-300 cursor-pointer"
+                  onClick={() => setShowHeader(!showHeader)}
+                />
+              </div>
+            </div>
+            <Button gradientDuoTone="greenToBlue" onClick={completeItemOnClick}>
+              <BsCheckSquareFill size={20} className="mr-2" />
+              Transaction Completed
+            </Button>
+          </div>
+        ) : (
+          <div className="absolute top-0 flex w-full justify-center ">
+            <RiArrowDownSLine
+              size={30}
+              className="text-gray-300 cursor-pointer mr-24"
+              onClick={() => setShowHeader(!showHeader)}
+            />{" "}
+          </div>
+        ))}
     </div>
   );
 };

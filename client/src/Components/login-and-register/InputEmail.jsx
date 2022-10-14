@@ -4,8 +4,11 @@ const InputEmail = ({ onChange }) => {
   return (
     <div>
       <div>
-        <label htmlFor="email" className="block mb-2 text-xs font-medium">
-          Email
+        <label
+          htmlFor="email"
+          className="block mb-2 text-xs font-medium text-gray-500"
+        >
+          Email*
         </label>
         <input
           type="email"

@@ -5,6 +5,7 @@ import { socialMediaMethod } from "../../actions/userActions";
 import socialMediaAuth from "../../firebase/authSocialMedia";
 
 import { googleProvider } from "../../firebase/authMethod";
+import { FcGoogle } from "react-icons/fc";
 
 const GoogleButton = ({ type }) => {
   const _authType = type === 1 ? "Register" : "Login";
@@ -32,12 +33,15 @@ const GoogleButton = ({ type }) => {
   };
 
   return (
-    <div>
+    <div className="">
       <button
         onClick={GoogleAuth}
-        className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+        className="flex justify-center place-items-center w-full bg-transparent hover:border-orange-700 
+         text-gray-700 font-semibold  py-2 px-4 border   hover:text-orange-700 
+        border-gray-700 hover:border-transparent rounded hover:shadow-[0_0px_50px_-15px_rgba(0,0,0,0.8)] hover:shadow-orange-400"
       >
-        {_authType} With Google
+        <FcGoogle size={30} className="mr-3" />{" "}
+        <span>{_authType} with Google</span>
       </button>
     </div>
   );

@@ -12,7 +12,7 @@ export const createUserEmailPassword = (email, password) => {
       return userCredential.user;
     })
     .catch((err) => {
-      return err;
+      return err.code;
     });
 };
 

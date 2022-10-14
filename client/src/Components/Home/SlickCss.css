@@ -1,12 +1,15 @@
-.slick-next::before{
-    color:rgb(92, 91, 91);
-    text-shadow: 2px 1px 10px rgb(136, 136, 136);
-    font-size: 60px;
+.slick-next::before {
+  color: rgb(92, 91, 91);
+  text-shadow: 2px 1px 10px rgb(136, 136, 136);
+  font-size: 60px;
 }
 
+.slick-prev::before {
+  color: rgb(92, 91, 91);
+  text-shadow: 2px 1px 10px rgb(136, 136, 136);
+  font-size: 60px;
+}
 
-.slick-prev::before{
-    color:rgb(92, 91, 91);
-    text-shadow: 2px 1px 10px rgb(136, 136, 136);
-    font-size: 60px;
+.slick-track {
+  margin-left: 0;
 }

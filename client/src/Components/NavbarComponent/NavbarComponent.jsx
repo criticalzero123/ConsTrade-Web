@@ -39,7 +39,7 @@ const NavbarComponent = () => {
   };
 
   return (
-    <div>
+    <div className="">
       <Navbar fluid={true}>
         <Navbar.Brand href="/">
           <img src={logo} className="mr-3 h-6 sm:h-10" alt="Constrade Logo" />

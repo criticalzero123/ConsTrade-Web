@@ -1,14 +1,14 @@
 import React from "react";
-import socialMediaAuth from "../../firebase/authSocialMedia";
-import { facebookProvider } from "../../firebase/authMethod";
+// import socialMediaAuth from "../../firebase/authSocialMedia";
+// import { facebookProvider } from "../../firebase/authMethod";
 
-import { socialMediaMethod } from "../../actions/userActions";
-import { useDispatch } from "react-redux";
+// import { socialMediaMethod } from "../../actions/userActions";
+// import { useDispatch } from "react-redux";
 
 const FacebookButton = ({ type }) => {
   const _authType = type === 1 ? "Register" : "Login";
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const FacebookAuth = async () => {
     alert("Temporarily Disable the Facebook Auth");

@@ -3,9 +3,12 @@ import React from "react";
 const InputName = ({ textname, onChange }) => {
   return (
     <div>
-      <div>
-        <label htmlFor={textname} className="block mb-2 text-xs font-medium">
-          {textname}
+      <div className="mb-6">
+        <label
+          htmlFor={textname}
+          className="block mb-2 text-xs font-medium text-gray-500"
+        >
+          {textname}*
         </label>
         <input
           type="text"

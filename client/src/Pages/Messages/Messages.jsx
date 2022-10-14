@@ -34,7 +34,7 @@ const Messages = () => {
 
   return (
     <div className="grid grid-cols-6 gap-4 ">
-      <aside className="col-span-2 xl:col-span-1 overflow-y-auto h-[35rem] bg-[#F5F7FB] p-5 rounded">
+      <aside className="col-span-2 w-full overflow-y-auto h-[35rem] bg-[#F5F7FB] p-5 rounded">
         {chats !== undefined &&
           Object.entries(chats)
             ?.sort((a, b) => b[1].date - a[1].date)

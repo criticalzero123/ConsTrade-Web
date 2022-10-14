@@ -1,6 +1,6 @@
 import React from "react";
-import { useEffect } from "react";
-import { isUserLoggedIn } from "../service/userService";
+// import { useEffect } from "react";
+// import { isUserLoggedIn } from "../service/userService";
 
 import pic1 from "../Assets/LandingPage/pic1.png";
 import pic2 from "../Assets/LandingPage/pic2.png";
@@ -12,9 +12,9 @@ import ellipse6 from "../Assets/LandingPage/ellipse6.png";
 import ellipse2 from "../Assets/LandingPage/Ellipse2.gif";
 
 const Index = () => {
-  useEffect(() => {
-    if (isUserLoggedIn()) window.location.href = "/home";
-  }, []);
+  // useEffect(() => {
+  //   if (isUserLoggedIn()) window.location.href = "/home";
+  // }, []);
   return (
     <div className="container -px-4 bg-white">
       <section className="item-cards ">

@@ -4,7 +4,7 @@ import { firstLetterUpper } from "../../service/userService";
 
 const SideUserDisplay = ({ photoURL, displayTitle, displayName }) => {
   return (
-    <div className="grid grid-cols-3 w-full h-16 place-items-center bg-gray-100 hover:bg-gray-300 rounded mb-5 cursor-pointer">
+    <div className="flex w-full h-16 place-items-center bg-gray-100 hover:bg-gray-300 rounded mb-5 cursor-pointer">
       <div className="col-span-1 mx-3 my-2">
         <img
           src={photoURL}
@@ -13,10 +13,10 @@ const SideUserDisplay = ({ photoURL, displayTitle, displayName }) => {
         />
       </div>
       <div className="col-span-2">
-        <p className="text-ellipsis overflow-hidden whitespace-nowrap w-16 lg:w-24 text-orange-600 font-bold">
+        <p className="text-ellipsis overflow-hidden whitespace-nowrap w-16 md:w-32 lg:w-full text-orange-600 font-bold">
           {firstLetterUpper(displayTitle)}
         </p>
-        <p className="text-ellipsis overflow-hidden whitespace-nowrap w-16 lg:w-24">
+        <p className="text-ellipsis overflow-hidden whitespace-nowrap w-16 md:w-32 lg:w-full">
           {firstLetterUpper(displayName)}
         </p>
       </div>

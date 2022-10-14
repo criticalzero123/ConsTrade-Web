@@ -16,9 +16,9 @@ import Messages from "./Pages/Messages/Messages";
 import MessagesUser from "./Pages/Messages/MessagesUser/MessagesUser";
 function App() {
   return (
-    <div>
+    <div className="container mx-auto">
       <NavbarComponent />
-      <div className="container mx-auto px-0 lg:px-4">
+      <div className=" px-0 lg:px-4">
         <Routes>
           <Route path="/" element={<Index />} />
 
