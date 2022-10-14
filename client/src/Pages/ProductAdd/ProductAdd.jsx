@@ -40,7 +40,7 @@ const ProductAdd = () => {
   //   Textarea
   const [description, setDescription] = useState("");
   //   dropzone
-  const [imageUpload, setImageUpload] = useState(null);
+  const [imageUpload, setImageUpload] = useState([]);
 
   const [loading, setLoading] = useState(false);
 
@@ -63,6 +63,27 @@ const ProductAdd = () => {
     } else {
       alert("Please Provide Picture");
     }
+  };
+
+  const addPicture = (e) => {
+    const imageInfo = e.target.files[0];
+
+    if (imageInfo !== undefined) {
+      const megaBytes = Math.pow(1024, 2);
+      const checkBytesImage = imageInfo.size / megaBytes;
+
+      if (checkBytesImage <= 5) {
+        setImageUpload([...imageUpload, imageInfo]);
+      } else {
+        alert("Sorry, you cannot upload more than 5mb.");
+      }
+    }
+  };
+
+  const onDeletePic = (image) => {
+    const newArrayImages = imageUpload.filter((images) => images !== image);
+
+    setImageUpload(newArrayImages);
   };
 
   const productUploadCallBack = (image) => {
@@ -96,8 +117,8 @@ const ProductAdd = () => {
         <form onSubmit={productAddRequest}>
           <aside className=" overflow-y-hidden hover:overflow-y-auto h-[45rem] ">
             <ProductAddInput
-              labeltext="Title"
-              placeholdertext="title..."
+              labeltext="Item Name"
+              placeholdertext="name..."
               value={title}
               fortext="title"
               onChange={(e) => setTitle(e.target.value)}
@@ -210,15 +231,37 @@ const ProductAdd = () => {
               required={true}
             />
             <br />
-            <ProductAddDropZone
-              labeltext="Picture"
-              onChange={(e) => {
-                setImageUpload(e.target.files[0]);
-              }}
-              required={true}
-            />
+            {imageUpload.length !== 0 && (
+              <div className="flex lg:hidden">
+                {imageUpload.map((image, index) => (
+                  <div
+                    key={index}
+                    className="relative mr-3 flex place-items-center h-24 w-16 bg-gray-400"
+                  >
+                    <img
+                      src={window.URL.createObjectURL(image)}
+                      alt={image.name}
+                      className="h-full w-full object-contain "
+                    />
+                    <div className="absolute top-0 right-0">
+                      <IoCloseCircleOutline
+                        size={25}
+                        className="text-[#dfdfdf] cursor-pointer"
+                        onClick={() => onDeletePic(image)}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+            {imageUpload.length < 5 && (
+              <ProductAddDropZone
+                labeltext="Add Picture"
+                onChange={addPicture}
+              />
+            )}
             <br />
-            {/* <img src={imageUpload && window.URL.createObjectURL(imageUpload)} /> */}
+
             <ProductAddSelect
               labeltext="Prefer Trade"
               fortext="trade"
@@ -287,7 +330,7 @@ const ProductAdd = () => {
           serialNumber={serialNumber}
           item={item}
           meetup={meetup}
-          image={imageUpload && window.URL.createObjectURL(imageUpload)}
+          // image={imageUpload && window.URL.createObjectURL(imageUpload)}
           userPhoto={user.imagePhotoURL}
           userName={user.name}
         />
