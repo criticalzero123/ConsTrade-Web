@@ -19,7 +19,7 @@ const ProductListCard = ({ product }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         dispatch(deleteProduct(product._id));
-        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+        Swal.fire("Deleted!", "Your item has been deleted.", "success");
       }
     });
   };

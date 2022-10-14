@@ -10,15 +10,17 @@ import "./SlickCss.css";
 
 const SlickCarousel = ({ products, title }) => {
   return (
-    <div className="lg:px-32">
-      <h1 className="ml-2 mb-4 text-2xl font-semibold">{title}</h1>
-      <Slider {...settings}>
-        {products &&
-          products.map((product) => (
-            <SlickCard product={product} key={product._id} />
-          ))}
-      </Slider>
-    </div>
+    products.length !== 0 && (
+      <div className="lg:px-32">
+        <h1 className="ml-2 mb-4 text-2xl font-semibold">{title}</h1>
+        <Slider {...settings}>
+          {products &&
+            products.map((product) => (
+              <SlickCard product={product} key={product._id} />
+            ))}
+        </Slider>
+      </div>
+    )
   );
 };
 

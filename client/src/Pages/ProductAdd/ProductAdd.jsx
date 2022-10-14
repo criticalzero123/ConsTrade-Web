@@ -52,6 +52,30 @@ const ProductAdd = () => {
     }
   };
 
+  const addPicture = (e) => {
+    if (imageUpload.length < 5) {
+      const imageInfo = e.target.files[0];
+
+      if (imageInfo !== undefined) {
+        const megaBytes = Math.pow(1024, 2);
+        const checkBytesImage = imageInfo.size / megaBytes;
+
+        if (checkBytesImage <= 4) {
+          setImageUpload([...imageUpload, imageInfo]);
+        } else {
+          alert("Sorry, you cannot upload more than 4mb.");
+        }
+      }
+    } else {
+      alert("Sorry, maximum of 5 pictures only");
+    }
+  };
+
+  const onDeletePic = (image) => {
+    const newArrayImages = imageUpload.filter((images) => images !== image);
+
+    setImageUpload(newArrayImages);
+  };
   const productAddRequest = async (e) => {
     e.preventDefault();
 
@@ -63,27 +87,6 @@ const ProductAdd = () => {
     } else {
       alert("Please Provide Picture");
     }
-  };
-
-  const addPicture = (e) => {
-    const imageInfo = e.target.files[0];
-
-    if (imageInfo !== undefined) {
-      const megaBytes = Math.pow(1024, 2);
-      const checkBytesImage = imageInfo.size / megaBytes;
-
-      if (checkBytesImage <= 5) {
-        setImageUpload([...imageUpload, imageInfo]);
-      } else {
-        alert("Sorry, you cannot upload more than 5mb.");
-      }
-    }
-  };
-
-  const onDeletePic = (image) => {
-    const newArrayImages = imageUpload.filter((images) => images !== image);
-
-    setImageUpload(newArrayImages);
   };
 
   const productUploadCallBack = (image) => {
@@ -99,7 +102,8 @@ const ProductAdd = () => {
         modelNumber: modelNumber,
         serialNumber: serialNumber,
         condition: condition,
-        imageURL: image,
+        imageURL: image[0],
+        imageListURL: image,
         preferTrade: prefer,
         cash: parseInt(cash),
         item: item,
@@ -231,12 +235,18 @@ const ProductAdd = () => {
               required={true}
             />
             <br />
+
+            <ProductAddDropZone
+              labeltext="Add Picture"
+              onChange={addPicture}
+              count={imageUpload.length}
+            />
             {imageUpload.length !== 0 && (
-              <div className="flex lg:hidden">
+              <div className="flex lg:hidden mt-5">
                 {imageUpload.map((image, index) => (
                   <div
                     key={index}
-                    className="relative mr-3 flex place-items-center h-24 w-16 bg-gray-400"
+                    className="relative mr-3 flex place-items-center h-28 w-20 bg-gray-100"
                   >
                     <img
                       src={window.URL.createObjectURL(image)}
@@ -253,12 +263,6 @@ const ProductAdd = () => {
                   </div>
                 ))}
               </div>
-            )}
-            {imageUpload.length < 5 && (
-              <ProductAddDropZone
-                labeltext="Add Picture"
-                onChange={addPicture}
-              />
             )}
             <br />
 
@@ -330,9 +334,10 @@ const ProductAdd = () => {
           serialNumber={serialNumber}
           item={item}
           meetup={meetup}
-          // image={imageUpload && window.URL.createObjectURL(imageUpload)}
+          image={imageUpload}
           userPhoto={user.imagePhotoURL}
           userName={user.name}
+          onDeletePicture={onDeletePic}
         />
       </div>
     </div>

@@ -75,6 +75,10 @@ const productSchema = mongoose.Schema(
       type: String,
       require,
     },
+    imageListURL: {
+      type: [String],
+      require,
+    },
     preferTrade: {
       type: String,
       require,

@@ -84,6 +84,7 @@ router.post("/addProduct", (req, res) => {
     platform: data.platform,
     condition: data.condition,
     imageURL: data.imageURL,
+    imageListURL: data.imageListURL,
     modelNumber: data.modelNumber,
     serialNumber: data.serialNumber,
     preferTrade: data.preferTrade,
