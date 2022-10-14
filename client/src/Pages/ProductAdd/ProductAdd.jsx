@@ -3,6 +3,7 @@ import ProductAddDropZone from "../../Components/ProductAdd/ProductAddDropZone";
 import ProductAddInput from "../../Components/ProductAdd/ProductAddInput";
 import ProductAddSelect from "../../Components/ProductAdd/ProductAddSelect";
 import ProductAddTextArea from "../../Components/ProductAdd/ProductAddTextArea";
+import { IoCloseCircleOutline } from "react-icons/io5";
 
 import ProductCardDetails from "../../Components/ProductAdd/ProductCardDetails.jsx/ProductCardDetails";
 
@@ -90,7 +91,7 @@ const ProductAdd = () => {
     }
   };
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 pt-7">
+    <div className="grid grid-cols-1 lg:grid-cols-3 pt-7 px-5">
       <div className=" ">
         <form onSubmit={productAddRequest}>
           <aside className=" overflow-y-hidden hover:overflow-y-auto h-[45rem] ">
@@ -112,6 +113,28 @@ const ProductAdd = () => {
                 addHookSelect(e.target.value, category, setCategory)
               }
             />
+            {/* This is for the smaller device showing list of category */}
+            <div className="block lg:hidden">
+              {category.length !== 0 && (
+                <div className="flex mt-3">
+                  {category.map((value) => (
+                    <div
+                      key={value}
+                      className="py-1 px-3 rounded-lg mr-3 bg-[rgba(0,0,0,0.1)] place-items-center flex "
+                    >
+                      {value}
+                      <IoCloseCircleOutline
+                        className="ml-3 cursor-pointer"
+                        size={20}
+                        onClick={() =>
+                          addHookSelect(value, category, setCategory)
+                        }
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
             <br />
             <ProductAddSelect
               required={true}
@@ -122,6 +145,28 @@ const ProductAdd = () => {
                 addHookSelect(e.target.value, platform, setPlatform)
               }
             />
+            {/* This is for the smaller device showing list of platform */}
+            <div className="block lg:hidden">
+              {platform.length !== 0 && (
+                <div className="flex mt-3">
+                  {platform.map((value) => (
+                    <div
+                      key={value}
+                      className="py-1 px-3 rounded-lg mr-3 bg-[rgba(0,0,0,0.1)] place-items-center flex "
+                    >
+                      {value}
+                      <IoCloseCircleOutline
+                        className="ml-3 cursor-pointer"
+                        size={20}
+                        onClick={() =>
+                          addHookSelect(value, platform, setPlatform)
+                        }
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
             <br />
             <ProductAddInput
               labeltext="Model Number"
@@ -228,7 +273,7 @@ const ProductAdd = () => {
           </div>
         </form>
       </div>
-      <div className="lg:col-span-2 ">
+      <div className="lg:col-span-2 hidden lg:block">
         <ProductCardDetails
           title={title}
           description={description}

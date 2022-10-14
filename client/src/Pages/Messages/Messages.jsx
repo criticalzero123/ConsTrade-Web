@@ -19,6 +19,8 @@ const Messages = () => {
   const [displayName, setDisplayName] = useState("");
   const { currentUser } = useSelector((state) => state.userInfoReducer);
 
+  const arrayOfChatsUser = chats !== undefined && Object.entries(chats);
+
   useEffect(() => {
     const getChats = () => {
       const unsub = onSnapshot(doc(db, "userChats", currentUser.uid), (doc) => {
@@ -35,8 +37,10 @@ const Messages = () => {
   return (
     <div className="grid grid-cols-6 gap-4 ">
       <aside className="col-span-2 w-full overflow-y-auto h-[35rem] bg-[#F5F7FB] p-5 rounded">
-        {chats !== undefined &&
-          Object.entries(chats)
+        {chats !== undefined && arrayOfChatsUser.length === 0 ? (
+          <div className="mx-auto">No conversations</div>
+        ) : (
+          arrayOfChatsUser
             ?.sort((a, b) => b[1].date - a[1].date)
             .map((chat) => (
               <Link
@@ -55,7 +59,8 @@ const Messages = () => {
                   photoURL={chat[1].productInfo.imageURL}
                 />
               </Link>
-            ))}
+            ))
+        )}
       </aside>
       <div className="col-span-4 ">
         <div className="">
