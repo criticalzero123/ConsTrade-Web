@@ -44,7 +44,17 @@ const ProductInfo = ({
         <p className="text-gray-400 font-semibold">({product.condition})</p>
       </div>
 
-      <p className="text-gray-400 mb-2 mt-2">
+      <p className="text-sm text-gray-400 mb-2 mt-2">
+        <span className="text-gray-200">Game Model Name: </span>
+        {product.modelNumber}
+      </p>
+
+      <p className="text-sm text-gray-400 mb-2 mt-2">
+        <span className="text-gray-200">Serial Number: </span>
+        {product.serialNumber}
+      </p>
+
+      <p className=" text-gray-400 mb-2 mt-2">
         <span className="text-gray-200">More Details: </span>
         {product.description}
       </p>
@@ -59,7 +69,7 @@ const ProductInfo = ({
           </div>
         )}
       </div>
-      <div className="grid grid-cols-2 gap-8 ">
+      <div className="grid md:grid-cols-2 gap-8 ">
         <div className="h-full ">
           <div className="flex mt-3 place-items-center">
             <Link to={`/user/${product.userId}`}>
@@ -130,7 +140,7 @@ const ProductInfo = ({
           </div>
         </div>
       </div>
-      <div className="flex h-2/5 items-end">
+      <div className="flex h-2/6 items-end">
         {currentUser._id !== product.userId ? (
           product && product.status === "sold" ? (
             <div className="w-full">
@@ -153,7 +163,7 @@ const ProductInfo = ({
                   type="button"
                   className="mt-5 text-white self-end
                     bg-gradient-to-r from-green-500 to-blue-500 hover:from-pink-500 hover:to-yellow-500
-                    w-full rounded-md p-3 font-semibold text-lg"
+                    w-full rounded-md p-3 font-semibold text-sm md:text-lg"
                 >
                   Contact Seller
                 </button>
@@ -166,7 +176,7 @@ const ProductInfo = ({
             onClick={() => (window.location.href = "/product/add")}
             className="mt-5 text-white self-end
           bg-gradient-to-r from-green-500 to-blue-500 hover:from-pink-500 hover:to-yellow-500
-          w-full rounded-md p-3 font-semibold text-lg"
+          w-full rounded-md p-3 font-semibold text-sm md:text-lg"
           >
             Add another Item
           </button>
@@ -175,7 +185,7 @@ const ProductInfo = ({
             type="button"
             className="mt-5 text-white self-end
             bg-gradient-to-r from-green-500 to-blue-500 hover:from-pink-500 hover:to-yellow-500
-            w-full rounded-md p-3 font-semibold text-lg"
+            w-full rounded-md p-3 font-semibold text-sm md:text-lg"
           >
             Edit Item
           </button>
@@ -186,7 +196,7 @@ const ProductInfo = ({
             onClick={setOnClickShowComments}
             className="mt-5 text-white 
                   bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-cyan-500 hover:to-blue-500
-                    w-full rounded-md p-3 font-semibold text-lg"
+                    w-full rounded-md p-3 font-semibold text-sm md:text-lg"
           >
             {!showComments ? "Show" : "Hide"}{" "}
             {product.comments !== undefined && product.comments.length} Comments

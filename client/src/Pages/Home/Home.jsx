@@ -6,6 +6,7 @@ import { IoMdAddCircle } from "react-icons/io";
 import SlickCarousel from "../../Components/Home/SlickCarousel";
 
 import { Link } from "react-router-dom";
+import HomePulseLoader from "../../Components/Home/HomePulseLoader";
 const Index = () => {
   const dispatch = useDispatch();
   const getallproducts = useSelector((state) => state.getAllProductsReducer);
@@ -26,9 +27,9 @@ const Index = () => {
       </Link>
 
       {loading ? (
-        <h1>Loading...</h1>
+        <HomePulseLoader />
       ) : error ? (
-        <h1>Something Went Wrong Check for the logs</h1>
+        <h1>Something Went Wrong.</h1>
       ) : (
         <div>
           {products && products.length === 0 ? (

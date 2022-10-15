@@ -81,7 +81,8 @@ const ProductAdd = () => {
 
     if (category.length === 0) alert("Please choose category of the item");
     else if (platform.length === 0) alert("Please choose platform of the item");
-    else if (imageUpload != null) {
+    else if (cash === 0) alert("Please input cash amount");
+    else if (imageUpload != null && imageUpload.length !== 0) {
       setLoading(true);
       await saveImageStorage(imageUpload, title, user, productUploadCallBack);
     } else {
@@ -194,12 +195,11 @@ const ProductAdd = () => {
             </div>
             <br />
             <ProductAddInput
-              labeltext="Model Number"
-              placeholdertext="xxx-xxx"
+              labeltext="Model Name"
+              placeholdertext="(Optional)"
               value={modelNumber}
               fortext="modelnumber"
               onChange={(e) => setModelNumber(e.target.value)}
-              required={true}
             />
             <br />
             <ProductAddInput

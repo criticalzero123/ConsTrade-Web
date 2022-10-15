@@ -23,6 +23,8 @@ const ProductDetails = () => {
   const { comments } = getcomments;
   const { loading, error, product } = getproductbyid;
 
+  const [displayImage, setDisplayImage] = useState(null);
+
   useEffect(() => {
     dispatch(getProductById(id));
   }, [dispatch, id]);
@@ -47,12 +49,32 @@ const ProductDetails = () => {
         product && (
           <div>
             <div className="lg:grid lg:grid-cols-3  h-[42rem] p-5 ">
-              <div className="lg:col-span-1  relative rounded w-full shadow-lg mr-5 text-black flex justify-center place-items-center bg-[#031533]">
-                <img
-                  className="object-contain rounded h-5/6"
-                  src={product.imageURL}
-                  alt={product.title}
-                />
+              <div className="lg:col-span-1 mb-5 lg:mb-0 relative rounded  shadow-lg mr-5 flex place-items-center justify-center text-black  bg-[#031533]">
+                <div className="h-5/6">
+                  <img
+                    className="object-contain rounded h-4/5"
+                    src={
+                      displayImage !== null ? displayImage : product.imageURL
+                    }
+                    alt={product.title}
+                  />
+                </div>
+                {product.imageListURL !== undefined && (
+                  <div className="mt-5 justify-center flex absolute bottom-0 p-5 w-full bg-[rgba(100%,100%,100%,0.6)] backdrop-blur-[30px]">
+                    {product.imageListURL.map((image, index) => (
+                      <img
+                        className="object-contain rounded h-20 cursor-pointer mr-3"
+                        src={image}
+                        key={image}
+                        alt={index}
+                        onClick={() => setDisplayImage(image)}
+                        onMouseEnter={() => setDisplayImage(image)}
+                      />
+                    ))}
+                  </div>
+                )}
+
+                {/* For the favorites */}
                 {product && currentUser._id !== product.userId && (
                   <div className="absolute top-0 w-full">
                     <div className="flex justify-end ">
