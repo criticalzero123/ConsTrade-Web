@@ -148,7 +148,7 @@ const MessagesUser = () => {
       ) : (
         user && (
           <>
-            {chatKey !== "" && (
+            {chatKey !== "" && chatKey !== undefined && (
               <div>
                 <MessageModalSoldInfo product={product} completed={completed} />
                 <MessagesComponent
@@ -157,7 +157,7 @@ const MessagesUser = () => {
                   currentUser_Id={currentUser._id}
                   otherUserProfile={
                     otherUserProfile === ""
-                      ? onRenderChat[1].userInfo.photoURL
+                      ? onRenderChat && onRenderChat[1].userInfo.photoURL
                       : otherUserProfile
                   }
                   completed={completed}
