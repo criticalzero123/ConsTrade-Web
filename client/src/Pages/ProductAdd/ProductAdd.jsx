@@ -24,6 +24,10 @@ import { Button, Spinner } from "flowbite-react";
 
 const ProductAdd = () => {
   const user = userInfo();
+  const [visibleOtherPlatform, setVisibleOtherPlatform] = useState(false);
+  const [cashTradeInVisible, setCashTradeInVisible] = useState(false);
+  const [itemTradeInVisible, setItemTradeInVisible] = useState(false);
+  const [itemList, setItemList] = useState([]);
   //   Select
   const [category, setCategory] = useState([]);
   const [platform, setPlatform] = useState([]);
@@ -37,6 +41,7 @@ const ProductAdd = () => {
   const [item, setItem] = useState("");
   const [modelNumber, setModelNumber] = useState("");
   const [serialNumber, setSerialNumber] = useState("");
+  const [otherPlatform, setOtherPlatform] = useState("");
   //   Textarea
   const [description, setDescription] = useState("");
   //   dropzone
@@ -50,6 +55,40 @@ const ProductAdd = () => {
     if (e.target.value >= 0) {
       setCash(e.target.value);
     }
+  };
+
+  const addPlatform = (e) => {
+    e.preventDefault();
+    if (e.target.value !== "Others...") {
+      setVisibleOtherPlatform(false);
+      addHookSelect(e.target.value, platform, setPlatform);
+    }
+
+    if (e.target.value === "Others...") {
+      setVisibleOtherPlatform(true);
+    }
+  };
+
+  const addingItemTradeIn = () => {
+    setItemTradeInVisible(true);
+    if (itemList.length >= 5) {
+      alert("Sorry, you cannot put more than 5 item");
+    }
+    const exist = itemList.find(
+      (_item) => _item.toLowerCase() === item.toLowerCase()
+    );
+
+    if (exist) alert("Item Already Exist");
+    else {
+      if (item !== "" && itemList.length < 5) {
+        setItemList([...itemList, item]);
+        setItem("");
+      }
+    }
+  };
+
+  const onDeleteItemList = (value) => {
+    setItemList(itemList.filter((_item) => _item !== value));
   };
 
   const addPicture = (e) => {
@@ -81,8 +120,9 @@ const ProductAdd = () => {
 
     if (category.length === 0) alert("Please choose category of the item");
     else if (platform.length === 0) alert("Please choose platform of the item");
-    else if (cash === 0) alert("Please input cash amount");
-    else if (imageUpload != null && imageUpload.length !== 0) {
+    else if (prefer === "Selling" && cash === 0) {
+      alert("Please input cash amount");
+    } else if (imageUpload != null && imageUpload.length !== 0) {
       setLoading(true);
       await saveImageStorage(imageUpload, title, user, productUploadCallBack);
     } else {
@@ -107,7 +147,7 @@ const ProductAdd = () => {
         imageListURL: image,
         preferTrade: prefer,
         cash: parseInt(cash),
-        item: item,
+        item: prefer === "Swapping" ? item : itemList.toString(),
         deliveryType: meetup,
       };
 
@@ -120,7 +160,7 @@ const ProductAdd = () => {
     <div className="grid grid-cols-1 lg:grid-cols-3 pt-7 px-5">
       <div className=" ">
         <form onSubmit={productAddRequest}>
-          <aside className=" overflow-y-hidden hover:overflow-y-auto h-[45rem] ">
+          <aside className="overflow-y-auto h-[45rem] ">
             <ProductAddInput
               labeltext="Item Name"
               placeholdertext="name..."
@@ -140,13 +180,13 @@ const ProductAdd = () => {
               }
             />
             {/* This is for the smaller device showing list of category */}
-            <div className="block lg:hidden">
+            <div className="block">
               {category.length !== 0 && (
-                <div className="flex mt-3">
+                <div className="flex flex-wrap ">
                   {category.map((value) => (
                     <div
                       key={value}
-                      className="py-1 px-3 rounded-lg mr-3 bg-[rgba(0,0,0,0.1)] place-items-center flex "
+                      className="py-1 px-3 rounded-lg mt-3 mr-3 bg-[rgba(0,0,0,0.1)] place-items-center flex "
                     >
                       {value}
                       <IoCloseCircleOutline
@@ -167,18 +207,36 @@ const ProductAdd = () => {
               items={platformOptions}
               labeltext="Platform Supported"
               width="w-32"
-              onChange={(e) =>
-                addHookSelect(e.target.value, platform, setPlatform)
-              }
+              onChange={addPlatform}
             />
+            {visibleOtherPlatform && (
+              <div className="flex place-items-center mt-3 cursor-pointer ">
+                <input
+                  className=" text-sm rounded-lg block w-full p-2.5 bg-gray-800 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="Input platform..."
+                  onChange={(e) => setOtherPlatform(e.target.value)}
+                  value={otherPlatform}
+                />
+                <span
+                  className="ml-3 rounded  px-5 py-1 border-2 border-gray-800 hover:bg-gray-800 hover:text-white"
+                  onClick={() => {
+                    addHookSelect(otherPlatform, platform, setPlatform);
+                    setOtherPlatform("");
+                  }}
+                >
+                  Add
+                </span>
+              </div>
+            )}
+
             {/* This is for the smaller device showing list of platform */}
-            <div className="block lg:hidden">
+            <div className=" w-full ">
               {platform.length !== 0 && (
-                <div className="flex mt-3">
+                <div className="flex flex-wrap">
                   {platform.map((value) => (
                     <div
                       key={value}
-                      className="py-1 px-3 rounded-lg mr-3 bg-[rgba(0,0,0,0.1)] place-items-center flex "
+                      className="py-1 px-3 rounded-lg mr-3  mt-3 bg-[rgba(0,0,0,0.1)] place-items-center flex "
                     >
                       {value}
                       <IoCloseCircleOutline
@@ -265,22 +323,42 @@ const ProductAdd = () => {
               </div>
             )}
             <br />
-
             <ProductAddSelect
               labeltext="Prefer Trade"
               fortext="trade"
               items={preferTradeOptions}
               width="w-40"
-              onChange={(e) => setPrefer(e.target.value)}
+              onChange={(e) => {
+                setCash(0);
+                setItemList([]);
+                setItem("");
+                setPrefer(e.target.value);
+              }}
             />
-            <br />
+            {prefer === "Trade-in" && (
+              <div className="mt-2">
+                <div
+                  className="hover:text-orange-500 hover:cursor-pointer max-w-fit"
+                  onClick={() => setCashTradeInVisible(!cashTradeInVisible)}
+                >
+                  <span>{!cashTradeInVisible ? "+" : "-"}</span> Cash
+                </div>
+                <div
+                  className="hover:text-orange-500 hover:cursor-pointer max-w-fit"
+                  onClick={addingItemTradeIn}
+                >
+                  + Item
+                </div>
+              </div>
+            )}
+
             <ProductAddInput
               labeltext="Cash Prefer"
               fortext="cash"
               placeholdertext="0"
               onChange={cashPreferInput}
               value={cash}
-              hidden={prefer === "Swapping" ? true : false}
+              hidden={prefer === "Selling" || cashTradeInVisible ? false : true}
               number={true}
             />
             <ProductAddInput
@@ -289,8 +367,30 @@ const ProductAdd = () => {
               placeholdertext="something..."
               value={item}
               onChange={(e) => setItem(e.target.value)}
-              hidden={prefer === "Selling" ? true : false}
+              hidden={
+                prefer === "Swapping" || itemTradeInVisible ? false : true
+              }
             />
+            {/* This is for the smaller device showing list of platform */}
+            <div className=" w-full ">
+              {itemList.length !== 0 && prefer === "Trade-in" && (
+                <div className="flex flex-wrap">
+                  {itemList.map((value) => (
+                    <div
+                      key={value}
+                      className="py-1 px-3 rounded-lg mr-3  mt-3 bg-[rgba(0,0,0,0.1)] place-items-center flex "
+                    >
+                      {value}
+                      <IoCloseCircleOutline
+                        className="ml-3 cursor-pointer"
+                        size={20}
+                        onClick={() => onDeleteItemList(value)}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
             <br />
             <ProductAddSelect
               labeltext="Mode of Transaction"
@@ -332,9 +432,11 @@ const ProductAdd = () => {
           cash={cash}
           modelNumber={modelNumber}
           serialNumber={serialNumber}
-          item={item}
+          item={prefer === "Swapping" ? item : itemList.toString()}
           meetup={meetup}
           image={imageUpload}
+          itemTradeInVisible={itemTradeInVisible}
+          cashTradeInVisible={cashTradeInVisible}
           userPhoto={user.imagePhotoURL}
           userName={user.name}
           onDeletePicture={onDeletePic}

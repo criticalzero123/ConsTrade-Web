@@ -23,12 +23,12 @@ const SlickCard = ({ product }) => {
             </h6>
             <div className=" font-normal text-sm text-gray-500 mb-4">
               Platform Supported{" "}
-              <div className="mt-1">
+              <div className=" flex flex-wrap">
                 {platform !== undefined &&
                   platform.map((supported, index) => (
                     <span
                       key={index}
-                      className="py-1 px-2 mr-2 bg-gray-100 rounded-lg text-black font-semibold"
+                      className="mt-1 py-1 px-2 mr-2 bg-gray-100 rounded-lg text-black font-semibold"
                     >
                       {supported}
                     </span>
@@ -37,12 +37,12 @@ const SlickCard = ({ product }) => {
             </div>
             <div className=" font-normal text-sm text-gray-500">
               Game Genre{" "}
-              <div className="mt-1">
+              <div className=" flex flex-wrap">
                 {gameGenre !== undefined &&
                   gameGenre.map((genre, index) => (
                     <span
                       key={index}
-                      className="py-1 px-2 mr-2 bg-gray-100 rounded-lg text-black font-semibold"
+                      className="mt-1 py-1 px-2 mr-2 bg-gray-100 rounded-lg text-black font-semibold"
                     >
                       {genre}
                     </span>

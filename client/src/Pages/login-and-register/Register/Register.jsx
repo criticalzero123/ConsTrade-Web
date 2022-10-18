@@ -103,7 +103,7 @@ const Register = () => {
           <img
             src={logo}
             alt="logo"
-            className="w-24 mx-auto hover:animate-bounce mb-5 "
+            className="w-24 mx-auto hover:animate-bounce mb-5 drop-shadow-[0px_10px_35px_rgba(0,0,0,0.7)]"
           />
           <h1 className="text-4xl text-center font-semibold">
             Create your account

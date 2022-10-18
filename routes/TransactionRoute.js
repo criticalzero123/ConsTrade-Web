@@ -5,7 +5,7 @@ const Transaction = require("../models/TransactionModel");
 const Product = require("../models/ProductModel");
 
 router.post("/soldProduct", async (req, res) => {
-  const { productId, userId } = req.body;
+  const { productId, userId, sellerId } = req.body;
 
   const getProduct = await Product.findById({ _id: productId });
 
@@ -13,6 +13,7 @@ router.post("/soldProduct", async (req, res) => {
     const newTransaction = new Transaction({
       productId: productId,
       buyerId: userId,
+      sellerId: sellerId,
       inAppTransac: true,
       dateTransac: new Date().getTime(),
     });

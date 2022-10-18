@@ -63,8 +63,11 @@ const ProductInfo = ({
         {stringPrefer === "SWAPPING" && <p>SWAP: {product.item}</p>}
         {stringPrefer === "TRADE-IN" && (
           <div className="flex">
-            TRADE-IN:
-            <p className="mr-3">₱{product.cash} </p>&
+            TRADE-IN:{" "}
+            <p className={`mr-3 ${product.cash !== 0 ? "block" : "hidden"}`}>
+              ₱{product.cash}
+            </p>
+            {product.item !== "" && product.cash !== 0 && " & "}
             <p className="ml-3">{product.item}</p>
           </div>
         )}

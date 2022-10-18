@@ -46,7 +46,7 @@ const Login = () => {
           <img
             src={logo}
             alt="logo"
-            className="w-24 mx-auto hover:animate-bounce mb-5 block lg:hidden"
+            className="w-24 mx-auto hover:animate-bounce mb-5 block lg:hidden drop-shadow-[0px_10px_35px_rgba(0,0,0,0.7)]"
           />
 
           <h1 className="font-semibold text-4xl text-center">Welcome back</h1>
@@ -122,7 +122,7 @@ const Login = () => {
             <img
               src={logo}
               alt="cover-logo1"
-              className="absolute w-1/4 top-1/3 animate-bounce"
+              className="absolute w-1/4 top-1/3 animate-bounce drop-shadow-[0px_10px_20px_rgba(0,0,0,0.5)]"
             />
             <img src={coverlogo} alt="cover-logo" className="rounded-l-full" />
           </div>

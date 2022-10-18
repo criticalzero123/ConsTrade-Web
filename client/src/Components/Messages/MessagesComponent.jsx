@@ -77,7 +77,9 @@ const MessagesComponent = ({
           "success"
         );
 
-        dispatch(soldItemTransaction(product._id, currentUser_Id));
+        dispatch(
+          soldItemTransaction(product._id, currentUser_Id, product.userId)
+        );
       } else if (
         /* Read more about handling dismissals below */
         result.dismiss === Swal.DismissReason.cancel

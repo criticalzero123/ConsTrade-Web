@@ -1,10 +1,35 @@
-export const categoryOptions = ["--SELECT--", "FPS", "ARPG", "RPG"];
+// export const categoryOptions = [
+//   "--SELECT--",
+//   "Sandbox",
+//   "Real-time strategy (RTS)",
+//   "Multiplayer online battle arena (MOBA)",
+//   "Role-playing (RPG, ARPG, etc..)",
+//   "Simulation and sports",
+//   "Puzzlers and party games",
+//   "Action-adventure",
+//   "Survival and horror",
+// ];
+export const categoryOptions = [
+  "--SELECT--",
+  "Sandbox",
+  "RTS",
+  "MOBA",
+  "RPG",
+  "ARPG",
+  "Simulation",
+  "Sports",
+  "Action",
+  "Adventure",
+  "Survival",
+  "Horror",
+];
 export const platformOptions = [
   "--SELECT--",
   "XBox360",
   "Xbox",
   "Switch",
   "PS4",
+  "Others...",
 ];
 export const conditionOptions = [
   "Brand New",
@@ -16,8 +41,11 @@ export const preferTradeOptions = ["Selling", "Swapping", "Trade-in"];
 export const meetupPreferenceOptions = ["Public Meetup", "Deliver"];
 
 export const addHookSelect = (value, hook, setHook) => {
-  if (!(value === "--SELECT--")) {
-    const exist = hook.some((hookValue) => hookValue === value);
+  if (value !== "--SELECT--" && value !== "") {
+    const exist = hook.some(
+      (hookValue) =>
+        hookValue.toString().toLowerCase() === value.toString().toLowerCase()
+    );
     if (exist) {
       const filterized = hook.filter((hookValue) => hookValue !== value);
 

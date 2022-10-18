@@ -10,6 +10,10 @@ const transactionSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       require,
     },
+    sellerId: {
+      type: mongoose.Schema.Types.ObjectId,
+      require,
+    },
     inAppTransac: {
       type: Boolean,
       require,

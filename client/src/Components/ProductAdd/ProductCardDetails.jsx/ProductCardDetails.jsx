@@ -20,6 +20,8 @@ const ProductCardDetails = (props) => {
     modelNumber,
     serialNumber,
     onDeletePicture,
+    cashTradeInVisible,
+    itemTradeInVisible,
   } = props;
 
   const imageDefault =
@@ -85,13 +87,13 @@ const ProductCardDetails = (props) => {
               {titlePreview("Prefer Trade: ")}{" "}
               {preferTrade === "Trade-in" ? "Cash and Item" : preferTrade}
             </p>
-            {(preferTrade === "Trade-in" || preferTrade === "Selling") && (
+            {(cashTradeInVisible || preferTrade === "Selling") && (
               <p className="text-gray-700 text-base mt-2 text-ellipsis overflow-hidden whitespace-nowrap w-72">
                 {titlePreview("Cash: ")} {`₱${cash}`}
               </p>
             )}
 
-            {(preferTrade === "Trade-in" || preferTrade === "Swapping") && (
+            {(itemTradeInVisible || preferTrade === "Swapping") && (
               <p className="text-gray-700 text-base mt-2 text-ellipsis overflow-hidden whitespace-nowrap w-72">
                 {titlePreview("Item: ")} {item}
               </p>
