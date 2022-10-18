@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { useOutletContext } from "react-router-dom";
 import { getUserById } from "../../../actions/userActions";
@@ -22,8 +22,11 @@ import MessageModalSoldInfo from "../../../Components/Messages/MessageModalSoldI
 const MessagesUser = () => {
   const { uid } = useParams();
 
-  const [chatId, otherUserProfile, productId, displayName] = useOutletContext();
+  const [chatId, otherUserProfile, productId, displayName, chats] =
+    useOutletContext();
   const location = useLocation();
+
+  const [newChatUserId, setNewChatUserId] = useState("");
 
   const dispatch = useDispatch();
   const { user, error, loading } = useSelector(
@@ -33,10 +36,28 @@ const MessagesUser = () => {
   const { currentUser } = useSelector((state) => state.userInfoReducer);
   const { product } = useSelector((state) => state.getProductByIdReducer);
 
+  var onRenderChatKey = "";
+  var onRenderChat = null;
+  const [onProductId, setOnProductId] = useState(productId);
+
+  if (user && chats) {
+    onRenderChatKey = Object.keys(chats).find((chat) =>
+      chat.includes(user.uid)
+    );
+    onRenderChat = Object.entries(chats).find((chat) =>
+      chat[0].includes(user.uid)
+    );
+  }
+
+  if (onProductId === "" && onRenderChat) {
+    setOnProductId(onRenderChat[1].productInfo.productId);
+  }
+
   useEffect(() => {
     dispatch(getUserById(uid));
-    productId && dispatch(getProductById(productId));
-  }, [dispatch, uid, productId]);
+    onProductId && dispatch(getProductById(onProductId));
+  }, [dispatch, uid, onProductId]);
+
   const handleClick = async () => {
     const defaultMessage =
       "Hello i'm trying to negotiate for the item name " + location.state.title;
@@ -45,6 +66,8 @@ const MessagesUser = () => {
       currentUser.uid > user.uid
         ? currentUser.uid + user.uid + location.state.title
         : user.uid + currentUser.uid + location.state.title;
+
+    setNewChatUserId(combinedId);
 
     const res = await getDoc(doc(db, "chats", combinedId));
     try {
@@ -105,8 +128,17 @@ const MessagesUser = () => {
       console.log(err);
     }
   };
-
   const completed = product && product.status === "sold";
+
+  // TODO: optimize this
+  const chatKey =
+    chatId !== ""
+      ? chatId
+      : newChatUserId !== ""
+      ? newChatUserId
+      : onRenderChatKey !== ""
+      ? onRenderChatKey
+      : "";
 
   return (
     <>
@@ -116,14 +148,18 @@ const MessagesUser = () => {
       ) : (
         user && (
           <>
-            {chatId !== "" && (
+            {chatKey !== "" && (
               <div>
                 <MessageModalSoldInfo product={product} completed={completed} />
                 <MessagesComponent
-                  chatId={chatId}
+                  chatId={chatKey}
                   currentUserId={currentUser.uid}
                   currentUser_Id={currentUser._id}
-                  otherUserProfile={otherUserProfile}
+                  otherUserProfile={
+                    otherUserProfile === ""
+                      ? onRenderChat[1].userInfo.photoURL
+                      : otherUserProfile
+                  }
                   completed={completed}
                   displayName={displayName}
                   product={product}

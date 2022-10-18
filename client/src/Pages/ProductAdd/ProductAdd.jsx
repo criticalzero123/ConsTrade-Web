@@ -4,6 +4,7 @@ import ProductAddInput from "../../Components/ProductAdd/ProductAddInput";
 import ProductAddSelect from "../../Components/ProductAdd/ProductAddSelect";
 import ProductAddTextArea from "../../Components/ProductAdd/ProductAddTextArea";
 import { IoCloseCircleOutline } from "react-icons/io5";
+import { AiFillInfoCircle } from "react-icons/ai";
 
 import ProductCardDetails from "../../Components/ProductAdd/ProductCardDetails.jsx/ProductCardDetails";
 
@@ -20,7 +21,7 @@ import { useDispatch } from "react-redux";
 import { addProduct } from "../../actions/productActions";
 import { userInfo } from "../../service/userService";
 import { saveImageStorage } from "../../firebase/storageImages";
-import { Button, Spinner } from "flowbite-react";
+import { Button, Spinner, Tooltip } from "flowbite-react";
 
 const ProductAdd = () => {
   const user = userInfo();
@@ -170,6 +171,7 @@ const ProductAdd = () => {
               required={true}
             />
             <br />
+
             <ProductAddSelect
               required={true}
               items={categoryOptions}
@@ -179,6 +181,7 @@ const ProductAdd = () => {
                 addHookSelect(e.target.value, category, setCategory)
               }
             />
+
             {/* This is for the smaller device showing list of category */}
             <div className="block">
               {category.length !== 0 && (
@@ -202,13 +205,36 @@ const ProductAdd = () => {
               )}
             </div>
             <br />
-            <ProductAddSelect
-              required={true}
-              items={platformOptions}
-              labeltext="Platform Supported"
-              width="w-32"
-              onChange={addPlatform}
-            />
+            <div className="flex">
+              <ProductAddSelect
+                required={true}
+                items={platformOptions}
+                labeltext="Platform Supported"
+                width="w-32"
+                onChange={addPlatform}
+              />{" "}
+              <span className="ml-1 mt-1">
+                <Tooltip
+                  content={
+                    <>
+                      <p>Choose the platform supported in your game.</p>
+                      <p className="text-gray-300">
+                        For more information click{" "}
+                        <span
+                          className="text-orange-500 hover:cursor-pointer"
+                          onClick={() => window.open("/home", "_blank")}
+                        >
+                          Here!
+                        </span>
+                      </p>
+                    </>
+                  }
+                  trigger={"click"}
+                >
+                  <AiFillInfoCircle className="cursor-pointer text-gray-400" />
+                </Tooltip>
+              </span>
+            </div>
             {visibleOtherPlatform && (
               <div className="flex place-items-center mt-3 cursor-pointer ">
                 <input
@@ -228,7 +254,6 @@ const ProductAdd = () => {
                 </span>
               </div>
             )}
-
             {/* This is for the smaller device showing list of platform */}
             <div className=" w-full ">
               {platform.length !== 0 && (
@@ -293,7 +318,6 @@ const ProductAdd = () => {
               required={true}
             />
             <br />
-
             <ProductAddDropZone
               labeltext="Add Picture"
               onChange={addPicture}
@@ -351,7 +375,6 @@ const ProductAdd = () => {
                 </div>
               </div>
             )}
-
             <ProductAddInput
               labeltext="Cash Prefer"
               fortext="cash"

@@ -11,6 +11,7 @@ const Messages = () => {
   // To get the current URL
   const location = useLocation();
   const splitName = location.pathname.split("/");
+
   //
   const [chats, setChats] = useState();
   const [chatId, setChatId] = useState("");
@@ -33,7 +34,6 @@ const Messages = () => {
     };
     currentUser.uid && getChats();
   }, [currentUser.uid]);
-
   return (
     <div className="grid grid-cols-6 gap-4 ">
       <aside className="col-span-2 w-full overflow-y-auto h-[35rem] bg-[#F5F7FB] p-5 rounded">
@@ -71,7 +71,7 @@ const Messages = () => {
             </div>
           )}
           <Outlet
-            context={[chatId, otherUserProfile, productId, displayName]}
+            context={[chatId, otherUserProfile, productId, displayName, chats]}
           />
         </div>
       </div>

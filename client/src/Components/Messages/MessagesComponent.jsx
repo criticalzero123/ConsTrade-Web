@@ -8,7 +8,7 @@ import { Button } from "flowbite-react";
 import { soldItemTransaction } from "../../actions/transactionActions";
 import { BsCheckSquareFill } from "react-icons/bs";
 
-import { RiArrowDownSLine, RiArrowUpSLine } from "react-icons/ri";
+import { RiArrowDownSLine } from "react-icons/ri";
 
 import { useDispatch } from "react-redux";
 
@@ -25,7 +25,7 @@ const MessagesComponent = ({
   currentUser_Id,
 }) => {
   const [messages, setMessages] = useState([]);
-  const [showHeader, setShowHeader] = useState(true);
+  const [showHeader, setShowHeader] = useState(false);
 
   const scrollDown = useRef();
   const dispatch = useDispatch();
@@ -44,7 +44,6 @@ const MessagesComponent = ({
     messages.length !== 0 &&
       scrollDown.current !== undefined &&
       onClickScrollDown();
-
     return () => {
       unSub();
     };
@@ -153,21 +152,13 @@ const MessagesComponent = ({
           <div
             className={`absolute top-0 p-4 bg-[rgba(100%,100%,100%,60%)] backdrop-blur-md w-full flex place-items-center justify-between`}
           >
-            <Link
-              to={`/product/item/${product._id}`}
-              className="hover:text-red-400 font-semibold text-gray-500"
+            <div
+              className="hover:text-red-400 font-semibold text-gray-500 cursor-pointer"
+              onClick={() => setShowHeader(!showHeader)}
             >
-              {product.title}
-            </Link>
-            <div className="relative top-5">
-              <div className="absolute top">
-                <RiArrowUpSLine
-                  size={30}
-                  className="text-gray-300 cursor-pointer"
-                  onClick={() => setShowHeader(!showHeader)}
-                />
-              </div>
+              Hide
             </div>
+
             <Button gradientDuoTone="greenToBlue" onClick={completeItemOnClick}>
               <BsCheckSquareFill size={20} className="mr-2" />
               Transaction Completed
