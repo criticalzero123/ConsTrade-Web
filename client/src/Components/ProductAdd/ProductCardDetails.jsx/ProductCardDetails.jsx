@@ -47,7 +47,9 @@ const ProductCardDetails = (props) => {
           <img
             src={
               displayImage !== null
-                ? window.URL.createObjectURL(displayImage)
+                ? typeof displayImage === "object"
+                  ? window.URL.createObjectURL(displayImage)
+                  : displayImage
                 : imageDefault
             }
             alt={title}
@@ -129,7 +131,11 @@ const ProductCardDetails = (props) => {
               onClick={() => setDisplayImage(img)}
             >
               <img
-                src={window.URL.createObjectURL(img)}
+                src={
+                  typeof img === "object"
+                    ? window.URL.createObjectURL(img)
+                    : img
+                }
                 alt={img.name}
                 className="h-full w-full object-contain "
               />

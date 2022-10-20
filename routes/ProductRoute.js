@@ -114,6 +114,37 @@ router.post("/deleteProduct", (req, res) => {
   });
 });
 
+router.post("/editProduct", async (req, res) => {
+  const { product, productId } = req.body;
+
+  const productData = await Product.findById({ _id: productId });
+
+  productData.title = product.title;
+  productData.location = product.location;
+  productData.description = product.description;
+  productData.gameGenre = product.category;
+  productData.platform = product.platform;
+  productData.modelNumber = product.modelNumber;
+  productData.serialNumber = product.serialNumber;
+  productData.condition = product.condition;
+  productData.imageURL = product.imageURL;
+  productData.imageListURL = product.imageListURL;
+  productData.preferTrade = product.preferTrade;
+  productData.cash = product.cash;
+  productData.item = product.item;
+  productData.deliveryType = product.deliveryType;
+
+  productData.save((err) => {
+    if (err) {
+      return res
+        .status(400)
+        .json({ message: "Somethibng went wrong in updating a product" });
+    } else {
+      res.send(productId);
+    }
+  });
+});
+
 router.post("/addCommentProduct", async (req, res) => {
   const { comment, productId, currentUser } = req.body;
 

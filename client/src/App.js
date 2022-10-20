@@ -14,6 +14,7 @@ import UserProfile from "./Pages/UserProfile/UserProfile";
 import Category from "./Pages/Search/Category/Category";
 import Messages from "./Pages/Messages/Messages";
 import MessagesUser from "./Pages/Messages/MessagesUser/MessagesUser";
+import ProductEdit from "./Pages/ProductEdit/ProductEdit";
 function App() {
   return (
     <div className="container mx-auto">
@@ -27,9 +28,12 @@ function App() {
 
           <Route path="/home" element={<Home />} />
 
+          {/*Product*/}
           <Route path="/product/item/:id" element={<ProductDetails />} />
           <Route path="/product/item/list/:id" element={<ProductList />} />
           <Route path="/product/add" element={<ProductAdd />} />
+          <Route path="/product/edit/:productid" element={<ProductEdit />} />
+
           <Route path="/user/:id" element={<UserProfile />} />
           <Route path="/search/category/:category" element={<Category />} />
           <Route path="/favorites" element={<Favorites />} />

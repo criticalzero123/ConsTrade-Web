@@ -63,7 +63,9 @@ const ProductListCard = ({ product }) => {
             <p className="mr-5 cursor-pointer " onClick={deleteClick}>
               Delete
             </p>
-            <p className="cursor-pointer">Edit</p>
+            <Link to={`/product/edit/${product._id}`}>
+              <p className="cursor-pointer">Edit</p>
+            </Link>
           </div>
         </div>
       </div>

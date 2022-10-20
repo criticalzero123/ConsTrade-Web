@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export const getAllProducts = () => (dispatch) => {
   dispatch({ type: "GET_PRODUCTS_REQUEST" });
@@ -34,7 +35,7 @@ export const getProductById = (id) => (dispatch) => {
     .post("/api/products/getproductbyid", { id })
     .then((res) => {
       dispatch({ type: "GET_PRODUCT_BY_ID_SUCCESS", payload: res.data });
-
+      // todo: this fetch always when getting the product id
       dispatch({ type: "COMMENT_LIST", payload: res.data.comments });
     })
     .catch((err) => {
@@ -86,6 +87,25 @@ export const deleteProduct = (productid) => (dispatch) => {
     .catch((err) => {
       console.log(err);
       dispatch({ type: "DELETE_PRODUCT_FAILED", payload: err });
+    });
+};
+
+export const editProduct = (product, productId) => (dispatch) => {
+  dispatch({ type: "EDIT_PRODUCT_REQUEST" });
+
+  axios
+    .post("/api/products/editProduct", { product, productId })
+    .then((res) => {
+      dispatch({ type: "EDIT_PRODUCT_SUCCESS" });
+      Swal.fire("Update Successfully!", "The item is updated!", "success").then(
+        (response) => {
+          window.location.href = "/product/item/" + res.data;
+        }
+      );
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({ type: "EDIT_PRODUCT_FAILED", payload: err });
     });
 };
 

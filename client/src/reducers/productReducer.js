@@ -136,6 +136,30 @@ export const deleteProductReducer = (state = {}, action) => {
   }
 };
 
+export const editProductReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "EDIT_PRODUCT_REQUEST":
+      return {
+        loading: true,
+      };
+    case "EDIT_PRODUCT_SUCCESS":
+      return {
+        ...state,
+        loading: false,
+        success: true,
+      };
+    case "EDIT_PRODUCT_FAILED":
+      return {
+        ...state,
+        loading: false,
+        error: true,
+      };
+
+    default:
+      return state;
+  }
+};
+
 export const addCommentProductReducer = (state = {}, action) => {
   switch (action.type) {
     case "ADD_COMMENT_PRODUCT_REQUEST":

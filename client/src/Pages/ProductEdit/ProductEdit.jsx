@@ -1,57 +1,93 @@
-import React, { useState } from "react";
-import ProductAddDropZone from "../../Components/ProductAdd/ProductAddDropZone";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { editProduct, getProductById } from "../../actions/productActions";
+import { toArrayString } from "../../service/productService";
 import ProductAddInput from "../../Components/ProductAdd/ProductAddInput";
 import ProductAddSelect from "../../Components/ProductAdd/ProductAddSelect";
 import ProductAddTextArea from "../../Components/ProductAdd/ProductAddTextArea";
+import ProductAddDropZone from "../../Components/ProductAdd/ProductAddDropZone";
+import { checkImageLimitSize } from "../../service/productService";
+import {
+  categoryOptions,
+  platformOptions,
+  meetupPreferenceOptions,
+  preferTradeOptions,
+  conditionOptions,
+} from "../../service/productService";
+import { addHookSelect } from "../../service/productService";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { AiFillInfoCircle } from "react-icons/ai";
-
-import ProductCardDetails from "../../Components/ProductAdd/ProductCardDetails.jsx/ProductCardDetails";
-
-// For the Options
-import {
-  addHookSelect,
-  categoryOptions,
-  checkImageLimitSize,
-  conditionOptions,
-  meetupPreferenceOptions,
-  platformOptions,
-  preferTradeOptions,
-} from "../../service/productService";
-import { useDispatch } from "react-redux";
-import { addProduct } from "../../actions/productActions";
+import { Tooltip, Button, Spinner } from "flowbite-react";
 import { userInfo } from "../../service/userService";
 import { saveImageStorage } from "../../firebase/storageImages";
-import { Button, Spinner, Tooltip } from "flowbite-react";
+import Swal from "sweetalert2";
+import ProductCardDetails from "../../Components/ProductAdd/ProductCardDetails.jsx/ProductCardDetails";
 
-const ProductAdd = () => {
+const ProductEdit = () => {
+  const { productid } = useParams();
+  const dispatch = useDispatch();
+
+  const { loading, error, product } = useSelector(
+    (state) => state.getProductByIdReducer
+  );
+
+  var productInfo = {};
+  if (product) {
+    productInfo = {
+      userId: product.userId,
+      userName: product.userName,
+      description: product.description,
+      title: product.title,
+      location: product.location,
+      cash: product.cash,
+      itemList: product.item,
+      modelNumber: product.modelNumber,
+      serialNumber: product.serialNumber,
+      category: product.gameGenre,
+      platform: product.platform,
+      condition: product.condition,
+      prefer: product.preferTrade,
+      meetup: product.deliveryType,
+      imageListURL: product.imageListURL,
+      imageURL: product.imageURL,
+    };
+  }
   const user = userInfo();
   const [visibleOtherPlatform, setVisibleOtherPlatform] = useState(false);
-  const [cashTradeInVisible, setCashTradeInVisible] = useState(false);
+  const [cashTradeInVisible, setCashTradeInVisible] = useState(
+    productInfo.cash > 0
+  );
+  const [loadingRequest, setLoadingRequest] = useState(false);
   const [itemTradeInVisible, setItemTradeInVisible] = useState(false);
-  const [itemList, setItemList] = useState([]);
+  const _itemList = toArrayString(productInfo.itemList);
+  const [itemList, setItemList] = useState(_itemList);
   //   Select
-  const [category, setCategory] = useState([]);
-  const [platform, setPlatform] = useState([]);
-  const [condition, setCondition] = useState(conditionOptions[0]);
-  const [prefer, setPrefer] = useState(preferTradeOptions[0]);
-  const [meetup, setMeetup] = useState(meetupPreferenceOptions[0]);
-  //   TextInput
-  const [title, setTitle] = useState("");
-  const [location, setLocation] = useState("");
-  const [cash, setCash] = useState(0);
+  const categoryList = toArrayString(productInfo.category);
+  const [category, setCategory] = useState(categoryList);
+  const platformList = toArrayString(productInfo.platform);
+  const [platform, setPlatform] = useState(platformList);
+  const [condition, setCondition] = useState(productInfo.condition);
+  const [prefer, setPrefer] = useState(productInfo.prefer);
+  const [meetup, setMeetup] = useState(productInfo.meetup);
+  //TextInput
+  const [title, setTitle] = useState(productInfo.title);
+  const [location, setLocation] = useState(productInfo.location);
+  const [cash, setCash] = useState(productInfo.cash);
+  const [modelNumber, setModelNumber] = useState(productInfo.modelNumber);
+  const [serialNumber, setSerialNumber] = useState(productInfo.serialNumber);
   const [item, setItem] = useState("");
-  const [modelNumber, setModelNumber] = useState("");
-  const [serialNumber, setSerialNumber] = useState("");
   const [otherPlatform, setOtherPlatform] = useState("");
   //   Textarea
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState(productInfo.description);
   //   dropzone
-  const [imageUpload, setImageUpload] = useState([]);
+  const [imageUpload, setImageUpload] = useState(
+    productInfo.imageListURL !== undefined ? productInfo.imageListURL : []
+  );
 
-  const [loading, setLoading] = useState(false);
-
-  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getProductById(productid));
+  }, [dispatch, productid]);
 
   const cashPreferInput = (e) => {
     if (e.target.value >= 0) {
@@ -116,7 +152,8 @@ const ProductAdd = () => {
 
     setImageUpload(newArrayImages);
   };
-  const productAddRequest = async (e) => {
+
+  const productEditRequest = async (e) => {
     e.preventDefault();
 
     if (category.length === 0) alert("Please choose category of the item");
@@ -124,8 +161,26 @@ const ProductAdd = () => {
     else if (prefer === "Selling" && cash === 0) {
       alert("Please input cash amount");
     } else if (imageUpload != null && imageUpload.length !== 0) {
-      setLoading(true);
-      await saveImageStorage(imageUpload, title, user, productUploadCallBack);
+      Swal.fire({
+        title: 'Are you sure to edit "' + product.title + '"?',
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          Swal.fire("Updating!", "Please wait...");
+          setLoadingRequest(true);
+          const newImage = imageUpload.filter(
+            (image) => typeof image === "object"
+          );
+          await saveImageStorage(newImage, title, user, productUploadCallBack);
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          Swal.fire("Cancelled", "Action is cancelled", "info");
+        }
+      });
     } else {
       alert("Please Provide Picture");
     }
@@ -133,9 +188,9 @@ const ProductAdd = () => {
 
   const productUploadCallBack = (image) => {
     if (image) {
+      const oldImage = imageUpload.filter((image) => typeof image !== "object");
+      const newImageList = [...oldImage, ...image];
       const product = {
-        userId: user._id,
-        name: user.name,
         title: title,
         description: description,
         location: location,
@@ -144,23 +199,30 @@ const ProductAdd = () => {
         modelNumber: modelNumber,
         serialNumber: serialNumber,
         condition: condition,
-        imageURL: image[0],
-        imageListURL: image,
+        imageURL: newImageList[0],
+        imageListURL: newImageList,
         preferTrade: prefer,
         cash: parseInt(cash),
         item: prefer === "Swapping" ? item : itemList.toString(),
         deliveryType: meetup,
       };
 
-      dispatch(addProduct(product));
+      dispatch(editProduct(product, productid));
     } else {
-      alert("Something went wrong in adding the product. ");
+      alert("Something went wrong in updating the product. ");
     }
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  if (error) {
+    return <div>Error...</div>;
+  }
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 pt-7 px-5">
       <section>
-        <form onSubmit={productAddRequest}>
+        <form onSubmit={productEditRequest}>
           <aside className="overflow-y-auto h-[45rem] ">
             <ProductAddInput
               labeltext="Item Name"
@@ -298,6 +360,7 @@ const ProductAdd = () => {
               items={conditionOptions}
               labeltext="Condition"
               width="w-40"
+              defaultValue={condition}
               onChange={(e) => setCondition(e.target.value)}
             />
             <br />
@@ -324,7 +387,7 @@ const ProductAdd = () => {
               onChange={addPicture}
               count={imageUpload.length}
             />
-            {imageUpload.length !== 0 && (
+            {imageUpload !== 0 && (
               <div className="flex lg:hidden mt-5">
                 {imageUpload.map((image, index) => (
                   <div
@@ -332,7 +395,11 @@ const ProductAdd = () => {
                     className="relative mr-3 flex place-items-center h-28 w-20 bg-gray-100"
                   >
                     <img
-                      src={window.URL.createObjectURL(image)}
+                      src={
+                        typeof image === "object"
+                          ? window.URL.createObjectURL(image)
+                          : image
+                      }
                       alt={image.name}
                       className="h-full w-full object-contain "
                     />
@@ -353,6 +420,7 @@ const ProductAdd = () => {
               fortext="trade"
               items={preferTradeOptions}
               width="w-40"
+              defaultValue={prefer}
               onChange={(e) => {
                 setCash(0);
                 setItemList([]);
@@ -424,6 +492,7 @@ const ProductAdd = () => {
             <ProductAddSelect
               labeltext="Mode of Transaction"
               items={meetupPreferenceOptions}
+              defaultValue={meetup}
               width="w-42"
               onChange={(e) => setMeetup(e.target.value)}
             />
@@ -435,15 +504,15 @@ const ProductAdd = () => {
             <Button
               gradientDuoTone="cyanToBlue"
               type="submit"
-              disabled={loading ? true : false}
+              disabled={loadingRequest ? true : false}
             >
               <div className="w-96 flex justify-center text-lg">
-                {loading && (
+                {loadingRequest && (
                   <div className="mr-3">
                     <Spinner size="md" light={true} />
                   </div>
                 )}
-                Add
+                Save
               </div>
             </Button>
           </div>
@@ -475,4 +544,4 @@ const ProductAdd = () => {
   );
 };
 
-export default ProductAdd;
+export default ProductEdit;

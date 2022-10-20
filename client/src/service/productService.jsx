@@ -18,6 +18,7 @@ export const categoryOptions = [
   "ARPG",
   "Simulation",
   "Sports",
+  "Racing",
   "Action",
   "Adventure",
   "Survival",
@@ -38,7 +39,7 @@ export const conditionOptions = [
   "Slightly Used",
 ];
 export const preferTradeOptions = ["Selling", "Swapping", "Trade-in"];
-export const meetupPreferenceOptions = ["Public Meetup", "Deliver"];
+export const meetupPreferenceOptions = ["Public Meetup", "Deliver", "Any"];
 
 export const addHookSelect = (value, hook, setHook) => {
   if (value !== "--SELECT--" && value !== "") {
@@ -61,5 +62,18 @@ export const toArrayString = (string) => {
     return string.split(",");
   } else {
     return new Array(string);
+  }
+};
+
+export const checkImageLimitSize = (imageFile, limit) => {
+  const { size } = imageFile;
+
+  const megaBytes = Math.pow(1024, 2);
+  const checkBytesImage = size / megaBytes;
+
+  if (checkBytesImage <= limit) {
+    return true;
+  } else {
+    return false;
   }
 };

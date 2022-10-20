@@ -184,14 +184,18 @@ const ProductInfo = ({
             Add another Item
           </button>
         ) : (
-          <button
-            type="button"
-            className="mt-5 text-white self-end
+          product && (
+            <Link to={`/product/edit/${product._id}`} className="w-full">
+              <button
+                type="button"
+                className="mt-5 text-white self-end
             bg-gradient-to-r from-green-500 to-blue-500 hover:from-pink-500 hover:to-yellow-500
             w-full rounded-md p-3 font-semibold text-sm md:text-lg"
-          >
-            Edit Item
-          </button>
+              >
+                Edit Item
+              </button>
+            </Link>
+          )
         )}
         <div className="w-full ml-5">
           <button
