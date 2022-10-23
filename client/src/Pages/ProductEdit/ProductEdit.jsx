@@ -27,67 +27,57 @@ import ProductCardDetails from "../../Components/ProductAdd/ProductCardDetails.j
 const ProductEdit = () => {
   const { productid } = useParams();
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getProductById(productid));
+  }, [dispatch, productid]);
 
   const { loading, error, product } = useSelector(
     (state) => state.getProductByIdReducer
   );
 
-  var productInfo = {};
-  if (product) {
-    productInfo = {
-      userId: product.userId,
-      userName: product.userName,
-      description: product.description,
-      title: product.title,
-      location: product.location,
-      cash: product.cash,
-      itemList: product.item,
-      modelNumber: product.modelNumber,
-      serialNumber: product.serialNumber,
-      category: product.gameGenre,
-      platform: product.platform,
-      condition: product.condition,
-      prefer: product.preferTrade,
-      meetup: product.deliveryType,
-      imageListURL: product.imageListURL,
-      imageURL: product.imageURL,
-    };
-  }
   const user = userInfo();
   const [visibleOtherPlatform, setVisibleOtherPlatform] = useState(false);
-  const [cashTradeInVisible, setCashTradeInVisible] = useState(
-    productInfo.cash > 0
-  );
+  const [cashTradeInVisible, setCashTradeInVisible] = useState(false);
   const [loadingRequest, setLoadingRequest] = useState(false);
   const [itemTradeInVisible, setItemTradeInVisible] = useState(false);
-  const _itemList = toArrayString(productInfo.itemList);
-  const [itemList, setItemList] = useState(_itemList);
+  const [itemList, setItemList] = useState([]);
   //   Select
-  const categoryList = toArrayString(productInfo.category);
-  const [category, setCategory] = useState(categoryList);
-  const platformList = toArrayString(productInfo.platform);
-  const [platform, setPlatform] = useState(platformList);
-  const [condition, setCondition] = useState(productInfo.condition);
-  const [prefer, setPrefer] = useState(productInfo.prefer);
-  const [meetup, setMeetup] = useState(productInfo.meetup);
+  const [category, setCategory] = useState([]);
+  const [platform, setPlatform] = useState([]);
+  const [condition, setCondition] = useState([]);
+  const [prefer, setPrefer] = useState([]);
+  const [meetup, setMeetup] = useState([]);
   //TextInput
-  const [title, setTitle] = useState(productInfo.title);
-  const [location, setLocation] = useState(productInfo.location);
-  const [cash, setCash] = useState(productInfo.cash);
-  const [modelNumber, setModelNumber] = useState(productInfo.modelNumber);
-  const [serialNumber, setSerialNumber] = useState(productInfo.serialNumber);
+  const [title, setTitle] = useState("");
+  const [location, setLocation] = useState("");
+  const [cash, setCash] = useState(0);
+  const [modelNumber, setModelNumber] = useState("");
+  const [serialNumber, setSerialNumber] = useState("");
   const [item, setItem] = useState("");
   const [otherPlatform, setOtherPlatform] = useState("");
   //   Textarea
-  const [description, setDescription] = useState(productInfo.description);
+  const [description, setDescription] = useState("");
   //   dropzone
-  const [imageUpload, setImageUpload] = useState(
-    productInfo.imageListURL !== undefined ? productInfo.imageListURL : []
-  );
+  const [imageUpload, setImageUpload] = useState([]);
 
   useEffect(() => {
-    dispatch(getProductById(productid));
-  }, [dispatch, productid]);
+    if (product && product !== undefined) {
+      setTitle(product.title);
+      setLocation(product.location);
+      setCash(product.cash);
+      setModelNumber(product.modelNumber);
+      setSerialNumber(product.serialNumber);
+      setDescription(product.description);
+      setImageUpload(product.imageListURL);
+      setCashTradeInVisible(product.cash > 0);
+      setItemList(toArrayString(product.item));
+      setCategory(toArrayString(product.gameGenre));
+      setPlatform(toArrayString(product.platform));
+      setCondition(product.condition);
+      setPrefer(product.preferTrade);
+      setMeetup(product.deliveryType);
+    }
+  }, [product]);
 
   const cashPreferInput = (e) => {
     if (e.target.value >= 0) {
@@ -356,6 +346,7 @@ const ProductEdit = () => {
               required={true}
             />
             <br />
+
             <ProductAddSelect
               items={conditionOptions}
               labeltext="Condition"
@@ -385,9 +376,9 @@ const ProductEdit = () => {
             <ProductAddDropZone
               labeltext="Add Picture"
               onChange={addPicture}
-              count={imageUpload.length}
+              count={imageUpload !== undefined ? imageUpload.length : 0}
             />
-            {imageUpload !== 0 && (
+            {imageUpload !== 0 && imageUpload !== undefined && (
               <div className="flex lg:hidden mt-5">
                 {imageUpload.map((image, index) => (
                   <div
@@ -519,7 +510,7 @@ const ProductEdit = () => {
         </form>
       </section>
       <div className="lg:col-span-2 hidden lg:block">
-        <ProductCardDetails
+        {/* <ProductCardDetails
           title={title}
           description={description}
           condition={condition}
@@ -538,7 +529,7 @@ const ProductEdit = () => {
           userPhoto={user.imagePhotoURL}
           userName={user.name}
           onDeletePicture={onDeletePic}
-        />
+        /> */}
       </div>
     </div>
   );
