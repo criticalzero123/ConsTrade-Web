@@ -238,9 +238,9 @@ const ProductEdit = () => {
             <div className="block">
               {category.length !== 0 && (
                 <div className="flex flex-wrap ">
-                  {category.map((value) => (
+                  {category.map((value, index) => (
                     <div
-                      key={value}
+                      key={index}
                       className="py-1 px-3 rounded-lg mt-3 mr-3 bg-[rgba(0,0,0,0.1)] place-items-center flex "
                     >
                       {value}
@@ -310,9 +310,9 @@ const ProductEdit = () => {
             <div className=" w-full ">
               {platform.length !== 0 && (
                 <div className="flex flex-wrap">
-                  {platform.map((value) => (
+                  {platform.map((value, index) => (
                     <div
-                      key={value}
+                      key={index}
                       className="py-1 px-3 rounded-lg mr-3  mt-3 bg-[rgba(0,0,0,0.1)] place-items-center flex "
                     >
                       {value}
@@ -463,9 +463,9 @@ const ProductEdit = () => {
             <div className=" w-full ">
               {itemList.length !== 0 && prefer === "Trade-in" && (
                 <div className="flex flex-wrap">
-                  {itemList.map((value) => (
+                  {itemList.map((value, index) => (
                     <div
-                      key={value}
+                      key={index}
                       className="py-1 px-3 rounded-lg mr-3  mt-3 bg-[rgba(0,0,0,0.1)] place-items-center flex "
                     >
                       {value}
@@ -510,7 +510,7 @@ const ProductEdit = () => {
         </form>
       </section>
       <div className="lg:col-span-2 hidden lg:block">
-        {/* <ProductCardDetails
+        <ProductCardDetails
           title={title}
           description={description}
           condition={condition}
@@ -529,7 +529,7 @@ const ProductEdit = () => {
           userPhoto={user.imagePhotoURL}
           userName={user.name}
           onDeletePicture={onDeletePic}
-        /> */}
+        />
       </div>
     </div>
   );

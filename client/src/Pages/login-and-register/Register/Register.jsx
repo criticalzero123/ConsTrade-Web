@@ -96,7 +96,7 @@ const Register = () => {
   return (
     <div className="h-screen">
       <div className="grid lg:grid-cols-2 h-5/6 ">
-        <div className="hidden lg:block ">
+        <div className="hidden lg:block  place-self-center">
           <img src={cover1} alt="cover" className="rounded-xl" />
         </div>
         <div className="md:w-1/2 mt-7 lg:mt-0 justify-self-center">

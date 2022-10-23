@@ -122,7 +122,7 @@ const ProductCardDetails = (props) => {
           </div>
         </div>
       </div>
-      {image.length !== 0 && (
+      {image && image.length !== 0 && (
         <div className="lg:ml-16 flex mt-5">
           {image.map((img, index) => (
             <div
