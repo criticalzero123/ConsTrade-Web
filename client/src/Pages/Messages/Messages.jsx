@@ -11,6 +11,7 @@ const Messages = () => {
   // To get the current URL
   const location = useLocation();
   const splitName = location.pathname.split("/");
+  const pathLength = splitName.length;
 
   //
   const [chats, setChats] = useState();
@@ -35,8 +36,12 @@ const Messages = () => {
     currentUser.uid && getChats();
   }, [currentUser.uid]);
   return (
-    <div className="grid grid-cols-6 gap-4 ">
-      <aside className="col-span-2 w-full overflow-y-auto h-[35rem] bg-[#F5F7FB] p-5 rounded">
+    <div className="sm:grid sm:grid-cols-6 sm:gap-4">
+      <aside
+        className={`${
+          pathLength > 3 && "hidden sm:block"
+        } sm:col-span-2 w-full overflow-y-auto h-[35rem] bg-[#F5F7FB] p-5 rounded`}
+      >
         {arrayOfChatsUser.length === 0 ? (
           <div className="mx-auto">No conversations</div>
         ) : (
@@ -58,22 +63,22 @@ const Messages = () => {
                   displayTitle={chat[1].productInfo.title}
                   displayName={chat[1].userInfo.displayName}
                   photoURL={chat[1].productInfo.imageURL}
+                  userId={chat[1].userInfo._id}
                 />
               </Link>
             ))
         )}
       </aside>
-      <div className="col-span-4 ">
-        <div className="">
-          {splitName.length < 3 && (
-            <div className="text-black h-[30rem] bg-[#F5F7FB] flex place-items-center justify-center text-4xl">
-              Select Conversation
-            </div>
-          )}
-          <Outlet
-            context={[chatId, otherUserProfile, productId, displayName, chats]}
-          />
-        </div>
+
+      <div className={`${pathLength < 3 ? "hidden" : "block"} sm:col-span-4 `}>
+        {splitName.length < 3 && (
+          <div className="text-black h-[30rem] bg-[#F5F7FB] flex place-items-center justify-center text-4xl">
+            Select Conversation
+          </div>
+        )}
+        <Outlet
+          context={[chatId, otherUserProfile, productId, displayName, chats]}
+        />
       </div>
     </div>
   );

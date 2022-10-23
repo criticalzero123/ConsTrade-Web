@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams, Link } from "react-router-dom";
 import { useOutletContext } from "react-router-dom";
 import { getUserById } from "../../../actions/userActions";
 import { getProductById } from "../../../actions/productActions";
 import { useDispatch, useSelector } from "react-redux";
+import { MdOutlineKeyboardBackspace } from "react-icons/md";
 import {
   doc,
   getDoc,
@@ -161,6 +162,13 @@ const MessagesUser = () => {
           <>
             {chatKey !== "" && chatKey !== undefined && (
               <div>
+                <Link
+                  to="/messages"
+                  className="cursor-pointer flex place-items-center hover:text-orange-500 mb-2 sm:hidden"
+                >
+                  <MdOutlineKeyboardBackspace className="mr-1 " /> Back
+                </Link>
+
                 <MessageModalSoldInfo product={product} completed={completed} />
                 <MessagesComponent
                   chatId={chatKey}
