@@ -8,7 +8,7 @@ import {
   getAllProductByCategoryReducer,
 } from "./reducers/productReducer";
 
-// import { soldItemTransactionReducer } from "./reducers/transactionReducer";
+import { getTransactionByUserIdReducer } from "./reducers/transactionReducer";
 
 import {
   socalMediaAuthReducer,
@@ -38,6 +38,7 @@ const finalReducer = combineReducers({
   favoriteReducer,
   getUserByIdReducer,
   getAllProductByCategoryReducer,
+  getTransactionByUserIdReducer,
 });
 
 const currentUser = localStorage.getItem("currentUser")

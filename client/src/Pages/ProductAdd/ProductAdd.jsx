@@ -175,6 +175,7 @@ const ProductAdd = () => {
             <ProductAddSelect
               required={true}
               items={categoryOptions}
+              flagCategory={true}
               labeltext="Category"
               width="w-32"
               onChange={(e) =>
@@ -209,6 +210,7 @@ const ProductAdd = () => {
               <ProductAddSelect
                 required={true}
                 items={platformOptions}
+                flagCategory={true}
                 labeltext="Platform Supported"
                 width="w-32"
                 onChange={addPlatform}
@@ -295,6 +297,7 @@ const ProductAdd = () => {
             />
             <br />
             <ProductAddSelect
+              flagCategory={false}
               items={conditionOptions}
               labeltext="Condition"
               width="w-40"
@@ -349,6 +352,7 @@ const ProductAdd = () => {
             )}
             <br />
             <ProductAddSelect
+              flagCategory={false}
               labeltext="Prefer Trade"
               fortext="trade"
               items={preferTradeOptions}
@@ -422,6 +426,7 @@ const ProductAdd = () => {
             </div>
             <br />
             <ProductAddSelect
+              flagCategory={false}
               labeltext="Mode of Transaction"
               items={meetupPreferenceOptions}
               width="w-42"

@@ -70,7 +70,7 @@ const UserProfile = () => {
                     </div>
                   </Card>
                 </div>
-                <UserProfileTransactionList />
+                <UserProfileTransactionList userId={user._id} />
               </div>
               <div className="col-span-2 mt-24">
                 <UserProfileReviews user={user} />

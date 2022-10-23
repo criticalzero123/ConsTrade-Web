@@ -19,6 +19,7 @@ const MessagesComponent = ({
   currentUserId,
   otherUserProfile,
   otherUserId,
+  otherUser_Id,
   completed,
   displayName,
   product,
@@ -77,7 +78,7 @@ const MessagesComponent = ({
         );
 
         dispatch(
-          soldItemTransaction(product._id, currentUser_Id, product.userId)
+          soldItemTransaction(product._id, otherUser_Id, product.userId)
         );
       } else if (
         /* Read more about handling dismissals below */

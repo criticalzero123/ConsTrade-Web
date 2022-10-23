@@ -70,8 +70,8 @@ const Messages = () => {
         )}
       </aside>
 
-      <div className={`${pathLength < 3 ? "hidden" : "block"} sm:col-span-4 `}>
-        {splitName.length < 3 && (
+      <div className={`${pathLength < 3 && "hidden sm:block"} sm:col-span-4 `}>
+        {pathLength < 3 && (
           <div className="text-black h-[30rem] bg-[#F5F7FB] flex place-items-center justify-center text-4xl">
             Select Conversation
           </div>

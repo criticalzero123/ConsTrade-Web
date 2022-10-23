@@ -36,7 +36,22 @@ const MessagesUser = () => {
 
   var onRenderChatKey = "";
   var onRenderChat = null;
-  const [onProductId, setOnProductId] = useState(productId);
+  const [onProductId, setOnProductId] = useState("");
+  useEffect(() => {
+    setOnProductId(productId);
+  }, [productId]);
+
+  useEffect(() => {
+    dispatch(getUserById(uid));
+    onProductId && dispatch(getProductById(onProductId));
+  }, [dispatch, uid, onProductId]);
+
+  const [completed, setCompleted] = useState(false);
+  useEffect(() => {
+    if (product && product !== undefined) {
+      setCompleted(product.status === "sold");
+    }
+  }, [product]);
 
   if (user && chats) {
     onRenderChatKey = Object.keys(chats).find((chat) =>
@@ -52,14 +67,9 @@ const MessagesUser = () => {
   }
 
   useEffect(() => {
-    dispatch(getUserById(uid));
-    onProductId && dispatch(getProductById(onProductId));
-  }, [dispatch, uid, onProductId]);
-
-  useEffect(() => {
     if (location.state === null) return;
 
-    const handleClick = async () => {
+    const onRenderChat = async () => {
       if (currentUser && user) {
         // const defaultMessage =
         //   "Hello i'm trying to negotiate for the item name " +
@@ -137,10 +147,10 @@ const MessagesUser = () => {
         }
       }
     };
-    handleClick();
+    onRenderChat();
   });
 
-  const completed = product && product.status === "sold";
+  // const _completed = product && product.status === "sold" ? true : false;
 
   // TODO: optimize this
   const chatKey =
@@ -174,6 +184,8 @@ const MessagesUser = () => {
                   chatId={chatKey}
                   currentUserId={currentUser.uid}
                   currentUser_Id={currentUser._id}
+                  otherUserId={user.uid}
+                  otherUser_Id={user._id}
                   otherUserProfile={
                     otherUserProfile === ""
                       ? onRenderChat && onRenderChat[1].userInfo.photoURL

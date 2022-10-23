@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const router = express.Router();
 const Transaction = require("../models/TransactionModel");
 const Product = require("../models/ProductModel");
+const User = require("../models/UserModel");
 
 router.post("/soldProduct", async (req, res) => {
   const { productId, userId, sellerId } = req.body;
@@ -39,6 +40,32 @@ router.post("/soldProduct", async (req, res) => {
     return res.status(400).json({
       message: "Product already sold",
     });
+  }
+});
+
+router.post("/getTransactionById", async (req, res) => {
+  const { userId } = req.body;
+
+  try {
+    const UserInfoList = new Array();
+
+    const transactions = await Transaction.find({ sellerId: userId });
+    for (let i = 0; i < transactions.length; i++) {
+      const { buyerId } = transactions[i];
+      const user = await User.findById({ _id: buyerId });
+
+      const UserInfo = {
+        name: user.name,
+        email: user.email,
+        imagePhotoURL: user.imagePhotoURL,
+      };
+
+      UserInfoList.push(UserInfo);
+    }
+
+    res.send(UserInfoList);
+  } catch (err) {
+    res.status(400).json({ error: err });
   }
 });
 

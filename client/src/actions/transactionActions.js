@@ -15,3 +15,16 @@ export const soldItemTransaction =
         console.log(err);
       });
   };
+
+export const getTransactionByUserId = (userId) => (dispatch) => {
+  dispatch({ type: "USER_TRANSACTION_REQUEST" });
+
+  axios
+    .post("/api/transactions/getTransactionById", { userId })
+    .then((res) => {
+      dispatch({ type: "USER_TRANSACTION_SUCCESS", payload: res.data });
+    })
+    .catch((err) => {
+      dispatch({ type: "USER_TRANSACTION_FAILED" });
+    });
+};

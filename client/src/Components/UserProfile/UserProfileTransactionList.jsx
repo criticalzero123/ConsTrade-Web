@@ -1,8 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Card } from "flowbite-react/lib/cjs/components";
+import { useDispatch, useSelector } from "react-redux";
+import { getTransactionByUserId } from "../../actions/transactionActions";
 
-const UserProfileTransactionList = () => {
+const UserProfileTransactionList = ({ userId }) => {
+  const dispatch = useDispatch();
+  const { loading, error, transactions } = useSelector(
+    (state) => state.getTransactionByUserIdReducer
+  );
+
+  useEffect(() => {
+    dispatch(getTransactionByUserId(userId));
+  }, [dispatch, userId]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Something went wrong!</div>;
+  }
+
   return (
     <div>
       <div className="max-w-sm">
@@ -17,116 +36,34 @@ const UserProfileTransactionList = () => {
           </div>
           <div className="flow-root">
             <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-              <li className="py-3 sm:py-4">
-                <div className="flex items-center space-x-4">
-                  <div className="shrink-0">
-                    <img
-                      className="h-8 w-8 rounded-full"
-                      src="https://flowbite.com/docs/images/people/profile-picture-1.jpg"
-                      alt="Neil"
-                    />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-medium text-gray-900 dark:text-white">
-                      Neil Sims
-                    </p>
-                    <p className="truncate text-sm text-gray-500 dark:text-gray-400">
-                      email@windster.com
-                    </p>
-                  </div>
-                  <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                    $320
-                  </div>
-                </div>
-              </li>
-              <li className="py-3 sm:py-4">
-                <div className="flex items-center space-x-4">
-                  <div className="shrink-0">
-                    <img
-                      className="h-8 w-8 rounded-full"
-                      src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
-                      alt="Bonnie"
-                    />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-medium text-gray-900 dark:text-white">
-                      Bonnie Green
-                    </p>
-                    <p className="truncate text-sm text-gray-500 dark:text-gray-400">
-                      email@windster.com
-                    </p>
-                  </div>
-                  <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                    $3467
-                  </div>
-                </div>
-              </li>
-              <li className="py-3 sm:py-4">
-                <div className="flex items-center space-x-4">
-                  <div className="shrink-0">
-                    <img
-                      className="h-8 w-8 rounded-full"
-                      src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
-                      alt="Michael"
-                    />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-medium text-gray-900 dark:text-white">
-                      Michael Gough
-                    </p>
-                    <p className="truncate text-sm text-gray-500 dark:text-gray-400">
-                      email@windster.com
-                    </p>
-                  </div>
-                  <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                    $67
-                  </div>
-                </div>
-              </li>
-              <li className="py-3 sm:py-4">
-                <div className="flex items-center space-x-4">
-                  <div className="shrink-0">
-                    <img
-                      className="h-8 w-8 rounded-full"
-                      src="https://flowbite.com/docs/images/people/profile-picture-4.jpg"
-                      alt="Lana"
-                    />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-medium text-gray-900 dark:text-white">
-                      Lana Byrd
-                    </p>
-                    <p className="truncate text-sm text-gray-500 dark:text-gray-400">
-                      email@windster.com
-                    </p>
-                  </div>
-                  <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                    $367
-                  </div>
-                </div>
-              </li>
-              <li className="pt-3 pb-0 sm:pt-4">
-                <div className="flex items-center space-x-4">
-                  <div className="shrink-0">
-                    <img
-                      className="h-8 w-8 rounded-full"
-                      src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                      alt="Thomas"
-                    />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-medium text-gray-900 dark:text-white">
-                      Thomes Lean
-                    </p>
-                    <p className="truncate text-sm text-gray-500 dark:text-gray-400">
-                      email@windster.com
-                    </p>
-                  </div>
-                  <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                    $2367
-                  </div>
-                </div>
-              </li>
+              {transactions && transactions.length !== 0 ? (
+                transactions.map((transaction) => (
+                  <li className="py-3 sm:py-4">
+                    <div className="flex items-center space-x-4">
+                      <div className="shrink-0">
+                        <img
+                          className="h-8 w-8 rounded-full"
+                          src={transaction.imagePhotoURL}
+                          alt={transaction.name}
+                        />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="truncate text-sm font-medium text-gray-900 dark:text-white">
+                          {transaction.name}
+                        </p>
+                        <p className="truncate text-sm text-gray-500 dark:text-gray-400">
+                          {transaction.email}
+                        </p>
+                      </div>
+                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                        See more
+                      </div>
+                    </div>
+                  </li>
+                ))
+              ) : (
+                <div>No Transactions.</div>
+              )}
             </ul>
           </div>
         </Card>

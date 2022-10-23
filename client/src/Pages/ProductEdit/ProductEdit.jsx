@@ -227,6 +227,7 @@ const ProductEdit = () => {
             <ProductAddSelect
               required={true}
               items={categoryOptions}
+              flagCategory={true}
               labeltext="Category"
               width="w-32"
               onChange={(e) =>
@@ -261,6 +262,7 @@ const ProductEdit = () => {
               <ProductAddSelect
                 required={true}
                 items={platformOptions}
+                flagCategory={true}
                 labeltext="Platform Supported"
                 width="w-32"
                 onChange={addPlatform}
@@ -350,6 +352,7 @@ const ProductEdit = () => {
             <ProductAddSelect
               items={conditionOptions}
               labeltext="Condition"
+              flagCategory={false}
               width="w-40"
               defaultValue={condition}
               onChange={(e) => setCondition(e.target.value)}
@@ -410,6 +413,7 @@ const ProductEdit = () => {
               labeltext="Prefer Trade"
               fortext="trade"
               items={preferTradeOptions}
+              flagCategory={false}
               width="w-40"
               defaultValue={prefer}
               onChange={(e) => {
@@ -483,6 +487,7 @@ const ProductEdit = () => {
             <ProductAddSelect
               labeltext="Mode of Transaction"
               items={meetupPreferenceOptions}
+              flagCategory={false}
               defaultValue={meetup}
               width="w-42"
               onChange={(e) => setMeetup(e.target.value)}
