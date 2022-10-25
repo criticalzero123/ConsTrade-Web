@@ -8,8 +8,8 @@ import { signInUserEmailPassword } from "../../../firebase/authEmailAndPassword"
 import { emailAndPasswordLogin } from "../../../actions/userActions";
 import { isUserLoggedIn } from "../../../service/userService";
 
-import logo from "../../../Assets/Branding/Web/SVG/IconWeb.svg";
-import coverlogo from "../../../Assets/sign-up-and-in/login1.svg";
+import logo from "../../../Assets/Images/Branding/Web/SVG/IconWeb.svg";
+import coverlogo from "../../../Assets/Images/sign-up-and-in/login1.svg";
 
 const Login = () => {
   const [email, setEmail] = useState("");

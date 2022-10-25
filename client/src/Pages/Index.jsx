@@ -1,146 +1,176 @@
 import React from "react";
-// import { useEffect } from "react";
-// import { isUserLoggedIn } from "../service/userService";
 
-import pic1 from "../Assets/LandingPage/pic1.png";
-import pic2 from "../Assets/LandingPage/pic2.png";
-import pic3 from "../Assets/LandingPage/pic3.png";
-import pic4 from "../Assets/LandingPage/pic4.png";
-import flash from "../Assets/LandingPage/flash.png";
-import ellipse3 from "../Assets/LandingPage/ellipse3.png";
-import ellipse6 from "../Assets/LandingPage/ellipse6.png";
-import ellipse2 from "../Assets/LandingPage/Ellipse2.gif";
+import { Accordion } from "flowbite-react/lib/cjs/components/Accordion";
+import header from "../Assets/Images/LandingPage/CONSTRADE.png";
+import aboutus from "../Assets/Images/LandingPage/who_we_are.jpg";
+import { BsFacebook } from "react-icons/bs";
 
 const Index = () => {
   // useEffect(() => {
   //   if (isUserLoggedIn()) window.location.href = "/home";
   // }, []);
   return (
-    <div className="container -px-4 bg-white">
-      <section className="item-cards ">
-        <img
-          src={ellipse2}
-          alt="ellipse2"
-          className="z-20 w-52 absolute  -right-32 sm:-right-20 lg:-left-20 top-1/3 sm:top-1/2 rounded-full"
-        />
-        <img
-          src={ellipse6}
-          alt="ellipse"
-          className=" z-20 w-12 absolute animate-ping right-24 top-30"
-        />
-        <img
-          src={ellipse3}
-          alt="ellipse"
-          className=" z-20 w-12 absolute animate-ping right-1/2 top-3/4"
-        />
-        <img
-          src={ellipse6}
-          alt="ellipse"
-          className=" z-20 w-12 absolute animate-ping left-48 top-40"
-        />
-        <div className="grid grid-cols-1 lg:grid-cols-2">
-          <div className="mt-10 p-8 lg:mt-0 lg:p-18 xl:p-32">
-            <p className="text-4xl  text-[#202937] font-bold">
-              ENJOY EVERY
-              <span className="text-4xl ml-4 font-bold text-orange-400">
-                GAME.
-              </span>{" "}
-            </p>
-            <div className="flex">
-              <p className="text-4xl text-[#202937] font-bold">EVERY </p>
-              <p className="text-4xl ml-4 font-bold text-blue-400">MOMENT.</p>
-            </div>
-            <div>
-              <p className="text-lg mt-4 mb-8 text-gray-400">
-                We strongly believe that every game is important and should be
-                cherish.
-              </p>
-            </div>
-            <div>
-              <p className="text-2xl mt-10 font-semibold text-orange-500 tracking-widest flex">
-                HOT{" "}
-                <img src={flash} className="w-6 animate-pulse" alt="flash" />
-                ITEM{" "}
-              </p>
-              <img
-                className="rounded-t-lg  w-1/2 lg:w-full"
-                src={pic1}
-                alt="pic1"
-              />
-            </div>
+    <div className="container px-4">
+      <section className="h-[93vh] bg-white grid md:grid-cols-2">
+        <div className="flex place-items-center lg:block lg:mt-40">
+          <div>
+            <h1 className="font-poppins font-semibold text-[2.5rem] lg:text-[3.2rem] lg:pr-3 ">
+              Buy, Sell, & Trade-in{" "}
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#3D4BA9] via-purple-500 to-[#EE661C]">
+                Console Games.
+              </span>
+            </h1>
+
+            <h3 className="text-gray-400 text-base mt-12 lg:text-xl border-l-2 border-l-[#3D4BA9] pl-2 pr-5">
+              We strongly believe that every game is important and should be
+              cherish.
+            </h3>
+
+            <button className="mt-5 py-3 px-6 rounded-lg border-2 border-[#1D257C] hover:bg-[#1D257C] text-[#1D257C] font-semibold font-poppins hover:text-white ">
+              How it Works
+            </button>
           </div>
-          <div className="md:grid md:grid-rows-2 md:grid-flow-col">
-            <div className="">
-              <p className="mt-4 ml-7 text-2xl font-semibold  tracking-widest text-orange-500">
-                TOP TRADED GAMES
+        </div>
+        <div className="flex place-items-center">
+          <img src={header} alt="header" />
+        </div>
+      </section>
+
+      <section className="h-screen bg-white">
+        <h1 className="text-4xl text-gray-500 font-poppins text-center mt-24 lg:mt-0 lg:mb-24">
+          About Us
+        </h1>
+
+        <div className="grid lg:grid-cols-2 ">
+          <div className="flex place-items-center">
+            <img src={aboutus} alt="aboutus" />
+          </div>
+          <div className="flex place-items-center">
+            <div className="md:p-20 md:pt-0 pt-10">
+              <h3 className="text-4xl font-poppins font-semibold mb-5 bg-clip-text text-transparent bg-gradient-to-r from-[#3D4BA9] via-purple-500 to-[#EE661C]">
+                Who We Are?
+              </h3>
+              <p className="text-gray-400">
+                Constrade is a Lorem Ipsum is simply dummy text of the printing
+                and typesetting industry. Lorem Ipsum has been the industry's
+                standard dummy text ever since the 1500s, when an unknown
+                printer took a galley of type and scrambled it to make a type
+                specimen book.
               </p>
-
-              <img className="rounded-t-lg w-full" src={pic1} alt="pic2" />
-
-              <div className="w-72 ml-11 text-justify">
-                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 hover:underline hover:decoration-pink-500/70 transition delay-200 cursor-pointer">
-                  HALO
-                </h5>
-
-                <div className="flex">
-                  <p className="mb-3 font-normal text-lg text-gray-700 dark:text-gray-400">
-                    Here are the biggest enterprise technology acquisitions of
-                    2021 so far, in reverse chronological order.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="">
-              <img className="rounded-t-lg  w-full" src={pic2} alt="pic3" />
-
-              <div className="w-72 ml-11 text-justify">
-                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 hover:underline hover:decoration-pink-500/70 transition delay-200 cursor-pointer">
-                  NBA2K20
-                </h5>
-
-                <div className="flex">
-                  <p className="mb-3 font-normal text-lg text-gray-700 dark:text-gray-400">
-                    Here are the biggest enterprise technology acquisitions of
-                    2021 so far, in reverse chronological order.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="max-w-sm  dark:border-gray-700">
-              <img className="rounded-t-lg  w-full" src={pic3} alt="pic3" />
-
-              <div className="w-72 ml-11 text-justify">
-                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 hover:underline hover:decoration-pink-500/70 transition delay-200 cursor-pointer">
-                  GTA 5
-                </h5>
-
-                <div className="flex">
-                  <p className="mb-3 font-normal text-lg text-gray-700 dark:text-gray-400">
-                    Here are the biggest enterprise technology acquisitions of
-                    2021 so far, in reverse chronological order.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="">
-              <img className="rounded-t-lg  w-full" src={pic4} alt="pic4" />
-
-              <div className="w-72 ml-11 text-justify">
-                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 hover:underline hover:decoration-pink-500/70 transition delay-200 cursor-pointer">
-                  FIFA20
-                </h5>
-
-                <div className="flex md:shrink-0">
-                  <p className="mb-3 font-normal text-lg text-gray-700 dark:text-gray-400">
-                    Here are the biggest enterprise technology acquisitions of
-                    2021 so far, in reverse chronological order.
-                  </p>
-                </div>
-              </div>
+              <button className="mt-10 border-2 py-2 px-5 rounded-lg border-[#EE661C] hover:bg-[#EE661C] text-[#EE661C] hover:text-white">
+                Learn More
+              </button>
             </div>
           </div>
         </div>
       </section>
+      <section className="h-screen lg:h-[70vh] grid lg:grid-cols-2 place-content-center lg:place-content-start">
+        <div>
+          <h2 className="text-4xl font-poppins font-semibold mb-5 bg-clip-text text-transparent bg-gradient-to-r from-[#3D4BA9] via-purple-500 to-[#EE661C]">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-gray-400 pr-16">
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s, when an unknown printer took a galley of type
+            and scrambled it to make a type specimen book. It has survived not
+            only five centuries, but also the leap into electronic typesetting,
+            remaining essentially unchanged.
+          </p>
+          <button className="mt-10 py-3 px-5 border-2 rounded-lg border-[#1D257C] hover:bg-[#1D257C] text-[#1D257C] font-semibold font-poppins hover:text-white">
+            Got more Questions?
+          </button>
+        </div>
+        <div className="shadow-lg h-fit mt-16 lg:mt-0">
+          <Accordion>
+            <Accordion.Panel>
+              <Accordion.Title>What is Console Games?</Accordion.Title>
+              <Accordion.Content>
+                <p className="mb-2 text-gray-500 dark:text-gray-400">
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry's
+                  standard dummy text ever since the 1500s, when an unknown
+                  printer took a galley of type and scrambled it to make a type
+                  specimen book.
+                </p>
+                <p className="text-gray-500 dark:text-gray-400">
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry.
+                </p>
+              </Accordion.Content>
+            </Accordion.Panel>
+            <Accordion.Panel>
+              <Accordion.Title>What is Trade-in?</Accordion.Title>
+              <Accordion.Content>
+                <p className="mb-2 text-gray-500 dark:text-gray-400">
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry's
+                  standard dummy text ever since the 1500s, when an unknown
+                  printer took a galley of type and scrambled it to make a type
+                  specimen book.
+                </p>
+                <p className="text-gray-500 dark:text-gray-400">
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry.
+                </p>
+              </Accordion.Content>
+            </Accordion.Panel>
+            <Accordion.Panel>
+              <Accordion.Title>What is the goal of ConsTrade?</Accordion.Title>
+              <Accordion.Content>
+                <p className="mb-2 text-gray-500 dark:text-gray-400">
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry's
+                  standard dummy text ever since the 1500s, when an unknown
+                  printer took a galley of type and scrambled it to make a type
+                  specimen book.
+                </p>
+                <p className="text-gray-500 dark:text-gray-400">
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry.
+                </p>
+              </Accordion.Content>
+            </Accordion.Panel>
+          </Accordion>
+        </div>
+      </section>
+
+      <footer className="h-32 bg-[#3D4BA9] backdrop-blur-2xl shadow-lg grid lg:grid-cols-2">
+        <div className="bg-[rgba(100%,100%,100%,90%)] py-5 lg:py-0 backdrop-blur-md w-full h-full flex items-center justify-center lg:border-r-2 lg:border-r-gray-300">
+          <p
+            className="text-lg lg:text-2xl font-poppins font-semibold bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-[#af3e02] hover:cursor-pointer
+           hover:to-purple-500 hover:from-[#af3e02]"
+            onClick={() =>
+              window.open(
+                "mailto:constradeapplication22@gmail.com?subject=HELLO&body=Hi%20Constrades"
+              )
+            }
+          >
+            constradeapplication22@gmail.com
+          </p>
+        </div>
+        <div className="bg-[rgba(100%,100%,100%,90%)] backdrop-blur-md w-full h-full flex items-center justify-center">
+          <div>
+            <div className="text-2xl font-poppins font-semibold flex place-items-center mb-5">
+              Follow Us{" "}
+              <span className="p-1 border ml-10 rounded-full border-black hover:border-orange-500">
+                <BsFacebook
+                  className=" cursor-pointer hover:text-orange-500 "
+                  onClick={() =>
+                    window.open(
+                      "https://www.facebook.com/profile.php?id=100086988933778",
+                      "_blank"
+                    )
+                  }
+                />
+              </span>
+            </div>
+            <p className="text-gray-400">
+              Copyright Constrades. All rights Reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };

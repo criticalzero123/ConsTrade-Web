@@ -9,8 +9,8 @@ import { createUserEmailPassword } from "../../../firebase/authEmailAndPassword"
 import { emailAndPasswordRegister } from "../../../actions/userActions";
 import { isUserLoggedIn } from "../../../service/userService";
 import InputName from "../../../Components/login-and-register/InputName";
-import logo from "../../../Assets/Branding/Web/SVG/IconWeb.svg";
-import cover1 from "../../../Assets/sign-up-and-in/coversign.png";
+import logo from "../../../Assets/Images/Branding/Web/SVG/IconWeb.svg";
+import cover1 from "../../../Assets/Images/sign-up-and-in/coversign.png";
 
 const Register = () => {
   const [email, setEmail] = useState("");

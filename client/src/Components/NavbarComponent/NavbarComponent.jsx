@@ -11,8 +11,8 @@ import {
 } from "../../service/userService";
 
 import { Avatar, Dropdown, Navbar } from "flowbite-react/lib/cjs/components";
-import logo from "../../Assets/Branding/Web/SVG/IconWeb.svg";
-import textLogo from "../../Assets/Branding/ConsTrade.svg";
+import logo from "../../Assets/Images/Branding/Web/SVG/IconWeb.svg";
+import textLogo from "../../Assets/Images/Branding/ConsTrade.svg";
 
 import { BiSearch } from "react-icons/bi";
 import { BsChatDots } from "react-icons/bs";
