@@ -36,6 +36,21 @@ const Index = () => {
             <div>There are no product posted yet.</div>
           ) : (
             <div>
+              <section>
+                <div className="w-full bg-gray-400 h-52 rounded-2xl px-5 lg:px-14 py-5">
+                  <h1 className="font-poppins text-2xl ">
+                    One Stop{" "}
+                    <span className="bg-clip-text font-semibold  text-transparent bg-gradient-to-r from-[#3D4BA9] via-purple-500 to-[#EE661C]">
+                      Trade
+                    </span>{" "}
+                    Platform
+                  </h1>
+                  <div className="mt-5 font-poppins text-gray-300">
+                    <h3>Discover Various of Console Games</h3>
+                    <h3>Add, Trade and collect yours now!</h3>
+                  </div>
+                </div>
+              </section>
               <SlickCarousel
                 products={products.filter(
                   (product) => product.status !== "sold"

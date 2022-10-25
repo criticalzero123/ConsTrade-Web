@@ -32,13 +32,18 @@ const Index = () => {
                   Console Games.
                 </span>
               </h1>
-
-              <h3 className="text-gray-400 text-base mt-12 lg:text-xl border-l-2 border-l-[#3D4BA9] pl-2 pr-5">
+              <div className="flex mt-7 place-items-center">
+                <div className="w-16 h-1 bg-orange-400"></div>
+                <p className="ml-2 text-2xl font-poppins font-semibold">
+                  What we believe.
+                </p>
+              </div>
+              <h3 className="text-gray-400 text-base mt-6 lg:text-xl  pl-2 pr-5">
                 We strongly believe that every game is important and should be
                 cherish.
               </h3>
 
-              <button className="mt-5 py-3 px-6 rounded-lg border-2 border-[#1D257C] hover:bg-[#1D257C] text-[#1D257C] font-semibold font-poppins hover:text-white ">
+              <button className="mt-10 py-3 px-6 rounded-lg border-2 border-[#1D257C] hover:bg-[#1D257C] text-[#1D257C] font-semibold font-poppins hover:text-white ">
                 How it Works
               </button>
             </div>
@@ -49,7 +54,7 @@ const Index = () => {
         </section>
 
         <section className="h-screen bg-white">
-          <h1 className="text-4xl text-gray-500 font-poppins text-center mt-24 lg:mt-0 lg:mb-24">
+          <h1 className="text-4xl text-gray-500 font-poppins text-center mt-24 lg:mt-0 lg:mb-24 ">
             About Us
           </h1>
 
