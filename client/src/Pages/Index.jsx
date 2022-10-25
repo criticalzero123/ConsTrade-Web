@@ -27,7 +27,7 @@ const Index = () => {
           <div className="flex place-items-center lg:block lg:mt-40">
             <div>
               <h1 className="font-poppins font-semibold text-[2.5rem] lg:text-[3.2rem] lg:pr-3 ">
-                Buy, Sell, & Trade-in{" "}
+                Sell, Swap, & Trade-in{" "}
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#3D4BA9] via-purple-500 to-[#EE661C]">
                   Console Games.
                 </span>

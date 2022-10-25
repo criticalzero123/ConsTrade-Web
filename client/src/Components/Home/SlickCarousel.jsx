@@ -11,7 +11,7 @@ import "./SlickCss.css";
 const SlickCarousel = ({ products, title }) => {
   return (
     products.length !== 0 && (
-      <div className="lg:px-32">
+      <div>
         <h1 className="ml-2 mb-4 text-2xl font-semibold">{title}</h1>
         <Slider {...settings}>
           {products &&
