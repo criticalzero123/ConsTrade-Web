@@ -65,7 +65,7 @@ const ProductMessagesUser = () => {
 
         setNewChatUserId(combinedId);
 
-        const res = await getDoc(doc(db, "chats", combinedId));
+        const res = await getDoc(doc(db, "productMessages", combinedId));
         try {
           if (!res.exists()) {
             //create a chat in chats collection
@@ -82,7 +82,7 @@ const ProductMessagesUser = () => {
             //   ],
             // });
 
-            await setDoc(doc(db, "chats", combinedId), {
+            await setDoc(doc(db, "productMessages", combinedId), {
               messages: [],
             });
 

@@ -22,7 +22,7 @@ const MessageInput = ({ chatId, otherUserId, onClickScrollDown }) => {
 
     setText("");
 
-    await updateDoc(doc(db, "chats", chatId), {
+    await updateDoc(doc(db, "productMessages", chatId), {
       messages: arrayUnion({
         id: v4(),
         text,

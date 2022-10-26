@@ -37,7 +37,7 @@ const MessagesComponent = ({
   };
 
   useEffect(() => {
-    const unSub = onSnapshot(doc(db, "chats", chatId), (doc) => {
+    const unSub = onSnapshot(doc(db, "productMessages", chatId), (doc) => {
       doc.exists() && setMessages(doc.data().messages);
     });
     // This is for the ref scroll
