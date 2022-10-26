@@ -38,7 +38,7 @@ const UserProfileTransactionList = ({ userId }) => {
             <ul className="divide-y divide-gray-200 dark:divide-gray-700">
               {transactions && transactions.length !== 0 ? (
                 transactions.map((transaction) => (
-                  <li className="py-3 sm:py-4">
+                  <li className="py-3 sm:py-4" key={transaction.name}>
                     <div className="flex items-center space-x-4">
                       <div className="shrink-0">
                         <img

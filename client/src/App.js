@@ -15,31 +15,44 @@ import Category from "./Pages/Search/Category/Category";
 import Messages from "./Pages/Messages/Messages";
 import MessagesUser from "./Pages/Messages/MessagesUser/MessagesUser";
 import ProductEdit from "./Pages/ProductEdit/ProductEdit";
+import { useSelector } from "react-redux";
 function App() {
+  const { currentUser } = useSelector((state) => state.userInfoReducer);
+
   return (
     <div className="container mx-auto">
       <NavbarComponent />
       <div className=" px-0 lg:px-4">
         <Routes>
           <Route path="/" element={<Index />} />
-
-          <Route path="/signin" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-
           <Route path="/home" element={<Home />} />
 
-          {/*Product*/}
-          <Route path="/product/item/:id" element={<ProductDetails />} />
-          <Route path="/product/item/list/:id" element={<ProductList />} />
-          <Route path="/product/add" element={<ProductAdd />} />
-          <Route path="/product/edit/:productid" element={<ProductEdit />} />
+          {currentUser && currentUser !== undefined ? (
+            <>
+              <Route path="/product/item/:id" element={<ProductDetails />} />
+              <Route path="/product/item/list/:id" element={<ProductList />} />
+              <Route path="/product/add" element={<ProductAdd />} />
+              <Route
+                path="/product/edit/:productid"
+                element={<ProductEdit />}
+              />
 
-          <Route path="/user/:id" element={<UserProfile />} />
-          <Route path="/search/category/:category" element={<Category />} />
-          <Route path="/favorites" element={<Favorites />} />
-          <Route path="/messages" element={<Messages />}>
-            <Route path="user/:uid" element={<MessagesUser />} />
-          </Route>
+              <Route path="/user/:id" element={<UserProfile />} />
+              <Route path="/search/category/:category" element={<Category />} />
+              <Route path="/favorites" element={<Favorites />} />
+              <Route path="/messages" element={<Messages />}>
+                <Route path="user/:uid" element={<MessagesUser />} />
+              </Route>
+            </>
+          ) : (
+            <>
+              <Route path="/signin" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+            </>
+          )}
+
+          {/*Product*/}
+
           <Route
             path="*"
             element={

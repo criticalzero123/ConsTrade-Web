@@ -41,7 +41,7 @@ const NavbarComponent = () => {
   return (
     <div className="">
       <Navbar fluid={true}>
-        <Navbar.Brand href="/">
+        <Navbar.Brand href={useLoggedIn ? "/home" : "/"}>
           <img src={logo} className="mr-3 h-6 sm:h-10" alt="Constrade Logo" />
           <img
             src={textLogo}
