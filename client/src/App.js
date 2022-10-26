@@ -13,7 +13,7 @@ import Favorites from "./Pages/Favorites/Favorites";
 import UserProfile from "./Pages/UserProfile/UserProfile";
 import Category from "./Pages/Search/Category/Category";
 import Messages from "./Pages/Messages/Messages";
-import MessagesUser from "./Pages/Messages/MessagesUser/MessagesUser";
+import ProductMessagesUser from "./Pages/Messages/MessagesUser/ProductMessagesUser";
 import ProductEdit from "./Pages/ProductEdit/ProductEdit";
 import { useSelector } from "react-redux";
 function App() {
@@ -41,7 +41,10 @@ function App() {
               <Route path="/search/category/:category" element={<Category />} />
               <Route path="/favorites" element={<Favorites />} />
               <Route path="/messages" element={<Messages />}>
-                <Route path="user/:uid" element={<MessagesUser />} />
+                <Route
+                  path="product/:productId/:uid"
+                  element={<ProductMessagesUser />}
+                />
               </Route>
             </>
           ) : (

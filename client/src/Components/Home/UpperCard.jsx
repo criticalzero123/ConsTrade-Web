@@ -25,16 +25,16 @@ const UpperCard = () => {
               <h3>Discover Various of Console Games</h3>
               <h3>Post, Trade and collect yours now!</h3>
             </div>
-            <div className="flex mt-10 place-items-end">
+            <div className="flex flex-wrap  sm:mt-10 place-items-end">
               <Link
                 to="/product/add"
-                className="py-3 px-6 bg-gray-100 mr-6 h-fit rounded-lg flex place-items-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white  font-poppins
+                className="py-3 px-6 mt-5 sm:mt-0 bg-gray-100 mr-6 h-fit rounded-lg flex place-items-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white  font-poppins
                       hover:text-orange-300"
               >
                 <BsPencilSquare className="mr-2" />
                 Start Posting
               </Link>
-              <button className="py-3 px-6  h-fit rounded-lg flex place-items-center bg-[#051632] text-white  font-poppins hover:text-orange-400">
+              <button className="py-3 mt-5 sm:mt-0 px-6   h-fit rounded-lg flex place-items-center bg-[#051632] text-white  font-poppins hover:text-orange-400">
                 <BsPlayCircle className="mr-2" />
                 Learn How
               </button>

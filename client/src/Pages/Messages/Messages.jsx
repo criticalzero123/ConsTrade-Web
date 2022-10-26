@@ -17,7 +17,6 @@ const Messages = () => {
   const [chats, setChats] = useState();
   const [chatId, setChatId] = useState("");
   const [otherUserProfile, setOtherUserProfile] = useState("");
-  const [productId, setProductId] = useState("");
   const [displayName, setDisplayName] = useState("");
   const { currentUser } = useSelector((state) => state.userInfoReducer);
 
@@ -40,7 +39,7 @@ const Messages = () => {
       <aside
         className={`${
           pathLength > 3 && "hidden sm:block"
-        } sm:col-span-2 w-full overflow-y-auto h-[35rem] bg-[#F5F7FB] p-5 rounded`}
+        } sm:col-span-2 w-full overflow-y-auto h-[88vh] bg-[#F5F7FB] p-5 rounded`}
       >
         {arrayOfChatsUser.length === 0 ? (
           <div className="mx-auto">No conversations</div>
@@ -51,11 +50,10 @@ const Messages = () => {
             .map((chat) => (
               <Link
                 key={chat[0]}
-                to={`user/${chat[1].userInfo._id}`}
+                to={`product/${chat[1].productInfo.productId}/${chat[1].userInfo._id}`}
                 onClick={() => {
                   setChatId(chat[0]);
                   setOtherUserProfile(chat[1].userInfo.photoURL);
-                  setProductId(chat[1].productInfo.productId);
                   setDisplayName(chat[1].userInfo.displayName);
                 }}
               >
@@ -64,6 +62,7 @@ const Messages = () => {
                   displayName={chat[1].userInfo.displayName}
                   photoURL={chat[1].productInfo.imageURL}
                   userId={chat[1].userInfo._id}
+                  productId={chat[1].productInfo.productId}
                 />
               </Link>
             ))
@@ -72,13 +71,11 @@ const Messages = () => {
 
       <div className={`${pathLength < 3 && "hidden sm:block"} sm:col-span-4 `}>
         {pathLength < 3 && (
-          <div className="text-black h-[30rem] bg-[#F5F7FB] flex place-items-center justify-center text-4xl">
+          <div className="text-black h-[88vh] bg-[#F5F7FB] flex place-items-center justify-center text-4xl">
             Select Conversation
           </div>
         )}
-        <Outlet
-          context={[chatId, otherUserProfile, productId, displayName, chats]}
-        />
+        <Outlet context={[chatId, otherUserProfile, displayName, chats]} />
       </div>
     </div>
   );

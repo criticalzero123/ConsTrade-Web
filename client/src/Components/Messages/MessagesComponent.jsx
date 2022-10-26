@@ -6,7 +6,7 @@ import MessageInput from "./MessageInput";
 import { Link } from "react-router-dom";
 import { Button } from "flowbite-react";
 import { soldItemTransaction } from "../../actions/transactionActions";
-import { BsCheckSquareFill } from "react-icons/bs";
+import { BsCheckSquareFill, BsArrowRight } from "react-icons/bs";
 
 import { RiArrowDownSLine } from "react-icons/ri";
 
@@ -20,7 +20,6 @@ const MessagesComponent = ({
   otherUserProfile,
   otherUserId,
   otherUser_Id,
-  completed,
   displayName,
   product,
   currentUser_Id,
@@ -90,8 +89,8 @@ const MessagesComponent = ({
   };
 
   return (
-    <div className="bg-[#EFF3F8] rounded-md relative">
-      <div className="h-[30rem] p-5 overflow-y-auto  rounded">
+    <div className="bg-[#EFF3F8] h-[85vh] sm:h-[88vh] rounded-md relative">
+      <div className="h-5/6 p-5 overflow-y-auto  rounded">
         {messages.map((message) => (
           <div key={message.id}>
             {message.senderId === currentUserId ? (
@@ -139,15 +138,33 @@ const MessagesComponent = ({
         ))}
         <div ref={scrollDown}></div>
       </div>
-      {completed !== true && (
-        <MessageInput
-          chatId={chatId}
-          otherUserId={otherUserId}
-          onClickScrollDown={onClickScrollDown}
-        />
+      {product ? (
+        product.status !== "sold" ? (
+          <MessageInput
+            chatId={chatId}
+            otherUserId={otherUserId}
+            onClickScrollDown={onClickScrollDown}
+          />
+        ) : (
+          <div className="h-1/6 flex place-item-center">
+            <div className="p-5 flex w-full justify-between items-center bg-[rgb(100%,100%,100%,50%)] backdrop-blur-md">
+              <div>This item is already Transacted.</div>
+              <Button
+                gradientDuoTone="greenToBlue"
+                onClick={() =>
+                  (window.location.href = "/product/item/" + product._id)
+                }
+              >
+                Go to Post <BsArrowRight size={20} className="ml-2" />
+              </Button>
+            </div>
+          </div>
+        )
+      ) : (
+        <div>Loading...</div>
       )}
-      {!completed &&
-        product &&
+      {product &&
+        product.status !== "sold" &&
         product.userId === currentUser_Id &&
         (showHeader ? (
           <div

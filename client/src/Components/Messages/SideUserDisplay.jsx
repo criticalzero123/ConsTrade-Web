@@ -3,15 +3,22 @@ import { useLocation } from "react-router-dom";
 
 import { firstLetterUpper } from "../../service/userService";
 
-const SideUserDisplay = ({ photoURL, displayTitle, displayName, userId }) => {
+const SideUserDisplay = ({
+  photoURL,
+  displayTitle,
+  displayName,
+  userId,
+  productId,
+}) => {
   const location = useLocation();
   const splitPathname = location.pathname.split("/");
   const currentUserId = splitPathname[splitPathname.length - 1];
+  const _productId = splitPathname[splitPathname.length - 2];
 
   return (
     <div
       className={`grid grid-cols-6 h-20 place-items-center ${
-        currentUserId === userId
+        currentUserId === userId && _productId === productId
           ? "bg-gray-800 text-gray-200 "
           : "bg-gray-100 text-black hover:bg-gray-200 "
       } rounded cursor-pointer p-1`}

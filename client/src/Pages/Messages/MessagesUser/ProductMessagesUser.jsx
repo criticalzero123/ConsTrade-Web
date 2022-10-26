@@ -15,18 +15,16 @@ import {
 
 import { db } from "../../../firebase/firebase-config";
 import MessagesComponent from "../../../Components/Messages/MessagesComponent";
-import MessageModalSoldInfo from "../../../Components/Messages/MessageModalSoldInfo";
 
-const MessagesUser = () => {
-  const { uid } = useParams();
-
-  const [chatId, otherUserProfile, productId, displayName, chats] =
-    useOutletContext();
+const ProductMessagesUser = () => {
+  const { uid, productId } = useParams();
   const location = useLocation();
+  const dispatch = useDispatch();
+
+  const [chatId, otherUserProfile, displayName, chats] = useOutletContext();
 
   const [newChatUserId, setNewChatUserId] = useState("");
 
-  const dispatch = useDispatch();
   const { user, error, loading } = useSelector(
     (state) => state.getUserByIdReducer
   );
@@ -36,22 +34,11 @@ const MessagesUser = () => {
 
   var onRenderChatKey = "";
   var onRenderChat = null;
-  const [onProductId, setOnProductId] = useState("");
-  useEffect(() => {
-    setOnProductId(productId);
-  }, [productId]);
 
   useEffect(() => {
     dispatch(getUserById(uid));
-    onProductId && dispatch(getProductById(onProductId));
-  }, [dispatch, uid, onProductId]);
-
-  const [completed, setCompleted] = useState(false);
-  useEffect(() => {
-    if (product && product !== undefined) {
-      setCompleted(product.status === "sold");
-    }
-  }, [product]);
+    dispatch(getProductById(productId));
+  }, [dispatch, uid, productId]);
 
   if (user && chats) {
     onRenderChatKey = Object.keys(chats).find((chat) =>
@@ -60,10 +47,6 @@ const MessagesUser = () => {
     onRenderChat = Object.entries(chats).find((chat) =>
       chat[0].includes(user.uid)
     );
-  }
-
-  if (onProductId === "" && onRenderChat) {
-    setOnProductId(onRenderChat[1].productInfo.productId);
   }
 
   useEffect(() => {
@@ -179,7 +162,6 @@ const MessagesUser = () => {
                   <MdOutlineKeyboardBackspace className="mr-1 " /> Back
                 </Link>
 
-                <MessageModalSoldInfo product={product} completed={completed} />
                 <MessagesComponent
                   chatId={chatKey}
                   currentUserId={currentUser.uid}
@@ -191,7 +173,6 @@ const MessagesUser = () => {
                       ? onRenderChat && onRenderChat[1].userInfo.photoURL
                       : otherUserProfile
                   }
-                  completed={completed}
                   displayName={
                     displayName === ""
                       ? onRenderChat && onRenderChat[1].userInfo.displayName
@@ -209,4 +190,4 @@ const MessagesUser = () => {
   );
 };
 
-export default MessagesUser;
+export default ProductMessagesUser;

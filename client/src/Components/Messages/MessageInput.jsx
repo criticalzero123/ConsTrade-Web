@@ -50,10 +50,10 @@ const MessageInput = ({ chatId, otherUserId, onClickScrollDown }) => {
   };
 
   return (
-    <div className="w-full p-3 ">
+    <div className="w-full p-3  h-1/6 flex place-items-end">
       <form
         onSubmit={handleSend}
-        className="bg-white p-2 rounded-lg shadow-xl mb-2"
+        className="bg-white p-2 rounded-lg shadow-xl mb-2 w-full"
       >
         <div className="flex">
           <input

@@ -160,7 +160,10 @@ const ProductInfo = ({
             </div>
           ) : (
             <div className="w-full">
-              <Link to={`/messages/user/${product.userId}`} state={product}>
+              <Link
+                to={`/messages/product/${product._id}/${product.userId}`}
+                state={product}
+              >
                 <button
                   disabled={soldChecker}
                   type="button"
