@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Accordion } from "flowbite-react/lib/cjs/components/Accordion";
 import header from "../Assets/Images/LandingPage/CONSTRADE.png";
@@ -10,7 +10,14 @@ import avatar4 from "../Assets/Images/LandingPage/avatar4.png";
 import avatar5 from "../Assets/Images/LandingPage/avatar5.png";
 import { BsFacebook } from "react-icons/bs";
 
+import Aos from "aos";
+import "aos/dist/aos.css";
+
 const Index = () => {
+  useEffect(() => {
+    Aos.init({ duration: 1500 });
+  }, []);
+
   const AvatarDisplay = ({ img, altT }) => (
     <>
       <img src={img} alt={altT} className="h-full object-contain ml-1" />
@@ -24,7 +31,10 @@ const Index = () => {
     <>
       <div className="container px-4">
         <section className="h-[93vh] bg-white grid md:grid-cols-2">
-          <div className="flex place-items-center lg:block lg:mt-40">
+          <div
+            className="flex place-items-center lg:block lg:mt-40"
+            data-aos="fade-right"
+          >
             <div>
               <h1 className="font-poppins font-semibold text-[2.5rem] lg:text-[3.2rem] lg:pr-3 ">
                 Sell, Swap, & Trade-in{" "}
@@ -48,18 +58,24 @@ const Index = () => {
               </button>
             </div>
           </div>
-          <div className="flex place-items-center">
+          <div className="flex place-items-center" data-aos="fade-left">
             <img src={header} alt="header" />
           </div>
         </section>
 
         <section className="h-screen bg-white">
-          <h1 className="text-4xl text-gray-500 font-poppins text-center mt-24 lg:mt-0 lg:mb-24 ">
+          <h1
+            className="text-4xl text-gray-500 font-poppins text-center mt-24 lg:mt-0 lg:mb-24 "
+            data-aos="zoom-in"
+          >
             About Us
           </h1>
 
           <div className="grid lg:grid-cols-2 ">
-            <div className="flex place-items-center relative">
+            <div
+              className="flex place-items-center relative"
+              data-aos="zoom-out-up"
+            >
               <img src={aboutus} alt="aboutus" />
 
               <div className="bg-gray-200 hidden h-12 w-40 absolute top-0 left-50 rounded-full sm:flex py-1 justify-start place-items-center">
@@ -81,7 +97,11 @@ const Index = () => {
                 <AvatarDisplay img={avatar5} alt={"avatar5"} />
               </div>
             </div>
-            <div className="flex place-items-center ">
+            <div
+              className="flex place-items-center "
+              data-aos="fade-up"
+              data-aos-anchor-placement="bottom-bottom"
+            >
               <div className="md:p-20 md:pt-0 pt-10">
                 <h3
                   className="text-4xl font-poppins font-semibold mb-5 bg-clip-text text-transparent relative bg-gradient-to-r from-[#3D4BA9] via-purple-500 to-[#EE661C]
@@ -104,7 +124,7 @@ const Index = () => {
           </div>
         </section>
         <section className="h-screen lg:h-[70vh] grid lg:grid-cols-2 place-content-center lg:place-content-start">
-          <div>
+          <div data-aos="flip-left">
             <h2 className="text-4xl font-poppins font-semibold mb-5 bg-clip-text text-transparent bg-gradient-to-r from-[#3D4BA9] via-purple-500 to-[#EE661C]">
               Frequently Asked Questions
             </h2>
@@ -120,7 +140,7 @@ const Index = () => {
               Got more Questions?
             </button>
           </div>
-          <div className="shadow-lg h-fit mt-16 lg:mt-0">
+          <div className="shadow-lg h-fit mt-16 lg:mt-0" data-aos="flip-right">
             <Accordion>
               <Accordion.Panel>
                 <Accordion.Title>What is Console Games?</Accordion.Title>

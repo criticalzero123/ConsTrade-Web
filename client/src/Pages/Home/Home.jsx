@@ -67,7 +67,7 @@ const Index = () => {
               <div className="w-full mt-10  mb-10">
                 <UserSlickCarousel
                   users={users}
-                  title="Top trader"
+                  title="Top Poster"
                   icon={
                     <RiUserStarFill
                       className="mr-2 text-yellow-400"
