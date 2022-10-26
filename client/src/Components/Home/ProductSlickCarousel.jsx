@@ -8,7 +8,7 @@ import { BsArrowRight } from "react-icons/bs";
 
 import { productSettings } from "../../service/slickService";
 import ProductSlickCard from "./ProductSlickCard";
-import "./SlickCss.css";
+import "./ProductSlickCss.css";
 
 const ProductSlickCarousel = ({ products, title, icon }) => {
   return products.length !== 0 ? (

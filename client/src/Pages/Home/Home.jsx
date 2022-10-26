@@ -8,15 +8,22 @@ import HomePulseLoader from "../../Components/Home/HomePulseLoader";
 import UpperCard from "../../Components/Home/UpperCard";
 import { FaHotjar } from "react-icons/fa";
 import { BsCheckAll } from "react-icons/bs";
+import UserSlickCarousel from "../../Components/Home/UserSlickCarousel";
+import { getAllUserByCountPost } from "../../actions/userActions";
+import { RiUserStarFill } from "react-icons/ri";
 
 const Index = () => {
   const dispatch = useDispatch();
   const getallproducts = useSelector((state) => state.getAllProductsReducer);
-
+  const getallusers = useSelector(
+    (state) => state.getAllUserByCountPostReducer
+  );
   const { loading, products, error } = getallproducts;
+  const { users } = getallusers;
 
   useEffect(() => {
     dispatch(getAllProducts());
+    dispatch(getAllUserByCountPost());
   }, [dispatch]);
 
   return (
@@ -51,8 +58,25 @@ const Index = () => {
                   }
                 />
               </div>
-              {/* <div className="w-full bg-gray-400 mt-10">asd</div> */}
             </div>
+          )}
+          {getallusers.loading ? (
+            <div>Loading</div>
+          ) : (
+            users && (
+              <div className="w-full mt-10  mb-10">
+                <UserSlickCarousel
+                  users={users}
+                  title="Top trader"
+                  icon={
+                    <RiUserStarFill
+                      className="mr-2 text-yellow-400"
+                      size={25}
+                    />
+                  }
+                />
+              </div>
+            )
           )}
         </div>
       )}

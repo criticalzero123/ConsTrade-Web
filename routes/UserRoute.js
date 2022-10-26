@@ -140,6 +140,18 @@ router.post("/getUserById", (req, res) => {
   });
 });
 
+router.get("/getAllUserByCountPost", async (req, res) => {
+  try {
+    const allUser = await User.find({}).sort({ countPost: -1 }).limit(20);
+
+    res.send(allUser);
+  } catch (err) {
+    return res.status(400).json({
+      message: "Something went wrong in fetching all users",
+    });
+  }
+});
+
 router.post("/addFavorite", async (req, res) => {
   const { userInfo, productId } = req.body;
 

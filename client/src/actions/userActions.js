@@ -73,6 +73,23 @@ export const getUserById = (id) => (dispatch) => {
     });
 };
 
+export const getAllUserByCountPost = () => (dispatch) => {
+  dispatch({ type: "GET_USER_ALL_BY_COUNT_POST_REQUEST" });
+
+  axios
+    .get("/api/users/getAllUserByCountPost")
+    .then((res) => {
+      dispatch({
+        type: "GET_USER_ALL_BY_COUNT_POST_SUCCESS",
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({ type: "GET_USER_ALL_BY_COUNT_POST_FAILED" });
+      console.log(err);
+    });
+};
+
 export const addToFavorite = (productId) => (dispatch, getState) => {
   dispatch({ type: "USER_FAVORITE_REQUEST" });
 
