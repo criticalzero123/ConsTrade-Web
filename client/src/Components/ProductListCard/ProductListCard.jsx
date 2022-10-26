@@ -1,11 +1,13 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { deleteProduct } from "../../actions/productActions";
 import Swal from "sweetalert2";
 
 const ProductListCard = ({ product }) => {
   const dispatch = useDispatch();
+
+  const { currentUser } = useSelector((state) => state.userInfoReducer);
 
   const deleteClick = () => {
     Swal.fire({
@@ -59,14 +61,16 @@ const ProductListCard = ({ product }) => {
               </svg>
             </p>
           </Link>
-          <div className="flex text-black">
-            <p className="mr-5 cursor-pointer " onClick={deleteClick}>
-              Delete
-            </p>
-            <Link to={`/product/edit/${product._id}`}>
-              <p className="cursor-pointer">Edit</p>
-            </Link>
-          </div>
+          {product.userId === currentUser._id && (
+            <div className="flex text-black">
+              <p className="mr-5 cursor-pointer " onClick={deleteClick}>
+                Delete
+              </p>
+              <Link to={`/product/edit/${product._id}`}>
+                <p className="cursor-pointer">Edit</p>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </div>
