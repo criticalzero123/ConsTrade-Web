@@ -47,12 +47,17 @@ const ProductMessages = () => {
       >
         <div className="grid grid-cols-2 mb-5">
           <div className="flex justify-center">
-            <Link to="/messages/user" className="hover:text-blue-500">
+            <Link
+              to="/messages/user"
+              className="hover:text-blue-500 font-poppins "
+            >
               Users
             </Link>
           </div>
           <div className="flex justify-center">
-            <Link className="text-orange-500">Products</Link>
+            <Link className="text-orange-500 font-poppins font-semibold border-b-2 border-b-orange-500">
+              Products
+            </Link>
           </div>
         </div>
         {arrayOfChatsUser.length === 0 ? (

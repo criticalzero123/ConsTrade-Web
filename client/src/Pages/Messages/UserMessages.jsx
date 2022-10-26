@@ -44,10 +44,15 @@ const UserMessages = () => {
       >
         <div className="grid grid-cols-2 mb-5">
           <div className="flex justify-center">
-            <Link className="text-orange-500">Users</Link>
+            <Link className="text-orange-500 font-poppins font-semibold border-b-2 border-b-orange-500 ">
+              Users
+            </Link>
           </div>
           <div className="flex justify-center">
-            <Link to="/messages/product" className=" hover:text-blue-500">
+            <Link
+              to="/messages/product"
+              className=" hover:text-blue-500 font-poppins"
+            >
               Products
             </Link>
           </div>
