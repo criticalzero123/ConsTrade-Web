@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 
 import { firstLetterUpper } from "../../service/userService";
 
-const SideUserDisplay = ({
+const ProductSideUserDisplay = ({
   photoURL,
   displayTitle,
   displayName,
@@ -42,4 +42,4 @@ const SideUserDisplay = ({
   );
 };
 
-export default SideUserDisplay;
+export default ProductSideUserDisplay;

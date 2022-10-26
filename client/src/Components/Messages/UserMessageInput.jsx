@@ -12,7 +12,7 @@ import { v4 } from "uuid";
 
 import { RiSendPlaneFill } from "react-icons/ri";
 
-const MessageInput = ({ chatId, otherUserId, onClickScrollDown }) => {
+const UserMessageInput = ({ chatId, otherUserId, onClickScrollDown }) => {
   const [text, setText] = useState("");
 
   const { currentUser } = useSelector((state) => state.userInfoReducer);
@@ -22,7 +22,7 @@ const MessageInput = ({ chatId, otherUserId, onClickScrollDown }) => {
 
     setText("");
 
-    await updateDoc(doc(db, "productMessages", chatId), {
+    await updateDoc(doc(db, "userMessages", chatId), {
       messages: arrayUnion({
         id: v4(),
         text,
@@ -74,4 +74,4 @@ const MessageInput = ({ chatId, otherUserId, onClickScrollDown }) => {
   );
 };
 
-export default MessageInput;
+export default UserMessageInput;

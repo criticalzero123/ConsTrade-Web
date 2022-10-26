@@ -55,7 +55,7 @@ const NavbarComponent = () => {
         {useLoggedIn ? (
           <>
             <div className="flex md:order-2 place-items-center">
-              <Link to="/messages">
+              <Link to="/messages/user">
                 <BsChatDots size={20} className="mr-4 cursor-pointer" />
               </Link>
               <BiSearch

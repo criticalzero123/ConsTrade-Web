@@ -9,6 +9,7 @@ import { MdVerified } from "react-icons/md";
 import { VscUnverified } from "react-icons/vsc";
 import UserProfileTransactionList from "../../Components/UserProfile/UserProfileTransactionList";
 import UserProfileReviews from "../../Components/UserProfile/UserProfileReviews";
+import { Link } from "react-router-dom";
 
 const UserProfile = () => {
   const { id } = useParams();
@@ -63,9 +64,12 @@ const UserProfile = () => {
                         {user.email}
                       </span>
                       <div className="mt-4 flex space-x-3 lg:mt-6">
-                        <div className="inline-flex cursor-pointer items-center rounded-lg border border-gray-300 bg-white py-2 px-4 text-center text-sm font-medium text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 ">
+                        <Link
+                          to={`/messages/user/${user._id}`}
+                          className="inline-flex cursor-pointer items-center rounded-lg border border-gray-300 bg-white py-2 px-4 text-center text-sm font-medium text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 "
+                        >
                           Message
-                        </div>
+                        </Link>
                       </div>
                     </div>
                   </Card>

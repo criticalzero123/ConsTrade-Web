@@ -5,6 +5,9 @@ export const creationOfUserChats = async (uid) => {
   await setDoc(doc(db, "userChats", uid), {
     //
   });
+  await setDoc(doc(db, "productChats", uid), {
+    //
+  });
 };
 
 export const existInUserChatsSocialMediaAuth = async (uid) => {

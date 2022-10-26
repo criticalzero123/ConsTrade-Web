@@ -12,10 +12,13 @@ import ProductList from "./Pages/ProductList/ProductList";
 import Favorites from "./Pages/Favorites/Favorites";
 import UserProfile from "./Pages/UserProfile/UserProfile";
 import Category from "./Pages/Search/Category/Category";
-import Messages from "./Pages/Messages/Messages";
+import ProductMessages from "./Pages/Messages/ProductMessages";
 import ProductMessagesUser from "./Pages/Messages/MessagesUser/ProductMessagesUser";
 import ProductEdit from "./Pages/ProductEdit/ProductEdit";
 import { useSelector } from "react-redux";
+import Messages from "./Pages/Messages/Messages";
+import UserMessages from "./Pages/Messages/UserMessages";
+import PersonalMessagesUser from "./Pages/Messages/MessagesUser/PersonalMessagesUser";
 function App() {
   const { currentUser } = useSelector((state) => state.userInfoReducer);
 
@@ -40,11 +43,15 @@ function App() {
               <Route path="/user/:id" element={<UserProfile />} />
               <Route path="/search/category/:category" element={<Category />} />
               <Route path="/favorites" element={<Favorites />} />
-              <Route path="/messages" element={<Messages />}>
+              <Route path="/messages" element={<Messages />} />
+              <Route path="/messages/product" element={<ProductMessages />}>
                 <Route
-                  path="product/:productId/:uid"
+                  path=":productId/:uid"
                   element={<ProductMessagesUser />}
                 />
+              </Route>
+              <Route path="/messages/user" element={<UserMessages />}>
+                <Route path=":uid" element={<PersonalMessagesUser />} />
               </Route>
             </>
           ) : (

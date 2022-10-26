@@ -2,7 +2,7 @@ import { doc, onSnapshot } from "firebase/firestore";
 import React, { useState, useEffect } from "react";
 import { useRef } from "react";
 import { db } from "../../firebase/firebase-config";
-import MessageInput from "./MessageInput";
+import ProductMessageInput from "./ProductMessageInput";
 import { Link } from "react-router-dom";
 import { Button } from "flowbite-react";
 import { soldItemTransaction } from "../../actions/transactionActions";
@@ -14,7 +14,7 @@ import { useDispatch } from "react-redux";
 
 import Swal from "sweetalert2";
 
-const MessagesComponent = ({
+const ProductMessagesComponent = ({
   chatId,
   currentUserId,
   otherUserProfile,
@@ -140,7 +140,7 @@ const MessagesComponent = ({
       </div>
       {product ? (
         product.status !== "sold" ? (
-          <MessageInput
+          <ProductMessageInput
             chatId={chatId}
             otherUserId={otherUserId}
             onClickScrollDown={onClickScrollDown}
@@ -149,14 +149,11 @@ const MessagesComponent = ({
           <div className="h-1/6 flex place-item-center">
             <div className="p-5 flex w-full justify-between items-center bg-[rgb(100%,100%,100%,50%)] backdrop-blur-md">
               <div>This item is already Transacted.</div>
-              <Button
-                gradientDuoTone="greenToBlue"
-                onClick={() =>
-                  (window.location.href = "/product/item/" + product._id)
-                }
-              >
-                Go to Post <BsArrowRight size={20} className="ml-2" />
-              </Button>
+              <Link to={`/product/item/${product._id}`}>
+                <Button gradientDuoTone="greenToBlue">
+                  Go to Post <BsArrowRight size={20} className="ml-2" />
+                </Button>{" "}
+              </Link>
             </div>
           </div>
         )
@@ -195,4 +192,4 @@ const MessagesComponent = ({
   );
 };
 
-export default MessagesComponent;
+export default ProductMessagesComponent;

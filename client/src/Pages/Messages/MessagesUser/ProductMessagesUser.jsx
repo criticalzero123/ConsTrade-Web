@@ -14,7 +14,7 @@ import {
 } from "firebase/firestore";
 
 import { db } from "../../../firebase/firebase-config";
-import MessagesComponent from "../../../Components/Messages/MessagesComponent";
+import ProductMessagesComponent from "../../../Components/Messages/ProductMessagesComponent";
 
 const ProductMessagesUser = () => {
   const { uid, productId } = useParams();
@@ -87,7 +87,7 @@ const ProductMessagesUser = () => {
             });
 
             // create user chats
-            await updateDoc(doc(db, "userChats", currentUser.uid), {
+            await updateDoc(doc(db, "productChats", currentUser.uid), {
               [combinedId + ".userInfo"]: {
                 uid: user.uid,
                 _id: user._id,
@@ -106,7 +106,7 @@ const ProductMessagesUser = () => {
               [combinedId + ".date"]: serverTimestamp(),
             });
 
-            await updateDoc(doc(db, "userChats", user.uid), {
+            await updateDoc(doc(db, "productChats", user.uid), {
               [combinedId + ".userInfo"]: {
                 uid: currentUser.uid,
                 _id: currentUser._id,
@@ -156,13 +156,13 @@ const ProductMessagesUser = () => {
             {chatKey !== "" && chatKey !== undefined && (
               <div>
                 <Link
-                  to="/messages"
+                  to="/messages/product"
                   className="cursor-pointer flex place-items-center hover:text-orange-500 mb-2 sm:hidden"
                 >
                   <MdOutlineKeyboardBackspace className="mr-1 " /> Back
                 </Link>
 
-                <MessagesComponent
+                <ProductMessagesComponent
                   chatId={chatKey}
                   currentUserId={currentUser.uid}
                   currentUser_Id={currentUser._id}
