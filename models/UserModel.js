@@ -75,6 +75,10 @@ const userSchema = mongoose.Schema(
       type: Boolean,
       require,
     },
+    countPost: {
+      type: Number,
+      require,
+    },
     reviews: [reviewSchema],
     favorites: [favoriteSchema],
   },

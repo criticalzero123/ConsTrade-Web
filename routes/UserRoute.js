@@ -40,6 +40,7 @@ router.post("/socialMediaAuth", (req, res) => {
             uid: req.body.uid,
             imagePhotoURL: req.body.imagePhotoURL,
             emailVerified: req.body.emailVerified,
+            countPost: 0,
             lastActiveAt: new Date().getTime(),
           });
 
@@ -77,6 +78,7 @@ router.post("/emailPasswordRegister", (req, res) => {
         imagePhotoURL:
           "https://lh3.googleusercontent.com/u47bMeQILiIr-MZSU3O6DqlwKyje0DXNvnSTxwlK2BwrUi5IfVjefPF9oCq98qDMVyHspIoPJWY248iVJ4dHk57AJxio_bb0-6e0Gjmq_w_iRqDNmVpk7oNCmFvwP1JH-HDhj_lZKQ=w2400",
         emailVerified: req.body.emailVerified,
+        countPost: 0,
         lastActiveAt: new Date().getTime(),
       });
 

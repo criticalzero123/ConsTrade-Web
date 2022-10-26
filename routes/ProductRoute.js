@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 
 const Product = require("../models/ProductModel");
+const User = require("../models/UserModel");
 
 router.get("/getallproducts", (req, res) => {
   Product.find({}, (err, docs) => {
@@ -95,9 +96,18 @@ router.post("/addProduct", (req, res) => {
     favoritesCount: 0,
     status: "unsold",
   });
-  newProduct.save((err) => {
+  newProduct.save(async (err) => {
     if (!err) {
-      res.send(`Product add Successful`);
+      const userInfo = await User.findById({ _id: data.userId });
+
+      userInfo.countPost = userInfo.countPost + 1;
+      userInfo.save((err) => {
+        if (!err) {
+          res.send(`Product add Successful`);
+        } else {
+          res.status(400).json({ message: `Adding Count Post went wrong` });
+        }
+      });
     } else {
       res.status(400).json({ message: `Product add went wrong` });
     }

@@ -176,7 +176,7 @@ const Index = () => {
           </div>
         </section>
       </div>
-      <footer className="h-32 bg-[#3D4BA9] backdrop-blur-2xl shadow-lg grid lg:grid-cols-2 w-full">
+      <footer className="h-32 mt-16 bg-[#3D4BA9] backdrop-blur-2xl shadow-lg grid lg:grid-cols-2 w-full">
         <div className="bg-[rgba(100%,100%,100%,90%)] py-5 lg:py-0 backdrop-blur-md w-full h-full flex items-center justify-center lg:border-r-2 lg:border-r-gray-300">
           <p
             className="text-lg lg:text-2xl font-poppins font-semibold bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-[#af3e02] hover:cursor-pointer

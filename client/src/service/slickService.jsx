@@ -33,7 +33,9 @@ const NextArrow = (props) => {
   );
 };
 
-export const settings = {
+export const userSettings = {};
+
+export const productSettings = {
   dots: false,
   infinite: false,
   speed: 500,
