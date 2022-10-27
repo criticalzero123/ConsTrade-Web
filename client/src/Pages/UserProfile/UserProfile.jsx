@@ -1,4 +1,4 @@
-import { Card } from "flowbite-react/lib/cjs/components";
+import { Card, Tabs } from "flowbite-react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -10,6 +10,12 @@ import { VscUnverified } from "react-icons/vsc";
 import UserProfileTransactionList from "../../Components/UserProfile/UserProfileTransactionList";
 import UserProfileReviews from "../../Components/UserProfile/UserProfileReviews";
 import { Link } from "react-router-dom";
+import { GrTransaction } from "react-icons/gr";
+import { BsFileEarmarkPost } from "react-icons/bs";
+import { FaUserCircle } from "react-icons/fa";
+import { AiOutlineMessage, AiOutlineUserAdd, AiFillStar } from "react-icons/ai";
+import UserProfileInfo from "../../Components/UserProfile/UserProfileInfo";
+import UserProfilePosts from "../../Components/UserProfile/Posts/UserProfilePosts";
 
 const UserProfile = () => {
   const { id } = useParams();
@@ -29,9 +35,9 @@ const UserProfile = () => {
       ) : (
         user && (
           <>
-            <div className="grid grid-cols-3 gap-4 lg:mt-10">
+            <div className="flex justify-center flex-wrap md:grid md:grid-cols-3 gap-4 lg:gap-0 lg:mt-10 h-[90vh] lg:h-[88vh]">
               <div>
-                <div className="max-w-sm mb-5">
+                <div className="max-w-sm mb-5  md:block">
                   <Card>
                     <div className="flex flex-col items-center pb-10">
                       <img
@@ -56,28 +62,66 @@ const UserProfile = () => {
                           </div>
                         )}
                       </span>
-                      <h5 className="mb-1 text-xl flex text-center font-medium text-gray-900 dark:text-white">
+                      <h5 className="mb-2 text-xl flex text-center font-medium text-gray-900 dark:text-white">
                         {firstLetterUpper(user.name)}
                       </h5>
+                      <div className="grid grid-cols-2  w-full text-center border-t pt-2 mx-3 border-t-gray-100">
+                        <div className="flex flex-col">
+                          <div className="w-full  flex justify-center">
+                            <p className="font-poppins">Follower</p>
+                          </div>
 
-                      <span className="text-sm text-gray-500 dark:text-gray-400 ">
-                        {user.email}
-                      </span>
-                      <div className="mt-4 flex space-x-3 lg:mt-6">
+                          <div className="w-full  flex justify-center">
+                            <p className="text-gray-500 hover:text-orange-500 cursor-pointer  max-w-fit">
+                              1
+                            </p>
+                          </div>
+                        </div>
+                        <div>
+                          <div className="w-full  flex justify-center">
+                            <p className="font-poppins">Following</p>
+                          </div>
+
+                          <div className="w-full  flex justify-center">
+                            <p className="text-gray-500 hover:text-orange-500 cursor-pointer  max-w-fit">
+                              2
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="mt-4 grid grid-cols-2 gap-4 lg:mt-6 w-full px-10 md:px-0 lg:px-10">
                         <Link
                           to={`/messages/user/${user._id}`}
-                          className="inline-flex cursor-pointer items-center rounded-lg border border-gray-300 bg-white py-2 px-4 text-center text-sm font-medium text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 "
+                          className="flex cursor-pointer justify-center place-items-center rounded-lg border border-gray-300 bg-white py-2 px-4 text-center text-sm font-medium text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 "
                         >
+                          <AiOutlineMessage className="mr-2" size={20} />
                           Message
                         </Link>
+                        <div className="flex cursor-pointer justify-center rounded-lg border border-gray-300 bg-white py-2 px-4 text-center text-sm font-medium text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 ">
+                          <AiOutlineUserAdd className="mr-2" size={20} />
+                          Follow
+                        </div>
                       </div>
                     </div>
                   </Card>
                 </div>
-                <UserProfileTransactionList userId={user._id} />
               </div>
-              <div className="col-span-2 mt-24">
-                <UserProfileReviews user={user} />
+              <div className="col-span-2 shadow-lg md:h-[88vh] h-screen w-full">
+                <Tabs.Group>
+                  <Tabs.Item title="Profile" icon={FaUserCircle}>
+                    <UserProfileInfo user={user} />
+                  </Tabs.Item>
+                  <Tabs.Item title="Products" icon={BsFileEarmarkPost}>
+                    <UserProfilePosts user={user} />
+                  </Tabs.Item>
+                  <Tabs.Item title="Transactions" icon={GrTransaction}>
+                    <UserProfileTransactionList userId={user._id} />
+                  </Tabs.Item>
+                  <Tabs.Item title="Reviews" icon={AiFillStar}>
+                    <UserProfileReviews user={user} />
+                  </Tabs.Item>
+                </Tabs.Group>
               </div>
             </div>
           </>

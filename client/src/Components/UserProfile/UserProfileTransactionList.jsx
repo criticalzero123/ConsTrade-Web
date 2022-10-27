@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 
-import { Card } from "flowbite-react/lib/cjs/components";
 import { useDispatch, useSelector } from "react-redux";
 import { getTransactionByUserId } from "../../actions/transactionActions";
 
@@ -24,8 +23,8 @@ const UserProfileTransactionList = ({ userId }) => {
 
   return (
     <div>
-      <div className="max-w-sm">
-        <Card>
+      {transactions && transactions.length !== 0 ? (
+        <>
           <div className="mb-4 flex items-center justify-between">
             <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">
               Latest Transaction
@@ -36,7 +35,7 @@ const UserProfileTransactionList = ({ userId }) => {
           </div>
           <div className="flow-root">
             <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-              {transactions && transactions.length !== 0 ? (
+              {transactions &&
                 transactions.map((transaction) => (
                   <li className="py-3 sm:py-4" key={transaction.name}>
                     <div className="flex items-center space-x-4">
@@ -60,14 +59,13 @@ const UserProfileTransactionList = ({ userId }) => {
                       </div>
                     </div>
                   </li>
-                ))
-              ) : (
-                <div>No Transactions.</div>
-              )}
+                ))}
             </ul>
           </div>
-        </Card>
-      </div>
+        </>
+      ) : (
+        <div>No Transaction</div>
+      )}
     </div>
   );
 };

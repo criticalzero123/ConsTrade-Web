@@ -8,7 +8,6 @@ const transactionSchema = mongoose.Schema(
     },
     buyerId: {
       type: mongoose.Schema.Types.ObjectId,
-      require,
     },
     sellerId: {
       type: mongoose.Schema.Types.ObjectId,

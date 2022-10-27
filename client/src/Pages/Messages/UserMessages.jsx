@@ -63,24 +63,27 @@ const UserMessages = () => {
           chats !== undefined &&
           Object.entries(chats)
             ?.sort((a, b) => b[1].date - a[1].date)
-            .map((chat) => (
-              <Link
-                key={chat[0]}
-                to={`${chat[1].userInfo._id}`}
-                onClick={() => {
-                  setChatId(chat[0]);
-                  setOtherUserProfile(chat[1].userInfo.photoURL);
-                  setDisplayName(chat[1].userInfo.displayName);
-                }}
-              >
-                <UserSideDisplay
-                  lastMessage={chat[1].lastMessage.text}
-                  displayName={chat[1].userInfo.displayName}
-                  photoURL={chat[1].userInfo.photoURL}
-                  userId={chat[1].userInfo._id}
-                />
-              </Link>
-            ))
+            .map(
+              (chat) =>
+                chat[1].lastMessage.text !== "" && (
+                  <Link
+                    key={chat[0]}
+                    to={`${chat[1].userInfo._id}`}
+                    onClick={() => {
+                      setChatId(chat[0]);
+                      setOtherUserProfile(chat[1].userInfo.photoURL);
+                      setDisplayName(chat[1].userInfo.displayName);
+                    }}
+                  >
+                    <UserSideDisplay
+                      lastMessage={chat[1].lastMessage.text}
+                      displayName={chat[1].userInfo.displayName}
+                      photoURL={chat[1].userInfo.photoURL}
+                      userId={chat[1].userInfo._id}
+                    />
+                  </Link>
+                )
+            )
         )}
       </aside>
       <div className={`${pathLength < 4 && "hidden sm:block"} sm:col-span-4 `}>

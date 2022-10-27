@@ -94,8 +94,8 @@ const Register = () => {
   };
 
   return (
-    <div className="h-screen">
-      <div className="grid lg:grid-cols-2 h-5/6 ">
+    <div className="h-[93vh] lg:overflow-y-hidden">
+      <div className="grid lg:grid-cols-2  ">
         <div className="hidden lg:block  place-self-center">
           <img src={cover1} alt="cover" className="rounded-xl" />
         </div>
@@ -103,7 +103,7 @@ const Register = () => {
           <img
             src={logo}
             alt="logo"
-            className="w-24 mx-auto hover:animate-bounce mb-5 drop-shadow-[0px_10px_35px_rgba(0,0,0,0.7)]"
+            className="w-24 mx-auto hover:animate-bounce mb-5 "
           />
           <h1 className="text-4xl text-center font-semibold">
             Create your account

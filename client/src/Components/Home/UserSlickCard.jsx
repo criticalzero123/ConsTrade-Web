@@ -22,7 +22,7 @@ const UserSlickCard = ({ user }) => {
         to={`/user/${user._id}`}
         className="px-5 py-2 text-sm cursor-pointer rounded-lg  bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 font-poppins text-white hover:text-orange-500"
       >
-        Follow
+        Visit
       </Link>
     </div>
   );
