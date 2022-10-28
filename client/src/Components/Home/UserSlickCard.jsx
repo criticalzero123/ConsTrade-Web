@@ -12,9 +12,12 @@ const UserSlickCard = ({ user }) => {
           className="w-10 rounded-xl mr-3"
         />{" "}
         <div>
-          <p className="tracking-tight text-ellipsis overflow-hidden whitespace-nowrap w-32 lg:w-full font-poppins">
+          <Link
+            to={`/user/${user._id}`}
+            className="tracking-tight text-ellipsis overflow-hidden whitespace-nowrap w-32 lg:w-full font-poppins hover:text-orange-500"
+          >
             {firstLetterUpper(user.name)}
-          </p>
+          </Link>
           <p className="text-gray-100 text-sm">{user.countPost} Items</p>
         </div>
       </div>

@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 
 import { Link } from "react-router-dom";
 import { addToFavorite } from "../../actions/userActions";
 
-import { IoMdHeartDislike, IoMdHeart } from "react-icons/io";
+import { IoMdHeart } from "react-icons/io";
 
 const FavoriteCard = ({ favorite }) => {
-  const [show, setShow] = useState(true);
-
   const dispatch = useDispatch();
 
   return (
@@ -49,21 +47,11 @@ const FavoriteCard = ({ favorite }) => {
               </p>{" "}
             </Link>
 
-            <p
-              className="mr-5 cursor-pointer"
+            <IoMdHeart
+              size={35}
+              className="cursor-pointer text-red-500"
               onClick={() => dispatch(addToFavorite(favorite.productId))}
-            >
-              <IoMdHeartDislike
-                size={35}
-                className={`text-black  ${show ? "hidden" : "block"}`}
-                onMouseLeave={() => setShow(true)}
-              />
-              <IoMdHeart
-                size={35}
-                className={`text-red-500  ${show ? "block" : "hidden"}`}
-                onMouseEnter={() => setShow(false)}
-              />
-            </p>
+            />
           </div>
         </div>
       </div>

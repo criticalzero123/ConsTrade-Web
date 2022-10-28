@@ -70,15 +70,44 @@ const ProductMessagesComponent = ({
       confirmButtonText: "Yes",
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire(
-          "Hoooray!",
-          "Transaction of this item is completed.",
-          "success"
-        );
-
-        dispatch(
-          soldItemTransaction(product._id, otherUser_Id, product.userId)
-        );
+        Swal.fire({
+          title: "Hooray!",
+          text: "Were you able to get your desired item or cash?",
+          showDenyButton: true,
+          confirmButtonText: "Yes",
+          denyButtonText: `No`,
+          icon: "success",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire("Thank you!", "", "success");
+            dispatch(
+              soldItemTransaction(
+                product._id,
+                otherUser_Id,
+                product.userId,
+                "Yes"
+              )
+            );
+          } else if (result.isDenied) {
+            dispatch(
+              soldItemTransaction(
+                product._id,
+                otherUser_Id,
+                product.userId,
+                "No"
+              )
+            );
+          } else if (result.isDismissed) {
+            dispatch(
+              soldItemTransaction(
+                product._id,
+                otherUser_Id,
+                product.userId,
+                "Not provided"
+              )
+            );
+          }
+        });
       } else if (
         /* Read more about handling dismissals below */
         result.dismiss === Swal.DismissReason.cancel
@@ -151,7 +180,7 @@ const ProductMessagesComponent = ({
               <div>This item is already Transacted.</div>
               <Link to={`/product/item/${product._id}`}>
                 <Button gradientDuoTone="greenToBlue">
-                  Go to Post <BsArrowRight size={20} className="ml-2" />
+                  Go to Product <BsArrowRight size={20} className="ml-2" />
                 </Button>{" "}
               </Link>
             </div>

@@ -17,6 +17,10 @@ const transactionSchema = mongoose.Schema(
       type: Boolean,
       require,
     },
+    getWant: {
+      type: String,
+      require,
+    },
     dateTransac: {
       type: Date,
       require,

@@ -9,6 +9,7 @@ import UpperCard from "../../Components/Home/UpperCard";
 import { FaHotjar } from "react-icons/fa";
 import { BsCheckAll } from "react-icons/bs";
 import UserSlickCarousel from "../../Components/Home/UserSlickCarousel";
+import FooterLandingPage from "../../Components/LandingPage/FooterLandingPage";
 import { getAllUserByCountPost } from "../../actions/userActions";
 import { RiUserStarFill } from "react-icons/ri";
 
@@ -80,6 +81,7 @@ const Index = () => {
           )}
         </div>
       )}
+      <FooterLandingPage />
     </div>
   );
 };

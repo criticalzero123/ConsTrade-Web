@@ -128,8 +128,16 @@ const NavbarComponent = () => {
           <>
             <Navbar.Toggle />
             <Navbar.Collapse>
-              <Navbar.Link href="/register"> Sign Up</Navbar.Link>
-              <Navbar.Link href="/signin">Sign in</Navbar.Link>
+              <Navbar.Link href="/signin">
+                <div className=" font-poppins py-2 rounded-lg text-[#20277A] text-base hover:text-[#F88652]">
+                  Login
+                </div>
+              </Navbar.Link>
+              <Navbar.Link href="/signup">
+                <div className="border-[#F88652] font-semibold font-poppins border-2 px-5 py-2 rounded-lg text-[#F88652] hover:border-[#20277A] hover:bg-[#20277A] hover:text-white">
+                  Register
+                </div>
+              </Navbar.Link>
             </Navbar.Collapse>
           </>
         )}

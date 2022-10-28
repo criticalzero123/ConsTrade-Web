@@ -8,10 +8,11 @@ import avatar2 from "../Assets/Images/LandingPage/avatar2.png";
 import avatar3 from "../Assets/Images/LandingPage/avatar3.png";
 import avatar4 from "../Assets/Images/LandingPage/avatar4.png";
 import avatar5 from "../Assets/Images/LandingPage/avatar5.png";
-import { BsFacebook } from "react-icons/bs";
+import { BsFillPlayCircleFill } from "react-icons/bs";
 
 import Aos from "aos";
 import "aos/dist/aos.css";
+import FooterLandingPage from "../Components/LandingPage/FooterLandingPage";
 
 const Index = () => {
   useEffect(() => {
@@ -44,18 +45,32 @@ const Index = () => {
               </h1>
               <div className="flex mt-7 place-items-center">
                 <div className="w-16 h-1 bg-orange-400"></div>
-                <p className="ml-2 text-2xl font-poppins font-semibold">
+                <p className="ml-2 text-2xl font-poppins font-semibold text-orange-400">
                   What we believe.
                 </p>
               </div>
-              <h3 className="text-gray-400 text-base mt-6 lg:text-xl  pl-2 pr-5">
-                We strongly believe that every game is important and should be
-                cherish.
+              <h3 className="text-gray-400 text-base mt-6 lg:text-xl  pl-2 pr-5 lg:pr-64">
+                We strongly believe that every console games is important and
+                should be cherish.
               </h3>
 
-              <button className="mt-10 py-3 px-6 rounded-lg border-2 border-[#1D257C] hover:bg-[#1D257C] text-[#1D257C] font-semibold font-poppins hover:text-white ">
-                How it Works
-              </button>
+              <div className="flex place-items-center mt-10 flex-wrap">
+                <button
+                  onClick={() => (window.location.href = "/signup")}
+                  className=" py-3 px-6 rounded-lg border-2 bg-[#1D257C] hover:text-orange-300 font-semibold font-poppins text-white tracking-wider"
+                >
+                  Join Now!
+                </button>
+                <div className="py-3 px-6 font-poppins font-semibold flex place-items-center ">
+                  <p className="text-[#c94e77] hover:text-[#1D257C] cursor-pointer mr-2">
+                    How it works?{" "}
+                  </p>
+                  <BsFillPlayCircleFill
+                    size={30}
+                    className="border-4 border-red-100 text-red-500 rounded-full cursor-pointer "
+                  />
+                </div>
+              </div>
             </div>
           </div>
           <div className="flex place-items-center" data-aos="fade-left">
@@ -196,42 +211,7 @@ const Index = () => {
           </div>
         </section>
       </div>
-      <footer className="h-32 mt-16 bg-[#3D4BA9] backdrop-blur-2xl shadow-lg grid lg:grid-cols-2 w-full">
-        <div className="bg-[rgba(100%,100%,100%,90%)] py-5 lg:py-0 backdrop-blur-md w-full h-full flex items-center justify-center lg:border-r-2 lg:border-r-gray-300">
-          <p
-            className="text-lg lg:text-2xl font-poppins font-semibold bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-[#af3e02] hover:cursor-pointer
-           hover:to-purple-500 hover:from-[#af3e02]"
-            onClick={() =>
-              window.open(
-                "mailto:constradeapplication22@gmail.com?subject=HELLO&body=Hi%20Constrades"
-              )
-            }
-          >
-            constradeapplication22@gmail.com
-          </p>
-        </div>
-        <div className="bg-[rgba(100%,100%,100%,90%)] backdrop-blur-md w-full h-full flex items-center justify-center">
-          <div>
-            <div className="text-2xl font-poppins font-semibold flex place-items-center mb-5">
-              Follow Us{" "}
-              <span className="p-1 border ml-10 rounded-full border-black hover:border-orange-500">
-                <BsFacebook
-                  className=" cursor-pointer hover:text-orange-500 "
-                  onClick={() =>
-                    window.open(
-                      "https://www.facebook.com/profile.php?id=100086988933778",
-                      "_blank"
-                    )
-                  }
-                />
-              </span>
-            </div>
-            <p className="text-gray-400">
-              Copyright Constrades. All rights Reserved.
-            </p>
-          </div>
-        </div>
-      </footer>
+      <FooterLandingPage />
     </>
   );
 };
