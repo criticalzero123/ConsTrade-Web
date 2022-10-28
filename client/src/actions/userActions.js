@@ -119,3 +119,16 @@ const removeAndRedirect = () => {
   localStorage.removeItem("currentUser");
   window.location.href = "/signin";
 };
+
+export const searchUserChat = (search) => (dispatch) => {
+  dispatch({ type: "USER_SEARCH_CHAT_REQUEST" });
+
+  axios
+    .post("/api/users/getUserChat", { search })
+    .then((res) => {
+      dispatch({ type: "USER_SEARCH_CHAT_SUCCESS", payload: res.data });
+    })
+    .catch((err) => {
+      dispatch({ type: "USER_SEARCH_CHAT_ERROR" });
+    });
+};

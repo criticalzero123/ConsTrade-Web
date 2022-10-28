@@ -158,3 +158,25 @@ export const favoriteReducer = (state = {}, action) => {
       return state;
   }
 };
+
+export const searchUserChatReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "USER_SEARCH_CHAT_REQUEST":
+      return {
+        loading: true,
+      };
+    case "USER_SEARCH_CHAT_SUCCESS":
+      return {
+        loading: false,
+        users: action.payload,
+      };
+
+    case "USER_SEARCH_CHAT_FAILED":
+      return {
+        loading: false,
+        error: true,
+      };
+    default:
+      return { ...state };
+  }
+};

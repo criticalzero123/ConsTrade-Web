@@ -246,4 +246,20 @@ router.post("/addFavorite", async (req, res) => {
   }
 });
 
+router.post("/getUserChat", async (req, res) => {
+  try {
+    const userName = req.body.search;
+    const users = await User.find({
+      name: { $regex: userName, $options: "-i" },
+      // $text: { $search: userName, $caseSensitive: false },
+    });
+
+    return res.send(users);
+  } catch (error) {
+    return res.status(400).json({
+      message: "Something went wrong in searching user chat",
+    });
+  }
+});
+
 module.exports = router;

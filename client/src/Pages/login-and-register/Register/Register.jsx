@@ -11,6 +11,7 @@ import { isUserLoggedIn } from "../../../service/userService";
 import InputName from "../../../Components/login-and-register/InputName";
 import logo from "../../../Assets/Images/Branding/Web/SVG/IconWeb.svg";
 import cover1 from "../../../Assets/Images/sign-up-and-in/coversign.png";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -142,12 +143,12 @@ const Register = () => {
             </button>
             <p className="mt-10 text-center text-gray-400">
               Already have an account?{" "}
-              <span
+              <Link
                 onClick={() => (window.location.href = "/signin")}
                 className="text-[#283270] font-semibold cursor-pointer hover:text-orange-400"
               >
                 Sign in
-              </span>
+              </Link>
             </p>
           </form>
           {/* <FacebookButton type={1} /> */}

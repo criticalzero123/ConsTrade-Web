@@ -66,25 +66,28 @@ const ProductMessages = () => {
           chats !== undefined &&
           Object.entries(chats)
             ?.sort((a, b) => b[1].date - a[1].date)
-            .map((chat) => (
-              <Link
-                key={chat[0]}
-                to={`${chat[1].productInfo.productId}/${chat[1].userInfo._id}`}
-                onClick={() => {
-                  setChatId(chat[0]);
-                  setOtherUserProfile(chat[1].userInfo.photoURL);
-                  setDisplayName(chat[1].userInfo.displayName);
-                }}
-              >
-                <ProductSideUserDisplay
-                  displayTitle={chat[1].productInfo.title}
-                  displayName={chat[1].userInfo.displayName}
-                  photoURL={chat[1].productInfo.imageURL}
-                  userId={chat[1].userInfo._id}
-                  productId={chat[1].productInfo.productId}
-                />
-              </Link>
-            ))
+            .map(
+              (chat) =>
+                chat[1].lastMessage !== undefined && (
+                  <Link
+                    key={chat[0]}
+                    to={`${chat[1].productInfo.productId}/${chat[1].userInfo._id}`}
+                    onClick={() => {
+                      setChatId(chat[0]);
+                      setOtherUserProfile(chat[1].userInfo.photoURL);
+                      setDisplayName(chat[1].userInfo.displayName);
+                    }}
+                  >
+                    <ProductSideUserDisplay
+                      displayTitle={chat[1].productInfo.title}
+                      displayName={chat[1].userInfo.displayName}
+                      photoURL={chat[1].productInfo.imageURL}
+                      userId={chat[1].userInfo._id}
+                      productId={chat[1].productInfo.productId}
+                    />
+                  </Link>
+                )
+            )
         )}
       </aside>
       <div className={`${pathLength < 4 && "hidden sm:block"} sm:col-span-4 `}>

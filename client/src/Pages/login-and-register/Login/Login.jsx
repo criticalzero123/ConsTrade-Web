@@ -10,6 +10,7 @@ import { isUserLoggedIn } from "../../../service/userService";
 
 import logo from "../../../Assets/Images/Branding/Web/SVG/IconWeb.svg";
 import coverlogo from "../../../Assets/Images/sign-up-and-in/login1.svg";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -108,12 +109,12 @@ const Login = () => {
           <GoogleButton type={2} />
           <p className="mt-10 text-center text-gray-400">
             Don't have an account?{" "}
-            <span
-              onClick={() => (window.location.href = "/register")}
+            <Link
+              onClick={() => (window.location.href = "/signup")}
               className="text-[#283270] font-semibold cursor-pointer hover:text-orange-400"
             >
               Sign up
-            </span>
+            </Link>
           </p>
           {/* <FacebookButton type={2} /> */}
         </div>
