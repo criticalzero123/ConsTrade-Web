@@ -28,7 +28,7 @@ const UserProfile = () => {
     dispatch(getUserById(id));
   }, [id, dispatch]);
   return (
-    <div>
+    <div className="container mx-auto px-0 lg:px-4">
       {error && <p>Something went wrong...</p>}
       {loading ? (
         <p>Loading...</p>

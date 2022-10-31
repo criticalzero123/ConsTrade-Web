@@ -10,7 +10,7 @@ const UpperCard = () => {
     <div>
       <section className="grid lg:grid-cols-4  h-[40vh] sm:h-[27vh] rounded-2xl md:overflow-hidden">
         <div className="lg:col-span-2 bg-gradient-to-r from-[#B1DBE0]  to-[#F9D5F2] rounded-2xl lg:rounded-none">
-          <div className="w-full  px-12 lg:px-14 py-5 ">
+          <div className="w-full  px-5 lg:px-14 py-5 ">
             <h1 className="font-poppins text-3xl font-semibold">
               One Stop{" "}
               <span

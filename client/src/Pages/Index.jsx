@@ -30,7 +30,7 @@ const Index = () => {
   );
   return (
     <>
-      <div className="container px-4">
+      <div className="container mx-auto px-0 lg:px-4">
         <section className="h-[93vh] bg-white grid md:grid-cols-2">
           <div
             className="flex place-items-center lg:block lg:mt-40"

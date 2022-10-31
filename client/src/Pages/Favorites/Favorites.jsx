@@ -8,11 +8,13 @@ const Favorites = () => {
   const { favorites } = getFavorites.currentUser && getFavorites.currentUser;
 
   return (
-    <div className="flex">
-      {favorites &&
-        favorites.map((favorite) => (
-          <FavoriteCard favorite={favorite} key={favorite.productId} />
-        ))}
+    <div className="container mx-auto px-0 lg:px-4">
+      <div className="flex">
+        {favorites &&
+          favorites.map((favorite) => (
+            <FavoriteCard favorite={favorite} key={favorite.productId} />
+          ))}
+      </div>
     </div>
   );
 };

@@ -13,6 +13,7 @@ const UserMessagesComponent = ({
   displayName,
 }) => {
   const [messages, setMessages] = useState([]);
+  const [isOtherTyping, setIsOtherTyping] = useState(false);
 
   const scrollDown = useRef();
 
@@ -22,6 +23,7 @@ const UserMessagesComponent = ({
     }
   };
 
+  // Messages Logs
   useEffect(() => {
     const unSub = onSnapshot(doc(db, "userMessages", chatId), (doc) => {
       doc.exists() && setMessages(doc.data().messages);
@@ -35,6 +37,26 @@ const UserMessagesComponent = ({
     };
   }, [chatId, messages.length]);
 
+  // Getting the Typing
+  useEffect(() => {
+    const unSub = onSnapshot(doc(db, "userMessages", chatId), (doc) => {
+      if (doc.exists() && doc.data().isTyping !== undefined) {
+        const otherUserValue = Object.entries(doc.data().isTyping).find(
+          (chat) => chat[0] === otherUserId
+        );
+
+        if (otherUserValue) {
+          setIsOtherTyping(otherUserValue[1]);
+          scrollDown.current !== undefined && onClickScrollDown();
+        }
+      }
+    });
+
+    return () => {
+      unSub();
+    };
+  }, [chatId, otherUserId]);
+
   const dateToTime = (date) => {
     return new Date(date).toLocaleTimeString([], {
       hour: "numeric",
@@ -47,7 +69,7 @@ const UserMessagesComponent = ({
 
   return (
     <div className="bg-[#EFF3F8] h-[85vh] sm:h-[88vh] rounded-md relative">
-      <div className="h-5/6 p-5 overflow-y-auto  rounded">
+      <div className="h-[78vh] p-5 overflow-y-auto  rounded">
         {messages.map((message) => (
           <div key={message.id}>
             {message.senderId === currentUserId ? (
@@ -93,6 +115,27 @@ const UserMessagesComponent = ({
             )}
           </div>
         ))}
+
+        {isOtherTyping && (
+          <div>
+            <div className="flex items-center mt-7 text-sm">
+              <div>
+                <img
+                  src={otherUserProfile}
+                  alt="profile"
+                  className="rounded-full h-8 md:h-10 mr-2"
+                />
+              </div>
+              <div className="hover:text-red-500">{displayName}</div>
+            </div>
+
+            <div className="flex justify-start w-3/5">
+              <div className="text-start mr-3 bg-gray-300 mt-2 p-3 rounded-r-2xl rounded-b-2xl max-w-fit">
+                Typing...
+              </div>
+            </div>
+          </div>
+        )}
         <div ref={scrollDown}></div>
       </div>
       <UserMessageInput

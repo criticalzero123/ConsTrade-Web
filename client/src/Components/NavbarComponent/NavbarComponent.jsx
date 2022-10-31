@@ -39,7 +39,7 @@ const NavbarComponent = () => {
   };
 
   return (
-    <div className="">
+    <div className="container mx-auto px-0 lg:px-4">
       <Navbar fluid={true}>
         <Navbar.Brand href={useLoggedIn ? "/home" : "/"}>
           <img src={logo} className="mr-3 h-6 sm:h-10" alt="Constrade Logo" />

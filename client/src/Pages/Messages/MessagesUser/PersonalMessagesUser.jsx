@@ -59,6 +59,10 @@ const PersonalMessagesUser = () => {
           if (!res.exists()) {
             await setDoc(doc(db, "userMessages", combinedId), {
               messages: [],
+              isTyping: {
+                [currentUser.uid]: false,
+                [user.uid]: false,
+              },
             });
 
             // create user chats

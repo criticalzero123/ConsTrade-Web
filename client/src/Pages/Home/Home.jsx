@@ -34,7 +34,7 @@ const Index = () => {
       ) : error ? (
         <h1>Something Went Wrong.</h1>
       ) : (
-        <div>
+        <div className="container mx-auto px-0 lg:px-4">
           {products && products.length === 0 ? (
             <div>There are no product posted yet.</div>
           ) : (

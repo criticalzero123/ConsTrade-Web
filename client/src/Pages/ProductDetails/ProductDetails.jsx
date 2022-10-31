@@ -41,7 +41,7 @@ const ProductDetails = () => {
   };
 
   return (
-    <div>
+    <div className="container mx-auto px-0 lg:px-4">
       {error && <div>Something Went Wrong...</div>}
       {loading ? (
         <p>Loading...</p>

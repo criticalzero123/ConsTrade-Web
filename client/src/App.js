@@ -1,6 +1,7 @@
 import "./App.css";
 
 import { Route, Routes } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Index from "./Pages/Index";
 import Login from "./Pages/login-and-register/Login/Login";
 import Register from "./Pages/login-and-register/Register/Register";
@@ -15,17 +16,15 @@ import Category from "./Pages/Search/Category/Category";
 import ProductMessages from "./Pages/Messages/ProductMessages";
 import ProductMessagesUser from "./Pages/Messages/MessagesUser/ProductMessagesUser";
 import ProductEdit from "./Pages/ProductEdit/ProductEdit";
-import { useSelector } from "react-redux";
-import Messages from "./Pages/Messages/Messages";
 import UserMessages from "./Pages/Messages/UserMessages";
 import PersonalMessagesUser from "./Pages/Messages/MessagesUser/PersonalMessagesUser";
 function App() {
   const { currentUser } = useSelector((state) => state.userInfoReducer);
 
   return (
-    <div className="container mx-auto">
+    <div>
       <NavbarComponent />
-      <div className=" px-0 lg:px-4">
+      <div>
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/home" element={<Home />} />
@@ -43,7 +42,6 @@ function App() {
               <Route path="/user/:id" element={<UserProfile />} />
               <Route path="/search/category/:category" element={<Category />} />
               <Route path="/favorites" element={<Favorites />} />
-              <Route path="/messages" element={<Messages />} />
               <Route path="/messages/product" element={<ProductMessages />}>
                 <Route
                   path=":productId/:uid"
@@ -60,8 +58,6 @@ function App() {
               <Route path="/signup" element={<Register />} />
             </>
           )}
-
-          {/*Product*/}
 
           <Route
             path="*"

@@ -21,28 +21,30 @@ const ProductList = () => {
   }, [dispatch, params.id]);
 
   return (
-    <div className="mt-5">
-      {error && <p>Something Went Wrong</p>}
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        products && (
-          <div className="grid lg:grid-cols-3 justify-center">
-            {products.map((product) => (
-              <ProductListCard product={product} key={product.title} />
-            ))}
-          </div>
-        )
-      )}
+    <div className="container mx-auto px-0 lg:px-4">
+      <div className="mt-5">
+        {error && <p>Something Went Wrong</p>}
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          products && (
+            <div className="grid lg:grid-cols-3 justify-center">
+              {products.map((product) => (
+                <ProductListCard product={product} key={product.title} />
+              ))}
+            </div>
+          )
+        )}
 
-      {products !== undefined && products.length === 0 && (
-        <div>
-          <div>There is no product listing.</div>
-          <Link to="/product/add" className="text-blue-700">
-            Add here
-          </Link>
-        </div>
-      )}
+        {products !== undefined && products.length === 0 && (
+          <div>
+            <div>There is no product listing.</div>
+            <Link to="/product/add" className="text-blue-700">
+              Add here
+            </Link>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

@@ -21,7 +21,7 @@ const Category = () => {
     dispatch(getAllProductByCategory(category));
   }, [dispatch, category]);
   return (
-    <div>
+    <div className="container mx-auto px-0 lg:px-4">
       {error && <div>error</div>}
       {loading ? (
         <div>Loading...</div>

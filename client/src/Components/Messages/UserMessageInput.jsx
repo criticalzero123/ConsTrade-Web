@@ -30,6 +30,8 @@ const UserMessageInput = ({ chatId, otherUserId, onClickScrollDown }) => {
         sender_Id: currentUser._id,
         date: Timestamp.now(),
       }),
+
+      ["isTyping." + currentUser.uid]: false,
     });
 
     await updateDoc(doc(db, "userChats", currentUser.uid), {
@@ -49,8 +51,33 @@ const UserMessageInput = ({ chatId, otherUserId, onClickScrollDown }) => {
     onClickScrollDown();
   };
 
+  const handleTyping = async (e) => {
+    const _text = e.target.value;
+    setText(_text);
+
+    // If empty set to false and check if it is first render by checking the state
+    if (_text === "" && text !== "") {
+      await updateDoc(doc(db, "userMessages", chatId), {
+        ["isTyping." + currentUser.uid]: false,
+      });
+    }
+    // if the text is more than 1 set to true this is for not always writing to true in firestore
+    else if (_text.length === 1) {
+      await updateDoc(doc(db, "userMessages", chatId), {
+        ["isTyping." + currentUser.uid]: true,
+      });
+    }
+  };
+
+  const handleBlur = async () => {
+    // set false if the input is onBlur
+    await updateDoc(doc(db, "userMessages", chatId), {
+      ["isTyping." + currentUser.uid]: false,
+    });
+  };
+
   return (
-    <div className="w-full p-3  h-1/6 flex place-items-end">
+    <div className="w-full p-3 absolute bottom-0 flex place-items-end">
       <form
         onSubmit={handleSend}
         className="bg-white p-2 rounded-lg shadow-xl mb-2 w-full"
@@ -59,7 +86,8 @@ const UserMessageInput = ({ chatId, otherUserId, onClickScrollDown }) => {
           <input
             type="text"
             placeholder="Type something..."
-            onChange={(e) => setText(e.target.value)}
+            onChange={handleTyping}
+            onBlur={handleBlur}
             value={text}
             required
             autoFocus
