@@ -54,7 +54,6 @@ router.post("/getTransactionById", async (req, res) => {
     for (let i = 0; i < transactions.length; i++) {
       const { buyerId } = transactions[i];
 
-      console.log(buyerId === "none");
       // if there is no buyer
       if (buyerId == "none") continue;
 
