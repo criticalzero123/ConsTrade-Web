@@ -9,6 +9,7 @@ const socialMediaAuth = (provider) => {
     .then(async (res) => {
       // TODO: incase for additional field in users in mongodb
       existInUserChatsSocialMediaAuth(res.user.uid);
+
       return res.user;
     })
     .catch((err) => {
