@@ -1,10 +1,12 @@
-import React from "react";
-import { firstLetterUpper } from "../../../service/userService";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserById } from "../../../actions/userActions";
 import { toArrayString } from "../../../service/productService";
+import ConfirmTransactedModal from "../ProductMarkAsTransactedModal/ConfirmTransactedModal";
+import { MdOutlineMoreVert } from "react-icons/md";
+import { BsCheckCircle } from "react-icons/bs";
 
 const ProductInfo = ({
   product,
@@ -13,6 +15,8 @@ const ProductInfo = ({
   setOnClickShowComments,
   showComments,
 }) => {
+  const [showModal, setShowModal] = useState(false);
+  const [showItemSettings, setShowItemSettings] = useState(false);
   const date = product && new Date(product.dateCreated).toDateString();
   const stringPrefer =
     product.preferTrade !== undefined &&
@@ -36,24 +40,54 @@ const ProductInfo = ({
 
   return (
     <div className=" bg-[#031533]  px-10 py-5 rounded h-full text-white">
-      <p className="font-bold text-base font-mono text-orange-400 tracking-widest">
-        {soldChecker ? "TRANSACTION SUCCESSFUL" : stringPrefer}
-      </p>
+      <div className="flex justify-between ">
+        <p className="font-bold text-base font-mono text-orange-400 tracking-widest">
+          {soldChecker ? "TRANSACTION SUCCESSFUL" : stringPrefer}
+        </p>
+        {product.status !== "sold" && product.userId === currentUser._id && (
+          <div className="relative">
+            <MdOutlineMoreVert
+              size={25}
+              onClick={() => setShowItemSettings(!showItemSettings)}
+              className="cursor-pointer hover:text-gray-500"
+            />
+            <div
+              className={`absolute top-5 bg-gray-800 text-white z-10 right-5 w-48 rounded-lg ${
+                showItemSettings ? "block" : "hidden"
+              }`}
+            >
+              <ul className="py-1 text-sm  text-gray-200">
+                <li
+                  onClick={() => setShowModal(!showModal)}
+                  className="cursor-pointer px-4 py-2 hover:bg-gray-600 hover:text-green-300 place-items-center w-full flex"
+                >
+                  <BsCheckCircle size={15} />
+                  <div className="px-1"></div>
+                  <p>Mark as transacted</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        )}
+      </div>
+      {showModal && (
+        <ConfirmTransactedModal
+          show={showModal}
+          onCloseModal={() => setShowModal(!showModal)}
+        />
+      )}
       <div className="flex place-items-center">
         <p className="font-bold text-4xl font-mono mr-3">{product.title}</p>
         <p className="text-gray-400 font-semibold">({product.condition})</p>
       </div>
-
       <p className="text-sm text-gray-400 mb-2 mt-2">
         <span className="text-gray-200">Game Model Name: </span>
         {product.modelNumber}
       </p>
-
       <p className="text-sm text-gray-400 mb-2 mt-2">
         <span className="text-gray-200">Serial Number: </span>
         {product.serialNumber}
       </p>
-
       <p className=" text-gray-400 mb-2 mt-2">
         <span className="text-gray-200">More Details: </span>
         {product.description}
@@ -84,8 +118,8 @@ const ProductInfo = ({
             </Link>
             <div className="ml-3">
               <Link to={`/user/${product.userId}`}>
-                <p className="font-semibold font-sans tracking-wider hover:text-red-500">
-                  {firstLetterUpper(product.userName)}
+                <p className="font-semibold font-sans tracking-wider hover:text-red-500 capitalize">
+                  {product.userName}
                 </p>{" "}
               </Link>
               <p className="text-gray-500 font-semibold tracking-wide">
@@ -93,11 +127,10 @@ const ProductInfo = ({
               </p>
             </div>
           </div>
-
           <p className="mt-2 font-semibold text-lg">
             Location:{" "}
             <span
-              className="text-base text-gray-500 hover:text-red-500 cursor-pointer"
+              className="text-base text-gray-500 hover:text-red-500 cursor-pointer capitalize"
               onClick={() =>
                 window.open(
                   "http://maps.google.com/?q=" + product.location,
@@ -105,7 +138,7 @@ const ProductInfo = ({
                 )
               }
             >
-              {firstLetterUpper(product.location)}
+              {product.location}
             </span>
           </p>
           <p className="mt-2 font-semibold text-lg">

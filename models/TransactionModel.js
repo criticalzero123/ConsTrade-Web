@@ -7,7 +7,7 @@ const transactionSchema = mongoose.Schema(
       require,
     },
     buyerId: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: String,
     },
     sellerId: {
       type: mongoose.Schema.Types.ObjectId,
@@ -17,7 +17,7 @@ const transactionSchema = mongoose.Schema(
       type: Boolean,
       require,
     },
-    getWant: {
+    getWanted: {
       type: String,
       require,
     },

@@ -120,15 +120,15 @@ const removeAndRedirect = () => {
   window.location.href = "/signin";
 };
 
-export const searchUserChat = (search) => (dispatch) => {
-  dispatch({ type: "USER_SEARCH_CHAT_REQUEST" });
+export const searchUser = (search) => (dispatch) => {
+  dispatch({ type: "USER_SEARCH_REQUEST" });
 
   axios
-    .post("/api/users/getUserChat", { search })
+    .post("/api/users/getUserByName", { search })
     .then((res) => {
-      dispatch({ type: "USER_SEARCH_CHAT_SUCCESS", payload: res.data });
+      dispatch({ type: "USER_SEARCH_SUCCESS", payload: res.data });
     })
     .catch((err) => {
-      dispatch({ type: "USER_SEARCH_CHAT_ERROR" });
+      dispatch({ type: "USER_SEARCH_ERROR" });
     });
 };

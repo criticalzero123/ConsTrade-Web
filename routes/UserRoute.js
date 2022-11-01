@@ -246,7 +246,7 @@ router.post("/addFavorite", async (req, res) => {
   }
 });
 
-router.post("/getUserChat", async (req, res) => {
+router.post("/getUserByName", async (req, res) => {
   try {
     const userName = req.body.search;
     const users = await User.find({

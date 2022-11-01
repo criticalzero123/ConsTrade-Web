@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const soldItemTransaction =
-  (productId, userId, sellerId, getWant) => (dispatch) => {
+  (productId, userId, sellerId, getWant, inAppTransac) => (dispatch) => {
     dispatch({ type: "SOLD_TRANSACTION_REQUEST" });
 
     axios
@@ -10,6 +10,7 @@ export const soldItemTransaction =
         userId,
         sellerId,
         getWant,
+        inAppTransac,
       })
       .then((res) => {
         dispatch({ type: "SOLD_TRANSACTION_SUCCESS" });

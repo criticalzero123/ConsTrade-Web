@@ -5,14 +5,13 @@ import { db } from "../../firebase/firebase-config";
 import ProductMessageInput from "./ProductMessageInput";
 import { Link } from "react-router-dom";
 import { Button } from "flowbite-react";
-import { soldItemTransaction } from "../../actions/transactionActions";
 import { BsCheckSquareFill, BsArrowRight } from "react-icons/bs";
 
 import { RiArrowDownSLine } from "react-icons/ri";
 
 import { useDispatch } from "react-redux";
 
-import Swal from "sweetalert2";
+import { markAstransactedPopUpWithBuyerInApp } from "../../firebase/transactionHelper";
 
 const ProductMessagesComponent = ({
   chatId,
@@ -60,61 +59,12 @@ const ProductMessagesComponent = ({
   };
 
   const completeItemOnClick = () => {
-    Swal.fire({
-      title: "Transaction Completed?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          title: "Hooray!",
-          text: "Were you able to get your desired item or cash?",
-          showDenyButton: true,
-          confirmButtonText: "Yes",
-          denyButtonText: `No`,
-          icon: "success",
-        }).then((result) => {
-          if (result.isConfirmed) {
-            Swal.fire("Thank you!", "", "success");
-            dispatch(
-              soldItemTransaction(
-                product._id,
-                otherUser_Id,
-                product.userId,
-                "Yes"
-              )
-            );
-          } else if (result.isDenied) {
-            dispatch(
-              soldItemTransaction(
-                product._id,
-                otherUser_Id,
-                product.userId,
-                "No"
-              )
-            );
-          } else if (result.isDismissed) {
-            dispatch(
-              soldItemTransaction(
-                product._id,
-                otherUser_Id,
-                product.userId,
-                "Not provided"
-              )
-            );
-          }
-        });
-      } else if (
-        /* Read more about handling dismissals below */
-        result.dismiss === Swal.DismissReason.cancel
-      ) {
-        Swal.fire("Cancelled", "Transaction Cancelled.", "error");
-      }
-    });
+    markAstransactedPopUpWithBuyerInApp(
+      product._id,
+      otherUser_Id,
+      product.userId,
+      dispatch
+    );
   };
 
   return (

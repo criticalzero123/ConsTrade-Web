@@ -6,7 +6,7 @@ import { db } from "../../firebase/firebase-config";
 import { doc, onSnapshot } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import UserSideDisplay from "../../Components/Messages/UserSideDisplay";
-import { searchUserChat } from "../../actions/userActions";
+import { searchUser } from "../../actions/userActions";
 import UserSearchDisplay from "../../Components/Messages/Search/UserSearchDisplay";
 
 const UserMessages = () => {
@@ -52,13 +52,13 @@ const UserMessages = () => {
     setTimer(
       setTimeout(() => {
         if (query.toString().trim() !== "") {
-          dispatch(searchUserChat(query));
+          dispatch(searchUser(query));
         }
       }, 500)
     );
   };
 
-  const usersChatSearch = useSelector((state) => state.searchUserChatReducer);
+  const usersChatSearch = useSelector((state) => state.searchUserReducer);
   const usersChat = usersChatSearch.users;
 
   return (
