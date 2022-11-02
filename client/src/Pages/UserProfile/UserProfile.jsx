@@ -13,20 +13,39 @@ import { Link } from "react-router-dom";
 import { GrTransaction } from "react-icons/gr";
 import { BsFileEarmarkPost } from "react-icons/bs";
 import { FaUserCircle } from "react-icons/fa";
-import { AiOutlineMessage, AiOutlineUserAdd, AiFillStar } from "react-icons/ai";
+import {
+  AiOutlineMessage,
+  AiOutlineUserAdd,
+  AiFillStar,
+  AiOutlineUserDelete,
+} from "react-icons/ai";
 import UserProfileInfo from "../../Components/UserProfile/UserProfileInfo";
 import UserProfilePosts from "../../Components/UserProfile/Posts/UserProfilePosts";
+import { followUser, isFollowingUser } from "../../actions/followActions";
 
 const UserProfile = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const getUser = useSelector((state) => state.getUserByIdReducer);
+  const { currentUser } = useSelector((state) => state.userInfoReducer);
+  const { payload } = useSelector((state) => state.isFollowingUserReducer);
 
   const { user, loading, error } = getUser;
 
   useEffect(() => {
     dispatch(getUserById(id));
-  }, [id, dispatch]);
+    currentUser._id !== id && dispatch(isFollowingUser(currentUser._id, id));
+  }, [id, dispatch, currentUser._id]);
+
+  const handleFollow = () => {
+    const _user = {
+      userId: user._id,
+      userName: user.name,
+      userImageURL: user.imagePhotoURL,
+    };
+    dispatch(followUser(currentUser._id, _user));
+  };
+
   return (
     <div className="container mx-auto px-0 lg:px-4">
       {error && <p>Something went wrong...</p>}
@@ -73,7 +92,7 @@ const UserProfile = () => {
 
                           <div className="w-full  flex justify-center">
                             <p className="text-gray-500 hover:text-orange-500 cursor-pointer  max-w-fit">
-                              1
+                              {user.countFollower ? user.countFollower : 0}
                             </p>
                           </div>
                         </div>
@@ -84,25 +103,42 @@ const UserProfile = () => {
 
                           <div className="w-full  flex justify-center">
                             <p className="text-gray-500 hover:text-orange-500 cursor-pointer  max-w-fit">
-                              2
+                              {user.countFollowing ? user.countFollowing : 0}
                             </p>
                           </div>
                         </div>
                       </div>
 
-                      <div className="mt-4 grid grid-cols-2 gap-4 lg:mt-6 w-full px-10 md:px-0 lg:px-10">
-                        <Link
-                          to={`/messages/user/${user._id}`}
-                          className="flex cursor-pointer justify-center place-items-center rounded-lg border border-gray-300 bg-white py-2 px-4 text-center text-sm font-medium text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 "
-                        >
-                          <AiOutlineMessage className="mr-2" size={20} />
-                          Message
-                        </Link>
-                        <div className="flex cursor-pointer justify-center rounded-lg border border-gray-300 bg-white py-2 px-4 text-center text-sm font-medium text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 ">
-                          <AiOutlineUserAdd className="mr-2" size={20} />
-                          Follow
+                      {currentUser._id !== id && (
+                        <div className="mt-4 grid grid-cols-2 gap-4 lg:mt-6 w-full px-10 md:px-0 lg:px-10">
+                          <Link
+                            to={`/messages/user/${user._id}`}
+                            className="flex cursor-pointer justify-center place-items-center rounded-lg border border-gray-300 bg-white py-2 px-4 text-center text-sm font-medium text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 "
+                          >
+                            <AiOutlineMessage className="mr-2" size={20} />
+                            Message
+                          </Link>
+                          <div
+                            onClick={handleFollow}
+                            className="flex cursor-pointer justify-center rounded-lg border border-gray-300 bg-white py-2 px-4 text-center text-sm font-medium text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 "
+                          >
+                            {payload ? (
+                              <>
+                                <AiOutlineUserDelete
+                                  className="mr-2"
+                                  size={20}
+                                />
+                                Unfollow
+                              </>
+                            ) : (
+                              <>
+                                <AiOutlineUserAdd className="mr-2" size={20} />
+                                Follow
+                              </>
+                            )}
+                          </div>
                         </div>
-                      </div>
+                      )}
                     </div>
                   </Card>
                 </div>

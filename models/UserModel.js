@@ -79,6 +79,12 @@ const userSchema = mongoose.Schema(
       type: Number,
       require,
     },
+    countFollower: {
+      type: Number,
+    },
+    countFollowing: {
+      type: Number,
+    },
     reviews: [reviewSchema],
     favorites: [favoriteSchema],
   },

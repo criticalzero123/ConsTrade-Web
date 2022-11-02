@@ -8,11 +8,13 @@ const path = require("path");
 var productsRoute = require("./routes/ProductRoute");
 var userRoute = require("./routes/UserRoute");
 var transactionRoute = require("./routes/TransactionRoute");
+var followRoute = require("./routes/FollowRoute");
 
 app.use(bodyParser.json());
 app.use("/api/products/", productsRoute);
 app.use("/api/users/", userRoute);
 app.use("/api/transactions/", transactionRoute);
+app.use("/api/follows/", followRoute);
 
 if (process.env.NODE_ENV === "production") {
   // For http redirect to https
