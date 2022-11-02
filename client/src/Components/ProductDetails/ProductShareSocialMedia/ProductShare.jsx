@@ -58,7 +58,7 @@ const ProductShare = ({ title, description }) => {
         style={{
           backgroundImage: `url(${background})`,
         }}
-        className="block absolute p-6 -z-10 -top-96 border rounded-lg bg-gray-200 text-black w-[346px] h-fit"
+        className="block absolute p-6 -z-10 -top-[100rem] border rounded-lg bg-gray-200 text-black w-[346px] h-fit"
         id="qrCodePic"
       >
         <div className="flex w-full justify-center mb-5">
