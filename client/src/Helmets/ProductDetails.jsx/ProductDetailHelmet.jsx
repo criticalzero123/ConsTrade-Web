@@ -1,8 +1,9 @@
-import Helmet from "react-helmet";
+import { Helmet, HelmetData } from "react-helmet-async";
 
 const ProductDetailHelmet = ({ title, metaDescription, imageUrl }) => {
+  const helmetData = new HelmetData({});
   return (
-    <Helmet>
+    <Helmet helmetData={helmetData}>
       <title>{"ConsTrade: " + title}</title>
       <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
       <meta name="description" key="description" content={metaDescription} />
