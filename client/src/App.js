@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Index from "./Pages/Index";
 import Login from "./Pages/login-and-register/Login/Login";
@@ -56,6 +56,19 @@ function App() {
             <>
               <Route path="/signin" element={<Login />} />
               <Route path="/signup" element={<Register />} />
+              <Route
+                path="/product/item/:id"
+                element={
+                  <main style={{ padding: "1rem" }}>
+                    <p>
+                      Please login to access here.{" "}
+                      <Link to="/signin" className="text-red-500">
+                        Login Here!
+                      </Link>
+                    </p>
+                  </main>
+                }
+              />
             </>
           )}
 
