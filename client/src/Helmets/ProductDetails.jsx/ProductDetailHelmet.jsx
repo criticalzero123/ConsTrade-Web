@@ -1,6 +1,7 @@
 import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const ProductDetailHelmet = ({ title, metaDescription, imageUrl }) => {
+  console.log(imageUrl);
   return (
     <HelmetProvider>
       <Helmet>

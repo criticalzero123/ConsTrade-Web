@@ -43,17 +43,17 @@ const ProductDetails = () => {
 
   return (
     <div className="container mx-auto px-0 lg:px-4">
-      <ProductDetailHelmet
-        imageUrl={product ? product.imageUrl : "Image"}
-        title={product ? product.title : "title"}
-        metaDescription={product ? product.description : "description"}
-      />
       {error && <div>Something Went Wrong...</div>}
       {loading ? (
         <p>Loading...</p>
       ) : (
         product && (
           <div>
+            <ProductDetailHelmet
+              imageUrl={product.imageURL}
+              title={product.title}
+              metaDescription={product.description}
+            />
             <div className="lg:grid lg:grid-cols-3  h-[42rem] p-5 ">
               <div className="lg:col-span-1 mb-5 lg:mb-0 relative rounded  shadow-lg mr-5 flex place-items-center justify-center text-black  bg-[#031533]">
                 <div className="h-5/6">
