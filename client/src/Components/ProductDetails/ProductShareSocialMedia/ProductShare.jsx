@@ -67,15 +67,15 @@ const ProductShare = ({ title, description }) => {
             src: logo,
             x: undefined,
             y: undefined,
-            height: 50,
-            width: 60,
+            height: 30,
+            width: 40,
             excavate: true,
           }}
         />
-        <p className="font-poppins text-lg mt-5 text-center font-semibold tracking-wide">
+        <p className="font-poppins text-xl mt-5 text-center font-semibold tracking-wide">
           {title}
         </p>
-        <p className="text-center opacity-50 mt-1 font-poppins ">
+        <p className="text-center opacity-50 mt-1 font-poppins text-sm font-semibold">
           <span className="text-black">Cons</span>
           <span className="text-red-500">Trade</span>™
         </p>
