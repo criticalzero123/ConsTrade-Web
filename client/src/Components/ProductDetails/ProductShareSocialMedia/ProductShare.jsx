@@ -5,23 +5,27 @@ import { Tooltip } from "flowbite-react";
 import { MdOutlineQrCodeScanner } from "react-icons/md";
 import { QRCodeCanvas } from "qrcode.react";
 import logo from "../../../Assets/Images/Branding/Web/SVG/IconWeb.svg";
+import html2canvas from "html2canvas";
 
 const ProductShare = ({ title, description }) => {
   const fullUrl = window.location.href;
 
   const exportQrImage = () => {
     const canva = document.getElementById("qrCodePic");
-    const pngUrl = canva
-      .toDataURL("image/png")
-      .replace("image/png", "image/octet-stream");
 
-    let downloadLink = document.createElement("a");
-    downloadLink.href = pngUrl;
-    downloadLink.download = title + ".png";
-    // Remove the created and invisible link.
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
+    html2canvas(canva).then((canvas) => {
+      const pngUrl = canvas
+        .toDataURL("image/png")
+        .replace("image/png", "image/octet-stream");
+
+      let downloadLink = document.createElement("a");
+      downloadLink.href = pngUrl;
+      downloadLink.download = title + ".png";
+      // Remove the created and invisible link.
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+    });
   };
 
   return (
@@ -47,9 +51,12 @@ const ProductShare = ({ title, description }) => {
       </Tooltip>
       <span className="px-1"></span>
       {/* QRCode Download */}
-      <div className="hidden">
+      {/*  Hide the qr code in out of page */}
+      <div
+        className="block absolute -z-10 -top-96 p-5 border rounded-lg bg-gray-200 text-black "
+        id="qrCodePic"
+      >
         <QRCodeCanvas
-          id="qrCodePic"
           value={fullUrl}
           size={256}
           bgColor={"#ffffff"}
@@ -61,11 +68,19 @@ const ProductShare = ({ title, description }) => {
             x: undefined,
             y: undefined,
             height: 50,
-            width: 50,
+            width: 60,
             excavate: true,
           }}
         />
+        <p className="font-poppins text-lg mt-5 text-center font-semibold tracking-wide">
+          {title}
+        </p>
+        <p className="text-center opacity-50 mt-1 font-poppins ">
+          <span className="text-black">Cons</span>
+          <span className="text-red-500">Trade</span>™
+        </p>
       </div>
+
       <MdOutlineQrCodeScanner
         size={29}
         className="p-1 rounded-full  bg-gray-200 text-black cursor-pointer"
