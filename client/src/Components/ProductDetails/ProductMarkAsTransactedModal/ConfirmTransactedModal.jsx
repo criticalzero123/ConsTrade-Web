@@ -4,7 +4,7 @@ import { Modal } from "flowbite-react";
 import UserListModal from "./UserListModal";
 
 import { useDispatch, useSelector } from "react-redux";
-import { markAstransactedPopUpNotApp } from "../../../firebase/transactionHelper";
+import { markAstransactedPopUpNotApp } from "../../../service/transactionHelper";
 
 const ConfirmTransactedModal = ({ show, onCloseModal }) => {
   const [showUserList, setShowUserList] = useState(false);

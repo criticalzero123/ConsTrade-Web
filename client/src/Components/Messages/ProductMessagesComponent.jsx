@@ -11,7 +11,7 @@ import { RiArrowDownSLine } from "react-icons/ri";
 
 import { useDispatch } from "react-redux";
 
-import { markAstransactedPopUpWithBuyerInApp } from "../../firebase/transactionHelper";
+import { markAstransactedPopUpWithBuyerInApp } from "../../service/transactionHelper";
 
 const ProductMessagesComponent = ({
   chatId,

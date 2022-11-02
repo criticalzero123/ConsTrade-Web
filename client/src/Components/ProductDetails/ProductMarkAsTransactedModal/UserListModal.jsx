@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { searchUser } from "../../../actions/userActions";
 
 import { IoCloseCircleOutline } from "react-icons/io5";
-import { markAstransactedPopUpWithBuyerInApp } from "../../../firebase/transactionHelper";
+import { markAstransactedPopUpWithBuyerInApp } from "../../../service/transactionHelper";
 
 const UserListModal = ({ onCloseModal, show, product }) => {
   //searching
