@@ -112,7 +112,7 @@ const UserProfile = () => {
                           </Link>
                           <FollowUserProfile
                             id={id}
-                            currentUserId={currentUser._id}
+                            currentUser={currentUser}
                             user={user}
                             onFollowAction={() =>
                               setCountFollower(countFollower + 1)

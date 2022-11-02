@@ -45,3 +45,19 @@ export const unFollowUserReducer = (state = {}, action) => {
       return state;
   }
 };
+
+export const getFollowersReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "GET_FOLLOWERS_REQUEST":
+      return { loading: true };
+
+    case "GET_FOLLOWERS_SUCCESS":
+      return { followers: action.payload, loading: false };
+
+    case "GET_FOLLOWERS_FAILED":
+      return { loading: false, error: true };
+
+    default:
+      return state;
+  }
+};

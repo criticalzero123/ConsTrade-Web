@@ -18,11 +18,15 @@ import {
   platformOptions,
   preferTradeOptions,
 } from "../../service/productService";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "../../actions/productActions";
 import { userInfo } from "../../service/userService";
 import { saveImageStorage } from "../../firebase/storageImages";
 import { Button, Spinner, Tooltip } from "flowbite-react";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../../firebase/firebase-config";
+import { useEffect } from "react";
+import { getFollowers } from "../../actions/followActions";
 
 const ProductAdd = () => {
   const user = userInfo();
@@ -52,6 +56,10 @@ const ProductAdd = () => {
   const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getFollowers(user._id));
+  }, [dispatch, user._id]);
 
   const cashPreferInput = (e) => {
     if (e.target.value >= 0) {
@@ -131,7 +139,7 @@ const ProductAdd = () => {
     }
   };
 
-  const productUploadCallBack = (image) => {
+  const productUploadCallBack = async (image) => {
     if (image) {
       const product = {
         userId: user._id,

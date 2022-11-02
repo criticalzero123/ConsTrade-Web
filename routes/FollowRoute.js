@@ -5,18 +5,29 @@ const User = require("../models/UserModel");
 const router = express.Router();
 
 router.post("/followUser", async (req, res) => {
-  const { currentUserId, user } = req.body;
+  const { currentUser, user } = req.body;
   try {
+    // Follow Transaction
+    // Following Update
     const options = { upsert: true, new: true, setDefaultsOnInsert: true };
     const update = { $push: { following: user } };
-    await Follow.findOneAndUpdate({ userId: currentUserId }, update, options);
+    await Follow.findOneAndUpdate(
+      { userId: currentUser.userId },
+      update,
+      options
+    );
+
+    // Follower Update
+    const _options = { upsert: true, new: true, setDefaultsOnInsert: true };
+    const _update = { $push: { follower: currentUser } };
+    await Follow.findOneAndUpdate({ userId: user.userId }, _update, _options);
 
     // User Transaction
     const userOptions = { upsert: true, setDefaultsOnInsert: true };
     // Ang nag follow
     const updateUser = { $inc: { countFollowing: +1 } };
     await User.findByIdAndUpdate(
-      { _id: currentUserId },
+      { _id: currentUser.userId },
       updateUser,
       userOptions
     );
@@ -58,8 +69,14 @@ router.post("/unFollowUser", async (req, res) => {
   const { userId, otherUserId } = req.body;
 
   try {
+    // Follow Transaction
+    // Unfollowing
     const update = { $pull: { following: { userId: otherUserId } } };
     await Follow.findOneAndUpdate({ userId: userId }, update);
+
+    // Unfollow
+    const _update = { $pull: { follower: { userId: userId } } };
+    await Follow.findOneAndUpdate({ userId: otherUserId }, _update);
 
     // User Transaction
     // Ang nag follow
@@ -76,6 +93,19 @@ router.post("/unFollowUser", async (req, res) => {
     return res
       .status(400)
       .json({ message: "Something went wrong unfollowing user." });
+  }
+});
+
+router.post("/getFollowers", async (req, res) => {
+  const { userId } = req.body;
+  try {
+    const followers = await Follow.findOne({ userId: userId });
+    console.log(followers);
+    res.send(followers.follower);
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ message: "Something went wrong fetching followers." });
   }
 });
 

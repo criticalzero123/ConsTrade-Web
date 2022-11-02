@@ -17,6 +17,7 @@ import textLogo from "../../Assets/Images/Branding/ConsTrade.svg";
 import { BiSearch } from "react-icons/bi";
 import { BsChatDots } from "react-icons/bs";
 import SearchHeader from "./SearchHeader/SearchHeader";
+import NavbarNotification from "./NavbarNotification";
 
 const NavbarComponent = () => {
   const useLoggedIn = isUserLoggedIn();
@@ -63,6 +64,7 @@ const NavbarComponent = () => {
                 className="mr-4 cursor-pointer"
                 onClick={() => setShowSearch(!showSearch)}
               />
+              <NavbarNotification />
               <Dropdown
                 arrowIcon={false}
                 inline={true}

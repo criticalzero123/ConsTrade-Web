@@ -11,7 +11,7 @@ import { Spinner } from "flowbite-react";
 import Swal from "sweetalert2";
 
 const FollowUserProfile = ({
-  currentUserId,
+  currentUser,
   id,
   user,
   onFollowAction,
@@ -20,8 +20,8 @@ const FollowUserProfile = ({
   const dispatch = useDispatch();
 
   useEffect(() => {
-    currentUserId !== id && dispatch(isFollowingUser(currentUserId, id));
-  }, [currentUserId, id, dispatch]);
+    currentUser._id !== id && dispatch(isFollowingUser(currentUser._id, id));
+  }, [currentUser._id, id, dispatch]);
 
   const { payload, loading } = useSelector(
     (state) => state.isFollowingUserReducer
@@ -39,17 +39,23 @@ const FollowUserProfile = ({
         confirmButtonText: "Yes",
       }).then((result) => {
         if (result.isConfirmed) {
-          dispatch(unFollowUser(currentUserId, user._id));
+          dispatch(unFollowUser(currentUser._id, user._id));
           onUnFollowAction();
         }
       });
     } else {
+      const _currentUser = {
+        userId: currentUser._id,
+        userName: currentUser.name,
+        userImageURL: currentUser.imagePhotoURL,
+      };
+
       const _user = {
         userId: user._id,
         userName: user.name,
         userImageURL: user.imagePhotoURL,
       };
-      dispatch(followUser(currentUserId, _user));
+      dispatch(followUser(_currentUser, _user));
       onFollowAction();
     }
   };

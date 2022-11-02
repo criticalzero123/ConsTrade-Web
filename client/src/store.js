@@ -10,7 +10,10 @@ import {
 
 import { getTransactionByUserIdReducer } from "./reducers/transactionReducer";
 
-import { isFollowingUserReducer } from "./reducers/followReducer";
+import {
+  isFollowingUserReducer,
+  getFollowersReducer,
+} from "./reducers/followReducer";
 
 import {
   socalMediaAuthReducer,
@@ -46,6 +49,7 @@ const finalReducer = combineReducers({
   getAllUserByCountPostReducer,
   searchUserReducer,
   isFollowingUserReducer,
+  getFollowersReducer,
 });
 
 const currentUser = localStorage.getItem("currentUser")
