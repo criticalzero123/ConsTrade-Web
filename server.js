@@ -15,6 +15,7 @@ app.use("/api/users/", userRoute);
 app.use("/api/transactions/", transactionRoute);
 
 if (process.env.NODE_ENV === "production") {
+  // For http redirect to https
   app.use((req, res, next) => {
     if (req.header("x-forwarded-proto") !== "https")
       res.redirect(`https://${req.header("host")}${req.url}`);

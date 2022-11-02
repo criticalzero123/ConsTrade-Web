@@ -5,7 +5,7 @@ const ProductDetailHelmet = ({ title, metaDescription, imageUrl }) => {
     <HelmetProvider>
       <Helmet>
         <title>{"ConsTrade: " + title}</title>
-        {/* <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" key="description" content={metaDescription} />
         <meta name="title" key="title" content={"ConsTrade: " + title} />
         <meta property="og:title" key="og:title" content={title} />
@@ -16,7 +16,7 @@ const ProductDetailHelmet = ({ title, metaDescription, imageUrl }) => {
           key="og:description"
           content={metaDescription}
         />
-        <meta property="og:image" key="og:image" content={imageUrl} /> */}
+        <meta property="og:image" key="og:image" content={imageUrl} />
       </Helmet>
     </HelmetProvider>
   );

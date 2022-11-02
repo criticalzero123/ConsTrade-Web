@@ -5,6 +5,8 @@ import { Tooltip } from "flowbite-react";
 import { MdOutlineQrCodeScanner } from "react-icons/md";
 import { QRCodeCanvas } from "qrcode.react";
 import logo from "../../../Assets/Images/Branding/Web/SVG/IconWeb.svg";
+import logoText from "../../../Assets/Images/Branding/ConsTrade.svg";
+import background from "../../../Assets/Images/ProductDetails/background.png";
 import html2canvas from "html2canvas";
 
 const ProductShare = ({ title, description }) => {
@@ -53,32 +55,45 @@ const ProductShare = ({ title, description }) => {
       {/* QRCode Download */}
       {/*  Hide the qr code in out of page */}
       <div
-        className="block absolute -z-10 -top-96 p-5 border rounded-lg bg-gray-200 text-black "
+        style={{
+          backgroundImage: `url(${background})`,
+        }}
+        className="block absolute p-6 -z-10 -top-96 border rounded-lg bg-gray-200 text-black w-[346px] h-fit"
         id="qrCodePic"
       >
-        <QRCodeCanvas
-          value={fullUrl}
-          size={256}
-          bgColor={"#ffffff"}
-          fgColor={"#000000"}
-          level={"L"}
-          includeMargin={false}
-          imageSettings={{
-            src: logo,
-            x: undefined,
-            y: undefined,
-            height: 30,
-            width: 40,
-            excavate: true,
-          }}
-        />
-        <p className="font-poppins text-xl mt-5 text-center font-semibold tracking-wide">
-          {title}
-        </p>
-        <p className="text-center opacity-50 mt-1 font-poppins text-sm font-semibold">
-          <span className="text-black">Cons</span>
-          <span className="text-red-500">Trade</span>™
-        </p>
+        <div className="flex w-full justify-center mb-5">
+          <img src={logoText} alt="ConsTrade" />
+        </div>
+
+        <div className="p-5 bg-white rounded-lg z-10">
+          {" "}
+          <p className="font-poppins text-lg mb-3 text-center font-semibold tracking-wide">
+            {title}
+          </p>
+          <QRCodeCanvas
+            value={fullUrl}
+            size={256}
+            bgColor={"#ffffff"}
+            fgColor={"#000000"}
+            level={"L"}
+            includeMargin={false}
+            imageSettings={{
+              src: logo,
+              x: undefined,
+              y: undefined,
+              height: 30,
+              width: 40,
+              excavate: true,
+            }}
+          />
+        </div>
+        <div className="p-2 bg-white shadow-lg mt-3 rounded-lg">
+          <p className="text-center opacity-70 font-poppins text-sm ">
+            <span className=" font-semibold text-red-500">
+              constrades.herokuapp.com
+            </span>
+          </p>
+        </div>
       </div>
 
       <MdOutlineQrCodeScanner
