@@ -2,11 +2,12 @@ import axios from "axios";
 
 export const followUser = (currentUserId, user) => (dispatch) => {
   dispatch({ type: "ADD_FOLLOW_USER_REQUEST" });
-
+  dispatch({ type: "IS_FOLLOWING_USER_REQUEST" });
   axios
     .post("/api/follows/followUser", { currentUserId, user })
     .then((res) => {
-      dispatch({ type: "ADD_FOLLOW_USER_SUCCESS", payload: res.data });
+      dispatch({ type: "ADD_FOLLOW_USER_SUCCESS" });
+      dispatch({ type: "IS_FOLLOWING_USER_SUCCESS", payload: res.data });
     })
     .catch((err) => {
       console.log(err);
@@ -15,15 +16,30 @@ export const followUser = (currentUserId, user) => (dispatch) => {
 };
 
 export const isFollowingUser = (userId, otherUserId) => (dispatch) => {
-  dispatch({ type: "FOLLOWING_USER_REQUEST" });
+  dispatch({ type: "IS_FOLLOWING_USER_REQUEST" });
 
   axios
     .post("/api/follows/followingUser", { userId, otherUserId })
     .then((res) => {
-      dispatch({ type: "FOLLOWING_USER_SUCCESS", payload: res.data });
+      dispatch({ type: "IS_FOLLOWING_USER_SUCCESS", payload: res.data });
     })
     .catch((err) => {
       console.log(err);
-      dispatch({ type: "FOLLOWING_USER_FAILED", payload: err });
+      dispatch({ type: "IS_FOLLOWING_USER_FAILED", payload: err });
+    });
+};
+
+export const unFollowUser = (userId, otherUserId) => (dispatch) => {
+  dispatch({ type: "UNFOLLOW_USER_REQUEST" });
+  dispatch({ type: "IS_FOLLOWING_USER_REQUEST" });
+  axios
+    .post("/api/follows/unFollowUser", { userId, otherUserId })
+    .then((res) => {
+      dispatch({ type: "UNFOLLOW_USER_SUCCESS" });
+      dispatch({ type: "IS_FOLLOWING_USER_SUCCESS", payload: res.data });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({ type: "UNFOLLOW_USER_FAILED", payload: err });
     });
 };

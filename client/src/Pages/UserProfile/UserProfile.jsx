@@ -1,9 +1,8 @@
 import { Card, Tabs } from "flowbite-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getUserById } from "../../actions/userActions";
-import { firstLetterUpper } from "../../service/userService";
 
 import { MdVerified } from "react-icons/md";
 import { VscUnverified } from "react-icons/vsc";
@@ -13,38 +12,29 @@ import { Link } from "react-router-dom";
 import { GrTransaction } from "react-icons/gr";
 import { BsFileEarmarkPost } from "react-icons/bs";
 import { FaUserCircle } from "react-icons/fa";
-import {
-  AiOutlineMessage,
-  AiOutlineUserAdd,
-  AiFillStar,
-  AiOutlineUserDelete,
-} from "react-icons/ai";
+import { AiOutlineMessage, AiFillStar } from "react-icons/ai";
 import UserProfileInfo from "../../Components/UserProfile/UserProfileInfo";
 import UserProfilePosts from "../../Components/UserProfile/Posts/UserProfilePosts";
-import { followUser, isFollowingUser } from "../../actions/followActions";
+import FollowUserProfile from "../../Components/UserProfile/Follow/FollowUserProfile";
 
 const UserProfile = () => {
+  const [countFollower, setCountFollower] = useState(0);
   const { id } = useParams();
   const dispatch = useDispatch();
   const getUser = useSelector((state) => state.getUserByIdReducer);
   const { currentUser } = useSelector((state) => state.userInfoReducer);
-  const { payload } = useSelector((state) => state.isFollowingUserReducer);
 
   const { user, loading, error } = getUser;
 
   useEffect(() => {
-    dispatch(getUserById(id));
-    currentUser._id !== id && dispatch(isFollowingUser(currentUser._id, id));
-  }, [id, dispatch, currentUser._id]);
+    if (user) {
+      setCountFollower(user.countFollower);
+    }
+  }, [user]);
 
-  const handleFollow = () => {
-    const _user = {
-      userId: user._id,
-      userName: user.name,
-      userImageURL: user.imagePhotoURL,
-    };
-    dispatch(followUser(currentUser._id, _user));
-  };
+  useEffect(() => {
+    dispatch(getUserById(id));
+  }, [id, dispatch, currentUser._id]);
 
   return (
     <div className="container mx-auto px-0 lg:px-4">
@@ -81,8 +71,8 @@ const UserProfile = () => {
                           </div>
                         )}
                       </span>
-                      <h5 className="mb-2 text-xl flex text-center font-medium text-gray-900 dark:text-white">
-                        {firstLetterUpper(user.name)}
+                      <h5 className="mb-2 text-xl flex text-center font-medium text-gray-900 dark:text-white capitalize">
+                        {user.name}
                       </h5>
                       <div className="grid grid-cols-2  w-full text-center border-t pt-2 mx-3 border-t-gray-100">
                         <div className="flex flex-col">
@@ -92,7 +82,7 @@ const UserProfile = () => {
 
                           <div className="w-full  flex justify-center">
                             <p className="text-gray-500 hover:text-orange-500 cursor-pointer  max-w-fit">
-                              {user.countFollower ? user.countFollower : 0}
+                              {countFollower}
                             </p>
                           </div>
                         </div>
@@ -118,25 +108,17 @@ const UserProfile = () => {
                             <AiOutlineMessage className="mr-2" size={20} />
                             Message
                           </Link>
-                          <div
-                            onClick={handleFollow}
-                            className="flex cursor-pointer justify-center rounded-lg border border-gray-300 bg-white py-2 px-4 text-center text-sm font-medium text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 "
-                          >
-                            {payload ? (
-                              <>
-                                <AiOutlineUserDelete
-                                  className="mr-2"
-                                  size={20}
-                                />
-                                Unfollow
-                              </>
-                            ) : (
-                              <>
-                                <AiOutlineUserAdd className="mr-2" size={20} />
-                                Follow
-                              </>
-                            )}
-                          </div>
+                          <FollowUserProfile
+                            id={id}
+                            currentUserId={currentUser._id}
+                            user={user}
+                            onFollowAction={() =>
+                              setCountFollower(countFollower + 1)
+                            }
+                            onUnFollowAction={() =>
+                              setCountFollower(countFollower - 1)
+                            }
+                          />
                         </div>
                       )}
                     </div>

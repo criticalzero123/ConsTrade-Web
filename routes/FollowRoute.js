@@ -29,7 +29,8 @@ router.post("/followUser", async (req, res) => {
       userOptions
     );
 
-    res.status(200).json({ message: "Successfully follow." });
+    // true => following
+    res.send(true);
   } catch (error) {
     return res
       .status(400)
@@ -50,6 +51,31 @@ router.post("/followingUser", async (req, res) => {
     return res
       .status(400)
       .json({ message: "Something went retreiving following user." });
+  }
+});
+
+router.post("/unFollowUser", async (req, res) => {
+  const { userId, otherUserId } = req.body;
+
+  try {
+    const update = { $pull: { following: { userId: otherUserId } } };
+    await Follow.findOneAndUpdate({ userId: userId }, update);
+
+    // User Transaction
+    // Ang nag follow
+    const updateUser = { $inc: { countFollowing: -1 } };
+    await User.findByIdAndUpdate({ _id: userId }, updateUser);
+
+    // Ang ge follow
+    const _updateUser = { $inc: { countFollower: -1 } };
+    await User.findByIdAndUpdate({ _id: otherUserId }, _updateUser);
+
+    // false => not following anymore
+    res.send(false);
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ message: "Something went wrong unfollowing user." });
   }
 });
 

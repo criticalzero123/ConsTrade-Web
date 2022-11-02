@@ -16,13 +16,29 @@ export const addFollowUser = (state = {}, action) => {
 
 export const isFollowingUserReducer = (state = {}, action) => {
   switch (action.type) {
-    case "FOLLOWING_USER_REQUEST":
+    case "IS_FOLLOWING_USER_REQUEST":
       return { loading: true };
 
-    case "FOLLOWING_USER_SUCCESS":
+    case "IS_FOLLOWING_USER_SUCCESS":
+      return { payload: action.payload, loading: false };
+
+    case "IS_FOLLOWING_USER_FAILED":
+      return { ...state, loading: false, error: true };
+
+    default:
+      return state;
+  }
+};
+
+export const unFollowUserReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "UNFOLLOW_USER_REQUEST":
+      return { loading: true };
+
+    case "UNFOLLOW_USER_SUCCESS":
       return { payload: action.payload, loading: false, success: true };
 
-    case "FOLLOWING_USER_FAILED":
+    case "UNFOLLOW_USER_FAILED":
       return { ...state, loading: false, error: true };
 
     default:
