@@ -28,7 +28,9 @@ const UserProfile = () => {
 
   useEffect(() => {
     if (user) {
-      setCountFollower(user.countFollower);
+      setCountFollower(
+        user.countFollower !== undefined ? user.countFollower : 0
+      );
     }
   }, [user]);
 
@@ -82,7 +84,7 @@ const UserProfile = () => {
 
                           <div className="w-full  flex justify-center">
                             <p className="text-gray-500 hover:text-orange-500 cursor-pointer  max-w-fit">
-                              {countFollower}
+                              {countFollower ? countFollower : 0}
                             </p>
                           </div>
                         </div>
