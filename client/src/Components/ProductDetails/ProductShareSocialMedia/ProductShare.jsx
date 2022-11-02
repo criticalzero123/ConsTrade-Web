@@ -66,8 +66,7 @@ const ProductShare = ({ title, description }) => {
         </div>
 
         <div className="p-5 bg-white rounded-lg z-10">
-          {" "}
-          <p className="font-poppins text-lg mb-3 text-center font-semibold tracking-wide">
+          <p className="font-poppins text-lg mb-5 text-center font-semibold tracking-wide">
             {title}
           </p>
           <QRCodeCanvas
@@ -86,13 +85,6 @@ const ProductShare = ({ title, description }) => {
               excavate: true,
             }}
           />
-        </div>
-        <div className="p-2 bg-white shadow-lg mt-3 rounded-lg">
-          <p className="text-center opacity-70 font-poppins text-sm ">
-            <span className=" font-semibold text-red-500">
-              constrades.herokuapp.com
-            </span>
-          </p>
         </div>
       </div>
 
