@@ -43,8 +43,6 @@ const Login = () => {
     }
   }, []);
 
-  console.log(nextRedirect);
-
   return (
     <div className=" h-[93vh] container mx-auto px-0 lg:px-4">
       <div className=" grid md:grid-cols-1 lg:grid-cols-2 h-5/6 ">
