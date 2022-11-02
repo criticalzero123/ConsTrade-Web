@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserById } from "../../../actions/userActions";
 import { toArrayString } from "../../../service/productService";
 import ConfirmTransactedModal from "../ProductMarkAsTransactedModal/ConfirmTransactedModal";
+import ProductShare from "../ProductShareSocialMedia/ProductShare";
 import { MdOutlineMoreVert } from "react-icons/md";
 import { BsCheckCircle } from "react-icons/bs";
 
@@ -234,6 +235,10 @@ const ProductInfo = ({
           )
         )}
         <div className="w-full ml-5">
+          <ProductShare
+            title={product.title}
+            description={product.description}
+          />
           <button
             type="button"
             onClick={setOnClickShowComments}
