@@ -9,6 +9,7 @@ import ProductAddComment from "../../Components/ProductDetails/ProductAddComment
 import { BsBookmarkHeartFill } from "react-icons/bs";
 import { addToFavorite } from "../../actions/userActions";
 import ProductInfo from "../../Components/ProductDetails/ProductInfo/ProductInfo";
+import ProductDetailHelmet from "../../Helmets/ProductDetails.jsx/ProductDetailHelmet";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -48,6 +49,11 @@ const ProductDetails = () => {
       ) : (
         product && (
           <div>
+            <ProductDetailHelmet
+              imageUrl={product.imageUrl}
+              title={product.title}
+              metaDescription={product.description}
+            />
             <div className="lg:grid lg:grid-cols-3  h-[42rem] p-5 ">
               <div className="lg:col-span-1 mb-5 lg:mb-0 relative rounded  shadow-lg mr-5 flex place-items-center justify-center text-black  bg-[#031533]">
                 <div className="h-5/6">
