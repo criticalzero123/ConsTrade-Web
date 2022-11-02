@@ -7,7 +7,7 @@ import socialMediaAuth from "../../firebase/authSocialMedia";
 import { googleProvider } from "../../firebase/authMethod";
 import { FcGoogle } from "react-icons/fc";
 
-const GoogleButton = ({ type }) => {
+const GoogleButton = ({ type, nextRedirect }) => {
   const _authType = type === 1 ? "Register" : "Login";
 
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ const GoogleButton = ({ type }) => {
         emailVerified: res.emailVerified,
       };
 
-      dispatch(socialMediaMethod(data));
+      dispatch(socialMediaMethod(data, nextRedirect));
     } else {
       // alert("Something went wrong in google auth");
       // error

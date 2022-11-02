@@ -10,11 +10,14 @@ import { isUserLoggedIn } from "../../../service/userService";
 
 import logo from "../../../Assets/Images/Branding/Web/SVG/IconWeb.svg";
 import coverlogo from "../../../Assets/Images/sign-up-and-in/login1.svg";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  // When logging in using the share link and not logged in
+  const location = useLocation();
+  const nextRedirect = location.state !== null && location.state.next;
 
   const dispatch = useDispatch();
 
@@ -27,7 +30,7 @@ const Login = () => {
         email: res.email,
         uid: res.uid,
       };
-      dispatch(emailAndPasswordLogin(user));
+      dispatch(emailAndPasswordLogin(user, nextRedirect));
     } else {
       alert("Something went wrong loging in with email and password");
       // error
@@ -39,6 +42,8 @@ const Login = () => {
       window.location.href = "/home";
     }
   }, []);
+
+  console.log(nextRedirect);
 
   return (
     <div className=" h-[93vh] container mx-auto px-0 lg:px-4">
@@ -106,7 +111,7 @@ const Login = () => {
             <span className="flex-shrink mx-4 text-gray-500">or</span>
             <div className="flex-grow border-t border-gray-300"></div>
           </div>
-          <GoogleButton type={2} />
+          <GoogleButton type={2} nextRedirect={nextRedirect} />
           <p className="mt-10 text-center text-gray-400">
             Don't have an account?{" "}
             <Link

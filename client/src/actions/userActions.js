@@ -1,7 +1,7 @@
 import axios from "axios";
 import { signOutEmailPassword } from "../firebase/authEmailAndPassword";
 
-export const socialMediaMethod = (data) => (dispatch) => {
+export const socialMediaMethod = (data, nextRedirect) => (dispatch) => {
   dispatch({ type: "USER_SOCIAL_MEDIA_AUTH_REQUEST" });
 
   axios
@@ -16,7 +16,8 @@ export const socialMediaMethod = (data) => (dispatch) => {
         localStorage.setItem("currentUser", JSON.stringify(res.data));
 
         dispatch({ type: "USER_INFO_SUCCESS", currentUser: res.data });
-        window.location.href = "/home";
+        if (nextRedirect) window.location.href = nextRedirect;
+        else window.location.href = "/home";
       }
     })
     .catch((err) => {
@@ -25,7 +26,7 @@ export const socialMediaMethod = (data) => (dispatch) => {
     });
 };
 
-export const emailAndPasswordLogin = (data) => (dispatch) => {
+export const emailAndPasswordLogin = (data, nextRedirect) => (dispatch) => {
   dispatch({ type: "USER_EMAIL_PASSWORD_LOGIN_AUTH_REQUEST" });
 
   axios
@@ -35,7 +36,8 @@ export const emailAndPasswordLogin = (data) => (dispatch) => {
 
       localStorage.setItem("currentUser", JSON.stringify(res.data));
 
-      window.location.href = "/home";
+      if (nextRedirect) window.location.href = nextRedirect;
+      else window.location.href = "/home";
     })
     .catch((err) => {
       dispatch({ type: "USER_EMAIL_PASSWORD_LOGIN_AUTH_FAILED" });
