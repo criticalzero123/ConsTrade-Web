@@ -47,6 +47,10 @@ const productSchema = mongoose.Schema(
       type: String,
       require,
     },
+    views: {
+      type: [mongoose.Schema.Types.ObjectId],
+      require,
+    },
     location: {
       type: String,
       require,

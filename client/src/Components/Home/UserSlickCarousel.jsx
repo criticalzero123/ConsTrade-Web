@@ -24,7 +24,9 @@ const UserSlickCarousel = ({ users, title, icon }) => {
         <div className="bg-[#d3d0f5] py-3 rounded-lg">
           <Slider {...userSettings}>
             {users &&
-              users.map((user) => <UserSlickCard user={user} key={user._id} />)}
+              users.map((user, index) => (
+                <UserSlickCard user={user} key={user._id} index={index} />
+              ))}
           </Slider>
         </div>
       </div>

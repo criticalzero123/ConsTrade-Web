@@ -1,8 +1,19 @@
 import React from "react";
 
-import { firstLetterUpper } from "../../service/userService";
 import { Link } from "react-router-dom";
-const UserSlickCard = ({ user }) => {
+
+import { FaCrown } from "react-icons/fa";
+
+const UserSlickCard = ({ user, index }) => {
+  const crownIcon = (index) => {
+    if (index === 0) return <FaCrown className="text-[#FFD700] mr-1 mb-1" />;
+    else if (index === 1)
+      return <FaCrown className="text-[#c0c0c0] mr-1 mb-1" />;
+    else if (index === 2)
+      return <FaCrown className="text-[#CD7F32] mr-1 mb-1" />;
+    else return;
+  };
+
   return (
     <div className="p-3 flex justify-between items-center bg-[#161449] m-3 rounded-lg text-white">
       <div className="flex place-items-center">
@@ -14,11 +25,16 @@ const UserSlickCard = ({ user }) => {
         <div>
           <Link
             to={`/user/${user._id}`}
-            className="tracking-tight text-ellipsis overflow-hidden whitespace-nowrap w-32 lg:w-full font-poppins hover:text-orange-500"
+            className="flex place-items-center tracking-tight text-ellipsis overflow-hidden whitespace-nowrap w-32 lg:w-full font-poppins hover:text-orange-500 capitalize"
           >
-            {firstLetterUpper(user.name)}
+            {crownIcon(index)} {user.name}
           </Link>
-          <p className="text-gray-100 text-sm">{user.countPost} Items</p>
+          <p className="text-gray-100 text-sm">
+            {user.countPost} Item
+            <span className={`${user.countPost > 1 ? "block" : "hidden"}`}>
+              s
+            </span>
+          </p>
         </div>
       </div>
       <Link

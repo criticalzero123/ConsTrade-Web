@@ -28,11 +28,11 @@ export const getAllProductByCategory = (category) => (dispatch) => {
     });
 };
 
-export const getProductById = (id) => (dispatch) => {
+export const getProductById = (id, currentUserId) => (dispatch) => {
   dispatch({ type: "GET_PRODUCT_BY_ID_REQUEST" });
 
   axios
-    .post("/api/products/getproductbyid", { id })
+    .post("/api/products/getproductbyid", { id, currentUserId })
     .then((res) => {
       dispatch({ type: "GET_PRODUCT_BY_ID_SUCCESS", payload: res.data });
       // todo: this fetch always when getting the product id

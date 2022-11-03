@@ -60,16 +60,27 @@ router.post("/getProductByUserId", (req, res) => {
   });
 });
 
-router.post("/getproductbyid", (req, res) => {
-  Product.find({ _id: req.body.id }, (err, docs) => {
-    if (!err) {
-      res.send(docs[0]);
-    } else {
-      return res
-        .status(400)
-        .json({ message: "Something Went wrong fetching item details" });
+router.post("/getproductbyid", async (req, res) => {
+  const { id, currentUserId } = req.body;
+
+  try {
+    const product = await Product.findById({ _id: id });
+
+    const exist = product.views.some(
+      (userView) => userView.toString() === currentUserId
+    );
+
+    if (!exist) {
+      product.views.push(currentUserId);
+      product.save();
     }
-  });
+
+    return res.send(product);
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ message: "Something Went wrong fetching item details" });
+  }
 });
 
 router.post("/addProduct", (req, res) => {
@@ -91,6 +102,7 @@ router.post("/addProduct", (req, res) => {
     preferTrade: data.preferTrade,
     cash: data.cash,
     item: data.item,
+    views: [],
     deliveryType: data.deliveryType,
     dateCreated: new Date().getTime(),
     favoritesCount: 0,

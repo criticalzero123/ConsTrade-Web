@@ -142,7 +142,9 @@ router.post("/getUserById", (req, res) => {
 
 router.get("/getAllUserByCountPost", async (req, res) => {
   try {
-    const allUser = await User.find({}).sort({ countPost: -1 }).limit(20);
+    const allUser = await User.find({ countPost: { $gte: 1 } })
+      .sort({ countPost: -1, name: 1 })
+      .limit(10);
 
     res.send(allUser);
   } catch (err) {

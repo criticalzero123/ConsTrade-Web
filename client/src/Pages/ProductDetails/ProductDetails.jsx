@@ -27,7 +27,7 @@ const ProductDetails = () => {
   const [displayImage, setDisplayImage] = useState(null);
 
   useEffect(() => {
-    dispatch(getProductById(id));
+    dispatch(getProductById(id, currentUser._id));
   }, [dispatch, id]);
 
   //For Favorites
