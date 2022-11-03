@@ -9,6 +9,7 @@ const FollowSchema = mongoose.Schema(
       type: [
         {
           userId: mongoose.Schema.Types.ObjectId,
+          userUid: String,
           userName: String,
           userImageURL: String,
           followMeDate: Date,
@@ -20,6 +21,7 @@ const FollowSchema = mongoose.Schema(
       type: [
         {
           userId: mongoose.Schema.Types.ObjectId,
+          userUid: String,
           userName: String,
           userImageURL: String,
           followingDate: Date,

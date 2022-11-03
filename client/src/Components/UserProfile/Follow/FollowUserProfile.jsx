@@ -9,6 +9,15 @@ import {
 } from "../../../actions/followActions";
 import { Spinner } from "flowbite-react";
 import Swal from "sweetalert2";
+import {
+  arrayUnion,
+  doc,
+  getDoc,
+  Timestamp,
+  updateDoc,
+} from "firebase/firestore";
+import { db } from "../../../firebase/firebase-config";
+import { v4 } from "uuid";
 
 const FollowUserProfile = ({
   currentUser,
@@ -27,7 +36,7 @@ const FollowUserProfile = ({
     (state) => state.isFollowingUserReducer
   );
 
-  const handleFollow = () => {
+  const handleFollow = async () => {
     if (payload) {
       Swal.fire({
         title: `Unfollow ${user.name}?`,
@@ -37,26 +46,67 @@ const FollowUserProfile = ({
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes",
-      }).then((result) => {
+      }).then(async (result) => {
         if (result.isConfirmed) {
           dispatch(unFollowUser(currentUser._id, user._id));
           onUnFollowAction();
+
+          //TODO: MAKE THIS A HELPER ALSO FROM THE BOTTOM ALSO
+          const res = await getDoc(doc(db, "userNotification", user.uid));
+          const _totalUnread =
+            res.data().totalUnread === undefined ? 0 : res.data().totalUnread;
+          await updateDoc(doc(db, "userNotification", user.uid), {
+            notifications: arrayUnion({
+              id: v4(),
+              senderId: currentUser.uid,
+              sender_Id: currentUser._id,
+              senderName: currentUser.name,
+              message: "unfollows you.",
+              imagePhotoURL: currentUser.imagePhotoURL,
+              status: "unread",
+              notifType: "follow",
+              dateCreated: Timestamp.now(),
+            }),
+
+            totalUnread: _totalUnread + 1,
+          });
         }
       });
     } else {
       const _currentUser = {
         userId: currentUser._id,
+        userUid: currentUser.uid,
         userName: currentUser.name,
         userImageURL: currentUser.imagePhotoURL,
       };
 
       const _user = {
         userId: user._id,
+        userUid: user.uid,
         userName: user.name,
         userImageURL: user.imagePhotoURL,
       };
       dispatch(followUser(_currentUser, _user));
       onFollowAction();
+      // MAKE THIS A HELPER
+      const res = await getDoc(doc(db, "userNotification", user.uid));
+      const _totalUnread =
+        res.data().totalUnread === undefined ? 0 : res.data().totalUnread;
+      await updateDoc(doc(db, "userNotification", user.uid), {
+        notifications: arrayUnion({
+          id: v4(),
+          senderId: currentUser.uid,
+          sender_Id: currentUser._id,
+          senderName: currentUser.name,
+          message: "started following you.",
+          imagePhotoURL: currentUser.imagePhotoURL,
+          status: "unread",
+          notifType: "follow",
+          dateCreated: Timestamp.now(),
+        }),
+
+        totalUnread: _totalUnread + 1,
+      });
     }
   };
 

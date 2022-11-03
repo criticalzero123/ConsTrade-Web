@@ -1,7 +1,11 @@
 import firebase from "./firebase-config";
 
 import "firebase/compat/auth";
-import { creationOfUserChats, creationOfProductChats } from "./chatService";
+import {
+  creationOfUserChats,
+  creationOfProductChats,
+  creationofUserNotification,
+} from "./chatService";
 
 export const createUserEmailPassword = (email, password) => {
   return firebase
@@ -10,6 +14,7 @@ export const createUserEmailPassword = (email, password) => {
     .then((userCredential) => {
       creationOfUserChats(userCredential.user.uid);
       creationOfProductChats(userCredential.user.uid);
+      creationofUserNotification(userCredential.user.uid);
       return userCredential.user;
     })
     .catch((err) => {

@@ -100,7 +100,7 @@ router.post("/getFollowers", async (req, res) => {
   const { userId } = req.body;
   try {
     const followers = await Follow.findOne({ userId: userId });
-    console.log(followers);
+
     res.send(followers.follower);
   } catch (error) {
     return res

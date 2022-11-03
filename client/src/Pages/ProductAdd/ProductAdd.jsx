@@ -6,6 +6,8 @@ import ProductAddTextArea from "../../Components/ProductAdd/ProductAddTextArea";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { AiFillInfoCircle } from "react-icons/ai";
 
+import { v4 } from "uuid";
+
 import ProductCardDetails from "../../Components/ProductAdd/ProductCardDetails.jsx/ProductCardDetails";
 
 // For the Options
@@ -23,7 +25,13 @@ import { addProduct } from "../../actions/productActions";
 import { userInfo } from "../../service/userService";
 import { saveImageStorage } from "../../firebase/storageImages";
 import { Button, Spinner, Tooltip } from "flowbite-react";
-import { doc, updateDoc } from "firebase/firestore";
+import {
+  arrayUnion,
+  doc,
+  getDoc,
+  Timestamp,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "../../firebase/firebase-config";
 import { useEffect } from "react";
 import { getFollowers } from "../../actions/followActions";
@@ -60,6 +68,8 @@ const ProductAdd = () => {
   useEffect(() => {
     dispatch(getFollowers(user._id));
   }, [dispatch, user._id]);
+
+  const { followers } = useSelector((state) => state.getFollowersReducer);
 
   const cashPreferInput = (e) => {
     if (e.target.value >= 0) {
@@ -160,6 +170,28 @@ const ProductAdd = () => {
         deliveryType: meetup,
       };
 
+      // Sending notifications
+      for (let i = 0; i < followers.length; i++) {
+        const _tempUser = followers[i];
+        const res = await getDoc(
+          doc(db, "userNotification", _tempUser.userUid)
+        );
+        await updateDoc(doc(db, "userNotification", _tempUser.userUid), {
+          notifications: arrayUnion({
+            id: v4(),
+            senderId: user.uid,
+            sender_Id: user._id,
+            senderName: user.name,
+            message: "posted an item.",
+            imagePhotoURL: user.imagePhotoURL,
+            status: "unread",
+            notifType: "addproduct",
+            dateCreated: Timestamp.now(),
+          }),
+
+          totalUnread: res.data().totalUnread + 1,
+        });
+      }
       dispatch(addProduct(product));
     } else {
       alert("Something went wrong in adding the product. ");

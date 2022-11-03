@@ -13,6 +13,12 @@ export const creationOfProductChats = async (uid) => {
   });
 };
 
+export const creationofUserNotification = async (uid) => {
+  await setDoc(doc(db, "userNotification", uid), {
+    //
+  });
+};
+
 export const existInUserChatsSocialMediaAuth = async (uid) => {
   const docRef = await doc(db, "userChats", uid);
   const docSnap = await getDoc(docRef);
@@ -26,5 +32,6 @@ export const existInUserChatsSocialMediaAuth = async (uid) => {
     // if wala pa
     creationOfUserChats(uid);
     creationOfProductChats(uid);
+    creationofUserNotification(uid);
   }
 };
