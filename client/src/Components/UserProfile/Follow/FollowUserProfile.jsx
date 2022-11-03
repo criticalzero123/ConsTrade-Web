@@ -50,26 +50,6 @@ const FollowUserProfile = ({
         if (result.isConfirmed) {
           dispatch(unFollowUser(currentUser._id, user._id));
           onUnFollowAction();
-
-          //TODO: MAKE THIS A HELPER ALSO FROM THE BOTTOM ALSO
-          const res = await getDoc(doc(db, "userNotification", user.uid));
-          const _totalUnread =
-            res.data().totalUnread === undefined ? 0 : res.data().totalUnread;
-          await updateDoc(doc(db, "userNotification", user.uid), {
-            notifications: arrayUnion({
-              id: v4(),
-              senderId: currentUser.uid,
-              sender_Id: currentUser._id,
-              senderName: currentUser.name,
-              message: "unfollows you.",
-              imagePhotoURL: currentUser.imagePhotoURL,
-              status: "unread",
-              notifType: "follow",
-              dateCreated: Timestamp.now(),
-            }),
-
-            totalUnread: _totalUnread + 1,
-          });
         }
       });
     } else {
