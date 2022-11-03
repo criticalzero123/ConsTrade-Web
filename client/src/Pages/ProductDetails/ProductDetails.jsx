@@ -28,7 +28,7 @@ const ProductDetails = () => {
 
   useEffect(() => {
     dispatch(getProductById(id, currentUser._id));
-  }, [dispatch, id]);
+  }, [dispatch, id, currentUser._id]);
 
   //For Favorites
   const userFavoriteProduct = currentUser.favorites.some(
