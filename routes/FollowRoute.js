@@ -98,13 +98,17 @@ router.post("/unFollowUser", async (req, res) => {
 
 router.post("/getFollowers", async (req, res) => {
   const { userId } = req.body;
-  
+  try {
     const followers = await Follow.findOne({ userId: userId });
 
-    if(followers.follower.length > 0){
+    if(followers){
       res.send(followers.follower);
     }
-
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ message: "Something went wrong fetching followers." });
+  }
 });
 
 module.exports = router;
