@@ -101,7 +101,9 @@ router.post("/getFollowers", async (req, res) => {
   try {
     const followers = await Follow.findOne({ userId: userId });
 
-    res.send(followers.follower);
+    if(followers.follower !== undefined ){
+      res.send(followers.follower);
+    }
   } catch (error) {
     return res
       .status(400)
