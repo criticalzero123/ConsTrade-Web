@@ -103,6 +103,8 @@ router.post("/getFollowers", async (req, res) => {
 
     if(followers){
       res.send(followers.follower);
+    }else { 
+      res.send([]);
     }
   } catch (error) {
     return res

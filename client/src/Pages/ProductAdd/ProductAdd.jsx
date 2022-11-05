@@ -170,7 +170,7 @@ const ProductAdd = () => {
         deliveryType: meetup,
       };
 
-      if(followers !== undefined){
+      if(followers !== undefined || followers.length > 0){
       // Sending notifications
       for (let i = 0; i < followers.length; i++) {
         const _tempUser = followers[i];
