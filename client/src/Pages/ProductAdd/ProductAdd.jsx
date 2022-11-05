@@ -170,6 +170,7 @@ const ProductAdd = () => {
         deliveryType: meetup,
       };
 
+      if(followers !== undefined){
       // Sending notifications
       for (let i = 0; i < followers.length; i++) {
         const _tempUser = followers[i];
@@ -193,6 +194,7 @@ const ProductAdd = () => {
         });
       }
       dispatch(addProduct(product));
+      }
     } else {
       alert("Something went wrong in adding the product. ");
     }
