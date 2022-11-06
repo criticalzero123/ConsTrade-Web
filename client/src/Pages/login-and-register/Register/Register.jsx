@@ -95,7 +95,7 @@ const Register = () => {
   };
 
   return (
-    <div className="h-[93vh] lg:overflow-y-hidden container mx-auto  px-0 lg:px-4">
+    <div className="h-[93vh] container mx-auto  px-0 lg:px-4">
       <div className="grid lg:grid-cols-2  ">
         <div className="hidden lg:block  place-self-center">
           <img src={cover1} alt="cover" className="rounded-xl" />

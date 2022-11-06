@@ -11,6 +11,7 @@ router.post("/submitBugReport", async (req, res) => {
       title: title,
       description: description,
       dateCreated: new Date().getTime(),
+      status: "undone",
     });
 
     bugReport.save();
@@ -31,6 +32,7 @@ router.post("/submitSuggestion", async (req, res) => {
       title: title,
       description: description,
       dateCreated: new Date().getTime(),
+      status: "undone",
     });
 
     suggestion.save();
