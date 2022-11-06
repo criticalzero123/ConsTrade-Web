@@ -29,7 +29,7 @@ const UserSlickCard = ({ user, index }) => {
           >
             {crownIcon(index)} {user.name}
           </Link>
-          <p className="text-gray-100 text-sm">
+          <p className="text-gray-100 text-sm flex">
             {user.countPost} Item
             <span className={`${user.countPost > 1 ? "block" : "hidden"}`}>
               s

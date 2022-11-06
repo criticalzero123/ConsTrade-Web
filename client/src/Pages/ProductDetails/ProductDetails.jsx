@@ -11,6 +11,8 @@ import { addToFavorite } from "../../actions/userActions";
 import ProductInfo from "../../Components/ProductDetails/ProductInfo/ProductInfo";
 import ProductDetailHelmet from "../../Helmets/ProductDetails.jsx/ProductDetailHelmet";
 
+import Swal from "sweetalert2";
+
 const ProductDetails = () => {
   const { id } = useParams();
   const [showComments, setShowComments] = useState(false);
@@ -38,6 +40,13 @@ const ProductDetails = () => {
 
   const favoriteOnClick = () => {
     dispatch(addToFavorite(product._id));
+    if (!select === true) {
+      Swal.fire(
+        "Added!",
+        "Succesfully added this item to your favourite!",
+        "success"
+      );
+    }
     setSelected(!select);
   };
 
