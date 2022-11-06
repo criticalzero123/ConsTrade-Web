@@ -67,7 +67,7 @@ router.post("/getproductbyid", async (req, res) => {
     const product = await Product.findById({ _id: id });
 
     const exist = product.views.some(
-      (userView) => userView.toString() === currentUserId
+      (userView) => userView?.toString() === currentUserId
     );
 
     if (!exist) {
