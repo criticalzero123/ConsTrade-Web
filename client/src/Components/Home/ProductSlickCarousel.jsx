@@ -12,7 +12,7 @@ import "./ProductSlickCss.css";
 
 const ProductSlickCarousel = ({ products, title, icon }) => {
   return products.length !== 0 ? (
-    <div className="">
+    <div>
       <div className="flex justify-between  mb-4 ">
         <h1 className="ml-2 text-xl flex place-items-center  font-poppins">
           {icon && icon}
@@ -22,7 +22,7 @@ const ProductSlickCarousel = ({ products, title, icon }) => {
           View all <BsArrowRight className="ml-1" />
         </h3>
       </div>
-      <div className="bg-gray-100 py-3 rounded-lg">
+      <div className="bg-gray-100 py-3 rounded-lg slick-container">
         <Slider {...productSettings}>
           {products &&
             products.map((product) => (

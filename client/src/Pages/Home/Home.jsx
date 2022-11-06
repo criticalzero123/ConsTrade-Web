@@ -40,7 +40,7 @@ const Index = () => {
           ) : (
             <div>
               <UpperCard />
-              <div className="grid md:grid-cols-2 grid-cols-1 gap-10 mt-10">
+              <div className="grid lg:grid-cols-2 grid-cols-1 gap-10 mt-10">
                 <ProductSlickCarousel
                   products={products
                     .sort((a, b) => b.favoritesCount - a.favoritesCount)

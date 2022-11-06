@@ -7,7 +7,7 @@ const PrevArrow = (props) => {
       className={className}
       style={{
         ...style,
-        display: "block",
+
         color: "black",
         marginLeft: "0",
         zIndex: "10",
@@ -24,7 +24,7 @@ const NextArrow = (props) => {
       className={className}
       style={{
         ...style,
-        display: "block",
+
         marginRight: "2.3rem",
         zIndex: "10",
       }}

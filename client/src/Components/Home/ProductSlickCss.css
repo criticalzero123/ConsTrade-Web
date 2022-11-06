@@ -2,13 +2,17 @@
   color: rgb(92, 91, 91);
   text-shadow: 2px 1px 10px rgb(136, 136, 136);
   font-size: 60px;
+  display: block;
 }
 
 .slick-prev::before {
   color: rgb(92, 91, 91);
   text-shadow: 2px 1px 10px rgb(136, 136, 136);
   font-size: 60px;
+  display: block;
 }
+
+
 
 .slick-track {
   margin-left: 0;
