@@ -7,7 +7,7 @@ import ProductSlickCarousel from "../../Components/Home/ProductSlickCarousel";
 import HomePulseLoader from "../../Components/Home/HomePulseLoader";
 import UpperCard from "../../Components/Home/UpperCard";
 import { FaHotjar } from "react-icons/fa";
-import { BsCheckAll } from "react-icons/bs";
+import { CgGames } from "react-icons/cg";
 import UserSlickCarousel from "../../Components/Home/UserSlickCarousel";
 import FooterLandingPage from "../../Components/LandingPage/FooterLandingPage";
 import { getAllUserByCountPost } from "../../actions/userActions";
@@ -42,21 +42,23 @@ const Index = () => {
               <UpperCard />
               <div className="grid md:grid-cols-2 grid-cols-1 gap-10 mt-10">
                 <ProductSlickCarousel
-                  products={products.filter(
-                    (product) => product.status !== "sold"
-                  )}
+                  products={products
+                    .sort((a, b) => b.favoritesCount - a.favoritesCount)
+                    .filter((product) => product.favoritesCount >= 2)}
                   title={"Hot Items"}
                   icon={<FaHotjar className="mr-3 text-red-500" />}
                 />
 
                 <ProductSlickCarousel
-                  products={products.filter(
-                    (product) => product.status === "sold"
-                  )}
-                  title={"Success"}
-                  icon={
-                    <BsCheckAll size={30} className="mr-3 text-green-500" />
-                  }
+                  products={products
+                    .sort(
+                      (a, b) =>
+                        new Date(a.dateCreated).getTime() -
+                        new Date(b.dateCreated).getTime()
+                    )
+                    .filter((product) => product.status !== "sold")}
+                  title={"All Items"}
+                  icon={<CgGames size={33} className="mr-3 text-orange-500" />}
                 />
               </div>
             </div>
