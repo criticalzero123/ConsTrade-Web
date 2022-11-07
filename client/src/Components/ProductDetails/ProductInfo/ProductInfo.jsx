@@ -157,7 +157,7 @@ const ProductInfo = ({
             <p className="mb-2 font-semibold text-lg">Platform Supported: </p>
             {platformArray !== undefined &&
               platformArray.map((platform, index) => (
-                <Link to={`/search/category/${platform}`} key={index}>
+                <Link to={`/search/platform/${platform}`} key={index}>
                   <span className="inline-block bg-[rgba(100%,100%,100%,10%)] rounded-full px-3 py-1 text-sm font-semibold text-white   mr-2 mb-2 hover:text-red-400">
                     {platform}
                   </span>
@@ -168,7 +168,7 @@ const ProductInfo = ({
             <p className="mb-2 font-semibold text-lg">Game Genre:</p>
             {gameGenreArray !== undefined &&
               gameGenreArray.map((category, index) => (
-                <Link to={`/search/category/${category}`} key={index}>
+                <Link to={`/search/genre/${category}`} key={index}>
                   <span className="inline-block bg-[rgba(100%,100%,100%,10%)] text-white rounded-full px-3 py-1 text-sm font-semibold  mr-2 mb-2 hover:text-red-400">
                     {category}
                   </span>

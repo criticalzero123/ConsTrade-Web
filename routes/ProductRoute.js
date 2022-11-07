@@ -61,21 +61,39 @@ router.post("/getProductByCategory", async (req, res) => {
   }
 });
 
-// router.post("/getProductByCategory", async (req, res) => {
-//   const category = req.body.category;
+router.post("/getProductByPlatform", async (req, res) => {
+  const platform = req.body.platform;
 
-//   const productAllCategory = await Product.find({
-//     $text: { $search: category, $caseSensitive: false },
-//   });
+  try {
+    const productAllPlatform = await Product.find({
+      platform: { $regex: platform, $options: "-i" },
+    });
 
-//   if (productAllCategory.length > 0) {
-//     return res.send(productAllCategory);
-//   } else {
-//     return res.status(400).json({
-//       message: "No category found",
-//     });
-//   }
-// });
+    return res.send(productAllPlatform);
+  } catch (error) {
+    return res.status(400).json({
+      message: "Something went wrong fetching platform",
+      errorMessage: error,
+    });
+  }
+});
+
+router.post("/getProductByGenre", async (req, res) => {
+  const genre = req.body.genre;
+
+  try {
+    const productAllGenre = await Product.find({
+      gameGenre: { $regex: genre, $options: "-i" },
+    });
+
+    return res.send(productAllGenre);
+  } catch (error) {
+    return res.status(400).json({
+      message: "Something went wrong fetching genre",
+      errorMessage: error,
+    });
+  }
+});
 
 router.post("/getProductByUserId", (req, res) => {
   Product.find({ userId: req.body.id }, (err, docs) => {

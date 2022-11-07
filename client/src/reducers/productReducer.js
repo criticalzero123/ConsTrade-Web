@@ -46,6 +46,60 @@ export const getAllProductByCategoryReducer = (
   }
 };
 
+export const getAllProductByPlatformReducer = (
+  state = { products: [] },
+  action
+) => {
+  switch (action.type) {
+    case "GET_PRODUCTS_BY_PLATFORM_REQUEST":
+      return {
+        loading: true,
+      };
+
+    case "GET_PRODUCTS_BY_PLATFORM_SUCCESS":
+      return {
+        loading: false,
+        products: action.payload,
+      };
+
+    case "GET_PRODUCTS_BY_PLATFORM_FAILED":
+      return {
+        loading: false,
+        error: true,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const getAllProductByGenreReducer = (
+  state = { products: [] },
+  action
+) => {
+  switch (action.type) {
+    case "GET_PRODUCTS_BY_GENRE_REQUEST":
+      return {
+        loading: true,
+      };
+
+    case "GET_PRODUCTS_BY_GENRE_SUCCESS":
+      return {
+        loading: false,
+        products: action.payload,
+      };
+
+    case "GET_PRODUCTS_BY_GENRE_FAILED":
+      return {
+        loading: false,
+        error: true,
+      };
+
+    default:
+      return state;
+  }
+};
+
 export const getProductByIdReducer = (state = { product: {} }, action) => {
   switch (action.type) {
     case "GET_PRODUCT_BY_ID_REQUEST":

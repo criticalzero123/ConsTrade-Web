@@ -28,6 +28,32 @@ export const getAllProductByCategory = (category) => (dispatch) => {
     });
 };
 
+export const getAllProductByPlatform = (platform) => (dispatch) => {
+  dispatch({ type: "GET_PRODUCTS_BY_PLATFORM_REQUEST" });
+
+  axios
+    .post("/api/products/getProductByPlatform", { platform })
+    .then((res) => {
+      dispatch({ type: "GET_PRODUCTS_BY_PLATFORM_SUCCESS", payload: res.data });
+    })
+    .catch((err) => {
+      dispatch({ type: "GET_PRODUCTS_BY_PLATFORM_FAILED", error: err });
+    });
+};
+
+export const getAllProductByGenre = (genre) => (dispatch) => {
+  dispatch({ type: "GET_PRODUCTS_BY_GENRE_REQUEST" });
+
+  axios
+    .post("/api/products/getProductByGenre", { genre })
+    .then((res) => {
+      dispatch({ type: "GET_PRODUCTS_BY_GENRE_SUCCESS", payload: res.data });
+    })
+    .catch((err) => {
+      dispatch({ type: "GET_PRODUCTS_BY_GENRE_FAILED", error: err });
+    });
+};
+
 export const getProductById = (id, currentUserId) => (dispatch) => {
   dispatch({ type: "GET_PRODUCT_BY_ID_REQUEST" });
 

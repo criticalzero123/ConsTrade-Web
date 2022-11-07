@@ -6,6 +6,8 @@ import {
   deleteProductReducer,
   commentListProductReducer,
   getAllProductByCategoryReducer,
+  getAllProductByPlatformReducer,
+  getAllProductByGenreReducer,
 } from "./reducers/productReducer";
 
 import { getTransactionByUserIdReducer } from "./reducers/transactionReducer";
@@ -50,6 +52,8 @@ const finalReducer = combineReducers({
   searchUserReducer,
   isFollowingUserReducer,
   getFollowersReducer,
+  getAllProductByPlatformReducer,
+  getAllProductByGenreReducer,
 });
 
 const currentUser = localStorage.getItem("currentUser")
