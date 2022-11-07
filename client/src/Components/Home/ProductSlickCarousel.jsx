@@ -5,12 +5,12 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import { BsArrowRight } from "react-icons/bs";
-
+import { Link } from "react-router-dom";
 import { productSettings } from "../../service/slickService";
 import ProductSlickCard from "./ProductSlickCard";
 import "./ProductSlickCss.css";
 
-const ProductSlickCarousel = ({ products, title, icon }) => {
+const ProductSlickCarousel = ({ products, title, icon, redirectTo }) => {
   return products.length !== 0 ? (
     <div>
       <div className="flex justify-between  mb-4 ">
@@ -18,9 +18,12 @@ const ProductSlickCarousel = ({ products, title, icon }) => {
           {icon && icon}
           {title}
         </h1>
-        <h3 className="px-3 py-1 text-sm shadow-md flex place-items-center rounded-lg cursor-pointer hover:text-orange-500 text-gray-600">
+        <Link
+          to={`/product/category/${redirectTo}`}
+          className="px-3 py-1 text-sm shadow-md flex place-items-center rounded-lg  hover:text-orange-500 text-gray-600"
+        >
           View all <BsArrowRight className="ml-1" />
-        </h3>
+        </Link>
       </div>
       <div className="bg-gray-100 py-3 rounded-lg slick-container">
         <Slider {...productSettings}>

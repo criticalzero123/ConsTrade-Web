@@ -18,6 +18,7 @@ import ProductMessagesUser from "./Pages/Messages/MessagesUser/ProductMessagesUs
 import ProductEdit from "./Pages/ProductEdit/ProductEdit";
 import UserMessages from "./Pages/Messages/UserMessages";
 import PersonalMessagesUser from "./Pages/Messages/MessagesUser/PersonalMessagesUser";
+import ProductCategory from "./Pages/ProductCategory/ProductCategory";
 function App() {
   const { currentUser } = useSelector((state) => state.userInfoReducer);
 
@@ -31,6 +32,10 @@ function App() {
 
           {currentUser && currentUser !== undefined ? (
             <>
+              <Route path="/user/:id" element={<UserProfile />} />
+              <Route path="/search/category/:category" element={<Category />} />
+              <Route path="/favorites" element={<Favorites />} />
+              {/* Product */}
               <Route path="/product/item/:id" element={<ProductDetails />} />
               <Route path="/product/item/list/:id" element={<ProductList />} />
               <Route path="/product/add" element={<ProductAdd />} />
@@ -38,10 +43,12 @@ function App() {
                 path="/product/edit/:productid"
                 element={<ProductEdit />}
               />
+              <Route
+                path="/product/category/:search"
+                element={<ProductCategory />}
+              />
 
-              <Route path="/user/:id" element={<UserProfile />} />
-              <Route path="/search/category/:category" element={<Category />} />
-              <Route path="/favorites" element={<Favorites />} />
+              {/* Messages */}
               <Route path="/messages/product" element={<ProductMessages />}>
                 <Route
                   path=":productId/:uid"

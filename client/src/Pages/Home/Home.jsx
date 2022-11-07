@@ -47,6 +47,7 @@ const Index = () => {
                     .filter((product) => product.favoritesCount >= 2)}
                   title={"Hot Items"}
                   icon={<FaHotjar className="mr-3 text-red-500" />}
+                  redirectTo="hotitems"
                 />
 
                 <ProductSlickCarousel
@@ -59,6 +60,7 @@ const Index = () => {
                     .filter((product) => product.status !== "sold")}
                   title={"All Items"}
                   icon={<CgGames size={33} className="mr-3 text-orange-500" />}
+                  redirectTo="all"
                 />
               </div>
             </div>

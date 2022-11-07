@@ -59,11 +59,11 @@ const NavbarComponent = () => {
               <Link to="/messages/user">
                 <BsChatDots size={20} className="mr-4 cursor-pointer" />
               </Link>
-              <BiSearch
+              {/* <BiSearch
                 size={20}
                 className="mr-4 cursor-pointer"
                 onClick={() => setShowSearch(!showSearch)}
-              />
+              /> */}
               <NavbarNotification />
               <Dropdown
                 arrowIcon={false}
@@ -108,7 +108,11 @@ const NavbarComponent = () => {
               <Navbar.Toggle />
             </div>
             {showSearch ? (
-              <SearchHeader />
+              <>
+                {/* //  (
+              //   <SearchHeader />
+              // ) */}
+              </>
             ) : (
               <Navbar.Collapse>
                 <Navbar.Link active={hasSome("home")} href="/home">

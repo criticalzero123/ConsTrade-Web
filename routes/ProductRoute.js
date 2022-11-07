@@ -35,18 +35,47 @@ router.post("/getProductByPlatform", async (req, res) => {
 router.post("/getProductByCategory", async (req, res) => {
   const category = req.body.category;
 
-  const productAllCategory = await Product.find({
-    $text: { $search: category, $caseSensitive: false },
-  });
+  try {
+    let products;
 
-  if (productAllCategory.length > 0) {
-    return res.send(productAllCategory);
-  } else {
+    switch (category) {
+      case "hotitems":
+        // getting hot items by favorite counts by 2
+        products = await Product.find({ favoritesCount: { $gte: 2 } });
+        break;
+      case "all":
+        // Limit the all by 10
+        products = await Product.find({}).limit(10);
+        break;
+
+      default:
+        products = [];
+        break;
+    }
+
+    res.send(products);
+  } catch (error) {
     return res.status(400).json({
-      message: "No category found",
+      message: "Something went wrong in getting by category",
     });
   }
 });
+
+// router.post("/getProductByCategory", async (req, res) => {
+//   const category = req.body.category;
+
+//   const productAllCategory = await Product.find({
+//     $text: { $search: category, $caseSensitive: false },
+//   });
+
+//   if (productAllCategory.length > 0) {
+//     return res.send(productAllCategory);
+//   } else {
+//     return res.status(400).json({
+//       message: "No category found",
+//     });
+//   }
+// });
 
 router.post("/getProductByUserId", (req, res) => {
   Product.find({ userId: req.body.id }, (err, docs) => {

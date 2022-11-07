@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { firstLetterUpper } from "../../service/userService";
-
 import { AiFillHeart } from "react-icons/ai";
 
 const ProductSlickCard = ({ product }) => {
@@ -18,8 +16,8 @@ const ProductSlickCard = ({ product }) => {
             />
           </div>
           <div className="p-5 ">
-            <h4 className="text-sm text-gray-500 tracking-tight text-ellipsis overflow-hidden whitespace-nowrap  ">
-              {firstLetterUpper(product.userName)}
+            <h4 className="text-sm text-gray-500 tracking-tight text-ellipsis overflow-hidden whitespace-nowrap capitalize ">
+              {product.userName}
             </h4>
             <h3 className="text-lg  text-black font-mono tracking-tight text-ellipsis overflow-hidden whitespace-nowrap  font-poppins  ">
               {product.title}
