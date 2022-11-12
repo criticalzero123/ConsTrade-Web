@@ -25,6 +25,9 @@ const FooterSuggestionModal = ({ onClose, show }) => {
     };
     dispatch(submitSuggestion(suggestion));
 
+    setTitle("");
+    setDescription("");
+
     Swal.fire("Thank you!", "We will check your suggestion!", "success").then(
       () => {
         onClose();

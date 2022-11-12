@@ -25,6 +25,9 @@ const FooterBugModal = ({ onClose, show }) => {
     };
     dispatch(submitBug(bug));
 
+    setTitle("");
+    setDescription("");
+
     Swal.fire("Thank you!", "You are a big help to us!", "success").then(() => {
       onClose();
     });

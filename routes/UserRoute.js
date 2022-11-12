@@ -41,6 +41,8 @@ router.post("/socialMediaAuth", (req, res) => {
             imagePhotoURL: req.body.imagePhotoURL,
             emailVerified: req.body.emailVerified,
             countPost: 0,
+            countFollower: 0,
+            countFollowing: 0,
             lastActiveAt: new Date().getTime(),
           });
 

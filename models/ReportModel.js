@@ -14,6 +14,10 @@ const ReportSchema = mongoose.Schema(
       type: String,
       require,
     },
+    status: {
+      type: String,
+      require,
+    },
     dateCreated: {
       type: Date,
       require,
