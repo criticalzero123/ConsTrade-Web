@@ -181,7 +181,7 @@ const ProductInfo = ({
         {currentUser._id !== product.userId ? (
           product && product.status === "sold" ? (
             <div className="w-full">
-              <Link to={`/search/category/${gameGenreArray[0]}`}>
+              <Link to={`/search/platform/${gameGenreArray[0]}`}>
                 <button
                   type="button"
                   className="mt-5 text-white self-end
