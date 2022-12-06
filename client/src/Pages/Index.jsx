@@ -61,7 +61,12 @@ const Index = () => {
                 >
                   Join Now!
                 </button>
-                <div className="py-3 px-6 font-poppins font-semibold flex place-items-center ">
+                <div
+                  className="py-3 px-6 font-poppins font-semibold flex place-items-center "
+                  onClick={() =>
+                    window.open("https://youtu.be/krJDLQmHLWw", "_blank")
+                  }
+                >
                   <p className="text-[#c94e77] hover:text-[#1D257C] cursor-pointer mr-2">
                     How it works?{" "}
                   </p>
