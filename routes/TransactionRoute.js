@@ -55,7 +55,7 @@ router.post("/getTransactionById", async (req, res) => {
       const { buyerId } = transactions[i];
 
       // if there is no buyer
-      if (buyerId == "none") continue;
+      if (buyerId === "none") continue;
 
       const user = await User.findById({ _id: buyerId });
 
@@ -69,6 +69,39 @@ router.post("/getTransactionById", async (req, res) => {
     }
 
     res.send(UserInfoList);
+  } catch (err) {
+    res.status(400).json({ error: err });
+  }
+});
+
+router.get("/getAllTransactions", async (req, res) => {
+  try {
+    const transactionList = new Array();
+
+    const transactions = await Transaction.find({});
+
+    for (let i = 0; i < transactions.length; i++) {
+      const element = transactions[i];
+
+      // if there is no buyer
+      if (element.buyerId === "none") continue;
+
+      const seller = await User.findById({ _id: element.sellerId });
+      const buyer = await User.findById({ _id: element.buyerId });
+
+      const product = await Product.findById({ _id: element.productId });
+
+      const _info = {
+        buyerName: buyer.name,
+        sellerName: seller.name,
+        product: product,
+        getWanted: element.getWanted,
+      };
+
+      transactionList.push(_info);
+    }
+
+    res.send(transactionList);
   } catch (err) {
     res.status(400).json({ error: err });
   }
