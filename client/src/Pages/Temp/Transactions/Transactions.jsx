@@ -14,7 +14,7 @@ const Transactions = () => {
   }, []);
   return (
     <div className="z-50 w-full h-screen absolute top-0 bg-white">
-      {transactions !== 0 ? (
+      {transactions.length !== 0 ? (
         <>
           <h3 className="text-2xl text-center">
             Total Transactions: <strong>{transactions.length}</strong>

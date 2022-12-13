@@ -15,7 +15,7 @@ const AllUser = () => {
   return (
     <div className="h-screen z-50 absolute top-0 bg-white w-full">
       <div className="text-center text-2xl">
-        Total Users: <strong>{users.length}</strong>
+        Total User(s): <strong>{users.length}</strong>
       </div>
       <ol className="list-decimal list-inside">
         {users.map((user) => (
