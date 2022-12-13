@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { RiH1 } from "react-icons/ri";
 
 const Transactions = () => {
   const [transactions, setTransactions] = useState([]);
@@ -12,6 +11,7 @@ const Transactions = () => {
       })
       .catch((err) => console.log(err.message));
   }, []);
+
   return (
     <div className="z-50 w-full h-screen absolute top-0 bg-white">
       {transactions.length !== 0 ? (
