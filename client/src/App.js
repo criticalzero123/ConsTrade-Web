@@ -20,6 +20,8 @@ import PersonalMessagesUser from "./Pages/Messages/MessagesUser/PersonalMessages
 import ProductCategory from "./Pages/ProductCategory/ProductCategory";
 import SearchGenre from "./Pages/Search/Genre/SearchGenre";
 import SearchPlatform from "./Pages/Search/Platform/SearchPlatform";
+import AllUser from "./Pages/Temp/AllUser/AllUser";
+import Transactions from "./Pages/Temp/Transactions/Transactions";
 function App() {
   const { currentUser } = useSelector((state) => state.userInfoReducer);
 
@@ -83,6 +85,13 @@ function App() {
                 <p>There's nothing here!</p>
               </main>
             }
+          />
+
+          {/* Temporary */}
+          <Route path="/api/users/getAllUser" element={<AllUser />} />
+          <Route
+            path="/api/transactions/getAllTransaction"
+            element={<Transactions />}
           />
         </Routes>
       </div>

@@ -250,6 +250,18 @@ router.post("/addFavorite", async (req, res) => {
   }
 });
 
+router.get("/getAllUser", async (req, res) => {
+  try {
+    const users = await User.find({});
+
+    return res.send(users);
+  } catch (error) {
+    return res.status(400).json({
+      message: "Something went wrong in searching user chat",
+    });
+  }
+});
+
 router.post("/getUserByName", async (req, res) => {
   try {
     const userName = req.body.search;
