@@ -88,9 +88,9 @@ function App() {
           />
 
           {/* Temporary */}
-          <Route path="/api/users/getAllUser" element={<AllUser />} />
+          <Route path="/api/users/getAllUsers" element={<AllUser />} />
           <Route
-            path="/api/transactions/getAllTransaction"
+            path="/api/transactions/getAllTransactions"
             element={<Transactions />}
           />
         </Routes>
