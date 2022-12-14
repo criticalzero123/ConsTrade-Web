@@ -24,6 +24,9 @@ const AllUser = () => {
             <span className="text-sm text-gray-500 ml-3 mr-1">
               ({user.emailVerified ? "Semi-Verified" : "Not-Verified"})
             </span>
+            <span className="text-sm text-gray-500 ml-3 mr-1">
+              || Last login: ({new Date(user.lastActiveAt).toLocaleString()})
+            </span>
           </li>
         ))}
       </ol>
